@@ -1,0 +1,835 @@
+{
+ "model": "qwen3.6-35b-a3b",
+ "base_url": "http://localhost:8000/v1",
+ "started": "2026-09-30 16:35:58",
+ "tests": {
+  "json": {
+   "summary": {
+    "n": 20,
+    "correct": 13,
+    "accuracy": 0.65,
+    "errors": 0,
+    "truncated": 0,
+    "avg_completion_tokens": 1085.5,
+    "avg_latency_s": 11.96741862297058
+   },
+   "records": [
+    {
+     "content": "\n\n{\"name\": \"Alice\", \"age\": 30, \"city\": \"Beijing\", \"hobbies\": [\"reading\", \"cycling\"]}",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 52,
+      "total_tokens": 987,
+      "completion_tokens": 935,
+      "prompt_tokens_details": null,
+      "completion_tokens_details": {
+       "reasoning_tokens": 901
+      }
+     },
+     "latency": 10.914151906967163,
+     "correct": true,
+     "parsed": {
+      "name": "Alice",
+      "age": 30,
+      "city": "Beijing",
+      "hobbies": [
+       "reading",
+       "cycling"
+      ]
+     }
+    },
+    {
+     "content": "\n\n{\"name\": \"Bob\", \"age\": 46, \"city\": \"Shanghai\", \"hobbies\": \"cooking\"}",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 50,
+      "total_tokens": 1540,
+      "completion_tokens": 1490,
+      "prompt_tokens_details": null,
+      "completion_tokens_details": {
+       "reasoning_tokens": 1459
+      }
+     },
+     "latency": 16.40998649597168,
+     "correct": false,
+     "parsed": {
+      "name": "Bob",
+      "age": 46,
+      "city": "Shanghai",
+      "hobbies": "cooking"
+     }
+    },
+    {
+     "content": "\n\n{\"name\": \"张伟\", \"age\": 30, \"city\": \"杭州\", \"hobbies\": [\"跑步\", \"摄影\", \"围棋\"]}",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 59,
+      "total_tokens": 1068,
+      "completion_tokens": 1009,
+      "prompt_tokens_details": null,
+      "completion_tokens_details": {
+       "reasoning_tokens": 974
+      }
+     },
+     "latency": 11.853676319122314,
+     "correct": true,
+     "parsed": {
+      "name": "张伟",
+      "age": 30,
+      "city": "杭州",
+      "hobbies": [
+       "跑步",
+       "摄影",
+       "围棋"
+      ]
+     }
+    },
+    {
+     "content": "\n\n{\"name\": \"Alice\", \"age\": 33, \"city\": \"Beijing\", \"hobbies\": [\"reading\", \"cycling\"]}",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 52,
+      "total_tokens": 854,
+      "completion_tokens": 802,
+      "prompt_tokens_details": null,
+      "completion_tokens_details": {
+       "reasoning_tokens": 768
+      }
+     },
+     "latency": 9.161205768585205,
+     "correct": true,
+     "parsed": {
+      "name": "Alice",
+      "age": 33,
+      "city": "Beijing",
+      "hobbies": [
+       "reading",
+       "cycling"
+      ]
+     }
+    },
+    {
+     "content": "\n\n{\"name\": \"Bob\", \"age\": 49, \"city\": \"Shanghai\", \"hobbies\": \"cooking\"}",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 50,
+      "total_tokens": 1343,
+      "completion_tokens": 1293,
+      "prompt_tokens_details": null,
+      "completion_tokens_details": {
+       "reasoning_tokens": 1262
+      }
+     },
+     "latency": 14.781071662902832,
+     "correct": false,
+     "parsed": {
+      "name": "Bob",
+      "age": 49,
+      "city": "Shanghai",
+      "hobbies": "cooking"
+     }
+    },
+    {
+     "content": "\n\n{\"name\": \"张伟\", \"age\": 33, \"city\": \"杭州\", \"hobbies\": [\"跑步\", \"摄影\", \"围棋\"]}",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 59,
+      "total_tokens": 1152,
+      "completion_tokens": 1093,
+      "prompt_tokens_details": null,
+      "completion_tokens_details": {
+       "reasoning_tokens": 1058
+      }
+     },
+     "latency": 12.782310485839844,
+     "correct": true,
+     "parsed": {
+      "name": "张伟",
+      "age": 33,
+      "city": "杭州",
+      "hobbies": [
+       "跑步",
+       "摄影",
+       "围棋"
+      ]
+     }
+    },
+    {
+     "content": "\n\n{\"name\": \"Alice\", \"age\": 36, \"city\": \"Beijing\", \"hobbies\": [\"reading\", \"cycling\"]}",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 52,
+      "total_tokens": 1105,
+      "completion_tokens": 1053,
+      "prompt_tokens_details": null,
+      "completion_tokens_details": {
+       "reasoning_tokens": 1019
+      }
+     },
+     "latency": 12.355854272842407,
+     "correct": true,
+     "parsed": {
+      "name": "Alice",
+      "age": 36,
+      "city": "Beijing",
+      "hobbies": [
+       "reading",
+       "cycling"
+      ]
+     }
+    },
+    {
+     "content": "\n\n{\"name\": \"Bob\", \"age\": 52, \"city\": \"Shanghai\", \"hobbies\": \"cooking\"}",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 50,
+      "total_tokens": 1241,
+      "completion_tokens": 1191,
+      "prompt_tokens_details": null,
+      "completion_tokens_details": {
+       "reasoning_tokens": 1160
+      }
+     },
+     "latency": 13.787945985794067,
+     "correct": false,
+     "parsed": {
+      "name": "Bob",
+      "age": 52,
+      "city": "Shanghai",
+      "hobbies": "cooking"
+     }
+    },
+    {
+     "content": "\n\n{\"name\": \"张伟\", \"age\": 36, \"city\": \"杭州\", \"hobbies\": [\"跑步\", \"摄影\", \"围棋\"]}",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 59,
+      "total_tokens": 1048,
+      "completion_tokens": 989,
+      "prompt_tokens_details": null,
+      "completion_tokens_details": {
+       "reasoning_tokens": 954
+      }
+     },
+     "latency": 11.611259460449219,
+     "correct": true,
+     "parsed": {
+      "name": "张伟",
+      "age": 36,
+      "city": "杭州",
+      "hobbies": [
+       "跑步",
+       "摄影",
+       "围棋"
+      ]
+     }
+    },
+    {
+     "content": "\n\n{\"name\": \"Alice\", \"age\": 39, \"city\": \"Beijing\", \"hobbies\": [\"reading\", \"cycling\"]}",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 52,
+      "total_tokens": 1052,
+      "completion_tokens": 1000,
+      "prompt_tokens_details": null,
+      "completion_tokens_details": {
+       "reasoning_tokens": 966
+      }
+     },
+     "latency": 11.743831634521484,
+     "correct": true,
+     "parsed": {
+      "name": "Alice",
+      "age": 39,
+      "city": "Beijing",
+      "hobbies": [
+       "reading",
+       "cycling"
+      ]
+     }
+    },
+    {
+     "content": "\n\n{\"name\": \"Bob\", \"age\": 55, \"city\": \"Shanghai\", \"hobbies\": \"cooking\"}",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 50,
+      "total_tokens": 1103,
+      "completion_tokens": 1053,
+      "prompt_tokens_details": null,
+      "completion_tokens_details": {
+       "reasoning_tokens": 1022
+      }
+     },
+     "latency": 12.35432767868042,
+     "correct": false,
+     "parsed": {
+      "name": "Bob",
+      "age": 55,
+      "city": "Shanghai",
+      "hobbies": "cooking"
+     }
+    },
+    {
+     "content": "\n\n{\"name\": \"张伟\", \"age\": 39, \"city\": \"杭州\", \"hobbies\": [\"跑步\", \"摄影\", \"围棋\"]}",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 59,
+      "total_tokens": 1265,
+      "completion_tokens": 1206,
+      "prompt_tokens_details": null,
+      "completion_tokens_details": {
+       "reasoning_tokens": 1171
+      }
+     },
+     "latency": 13.937535524368286,
+     "correct": true,
+     "parsed": {
+      "name": "张伟",
+      "age": 39,
+      "city": "杭州",
+      "hobbies": [
+       "跑步",
+       "摄影",
+       "围棋"
+      ]
+     }
+    },
+    {
+     "content": "\n\n{\"name\": \"Alice\", \"age\": 42, \"city\": \"Beijing\", \"hobbies\": [\"reading\", \"cycling\"]}",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 52,
+      "total_tokens": 941,
+      "completion_tokens": 889,
+      "prompt_tokens_details": null,
+      "completion_tokens_details": {
+       "reasoning_tokens": 855
+      }
+     },
+     "latency": 10.301715612411499,
+     "correct": true,
+     "parsed": {
+      "name": "Alice",
+      "age": 42,
+      "city": "Beijing",
+      "hobbies": [
+       "reading",
+       "cycling"
+      ]
+     }
+    },
+    {
+     "content": "\n\n{\"name\": \"Bob\", \"age\": 58, \"city\": \"Shanghai\", \"hobbies\": \"cooking\"}",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 50,
+      "total_tokens": 1350,
+      "completion_tokens": 1300,
+      "prompt_tokens_details": null,
+      "completion_tokens_details": {
+       "reasoning_tokens": 1269
+      }
+     },
+     "latency": 14.839413404464722,
+     "correct": false,
+     "parsed": {
+      "name": "Bob",
+      "age": 58,
+      "city": "Shanghai",
+      "hobbies": "cooking"
+     }
+    },
+    {
+     "content": "\n\n{\"name\": \"张伟\", \"age\": 42, \"city\": \"杭州\", \"hobbies\": [\"跑步\", \"摄影\", \"围棋\"]}",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 59,
+      "total_tokens": 1039,
+      "completion_tokens": 980,
+      "prompt_tokens_details": null,
+      "completion_tokens_details": {
+       "reasoning_tokens": 945
+      }
+     },
+     "latency": 11.496712446212769,
+     "correct": true,
+     "parsed": {
+      "name": "张伟",
+      "age": 42,
+      "city": "杭州",
+      "hobbies": [
+       "跑步",
+       "摄影",
+       "围棋"
+      ]
+     }
+    },
+    {
+     "content": "\n\n{\"name\": \"Alice\", \"age\": 45, \"city\": \"Beijing\", \"hobbies\": [\"reading\", \"cycling\"]}",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 52,
+      "total_tokens": 878,
+      "completion_tokens": 826,
+      "prompt_tokens_details": null,
+      "completion_tokens_details": {
+       "reasoning_tokens": 792
+      }
+     },
+     "latency": 9.487094163894653,
+     "correct": true,
+     "parsed": {
+      "name": "Alice",
+      "age": 45,
+      "city": "Beijing",
+      "hobbies": [
+       "reading",
+       "cycling"
+      ]
+     }
+    },
+    {
+     "content": "\n\n{\"name\": \"Bob\", \"age\": 61, \"city\": \"Shanghai\", \"hobbies\": \"cooking\"}",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 50,
+      "total_tokens": 1200,
+      "completion_tokens": 1150,
+      "prompt_tokens_details": null,
+      "completion_tokens_details": {
+       "reasoning_tokens": 1119
+      }
+     },
+     "latency": 10.847600221633911,
+     "correct": false,
+     "parsed": {
+      "name": "Bob",
+      "age": 61,
+      "city": "Shanghai",
+      "hobbies": "cooking"
+     }
+    },
+    {
+     "content": "\n\n{\"name\": \"张伟\", \"age\": 45, \"city\": \"杭州\", \"hobbies\": [\"跑步\", \"摄影\", \"围棋\"]}",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 59,
+      "total_tokens": 1183,
+      "completion_tokens": 1124,
+      "prompt_tokens_details": null,
+      "completion_tokens_details": {
+       "reasoning_tokens": 1089
+      }
+     },
+     "latency": 10.500760316848755,
+     "correct": true,
+     "parsed": {
+      "name": "张伟",
+      "age": 45,
+      "city": "杭州",
+      "hobbies": [
+       "跑步",
+       "摄影",
+       "围棋"
+      ]
+     }
+    },
+    {
+     "content": "\n\n{\"name\": \"Alice\", \"age\": 48, \"city\": \"Beijing\", \"hobbies\": [\"reading\", \"cycling\"]}",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 52,
+      "total_tokens": 1130,
+      "completion_tokens": 1078,
+      "prompt_tokens_details": null,
+      "completion_tokens_details": {
+       "reasoning_tokens": 1044
+      }
+     },
+     "latency": 9.80014157295227,
+     "correct": true,
+     "parsed": {
+      "name": "Alice",
+      "age": 48,
+      "city": "Beijing",
+      "hobbies": [
+       "reading",
+       "cycling"
+      ]
+     }
+    },
+    {
+     "content": "\n\n{\"name\": \"Bob\", \"age\": 64, \"city\": \"Shanghai\", \"hobbies\": \"cooking\"}",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 50,
+      "total_tokens": 1299,
+      "completion_tokens": 1249,
+      "prompt_tokens_details": null,
+      "completion_tokens_details": {
+       "reasoning_tokens": 1218
+      }
+     },
+     "latency": 10.38177752494812,
+     "correct": false,
+     "parsed": {
+      "name": "Bob",
+      "age": 64,
+      "city": "Shanghai",
+      "hobbies": "cooking"
+     }
+    }
+   ]
+  },
+  "tools": {
+   "summary": {
+    "n": 10,
+    "correct": 8,
+    "accuracy": 0.8,
+    "errors": 0,
+    "truncated": 1,
+    "avg_completion_tokens": 617.9,
+    "avg_latency_s": 5.350438594818115
+   },
+   "records": [
+    {
+     "content": "",
+     "tool_calls": [
+      {
+       "id": "chatcmpl-tool-bbd0730231c7f5cd",
+       "type": "function",
+       "function": {
+        "name": "get_weather",
+        "arguments": "{\"city\": \"Tokyo\"}"
+       }
+      }
+     ],
+     "finish": "tool_calls",
+     "usage": {
+      "prompt_tokens": 377,
+      "total_tokens": 564,
+      "completion_tokens": 187,
+      "prompt_tokens_details": null,
+      "completion_tokens_details": {
+       "reasoning_tokens": 158
+      }
+     },
+     "latency": 2.092755079269409,
+     "expected": "get_weather",
+     "got": {
+      "name": "get_weather",
+      "args": {
+       "city": "Tokyo"
+      }
+     },
+     "correct": true
+    },
+    {
+     "content": "",
+     "tool_calls": [
+      {
+       "id": "chatcmpl-tool-9d6437b1baff2600",
+       "type": "function",
+       "function": {
+        "name": "get_weather",
+        "arguments": "{\"city\": \"北京\"}"
+       }
+      }
+     ],
+     "finish": "tool_calls",
+     "usage": {
+      "prompt_tokens": 373,
+      "total_tokens": 816,
+      "completion_tokens": 443,
+      "prompt_tokens_details": null,
+      "completion_tokens_details": {
+       "reasoning_tokens": 415
+      }
+     },
+     "latency": 4.419841527938843,
+     "expected": "get_weather",
+     "got": {
+      "name": "get_weather",
+      "args": {
+       "city": "北京"
+      }
+     },
+     "correct": true
+    },
+    {
+     "content": "",
+     "tool_calls": [
+      {
+       "id": "chatcmpl-tool-8c29c1e2702e4d14",
+       "type": "function",
+       "function": {
+        "name": "convert_currency",
+        "arguments": "{\"amount\": 100, \"from\": \"USD\", \"to\": \"EUR\"}"
+       }
+      }
+     ],
+     "finish": "tool_calls",
+     "usage": {
+      "prompt_tokens": 378,
+      "total_tokens": 600,
+      "completion_tokens": 222,
+      "prompt_tokens_details": null,
+      "completion_tokens_details": {
+       "reasoning_tokens": 167
+      }
+     },
+     "latency": 2.4529080390930176,
+     "expected": "convert_currency",
+     "got": {
+      "name": "convert_currency",
+      "args": {
+       "amount": 100,
+       "from": "USD",
+       "to": "EUR"
+      }
+     },
+     "correct": true
+    },
+    {
+     "content": "",
+     "tool_calls": [
+      {
+       "id": "chatcmpl-tool-8c577ac08b01fd23",
+       "type": "function",
+       "function": {
+        "name": "convert_currency",
+        "arguments": "{\"amount\": 250, \"from\": \"CNY\", \"to\": \"JPY\"}"
+       }
+      }
+     ],
+     "finish": "tool_calls",
+     "usage": {
+      "prompt_tokens": 377,
+      "total_tokens": 1114,
+      "completion_tokens": 737,
+      "prompt_tokens_details": null,
+      "completion_tokens_details": {
+       "reasoning_tokens": 680
+      }
+     },
+     "latency": 6.741653680801392,
+     "expected": "convert_currency",
+     "got": {
+      "name": "convert_currency",
+      "args": {
+       "amount": 250,
+       "from": "CNY",
+       "to": "JPY"
+      }
+     },
+     "correct": true
+    },
+    {
+     "content": "",
+     "tool_calls": [
+      {
+       "id": "chatcmpl-tool-ae1d1cc81dac5563",
+       "type": "function",
+       "function": {
+        "name": "get_weather",
+        "arguments": "{\"city\": \"Cairo\", \"unit\": \"fahrenheit\"}"
+       }
+      }
+     ],
+     "finish": "tool_calls",
+     "usage": {
+      "prompt_tokens": 379,
+      "total_tokens": 908,
+      "completion_tokens": 529,
+      "prompt_tokens_details": null,
+      "completion_tokens_details": {
+       "reasoning_tokens": 487
+      }
+     },
+     "latency": 5.132536172866821,
+     "expected": "get_weather",
+     "got": {
+      "name": "get_weather",
+      "args": {
+       "city": "Cairo",
+       "unit": "fahrenheit"
+      }
+     },
+     "correct": true
+    },
+    {
+     "content": "",
+     "tool_calls": [
+      {
+       "id": "chatcmpl-tool-829e311991ecd65a",
+       "type": "function",
+       "function": {
+        "name": "convert_currency",
+        "arguments": "{\"amount\": 75, \"from\": \"GBP\", \"to\": \"USD\"}"
+       }
+      }
+     ],
+     "finish": "tool_calls",
+     "usage": {
+      "prompt_tokens": 378,
+      "total_tokens": 557,
+      "completion_tokens": 179,
+      "prompt_tokens_details": null,
+      "completion_tokens_details": {
+       "reasoning_tokens": 125
+      }
+     },
+     "latency": 2.0310113430023193,
+     "expected": "convert_currency",
+     "got": {
+      "name": "convert_currency",
+      "args": {
+       "amount": 75,
+       "from": "GBP",
+       "to": "USD"
+      }
+     },
+     "correct": true
+    },
+    {
+     "content": "",
+     "tool_calls": [
+      {
+       "id": "chatcmpl-tool-aab50fdebd88d24b",
+       "type": "function",
+       "function": {
+        "name": "get_weather",
+        "arguments": "{\"city\": \"Shanghai\"}"
+       }
+      }
+     ],
+     "finish": "tool_calls",
+     "usage": {
+      "prompt_tokens": 371,
+      "total_tokens": 1280,
+      "completion_tokens": 909,
+      "prompt_tokens_details": null,
+      "completion_tokens_details": {
+       "reasoning_tokens": 880
+      }
+     },
+     "latency": 7.904640436172485,
+     "expected": "get_weather",
+     "got": {
+      "name": "get_weather",
+      "args": {
+       "city": "Shanghai"
+      }
+     },
+     "correct": false
+    },
+    {
+     "content": "",
+     "tool_calls": [
+      {
+       "id": "chatcmpl-tool-b119a1becd0fdd5d",
+       "type": "function",
+       "function": {
+        "name": "convert_currency",
+        "arguments": "{\"amount\": 1000, \"from\": \"EUR\", \"to\": \"GBP\"}"
+       }
+      }
+     ],
+     "finish": "tool_calls",
+     "usage": {
+      "prompt_tokens": 378,
+      "total_tokens": 1198,
+      "completion_tokens": 820,
+      "prompt_tokens_details": null,
+      "completion_tokens_details": {
+       "reasoning_tokens": 764
+      }
+     },
+     "latency": 7.327348232269287,
+     "expected": "convert_currency",
+     "got": {
+      "name": "convert_currency",
+      "args": {
+       "amount": 1000,
+       "from": "EUR",
+       "to": "GBP"
+      }
+     },
+     "correct": true
+    },
+    {
+     "content": "",
+     "tool_calls": [
+      {
+       "id": "chatcmpl-tool-adf537613d32b029",
+       "type": "function",
+       "function": {
+        "name": "get_weather",
+        "arguments": "{\"city\": \"Paris\", \"unit\": \"celsius\"}"
+       }
+      }
+     ],
+     "finish": "tool_calls",
+     "usage": {
+      "prompt_tokens": 375,
+      "total_tokens": 480,
+      "completion_tokens": 105,
+      "prompt_tokens_details": null,
+      "completion_tokens_details": {
+       "reasoning_tokens": 64
+      }
+     },
+     "latency": 1.273918628692627,
+     "expected": "get_weather",
+     "got": {
+      "name": "get_weather",
+      "args": {
+       "city": "Paris",
+       "unit": "celsius"
+      }
+     },
+     "correct": true
+    },
+    {
+     "content": "",
+     "tool_calls": null,
+     "finish": "length",
+     "usage": {
+      "prompt_tokens": 376,
+      "total_tokens": 2424,
+      "completion_tokens": 2048,
+      "prompt_tokens_details": null,
+      "completion_tokens_details": {
+       "reasoning_tokens": 2048
+      }
+     },
+     "latency": 14.127772808074951,
+     "expected": null,
+     "got": null,
+     "correct": false
+    }
+   ]
+  }
+ },
+ "finished": "2026-09-30 16:36:33"
+}

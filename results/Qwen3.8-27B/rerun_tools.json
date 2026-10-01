@@ -1,0 +1,339 @@
+{
+ "model": "qwen3.8-27b",
+ "base_url": "http://localhost:8001/v1",
+ "started": "2026-09-30 16:36:33",
+ "tests": {
+  "tools": {
+   "summary": {
+    "n": 10,
+    "correct": 9,
+    "accuracy": 0.9,
+    "errors": 0,
+    "truncated": 1,
+    "avg_completion_tokens": 275.7,
+    "avg_latency_s": 6.372922468185425
+   },
+   "records": [
+    {
+     "content": "",
+     "tool_calls": [
+      {
+       "id": "chatcmpl-tool-9cb142c396815af0",
+       "type": "function",
+       "function": {
+        "name": "get_weather",
+        "arguments": "{\"city\": \"Tokyo\"}"
+       }
+      }
+     ],
+     "finish": "tool_calls",
+     "usage": {
+      "prompt_tokens": 415,
+      "total_tokens": 493,
+      "completion_tokens": 78,
+      "prompt_tokens_details": null,
+      "completion_tokens_details": {
+       "reasoning_tokens": 49
+      }
+     },
+     "latency": 2.3711740970611572,
+     "expected": "get_weather",
+     "got": {
+      "name": "get_weather",
+      "args": {
+       "city": "Tokyo"
+      }
+     },
+     "correct": true
+    },
+    {
+     "content": "",
+     "tool_calls": [
+      {
+       "id": "chatcmpl-tool-9bd5f7d6868b8ec1",
+       "type": "function",
+       "function": {
+        "name": "get_weather",
+        "arguments": "{\"city\": \"北京\", \"unit\": \"celsius\"}"
+       }
+      }
+     ],
+     "finish": "tool_calls",
+     "usage": {
+      "prompt_tokens": 411,
+      "total_tokens": 499,
+      "completion_tokens": 88,
+      "prompt_tokens_details": null,
+      "completion_tokens_details": {
+       "reasoning_tokens": 47
+      }
+     },
+     "latency": 2.5364832878112793,
+     "expected": "get_weather",
+     "got": {
+      "name": "get_weather",
+      "args": {
+       "city": "北京",
+       "unit": "celsius"
+      }
+     },
+     "correct": true
+    },
+    {
+     "content": "",
+     "tool_calls": [
+      {
+       "id": "chatcmpl-tool-8cfff05f51e71e20",
+       "type": "function",
+       "function": {
+        "name": "convert_currency",
+        "arguments": "{\"amount\": 100, \"from\": \"USD\", \"to\": \"EUR\"}"
+       }
+      }
+     ],
+     "finish": "tool_calls",
+     "usage": {
+      "prompt_tokens": 416,
+      "total_tokens": 494,
+      "completion_tokens": 78,
+      "prompt_tokens_details": null,
+      "completion_tokens_details": {
+       "reasoning_tokens": 23
+      }
+     },
+     "latency": 2.3700687885284424,
+     "expected": "convert_currency",
+     "got": {
+      "name": "convert_currency",
+      "args": {
+       "amount": 100,
+       "from": "USD",
+       "to": "EUR"
+      }
+     },
+     "correct": true
+    },
+    {
+     "content": "",
+     "tool_calls": [
+      {
+       "id": "chatcmpl-tool-b2fffdda0609ab33",
+       "type": "function",
+       "function": {
+        "name": "convert_currency",
+        "arguments": "{\"amount\": 250, \"from\": \"CNY\", \"to\": \"JPY\"}"
+       }
+      }
+     ],
+     "finish": "tool_calls",
+     "usage": {
+      "prompt_tokens": 415,
+      "total_tokens": 500,
+      "completion_tokens": 85,
+      "prompt_tokens_details": null,
+      "completion_tokens_details": {
+       "reasoning_tokens": 28
+      }
+     },
+     "latency": 2.5151567459106445,
+     "expected": "convert_currency",
+     "got": {
+      "name": "convert_currency",
+      "args": {
+       "amount": 250,
+       "from": "CNY",
+       "to": "JPY"
+      }
+     },
+     "correct": true
+    },
+    {
+     "content": "",
+     "tool_calls": [
+      {
+       "id": "chatcmpl-tool-825a6f48279350bf",
+       "type": "function",
+       "function": {
+        "name": "get_weather",
+        "arguments": "{\"city\": \"Cairo\", \"unit\": \"fahrenheit\"}"
+       }
+      }
+     ],
+     "finish": "tool_calls",
+     "usage": {
+      "prompt_tokens": 417,
+      "total_tokens": 491,
+      "completion_tokens": 74,
+      "prompt_tokens_details": null,
+      "completion_tokens_details": {
+       "reasoning_tokens": 32
+      }
+     },
+     "latency": 2.279686450958252,
+     "expected": "get_weather",
+     "got": {
+      "name": "get_weather",
+      "args": {
+       "city": "Cairo",
+       "unit": "fahrenheit"
+      }
+     },
+     "correct": true
+    },
+    {
+     "content": "",
+     "tool_calls": [
+      {
+       "id": "chatcmpl-tool-81e9e046441690e5",
+       "type": "function",
+       "function": {
+        "name": "convert_currency",
+        "arguments": "{\"amount\": 75, \"from\": \"GBP\", \"to\": \"USD\"}"
+       }
+      }
+     ],
+     "finish": "tool_calls",
+     "usage": {
+      "prompt_tokens": 416,
+      "total_tokens": 491,
+      "completion_tokens": 75,
+      "prompt_tokens_details": null,
+      "completion_tokens_details": {
+       "reasoning_tokens": 21
+      }
+     },
+     "latency": 2.3016111850738525,
+     "expected": "convert_currency",
+     "got": {
+      "name": "convert_currency",
+      "args": {
+       "amount": 75,
+       "from": "GBP",
+       "to": "USD"
+      }
+     },
+     "correct": true
+    },
+    {
+     "content": "",
+     "tool_calls": [
+      {
+       "id": "chatcmpl-tool-b6b88eac8d70acca",
+       "type": "function",
+       "function": {
+        "name": "get_weather",
+        "arguments": "{\"city\": \"上海\", \"unit\": \"celsius\"}"
+       }
+      }
+     ],
+     "finish": "tool_calls",
+     "usage": {
+      "prompt_tokens": 409,
+      "total_tokens": 497,
+      "completion_tokens": 88,
+      "prompt_tokens_details": null,
+      "completion_tokens_details": {
+       "reasoning_tokens": 47
+      }
+     },
+     "latency": 2.5749967098236084,
+     "expected": "get_weather",
+     "got": {
+      "name": "get_weather",
+      "args": {
+       "city": "上海",
+       "unit": "celsius"
+      }
+     },
+     "correct": true
+    },
+    {
+     "content": "",
+     "tool_calls": [
+      {
+       "id": "chatcmpl-tool-ae71868b16d8e95e",
+       "type": "function",
+       "function": {
+        "name": "convert_currency",
+        "arguments": "{\"amount\": 1000, \"from\": \"EUR\", \"to\": \"GBP\"}"
+       }
+      }
+     ],
+     "finish": "tool_calls",
+     "usage": {
+      "prompt_tokens": 416,
+      "total_tokens": 497,
+      "completion_tokens": 81,
+      "prompt_tokens_details": null,
+      "completion_tokens_details": {
+       "reasoning_tokens": 25
+      }
+     },
+     "latency": 2.429636001586914,
+     "expected": "convert_currency",
+     "got": {
+      "name": "convert_currency",
+      "args": {
+       "amount": 1000,
+       "from": "EUR",
+       "to": "GBP"
+      }
+     },
+     "correct": true
+    },
+    {
+     "content": "",
+     "tool_calls": [
+      {
+       "id": "chatcmpl-tool-ad75d8613e9d45af",
+       "type": "function",
+       "function": {
+        "name": "get_weather",
+        "arguments": "{\"city\": \"Paris\", \"unit\": \"celsius\"}"
+       }
+      }
+     ],
+     "finish": "tool_calls",
+     "usage": {
+      "prompt_tokens": 413,
+      "total_tokens": 475,
+      "completion_tokens": 62,
+      "prompt_tokens_details": null,
+      "completion_tokens_details": {
+       "reasoning_tokens": 21
+      }
+     },
+     "latency": 2.009162187576294,
+     "expected": "get_weather",
+     "got": {
+      "name": "get_weather",
+      "args": {
+       "city": "Paris",
+       "unit": "celsius"
+      }
+     },
+     "correct": true
+    },
+    {
+     "content": "",
+     "tool_calls": null,
+     "finish": "length",
+     "usage": {
+      "prompt_tokens": 414,
+      "total_tokens": 2462,
+      "completion_tokens": 2048,
+      "prompt_tokens_details": null,
+      "completion_tokens_details": {
+       "reasoning_tokens": 2048
+      }
+     },
+     "latency": 42.341249227523804,
+     "expected": null,
+     "got": null,
+     "correct": false
+    }
+   ]
+  }
+ },
+ "finished": "2026-09-30 16:37:16"
+}

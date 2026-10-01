@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>指标解读 · LLM Inference Lab</title>
+<meta name="description" content="vLLM 是什么，TTFT、TPOT、吞吐、P99、KV cache 容量这些性能指标怎么读，GSM8K、HumanEval、C-Eval、大海捞针等质量指标怎么判分。">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="site.css">
+</head>
+<body>
+<div class="wrap">
+<header class="top"><a class="brand" href="../index.html">LLM Inference Lab</a>
+<nav><a href="lab.html">原理实验台</a><a class="on" href="metrics.html">指标解读</a><a href="benchmark.html">评测报告</a><a href="deployment.html">部署实录</a><a href="https://github.com/haoxiangNtu/llm-inference-lab">GitHub</a></nav></header>
+
+<div class="eyebrow">Metrics</div>
+<h1>这些指标到底在量什么</h1>
+<p class="lead">评测报告里的每一个数字都对应推理过程中的某个阶段。先讲清楚推理引擎在做什么，再逐个解释性能指标和质量指标，最后说明这套评测的局限。</p>
+<div class="toc"><a href="#vllm">vLLM</a><a href="#phases">两个阶段</a><a href="#perf">性能指标</a><a href="#quality">质量指标</a><a href="#caveats">局限</a></div>
+
+<h2 id="vllm">vLLM 是什么</h2>
+<p>vLLM 是加州伯克利 2023 年开源的大模型推理引擎，现在是开源模型部署的事实标准。名字里的 v 来自"虚拟内存"：它的核心发明 PagedAttention 把操作系统的分页思想搬到了显存管理上，把 KV cache 切成小块按需分配，显存利用率从传统做法的 20% 到 40% 提高到 90% 以上。</p>
+<p>在一次部署里它负责：把权重加载并切到多张卡上（张量并行、流水线并行、专家并行），管理 KV cache，把同时到达的请求合批送进 GPU（连续批处理），对外提供 OpenAI 兼容的 HTTP 接口。<code>vllm serve</code> 启动服务，<code>vllm bench serve</code> 是它自带的压测客户端。同类工具还有 SGLang、TensorRT-LLM、llama.cpp。</p>
+
+<h2 id="phases">推理的两个阶段</h2>
+<p><b>Prefill</b> 一次性读完提示词，所有 token 并行计算，矩阵乘的规模是"token 数 × 隐藏维度"，GPU 的算力被喂饱，瓶颈是算力。<b>Decode</b> 逐个生成输出 token，每生成一个都要把全部激活权重和 KV cache 从显存读一遍，算力大量闲置，时间花在搬数据上，瓶颈是显存带宽。两个阶段性质不同，所以性能指标也分开测。</p>
+<div class="note">A800 的显存带宽是 2 TB/s。一个每 token 激活 18B 参数、FP8 存储的模型，4 卡分摊后每卡每步要读 4.5 GB，理论下限约 2.3 ms。实测 GLM-5.3-Flash 的 TPOT 是 20 ms，差距来自内核效率、流水线气泡和通信开销。<a href="lab.html#s2">原理实验台第 2 站</a>可以拨动这些参数看效果。</div>
+
+<h2 id="perf">性能指标</h2>
+<div class="tablewrap"><table>
+<tr><th>指标</th><th>含义</th><th>对应阶段</th><th>用户感受</th></tr>
+<tr><td>Token</td><td>模型处理文本的基本单位，约 0.7 个汉字或 0.75 个英文单词</td><td></td><td></td></tr>
+<tr><td>TTFT</td><td>首 token 延迟：从发出请求到收到第一个字，等于 prefill 时间加排队时间，随输入长度增长</td><td>Prefill</td><td>等多久才开始出字</td></tr>
+<tr><td>TPOT</td><td>每输出 token 耗时：decode 每步的时间。1000 ÷ TPOT 就是单流速度 tok/s</td><td>Decode</td><td>出字快不快，20 tok/s 以上感觉流畅</td></tr>
+<tr><td>ITL</td><td>token 间隔的分布，和 TPOT 同源，看抖动</td><td>Decode</td><td>出字是否均匀</td></tr>
+<tr><td>吞吐 tok/s</td><td>所有并发请求每秒合计产出的 token。GPU 一步同时算 16 条请求和算 1 条的耗时接近，所以并发越高吞吐越高，每条请求的 TPOT 变差</td><td>Decode 批处理</td><td>服务能同时伺候多少人</td></tr>
+<tr><td>E2EL</td><td>端到端延迟：一条请求从发出到最后一个字</td><td>全程</td><td>一次回答总共等多久</td></tr>
+<tr><td>P50 / P99</td><td>中位数和 99 分位。P99 反映最差的那 1% 请求有多慢，做服务时比平均值更重要</td><td></td><td>最倒霉的用户体验</td></tr>
+<tr><td>KV cache 容量</td><td>显存里能同时装下多少 token 的上下文，决定并发和长上下文的上限</td><td>显存</td><td></td></tr>
+</table></div>
+<p>压测时用固定长度的随机输入并强制生成到指定长度（<code>ignore_eos</code>），是为了让不同模型的数字可比，不受它们"话多话少"的影响。并发 1 / 4 / 8 / 16 / 32 的曲线比单个数字更有信息量：曲线先陡后平的拐点就是算力墙。</p>
+
+<h2 id="quality">质量指标</h2>
+<div class="tablewrap"><table>
+<tr><th>测试</th><th>内容</th><th>样本</th><th>判分方式</th><th>测什么</th></tr>
+<tr><td>GSM8K</td><td>小学应用题</td><td>测试集 1319 题中抽 200</td><td>只比最终数字是否精确一致</td><td>多步推理</td></tr>
+<tr><td>HumanEval</td><td>Python 函数补全</td><td>全部 164 题</td><td>真实执行模型写的代码跑隐藏单元测试，一次通过的比例即 pass@1</td><td>代码能力，无法靠"看起来对"蒙混</td></tr>
+<tr><td>C-Eval</td><td>中文考试题，52 个学科</td><td>验证集 1346 题中每科约 6 题，共 300</td><td>比选项字母</td><td>中文知识面</td></tr>
+<tr><td>大海捞针</td><td>长文本里埋一个 7 位密码</td><td>4K 到 128K 各 3 次，深度 10% / 50% / 90%</td><td>答案含该密码即对，同时记录延迟</td><td>长上下文是否真的可用</td></tr>
+<tr><td>JSON 合规</td><td>从一句话抽取信息输出规定 JSON</td><td>20 条</td><td>字段集合和值完全正确</td><td>指令遵循，能否接进程序</td></tr>
+<tr><td>工具调用</td><td>OpenAI tools 接口，两个函数</td><td>10 条，含 1 条不该调用</td><td>函数名和参数正确，不该调用时不调用</td><td>Agent 场景的基础</td></tr>
+<tr><td>图形题</td><td>程序生成的圆和方块</td><td>12 张，问数量 / 颜色 / 形状</td><td>关键词匹配</td><td>图片链路通不通，基础感知</td></tr>
+</table></div>
+<p>附带记录平均输出长度和单题耗时，反映思考模式的开销；以及截断率，即思考太长没说完答案的比例。截断在本套评测里按答错计。</p>
+
+<h2 id="caveats">这套评测的局限</h2>
+<ul>
+<li>样本量小，准确率有正负 3 到 5 个点的抖动，看趋势别抠小数。</li>
+<li>同一套脚本下的横向比较有意义，和官方榜单不可直接比：提示词、思考模式、判分规则、token 预算都不同。</li>
+<li>性能数字绑定部署配置：卡数、并行方式、max-num-seqs、KV 精度都会改变曲线，报告里都标了配置。</li>
+<li>图形题只是合成图，不代表真实视觉能力。</li>
+</ul>
+<p>脚本都在仓库的 <code>bench/</code> 目录：<code>quality.py</code> 跑质量，<code>perf.sh</code> 跑性能矩阵，<code>report.py</code> 汇总。</p>
+
+<footer>LLM Inference Lab · 在 8 × A800 上部署并评测开源大模型的学习记录 · <a href="https://github.com/haoxiangNtu/llm-inference-lab">源码</a></footer>
+</div>
+</body>
+</html>

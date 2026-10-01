@@ -1,0 +1,457 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>原理实验台 · LLM Inference Lab</title>
+<meta name="description" content="六个可交互实验：一次生成的全景、prefill 与 decode、KV cache 分页 3D 视图、多卡并行、训练与推理的内存账、指标对号入座。">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="site.css">
+<style>
+/* Layout: a vertical lab notebook — each station has a canvas/3D stage on top and its controls + notes below.
+   Dark-first (GPU memory feels like a dark oscilloscope), light variant for daytime reading. */
+:root{
+  --bg:#0c1220; --bg2:#121a2b; --panel:#182238; --line:#26324d; --fg:#e6ecf7; --muted:#8e9bb8;
+  --compute:#38d1ff; --memory:#ffb347; --kv:#ff5fa8; --token:#7ef0b0; --weights:#8f9dff; --warn:#ff7a59;
+  --font-body:"Noto Sans SC","PingFang SC","Microsoft YaHei",system-ui,sans-serif;
+  --font-mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  color-scheme:dark;
+}
+@media (prefers-color-scheme: light){ :root:not([data-theme="dark"]){
+  --bg:#f5f7fb; --bg2:#ffffff; --panel:#ffffff; --line:#d7deea; --fg:#141a28; --muted:#5b6780;
+  --compute:#0a86b8; --memory:#c66a00; --kv:#c8237a; --token:#1f8f5a; --weights:#4553c7; --warn:#d4451f; color-scheme:light } }
+:root[data-theme="light"]{
+  --bg:#f5f7fb; --bg2:#ffffff; --panel:#ffffff; --line:#d7deea; --fg:#141a28; --muted:#5b6780;
+  --compute:#0a86b8; --memory:#c66a00; --kv:#c8237a; --token:#1f8f5a; --weights:#4553c7; --warn:#d4451f; color-scheme:light }
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--font-body);font-size:15px;line-height:1.7;margin:0}
+.wrap{max-width:1080px;margin:0 auto;padding-block:24px 80px;padding-inline:16px}
+h1{font-size:clamp(26px,4vw,38px);line-height:1.25;margin:0 0 8px;text-wrap:balance;font-weight:700}
+h2{font-size:22px;margin:0;text-wrap:balance}
+h3{font-size:16px;margin:16px 0 6px}
+p{max-width:68ch;margin:8px 0}
+.eyebrow{font-family:var(--font-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.lead{color:var(--muted);max-width:70ch;font-size:16px}
+nav.toc{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 8px}
+nav.toc a{font-size:13px;color:var(--fg);text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:4px 12px;background:var(--bg2)}
+nav.toc a:hover,nav.toc a:focus-visible{border-color:var(--compute);outline:none}
+section.station{margin-top:44px;padding-top:24px;border-top:1px solid var(--line)}
+.station-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 16px;margin-bottom:12px}
+.stage{background:var(--bg2);border:1px solid var(--line);border-radius:10px;overflow:hidden;position:relative}
+canvas.viz{display:block;width:100%;height:auto;max-width:100%}
+.stage3d{height:420px;position:relative;touch-action:none}
+.stage3d canvas{display:block;width:100%!important;height:100%!important}
+.hint{position:absolute;right:10px;bottom:8px;font-family:var(--font-mono);font-size:11px;color:var(--muted);pointer-events:none}
+.controls{display:flex;flex-wrap:wrap;gap:12px 22px;align-items:end;margin:14px 0 6px}
+.ctl{display:flex;flex-direction:column;gap:4px;min-width:150px;flex:1 1 150px;max-width:260px}
+.ctl label{font-size:12px;color:var(--muted)}
+.ctl output,.ctl .val{font-family:var(--font-mono);font-size:12px;color:var(--fg)}
+input[type=range]{width:100%;accent-color:var(--compute)}
+select,button{font:inherit;font-size:14px;color:var(--fg);background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:7px 12px}
+button{cursor:pointer}
+button.primary{background:var(--compute);color:#06121c;border-color:transparent;font-weight:600}
+button:focus-visible,select:focus-visible{outline:2px solid var(--compute);outline-offset:2px}
+.btnrow{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:14px 0}
+.stat{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:10px 12px;min-width:0}
+.stat .k{font-size:12px;color:var(--muted)}
+.stat .v{font-family:var(--font-mono);font-size:20px;font-weight:600;font-variant-numeric:tabular-nums}
+.stat .s{font-size:12px;color:var(--muted)}
+.legend{display:flex;flex-wrap:wrap;gap:8px 16px;font-size:12px;color:var(--muted);margin:8px 0}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;vertical-align:middle}
+.note{background:var(--panel);border-left:3px solid var(--compute);padding:10px 14px;border-radius:0 8px 8px 0;margin:14px 0;max-width:76ch}
+.note.mem{border-color:var(--memory)}
+.note.kv{border-color:var(--kv)}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--muted);font-weight:500;font-size:12px}
+td.num{font-family:var(--font-mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+.tablewrap{overflow-x:auto;margin:10px 0}
+.pill{display:inline-block;font-family:var(--font-mono);font-size:11px;padding:1px 8px;border-radius:999px;border:1px solid var(--line);color:var(--muted)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media (max-width:760px){.two{grid-template-columns:1fr}.stage3d{height:340px}}
+code{font-family:var(--font-mono);font-size:13px;background:var(--panel);padding:1px 6px;border-radius:4px}
+@media (prefers-reduced-motion: reduce){.anim-note{display:block}}
+.anim-note{display:none;font-size:12px;color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+
+<div class="wrap">
+<header class="top"><a class="brand" href="../index.html">LLM Inference Lab</a>
+<nav><a class="on" href="lab.html">原理实验台</a><a href="metrics.html">指标解读</a><a href="benchmark.html">评测报告</a><a href="deployment.html">部署实录</a><a href="https://github.com/haoxiangNtu/llm-inference-lab">GitHub</a></nav></header>
+  <div class="eyebrow">Inference Lab · 8 × A800 现场版</div>
+  <h1>大模型推理时，GPU 到底在忙什么</h1>
+  <p class="lead">六个可以动手拨弄的"实验台"，把 prefill、decode、KV cache、并行切分和训练的内存账算清楚。所有默认参数都取自你这台机器和刚部署的模型，理论值旁边尽量放上实测值，方便对号入座。</p>
+  <nav class="toc" aria-label="目录">
+    <a href="#s1">1 一次生成的全景</a><a href="#s2">2 Prefill 与 Decode</a><a href="#s3">3 KV cache 与分页</a><a href="#s4">4 多卡并行</a><a href="#s5">5 训练 vs 推理</a><a href="#s6">6 指标对号入座</a>
+  </nav>
+  <p class="anim-note">检测到你的系统偏好减少动画，页面里的动画默认暂停，可用按钮手动单步。</p>
+
+  <!-- ===================== 1 全景 ===================== -->
+  <section class="station" id="s1">
+    <div class="station-head"><h2>1. 一次生成的全景</h2><span class="pill">forward pass</span></div>
+    <p>模型不"读句子"，它一次处理一串 token。每个 token 先变成一个向量，穿过几十层相同结构的 Transformer 块，最后一层的输出变成对"下一个 token"的概率分布，采样一个，接到末尾，再来一遍。下面的动画是一步生成的路径，点一下可以单步。</p>
+    <div class="stage"><canvas class="viz" id="c1" width="1040" height="300"></canvas></div>
+    <div class="btnrow" style="margin-top:10px"><button class="primary" id="b1play">播放 / 暂停</button><button id="b1step">单步</button><span class="pill" id="s1status">layer 0/45</span></div>
+    <div class="note">每一层里两件事：<b>注意力</b>让当前 token 去看之前所有 token 的 K、V（这就是 KV cache 存的东西），<b>MLP</b> 对每个 token 各自做一次大矩阵乘。MoE 模型的 MLP 由很多"专家"组成，每个 token 只激活其中几个，所以 GLM-5.3-Flash 有 320B 参数但每个 token 只算 18B。</div>
+  </section>
+
+  <!-- ===================== 2 Prefill / Decode ===================== -->
+  <section class="station" id="s2">
+    <div class="station-head"><h2>2. Prefill 与 Decode：算力墙和带宽墙</h2><span class="pill">roofline</span></div>
+    <p>Prefill 把整段提示词一次算完，矩阵乘的规模是"token 数 × 隐藏维度"，GPU 的算力被喂饱。Decode 每步只有一个新 token，却仍要把全部激活权重从显存读一遍，算力大量闲置，时间花在搬数据上。批处理的意义就在这里：一步里同时算 16 条请求，权重只读一次。</p>
+    <div class="stage"><canvas class="viz" id="c2" width="1040" height="360"></canvas><div class="hint">上：prefill 一次并行 · 下：decode 逐 token，每步扫一遍权重</div></div>
+    <div class="btnrow" style="margin-top:10px"><button class="primary" id="b2play">播放 / 暂停</button><button id="b2reset">重来</button></div>
+    <div class="controls">
+      <div class="ctl"><label for="m2">模型</label><select id="m2"></select></div>
+      <div class="ctl"><label for="hw2">GPU</label><select id="hw2"></select></div>
+      <div class="ctl"><label for="ngpu2">参与的卡数（张量并行）<output id="ngpu2v">4</output></label><input type="range" id="ngpu2" min="1" max="8" value="4"></div>
+      <div class="ctl"><label for="lp2">提示词长度 token <output id="lp2v">1024</output></label><input type="range" id="lp2" min="64" max="32768" step="64" value="1024"></div>
+      <div class="ctl"><label for="lo2">输出长度 token <output id="lo2v">256</output></label><input type="range" id="lo2" min="16" max="2048" step="16" value="256"></div>
+      <div class="ctl"><label for="bs2">并发请求数 <output id="bs2v">1</output></label><input type="range" id="bs2" min="1" max="64" value="1"></div>
+      <div class="ctl"><label for="eff2">内核效率 <output id="eff2v">40%</output></label><input type="range" id="eff2" min="5" max="100" value="40"></div>
+    </div>
+    <div class="stats" id="stats2"></div>
+    <div class="stage" style="margin-top:8px"><canvas class="viz" id="c2b" width="1040" height="260"></canvas><div class="hint">总吞吐 与 每请求 TPOT 随并发变化</div></div>
+    <div class="note mem"><b>怎么读这组数字。</b> 决定 decode 每步时间的是"每张卡要搬多少字节 ÷ 这张卡的显存带宽"。A800 的 HBM 是 2 TB/s，GLM-5.3-Flash 每个 token 激活 18B 参数、FP8 一字节，4 卡分摊后每卡每步读 4.5 GB，理论下限约 2.3 ms。实测 TPOT 是 38 ms，差了十几倍，这就是"内核效率"滑块的意义：Ampere 上跑的是 Triton 回退内核、流水线并行有气泡、MoE 路由和 all-reduce 都有固定开销。把滑块拉到 6% 左右，理论值就和实测对上了，这个差距正是后续优化的空间。</div>
+    <div class="note"><b>算术强度。</b> 每搬 1 字节能做多少次乘加，决定你撞的是哪堵墙。A800 的平衡点约 156 FLOP/字节。单条请求 decode 每字节只做 2 次运算，离平衡点差两个数量级，纯粹带宽瓶颈；并发拉到几十条以后强度线性上升，才开始接近算力墙。这就是并发曲线先陡后平的原因。</div>
+  </section>
+
+  <!-- ===================== 3 KV cache ===================== -->
+  <section class="station" id="s3">
+    <div class="station-head"><h2>3. KV cache 与 PagedAttention</h2><span class="pill">3D · 拖动旋转</span></div>
+    <p>注意力要看历史 token 的 K 和 V，不缓存就得每步重算整段上下文。缓存下来后，显存里除了权重，剩下的空间几乎都给了它。vLLM 把 KV cache 按固定大小的"页"管理，请求来了按需分页、结束就归还，这就是 v 的来历。下面是一张 A800 的显存，方块是页，颜色是不同请求。</p>
+    <div class="stage stage3d" id="stage3"><div class="hint">左键拖动旋转 · 滚轮缩放</div></div>
+    <div class="controls">
+      <div class="ctl"><label for="m3">模型</label><select id="m3"></select></div>
+      <div class="ctl"><label for="mode3">显存分配方式</label><select id="mode3"><option value="paged">分页（PagedAttention）</option><option value="contig">按最大长度预留（传统）</option></select></div>
+      <div class="ctl"><label for="ctx3">每请求上下文上限 token <output id="ctx3v">32768</output></label><input type="range" id="ctx3" min="2048" max="131072" step="2048" value="32768"></div>
+    </div>
+    <div class="btnrow"><button class="primary" id="b3add">来一条新请求</button><button id="b3done">结束最早的请求</button><button id="b3auto">自动流量 开/关</button></div>
+    <div class="stats" id="stats3"></div>
+    <div class="note kv"><b>KV 每 token 占多少。</b> GQA 模型是 2 × 层数 × KV 头数 × 头维度 × 2 字节；Qwen3.8-27B 约 262 KB/token，128K 上下文一条请求就要 34 GB。GLM-5.3-Flash 用 MLA 把 K、V 压成一个 512 维的潜向量，加上稀疏注意力索引，每 token 只有几十 KB，所以同样的显存能装 263 万 token，这是它能标 1M 上下文的物理基础。</div>
+  </section>
+
+  <!-- ===================== 4 并行 ===================== -->
+  <section class="station" id="s4">
+    <div class="station-head"><h2>4. 多卡怎么分工</h2><span class="pill">TP · PP · EP</span></div>
+    <p>一个模型放不进一张卡，或者一张卡算得太慢，就要切。<b>张量并行</b>把每一层的大矩阵横着切给几张卡，每层算完要做一次 all-reduce 把结果合起来，靠 NVLink 撑。<b>流水线并行</b>把层按顺序切成几段，token 像流水线上的工件依次经过，段与段之间只传一个激活向量，但下游要等上游，产生"气泡"。<b>专家并行</b>把 MoE 的专家分到不同卡，token 按路由结果跳到专家所在的卡。GLM 的部署是 TP4 × PP2，用满 8 张卡。</p>
+    <div class="stage stage3d" id="stage4"><div class="hint">左键拖动旋转 · 亮起的卡正在计算 · 连线是通信</div></div>
+    <div class="controls">
+      <div class="ctl"><label for="mode4">并行方案</label><select id="mode4">
+        <option value="tp8">TP8：8 卡切同一层</option><option value="tp4pp2" selected>TP4 × PP2：GLM-5.3-Flash 现用</option><option value="tp2">TP2：Qwen 现用（2 卡）</option><option value="pp8">PP8：8 段流水线</option><option value="ep">TP4 × PP2 + 专家并行</option></select></div>
+      <div class="ctl"><label for="mb4">流水线微批数 <output id="mb4v">4</output></label><input type="range" id="mb4" min="1" max="8" value="4"></div>
+    </div>
+    <div class="stage" style="margin-top:8px"><canvas class="viz" id="c4" width="1040" height="220"></canvas><div class="hint">流水线时间线：色块是微批在各段的计算，空白是气泡</div></div>
+    <div class="note"><b>为什么 GLM 选 TP4 × PP2 而不是 TP8。</b> TP 每层要 all-reduce，卡越多通信越碎；A800 的 NVLink 是 400 GB/s，比 A100 的 600 GB/s 又砍了三分之一。PP 的通信量小得多，但 8 卡都堆在 PP 上气泡太大。4 × 2 是在这台机器上两种代价的折中，验证者在同样的 8×A800 上试出来的。</div>
+  </section>
+
+  <!-- ===================== 5 训练 vs 推理 ===================== -->
+  <section class="station" id="s5">
+    <div class="station-head"><h2>5. 训练和推理的内存账</h2><span class="pill">bytes / param</span></div>
+    <p>推理只需要权重和 KV cache。训练还要保存梯度、优化器状态和反向传播用的激活值，混合精度下每个参数要 16 字节起步，再加上算力是推理的 3 倍（前向 1 份，反向 2 份）。拖动参数量，看看同一个模型训练和推理各要多少张 A800。</p>
+    <div class="stage"><canvas class="viz" id="c5" width="1040" height="300"></canvas></div>
+    <div class="controls">
+      <div class="ctl"><label for="np5">参数量（十亿）<output id="np5v">27</output></label><input type="range" id="np5" min="1" max="700" value="27"></div>
+      <div class="ctl"><label for="ctx5">推理时 KV 预留 token 数 <output id="ctx5v">1000000</output></label><input type="range" id="ctx5" min="0" max="4000000" step="100000" value="1000000"></div>
+      <div class="ctl"><label for="seq5">训练序列长度 × 批大小 token <output id="seq5v">32768</output></label><input type="range" id="seq5" min="4096" max="262144" step="4096" value="32768"></div>
+    </div>
+    <div class="stats" id="stats5"></div>
+    <div class="note"><b>时间线上的区别。</b> 推理：前向一次，出一个 token。训练：前向算 loss，反向把梯度一层层传回来，优化器用梯度更新全部权重，再来下一批。反向的计算量约是前向的两倍，而且每一层的激活值都要留到反向用，序列越长激活越多，这就是长序列训练那么吃显存的原因。ZeRO / FSDP 把权重、梯度、优化器状态切到多张卡上分摊，DeepSpeed 和 FSDP 都是这个思路。</div>
+  </section>
+
+  <!-- ===================== 6 指标对号入座 ===================== -->
+  <section class="station" id="s6">
+    <div class="station-head"><h2>6. 把测到的指标对号入座</h2><span class="pill">GLM-5.3-Flash · 8×A800 实测</span></div>
+    <div class="tablewrap"><table>
+      <tr><th>指标</th><th>对应阶段</th><th>受什么支配</th><th>实测（1K 输入 / 256 输出，并发 4）</th></tr>
+      <tr><td>TTFT 首 token 延迟</td><td>Prefill</td><td>算力、提示词长度、排队</td><td class="num">540 ms</td></tr>
+      <tr><td>TPOT 每 token 耗时</td><td>Decode 单步</td><td>显存带宽、激活参数字节数、KV 长度</td><td class="num">38 ms（26 tok/s 单流）</td></tr>
+      <tr><td>吞吐 tok/s</td><td>Decode 批处理</td><td>并发数、每步时间增长的斜率</td><td class="num">99 tok/s @ 并发 4</td></tr>
+      <tr><td>KV cache 容量</td><td>显存</td><td>显存减权重，除以每 token KV 字节</td><td class="num">2,627,138 token</td></tr>
+      <tr><td>加载时间</td><td>启动</td><td>存储读取带宽、权重体积</td><td class="num">306 GB / 550 s</td></tr>
+      <tr><td>CUDA Graph 捕获</td><td>启动</td><td>把 decode 每步的几千个内核调用录成一张图重放，省 CPU 开销</td><td class="num">103 s</td></tr>
+    </table></div>
+    <p>后面两个 Qwen 模型的完整报告出来后，可以把它们的数字填进第 2 站的模型下拉框里做对比：同样的硬件，稠密 27B、MoE 3B 激活、MoE 18B 激活三种结构的 TPOT 曲线会很不一样。</p>
+  </section>
+<footer>LLM Inference Lab · 在 8 × A800 上部署并评测开源大模型的学习记录 · <a href="https://github.com/haoxiangNtu/llm-inference-lab">源码</a></footer>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+(function(){
+'use strict';
+const css = (n)=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const $ = (id)=>document.getElementById(id);
+const fmt = (x,d=1)=> x>=1e12? (x/1e12).toFixed(d)+' T' : x>=1e9? (x/1e9).toFixed(d)+' G' : x>=1e6? (x/1e6).toFixed(d)+' M' : x>=1e3? (x/1e3).toFixed(d)+' K' : x.toFixed(d);
+const fms = (ms)=> ms>=1000? (ms/1000).toFixed(2)+' s' : ms>=10? ms.toFixed(0)+' ms' : ms.toFixed(2)+' ms';
+function fitCanvas(c){ const r=c.getBoundingClientRect(); const dpr=Math.min(2,window.devicePixelRatio||1); const w=Math.round(r.width*dpr), h=Math.round(r.width*dpr*(+c.getAttribute('height')/+c.getAttribute('width'))); if(c.width!==w||c.height!==h){c.width=w;c.height=h;} const g=c.getContext('2d'); g.setTransform(dpr*r.width/ +c.getAttribute('width'),0,0,dpr*r.width/ +c.getAttribute('width'),0,0); return g; }
+function tokens(){ return {bg:css('--bg2'),panel:css('--panel'),line:css('--line'),fg:css('--fg'),muted:css('--muted'),compute:css('--compute'),memory:css('--memory'),kv:css('--kv'),token:css('--token'),weights:css('--weights'),warn:css('--warn')}; }
+
+/* ---------------- model / hardware presets (real numbers from this deployment) ---------------- */
+const MODELS = [
+  {name:'GLM-5.3-Flash（MoE 320B，激活 18B，FP8）', total:320e9, active:18e9, bytes:1, layers:45, kvPerTok:36*1024, note:'MLA 512 维潜向量 + 稀疏索引', measured:{tpot:38,ttft:540,tp:4,pp:2}},
+  {name:'Qwen3.6-35B-A3B（MoE 35B，激活 3B，BF16）', total:35e9, active:3e9, bytes:2, layers:40, kvPerTok:2*40*4*128*2, note:'GQA 4 个 KV 头'},
+  {name:'Qwen3.8-27B（稠密 27B，BF16）', total:27e9, active:27e9, bytes:2, layers:64, kvPerTok:2*64*8*128*2, note:'GQA 8 个 KV 头'},
+  {name:'DeepSeek-V4-Flash（MoE 284B，激活 13B，FP4+FP8）', total:284e9, active:13e9, bytes:0.6, layers:61, kvPerTok:20*1024, note:'压缩稀疏注意力'},
+  {name:'Llama-70B 级稠密（BF16）', total:70e9, active:70e9, bytes:2, layers:80, kvPerTok:2*80*8*128*2, note:'GQA 8 个 KV 头'}
+];
+const HW = [
+  {name:'A800 80GB（本机）', tflops:312, bw:2.0e12, mem:80, nvlink:400},
+  {name:'A100 80GB', tflops:312, bw:2.0e12, mem:80, nvlink:600},
+  {name:'H100 80GB', tflops:989, bw:3.35e12, mem:80, nvlink:900},
+  {name:'H200 141GB', tflops:989, bw:4.8e12, mem:141, nvlink:900},
+  {name:'RTX 4090 24GB', tflops:165, bw:1.0e12, mem:24, nvlink:0}
+];
+
+/* ================= Station 1: forward pass ================= */
+(function(){
+  const c=$('c1'); let t=0, playing=!reduced, layer=0; const L=45;
+  const words=['大','模型','推理','时','GPU','在','忙','什么','？'];
+  function draw(){
+    const g=fitCanvas(c), T=tokens(); const W=1040,H=300; g.clearRect(0,0,W,H);
+    g.font='12px '+css('--font-mono'); g.textBaseline='middle';
+    // tokens row
+    const x0=30, y0=40; g.fillStyle=T.muted; g.fillText('输入 token', x0, 16);
+    words.forEach((w,i)=>{ g.fillStyle=T.token; g.globalAlpha=0.9; g.fillRect(x0+i*60, y0-14, 52, 28); g.globalAlpha=1; g.fillStyle='#062015'; g.font='13px '+css('--font-body'); g.textAlign='center'; g.fillText(w, x0+i*60+26, y0); g.textAlign='left'; });
+    g.font='12px '+css('--font-mono'); g.fillStyle=T.muted; g.fillText('→ 每个 token 变成一个 4096 维向量（embedding）', x0+words.length*60+10, y0);
+    // layers stack
+    const lx=30, ly=80, lw=980, lh=130; g.strokeStyle=T.line; g.strokeRect(lx,ly,lw,lh);
+    g.fillStyle=T.muted; g.fillText(L+' 层 Transformer 块，每层：注意力 → MLP', lx, ly-12);
+    const per=lw/L;
+    for(let i=0;i<L;i++){ const x=lx+i*per; g.fillStyle=(i<layer)?T.weights:(i===layer?T.compute:T.panel); g.globalAlpha=(i<layer)?0.45:1; g.fillRect(x+1, ly+8, per-2, lh-16); g.globalAlpha=1; }
+    // zoom of current layer
+    const zx=lx, zy=ly+lh+22, zw=lw, zh=52; g.fillStyle=T.panel; g.fillRect(zx,zy,zw,zh); g.strokeStyle=T.line; g.strokeRect(zx,zy,zw,zh);
+    const phase=(t%2); // 0 attention 1 mlp
+    const bx=[zx+16, zx+zw/2+16]; const names=['注意力：Q·K 找相关 token，加权求和 V（读 KV cache，写入本 token 的 K,V）','MLP：两次大矩阵乘（MoE 时只激活几个专家）'];
+    for(let k=0;k<2;k++){ g.fillStyle=(k===phase)?(k===0?T.kv:T.compute):T.line; g.globalAlpha=k===phase?0.9:0.6; g.fillRect(bx[k], zy+10, zw/2-32, 32); g.globalAlpha=1; g.fillStyle=(k===phase)?'#0b0f1a':T.fg; g.font='12px '+css('--font-body'); g.fillText(names[k], bx[k]+10, zy+26); }
+    g.font='12px '+css('--font-mono'); g.fillStyle=T.muted; g.fillText('第 '+(layer+1)+' 层', zx+zw-70, zy-8);
+    // output
+    g.fillStyle=T.muted; g.fillText('最后一层 → 词表大小的 logits → softmax → 采样下一个 token → 接到末尾，再来一遍', lx, H-12);
+    $('s1status').textContent='layer '+(layer+1)+'/'+L+(phase?' · MLP':' · attention');
+  }
+  function step(){ t++; if(t%2===0){ layer=(layer+1)%L; } draw(); }
+  let last=0; function loop(ts){ if(playing && ts-last>140){ last=ts; step(); } requestAnimationFrame(loop); }
+  $('b1play').onclick=()=>{playing=!playing;}; $('b1step').onclick=()=>{playing=false; step();};
+  draw(); requestAnimationFrame(loop); addEventListener('resize',draw);
+  matchMedia('(prefers-color-scheme: dark)').addEventListener('change',draw);
+})();
+
+/* ================= Station 2: prefill / decode roofline ================= */
+const S2 = (function(){
+  const m2=$('m2'), hw2=$('hw2'); MODELS.forEach((m,i)=>m2.add(new Option(m.name,i))); HW.forEach((h,i)=>hw2.add(new Option(h.name,i)));
+  const ids=['ngpu2','lp2','lo2','bs2','eff2']; const sync=()=>{ $('ngpu2v').value=$('ngpu2').value; $('lp2v').value=$('lp2').value; $('lo2v').value=$('lo2').value; $('bs2v').value=$('bs2').value; $('eff2v').value=$('eff2').value+'%'; };
+  function est(p){ // p: model, hw, ngpu, Lp, Lo, bs, eff
+    const {m,h,n,Lp,Lo,bs,eff}=p;
+    const flopsPrefill = 2*m.active*Lp*bs;                       // FLOPs for the whole batch prompt
+    const prefillMs = flopsPrefill/(h.tflops*1e12*n*eff)*1000;
+    const wBytes = m.active*m.bytes/n;                            // per GPU per step
+    const kvBytes = m.kvPerTok*(Lp+Lo/2)*bs/n;                     // average context, per GPU
+    const stepMs = (wBytes+kvBytes)/(h.bw*eff)*1000 + m.layers*0.02; // + small fixed launch/comm overhead
+    const decodeMs = stepMs*Lo;
+    const tps = bs*1000/stepMs;                                    // aggregate tok/s
+    const intensity = (2*m.active*bs)/(m.active*m.bytes+m.kvPerTok*(Lp+Lo/2)*bs); // flop per byte
+    const memGB = (m.total*m.bytes + m.kvPerTok*(Lp+Lo)*bs)/1e9;
+    return {prefillMs, stepMs, decodeMs, tps, intensity, memGB, wBytes, kvBytes};
+  }
+  function params(){ return {m:MODELS[+m2.value], h:HW[+hw2.value], n:+$('ngpu2').value, Lp:+$('lp2').value, Lo:+$('lo2').value, bs:+$('bs2').value, eff:+$('eff2').value/100}; }
+  // animation state
+  const c=$('c2'), cb=$('c2b'); let playing=!reduced, prog=0; // prog: 0..1 prefill, then decode tokens
+  function drawMain(){
+    const g=fitCanvas(c), T=tokens(); const W=1040,H=360; g.clearRect(0,0,W,H); const p=params(), e=est(p);
+    g.font='12px '+css('--font-mono'); g.textBaseline='middle';
+    // --- prefill row
+    const y1=26; g.fillStyle=T.muted; g.fillText('PREFILL  提示词 '+p.Lp+' token 一次并行  ·  算力墙', 24, y1);
+    const bx=24, by=44, bw=992, bh=54; g.strokeStyle=T.line; g.strokeRect(bx,by,bw,bh);
+    const nTok=Math.min(96, p.Lp); const tw=bw/nTok; const pf=Math.min(1, prog/0.25);
+    for(let i=0;i<nTok;i++){ g.fillStyle=T.token; g.globalAlpha= pf>0 ? 0.35+0.65*pf : 0.15; g.fillRect(bx+i*tw+1, by+8, Math.max(1,tw-2), bh-16); }
+    g.globalAlpha=1;
+    // compute meter for prefill
+    g.fillStyle=T.muted; g.fillText('算力占用', bx+bw-190, by+bh+14); meter(g,T, bx+bw-120, by+bh+8, 116, 10, pf>0? Math.min(1, p.eff*1.0+0.3):0, T.compute);
+    g.fillStyle=T.fg; g.fillText('理论 TTFT ≈ '+fms(e.prefillMs), bx, by+bh+14);
+    // --- decode row
+    const y2=140; g.fillStyle=T.muted; g.fillText('DECODE  每步 1 个新 token × '+p.bs+' 条并发  ·  带宽墙', 24, y2);
+    // weights block + sweep
+    const wx=24, wy=158, ww=300, wh=120; g.fillStyle=T.panel; g.fillRect(wx,wy,ww,wh); g.strokeStyle=T.line; g.strokeRect(wx,wy,ww,wh);
+    g.fillStyle=T.weights; g.globalAlpha=0.35; g.fillRect(wx+1,wy+1,ww-2,wh-2); g.globalAlpha=1;
+    const dprog = prog<=0.25?0:(prog-0.25)/0.75; const stepIdx=Math.floor(dprog*p.Lo); const within=(dprog*p.Lo)%1;
+    if(prog>0.25){ g.fillStyle=T.memory; g.globalAlpha=0.9; g.fillRect(wx+1, wy+1, (ww-2)*within, wh-2); g.globalAlpha=1; }
+    g.fillStyle=T.fg; g.font='12px '+css('--font-body'); g.fillText('激活权重 '+fmt(p.m.active,0)+' 参数 × '+p.m.bytes+' B', wx+8, wy+16); g.fillText('每卡每步读 '+fmt(e.wBytes,1)+'B', wx+8, wy+36); g.font='12px '+css('--font-mono');
+    // KV block grows
+    const kx=344, ky=158, kw=300, kh=120; g.fillStyle=T.panel; g.fillRect(kx,ky,kw,kh); g.strokeStyle=T.line; g.strokeRect(kx,ky,kw,kh);
+    const ctxNow=p.Lp+stepIdx; const kfrac=Math.min(1, ctxNow/(p.Lp+p.Lo)); g.fillStyle=T.kv; g.globalAlpha=0.5; g.fillRect(kx+1, ky+kh-1-(kh-2)*kfrac, kw-2, (kh-2)*kfrac); g.globalAlpha=1;
+    if(prog>0.25){ g.fillStyle=T.memory; g.globalAlpha=0.9; g.fillRect(kx+1, ky+kh-1-(kh-2)*kfrac, (kw-2)*within, (kh-2)*kfrac); g.globalAlpha=1; }
+    g.fillStyle=T.fg; g.font='12px '+css('--font-body'); g.fillText('KV cache  上下文 '+ctxNow+' token', kx+8, ky+16); g.fillText('每卡每步读 '+fmt(e.kvBytes,1)+'B', kx+8, ky+36); g.font='12px '+css('--font-mono');
+    // output tokens strip
+    const ox=664, oy=158, ow=352, oh=120; g.strokeStyle=T.line; g.strokeRect(ox,oy,ow,oh); g.fillStyle=T.muted; g.fillText('生成的 token', ox+8, oy+14);
+    const cols=22, rows=4, cw=(ow-16)/cols; for(let i=0;i<Math.min(cols*rows, stepIdx);i++){ g.fillStyle=T.token; g.fillRect(ox+8+(i%cols)*cw, oy+26+Math.floor(i/cols)*22, cw-2, 18); }
+    if(prog>0.25 && stepIdx<cols*rows){ g.fillStyle=T.compute; g.globalAlpha=0.5+0.5*Math.sin(within*Math.PI); g.fillRect(ox+8+(stepIdx%cols)*cw, oy+26+Math.floor(stepIdx/cols)*22, cw-2, 18); g.globalAlpha=1; }
+    // meters
+    const my=300; g.fillStyle=T.muted; g.fillText('算力占用', 24, my); meter(g,T, 100, my-6, 200, 10, prog>0.25? Math.min(1, e.intensity/156):0, T.compute); g.fillText((e.intensity).toFixed(1)+' FLOP/B（平衡点 156）', 310, my);
+    g.fillText('带宽占用', 24, my+24); meter(g,T, 100, my+18, 200, 10, prog>0.25? Math.min(1,p.eff+0.05):0, T.memory); g.fillText('理论每步 '+fms(e.stepMs)+'  → 单流 '+(1000/e.stepMs).toFixed(0)+' tok/s，'+p.bs+' 并发合计 '+e.tps.toFixed(0)+' tok/s', 310, my+24);
+    g.fillStyle=T.fg; g.fillText('第 '+Math.min(stepIdx+1,p.Lo)+'/'+p.Lo+' 步', 664, my);
+    if(p.m.measured){ g.fillStyle=T.warn; g.fillText('实测 GLM TPOT 38 ms（TP'+p.m.measured.tp+'×PP'+p.m.measured.pp+'）', 664, my+24); }
+    // stats panel
+    const st=$('stats2'); st.innerHTML=[
+      ['理论 TTFT（prefill）', fms(e.prefillMs), '2 × 激活参数 × 提示词长度 ÷ 有效算力'],
+      ['理论 TPOT（decode 每步）', fms(e.stepMs), '(权重字节 + KV 字节) ÷ 每卡带宽'],
+      ['整条请求耗时', fms(e.prefillMs+e.decodeMs), 'TTFT + TPOT × 输出长度'],
+      ['合计吞吐', e.tps.toFixed(0)+' tok/s', p.bs+' 条并发 ÷ 每步时间'],
+      ['显存需求（权重+KV）', e.memGB.toFixed(0)+' GB', '每卡 '+(e.memGB/p.n).toFixed(0)+' GB，上限 '+p.h.mem+' GB'+(e.memGB/p.n>p.h.mem?' ⚠ 放不下':'')],
+    ].map(r=>'<div class="stat"><div class="k">'+r[0]+'</div><div class="v">'+r[1]+'</div><div class="s">'+r[2]+'</div></div>').join('');
+  }
+  function meter(g,T,x,y,w,h,f,color){ g.fillStyle=T.line; g.fillRect(x,y,w,h); g.fillStyle=color; g.fillRect(x,y,w*Math.max(0,Math.min(1,f)),h); }
+  function drawCurve(){
+    const g=fitCanvas(cb), T=tokens(); const W=1040,H=260; g.clearRect(0,0,W,H); const p=params();
+    const xs=[1,2,4,8,16,32,64,128]; const pts=xs.map(b=>{const e=est(Object.assign({},p,{bs:b})); return {b, tps:e.tps, tpot:e.stepMs};});
+    const L=70,R=70,Tp=28,B=40; const x=(i)=>L+(W-L-R)*i/(xs.length-1);
+    const maxT=Math.max(...pts.map(q=>q.tps))*1.1, maxP=Math.max(...pts.map(q=>q.tpot))*1.1;
+    g.strokeStyle=T.line; g.beginPath(); g.moveTo(L,Tp); g.lineTo(L,H-B); g.lineTo(W-R,H-B); g.stroke(); g.beginPath(); g.moveTo(W-R,Tp); g.lineTo(W-R,H-B); g.stroke();
+    g.font='11px '+css('--font-mono'); g.fillStyle=T.muted; g.textAlign='center'; xs.forEach((b,i)=>g.fillText(b, x(i), H-B+16)); g.fillText('并发请求数', W/2, H-6);
+    g.textAlign='right'; g.fillStyle=T.compute; g.fillText('合计 tok/s', L-8, Tp+6); g.fillText(fmt(maxT,0), L-8, Tp+22); g.fillText('0', L-8, H-B);
+    g.textAlign='left'; g.fillStyle=T.memory; g.fillText('TPOT ms', W-R+8, Tp+6); g.fillText(fms(maxP), W-R+8, Tp+22);
+    g.textAlign='left';
+    // throughput
+    g.strokeStyle=T.compute; g.lineWidth=2.5; g.beginPath(); pts.forEach((q,i)=>{const y=H-B-(H-B-Tp)*q.tps/maxT; i?g.lineTo(x(i),y):g.moveTo(x(i),y);}); g.stroke();
+    g.strokeStyle=T.memory; g.beginPath(); pts.forEach((q,i)=>{const y=H-B-(H-B-Tp)*q.tpot/maxP; i?g.lineTo(x(i),y):g.moveTo(x(i),y);}); g.stroke(); g.lineWidth=1;
+    // marker at current bs
+    const ci=xs.indexOf([1,2,4,8,16,32,64,128].reduce((a,b)=>Math.abs(b-p.bs)<Math.abs(a-p.bs)?b:a)); g.fillStyle=T.fg; g.beginPath(); g.arc(x(ci), H-B-(H-B-Tp)*pts[ci].tps/maxT, 5, 0, 7); g.fill();
+    g.fillStyle=T.muted; g.fillText('权重每步只读一次，并发翻倍时每步时间只增加 KV 的那一小块，所以吞吐近似线性增长，直到撞上算力墙。', L, Tp-10);
+  }
+  function drawAll(){ drawMain(); drawCurve(); }
+  let last=0; function loop(ts){ if(playing && ts-last>40){ last=ts; prog+= (prog<0.25? 0.012 : 0.75/Math.min(+$('lo2').value,120)/1.6); if(prog>=1){prog=1; playing=false;} drawMain(); } requestAnimationFrame(loop); }
+  [m2,hw2,...ids.map($)].forEach(el=>el.addEventListener('input',()=>{sync(); drawAll();}));
+  $('b2play').onclick=()=>{ if(prog>=1){prog=0;} playing=!playing; }; $('b2reset').onclick=()=>{prog=0; playing=!reduced; drawAll();};
+  m2.value=0; hw2.value=0; sync(); drawAll(); requestAnimationFrame(loop); addEventListener('resize',drawAll); matchMedia('(prefers-color-scheme: dark)').addEventListener('change',drawAll);
+  return {est};
+})();
+
+/* ================= shared 3D helpers ================= */
+function makeScene(host){
+  const T=tokens(); const renderer=new THREE.WebGLRenderer({antialias:true, alpha:true}); renderer.setPixelRatio(Math.min(2,devicePixelRatio||1));
+  const scene=new THREE.Scene(); const cam=new THREE.PerspectiveCamera(42, 2, 0.1, 500);
+  host.appendChild(renderer.domElement);
+  scene.add(new THREE.AmbientLight(0xffffff, 0.75)); const dl=new THREE.DirectionalLight(0xffffff, 0.8); dl.position.set(5,10,7); scene.add(dl);
+  let theta=0.6, phi=0.9, dist=30, tx=0, ty=0; let drag=null;
+  function place(){ cam.position.set(tx+dist*Math.sin(phi)*Math.sin(theta), ty+dist*Math.cos(phi), dist*Math.sin(phi)*Math.cos(theta)); cam.lookAt(tx,ty,0); }
+  host.addEventListener('pointerdown',e=>{drag={x:e.clientX,y:e.clientY}; host.setPointerCapture(e.pointerId);});
+  host.addEventListener('pointermove',e=>{ if(!drag) return; theta-=(e.clientX-drag.x)*0.008; phi=Math.max(0.2,Math.min(1.45,phi-(e.clientY-drag.y)*0.008)); drag={x:e.clientX,y:e.clientY}; place(); });
+  host.addEventListener('pointerup',()=>drag=null); host.addEventListener('pointercancel',()=>drag=null);
+  host.addEventListener('wheel',e=>{ e.preventDefault(); dist=Math.max(8,Math.min(80,dist*(1+Math.sign(e.deltaY)*0.08))); place(); },{passive:false});
+  function resize(){ const w=host.clientWidth, h=host.clientHeight; renderer.setSize(w,h,false); cam.aspect=w/h; cam.updateProjectionMatrix(); }
+  addEventListener('resize',resize); resize(); place();
+  return {renderer, scene, cam, place, setView(t,p,d,cx,cy){theta=t;phi=p;dist=d;tx=cx||0;ty=cy||0;place();}, render(){renderer.render(scene,cam);}};
+}
+const hex = (s)=>{ const c=document.createElement('canvas').getContext('2d'); c.fillStyle=s; return c.fillStyle; };
+
+/* ================= Station 3: KV cache pages (3D) ================= */
+(function(){
+  const host=$('stage3'); const S=makeScene(host); S.setView(0.7,1.0,34, 0, -1);
+  const m3=$('m3'); MODELS.forEach((m,i)=>m3.add(new Option(m.name,i))); m3.value=0;
+  const GX=16, GY=6, GZ=10; // 960 pages
+  const PAGE_TOK=16; // tokens per page (vLLM block_size)
+  const geo=new THREE.BoxGeometry(0.86,0.86,0.86); const cubes=[]; const group=new THREE.Group(); S.scene.add(group);
+  const base=new THREE.Mesh(new THREE.BoxGeometry(GX+1.2,0.3,GZ+1.2), new THREE.MeshStandardMaterial({color:0x223052})); base.position.set(0,-GY/2-0.5,0); group.add(base);
+  for(let y=0;y<GY;y++)for(let z=0;z<GZ;z++)for(let x=0;x<GX;x++){ const mesh=new THREE.Mesh(geo,new THREE.MeshStandardMaterial({color:0x334066, transparent:true, opacity:0.18})); mesh.position.set(x-GX/2+0.5, y-GY/2+0.5, z-GZ/2+0.5); group.add(mesh); cubes.push({mesh, owner:-1, weight:false}); }
+  const PALETTE=[0x38d1ff,0xff5fa8,0x7ef0b0,0xffb347,0x8f9dff,0xff7a59,0xf9f871,0x9be7ff];
+  let reqs=[], nextId=1, autoOn=false, tick=0;
+  function model(){ return MODELS[+m3.value]; }
+  function layout(){
+    const m=model(); const hw=HW[0]; const weightGB=m.total*m.bytes/1e9/8; // per GPU with TP8-ish share? use TP from measured or 4
+    const tp = m.measured? m.measured.tp*m.measured.pp : (m.total*m.bytes/1e9>70?8:2); const perGpuW=m.total*m.bytes/1e9/tp;
+    const nPagesTotal=cubes.length; const wPages=Math.round(nPagesTotal*perGpuW/hw.mem);
+    cubes.forEach((c,i)=>{ c.weight=i<wPages; c.owner=-1; c.mesh.material.color.set(c.weight?0x6d7bff:0x334066); c.mesh.material.opacity=c.weight?0.55:0.18; });
+    reqs=[]; return {tp, perGpuW, wPages, freePages:nPagesTotal-wPages, kvPerPageGB:m.kvPerTok*PAGE_TOK/1e9/tp, pageGB:(hw.mem/nPagesTotal)};
+  }
+  let L=layout();
+  const freeList=()=>cubes.map((c,i)=>(!c.weight&&c.owner<0)?i:-1).filter(i=>i>=0);
+  function pagesFor(tokens){ const m=model(); const gb=m.kvPerTok*tokens/1e9/L.tp; return Math.max(1, Math.ceil(gb/L.pageGB)); }
+  function addReq(){
+    const mode=$('mode3').value; const ctx=+$('ctx3').value; const prompt=200+Math.floor(Math.random()*1500); const out=100+Math.floor(Math.random()*600);
+    const need = mode==='contig'? pagesFor(ctx) : pagesFor(prompt);
+    const fl=freeList(); if(fl.length<need){ flash('显存不够，新请求排队等待'); return; }
+    const r={id:nextId++, color:PALETTE[(nextId-2)%PALETTE.length], prompt, out, gen:0, pages:[], mode}; reqs.push(r);
+    take(r, mode==='contig'? fl.slice(0,need) : fl.slice(0,need));
+  }
+  function take(r, idxs){ idxs.forEach(i=>{ const c=cubes[i]; c.owner=r.id; c.mesh.material.color.set(r.color); c.mesh.material.opacity=0.95; r.pages.push(i); }); }
+  function finishOldest(){ const r=reqs.shift(); if(!r) return; r.pages.forEach(i=>{const c=cubes[i]; c.owner=-1; c.mesh.material.color.set(0x334066); c.mesh.material.opacity=0.18;}); }
+  function grow(){ // each tick every request generates tokens; paged mode allocates pages on demand
+    reqs.forEach(r=>{ if(r.gen>=r.out) return; r.gen+=8; if(r.mode==='paged'){ const need=pagesFor(r.prompt+r.gen); if(need>r.pages.length){ const fl=freeList(); if(fl.length){ take(r, fl.slice(0, Math.min(fl.length, need-r.pages.length))); } else { r.gen=r.out; flash('无空闲页：请求 #'+r.id+' 被抢占'); } } } });
+    reqs.filter(r=>r.gen>=r.out && Math.random()<0.15).forEach(r=>{ const k=reqs.indexOf(r); if(k>=0){ reqs.splice(k,1); r.pages.forEach(i=>{const c=cubes[i]; c.owner=-1; c.mesh.material.color.set(0x334066); c.mesh.material.opacity=0.18;}); } });
+  }
+  let msg='', msgT=0; function flash(s){ msg=s; msgT=90; }
+  function stats(){
+    const m=model(); const used=cubes.filter(c=>c.owner>=0).length; const kvTok=reqs.reduce((a,r)=>a+r.prompt+r.gen,0);
+    const capTok=Math.floor(L.freePages*L.pageGB*1e9*L.tp/m.kvPerTok);
+    $('stats3').innerHTML=[
+      ['每页 = '+PAGE_TOK+' token 的 K、V', (m.kvPerTok*PAGE_TOK/1024).toFixed(0)+' KB', m.note],
+      ['权重占用（每卡）', L.perGpuW.toFixed(1)+' GB', '总参数 '+fmt(m.total,0)+' × '+m.bytes+' B ÷ '+L.tp+' 卡'],
+      ['KV 可用容量', fmt(capTok,2)+' token', '剩余显存 ÷ 每 token KV 字节'],
+      ['当前在飞请求 / 已用页', reqs.length+' / '+used, msgT>0? msg : (kvTok? '缓存中的 token 约 '+fmt(kvTok,1):'点"来一条新请求"')],
+    ].map(r=>'<div class="stat"><div class="k">'+r[0]+'</div><div class="v">'+r[1]+'</div><div class="s">'+r[2]+'</div></div>').join('');
+  }
+  $('b3add').onclick=addReq; $('b3done').onclick=finishOldest; $('b3auto').onclick=()=>{autoOn=!autoOn;};
+  m3.addEventListener('change',()=>{L=layout(); stats();}); $('mode3').addEventListener('change',()=>{L=layout(); stats();}); $('ctx3').addEventListener('input',()=>{$('ctx3v').value=$('ctx3').value;});
+  for(let i=0;i<3;i++) addReq();
+  function loop(){ tick++; if(!reduced || autoOn){ if(tick%30===0){ grow(); if(autoOn && Math.random()<0.5) addReq(); } group.rotation.y+= (autoOn?0.002:0.0008); } if(msgT>0) msgT--; if(tick%15===0) stats(); S.render(); requestAnimationFrame(loop); }
+  stats(); loop();
+})();
+
+/* ================= Station 4: parallelism (3D + pipeline timeline) ================= */
+(function(){
+  const host=$('stage4'); const S=makeScene(host); S.setView(0.5,0.95,30,0,0);
+  const gpus=[]; const geo=new THREE.BoxGeometry(2.6,1.2,2.6);
+  for(let i=0;i<8;i++){ const m=new THREE.Mesh(geo,new THREE.MeshStandardMaterial({color:0x334066})); m.position.set((i%4)*4-6, 0, Math.floor(i/4)*4-2); S.scene.add(m); const edge=new THREE.LineSegments(new THREE.EdgesGeometry(geo), new THREE.LineBasicMaterial({color:0x8e9bb8})); edge.position.copy(m.position); S.scene.add(edge); gpus.push(m); }
+  const links=new THREE.Group(); S.scene.add(links);
+  const lineMat=(c)=>new THREE.LineBasicMaterial({color:c, transparent:true, opacity:0.9});
+  function link(a,b,c){ const g=new THREE.BufferGeometry().setFromPoints([gpus[a].position.clone().add(new THREE.Vector3(0,0.7,0)), gpus[b].position.clone().add(new THREE.Vector3(0,0.7,0))]); links.add(new THREE.Line(g,lineMat(c))); }
+  const MODES={
+    tp8:{groups:[[0,1,2,3,4,5,6,7]], stages:1, desc:'每一层 8 卡同时算，层末 8 卡 all-reduce'},
+    tp4pp2:{groups:[[0,1,2,3],[4,5,6,7]], stages:2, desc:'前 24 层在 0-3 卡（TP4），后 21 层在 4-7 卡；两段之间只传激活'},
+    tp2:{groups:[[0,1]], stages:1, desc:'Qwen 用 2 卡 TP，其余 6 卡空闲'},
+    pp8:{groups:[[0],[1],[2],[3],[4],[5],[6],[7]], stages:8, desc:'每卡负责约 6 层，token 依次流过 8 张卡'},
+    ep:{groups:[[0,1,2,3],[4,5,6,7]], stages:2, ep:true, desc:'MoE 层把专家分到 4 卡，token 按路由跳到专家所在卡（all-to-all）'}
+  };
+  let mode='tp4pp2', t=0;
+  function setup(){ const M=MODES[mode]; links.clear(); gpus.forEach(g=>g.material.color.set(0x334066)); M.groups.forEach(grp=>{ for(let i=0;i<grp.length;i++) for(let j=i+1;j<grp.length;j++) link(grp[i],grp[j], M.ep?0xff5fa8:0x38d1ff); }); for(let s=0;s<M.groups.length-1;s++){ link(M.groups[s][0], M.groups[s+1][0], 0xffb347); } }
+  function anim(){ const M=MODES[mode]; const cyc=M.groups.length; const ph=Math.floor(t/45)%cyc; const inner=(t%45)/45; gpus.forEach(g=>g.material.color.set(0x334066)); M.groups.forEach((grp,si)=>{ if(si===ph){ grp.forEach(i=>gpus[i].material.color.set(inner<0.75?0x38d1ff:(M.ep?0xff5fa8:0x8f9dff))); } }); }
+  $('mode4').addEventListener('change',()=>{mode=$('mode4').value; setup(); drawPipe();}); setup();
+  function loop(){ t++; if(!reduced) anim(); S.render(); requestAnimationFrame(loop); } loop();
+  // pipeline timeline canvas
+  const c=$('c4');
+  function drawPipe(){ const g=fitCanvas(c), T=tokens(); const W=1040,H=220; g.clearRect(0,0,W,H); const M=MODES[mode]; const stages=M.stages, mb=+$('mb4').value; $('mb4v').value=mb;
+    g.font='12px '+css('--font-mono'); g.textBaseline='middle'; g.fillStyle=T.muted; g.fillText(M.desc, 24, 16);
+    const L=90, R=24, Tp=36, B=30; const rowH=(H-Tp-B)/stages; const slots=mb+stages-1; const sw=(W-L-R)/slots;
+    for(let s=0;s<stages;s++){ g.fillStyle=T.muted; g.fillText('段 '+(s+1), 24, Tp+s*rowH+rowH/2); for(let m=0;m<mb;m++){ const slot=m+s; g.fillStyle=['#38d1ff','#7ef0b0','#ffb347','#ff5fa8','#8f9dff','#ff7a59','#f9f871','#9be7ff'][m%8]; g.globalAlpha=0.85; g.fillRect(L+slot*sw+1, Tp+s*rowH+3, sw-2, rowH-6); g.globalAlpha=1; g.fillStyle='#0b0f1a'; g.fillText('mb'+(m+1), L+slot*sw+6, Tp+s*rowH+rowH/2); } }
+    const bubble = stages>1 ? (stages-1)/(mb+stages-1) : 0; g.fillStyle=T.fg; g.fillText('气泡占比 ≈ (段数-1) ÷ (微批数+段数-1) = '+(bubble*100).toFixed(0)+'%', L, H-10);
+  }
+  $('mb4').addEventListener('input',drawPipe); drawPipe(); addEventListener('resize',drawPipe); matchMedia('(prefers-color-scheme: dark)').addEventListener('change',drawPipe);
+})();
+
+/* ================= Station 5: training vs inference memory ================= */
+(function(){
+  const c=$('c5');
+  function draw(){ const g=fitCanvas(c), T=tokens(); const W=1040,H=300; g.clearRect(0,0,W,H);
+    const np=+$('np5').value*1e9, kvTok=+$('ctx5').value, seq=+$('seq5').value; $('np5v').value=$('np5').value; $('ctx5v').value=kvTok; $('seq5v').value=seq;
+    const inf={weights:np*2/1e9, kv:kvTok*128*1024/1e9}; // assume ~128KB/token KV as a middle value
+    const layers=Math.round(32*Math.cbrt(np/7e9)), hidden=Math.round(4096*Math.cbrt(np/7e9));
+    const trn={weights:np*2/1e9, grads:np*2/1e9, master:np*4/1e9, adam:np*8/1e9, act: seq*layers*hidden*34/1e9/4 /* with recompute */};
+    const rows=[['推理',[['权重 BF16',inf.weights,T.weights],['KV cache',inf.kv,T.kv]]],['训练（混合精度 + Adam）',[['权重 BF16',trn.weights,T.weights],['梯度',trn.grads,T.warn],['FP32 主权重',trn.master,T.compute],['Adam 一阶+二阶',trn.adam,T.memory],['激活（含重计算）',trn.act,T.token]]]];
+    const total=(r)=>r[1].reduce((a,b)=>a+b[1],0); const maxGB=Math.max(total(rows[0]),total(rows[1]))*1.05;
+    g.font='12px '+css('--font-mono'); g.textBaseline='middle';
+    rows.forEach((r,i)=>{ const y=40+i*110; g.fillStyle=T.fg; g.font='14px '+css('--font-body'); g.fillText(r[0]+'  ·  '+total(r).toFixed(0)+' GB  ≈  '+Math.ceil(total(r)/80)+' 张 A800', 24, y-16); g.font='12px '+css('--font-mono'); let x=24; r[1].forEach(seg=>{ const w=(W-48)*seg[1]/maxGB; g.fillStyle=seg[2]; g.globalAlpha=0.85; g.fillRect(x, y, w, 34); g.globalAlpha=1; if(w>60){ g.fillStyle='#0b0f1a'; g.fillText(seg[0]+' '+seg[1].toFixed(0)+'G', x+6, y+17); } x+=w; }); });
+    g.fillStyle=T.muted; g.fillText('训练每参数 16 字节起步：2（权重）+2（梯度）+4（FP32 主副本）+8（Adam 两个矩）。激活随序列长度线性增长。', 24, 262);
+    g.fillText('算力：训练每 token 约 6 × 参数量 FLOP，推理 2 × 激活参数量。', 24, 282);
+    $('stats5').innerHTML=[['推理显存',total(rows[0]).toFixed(0)+' GB',Math.ceil(total(rows[0])/80)+' 张 A800'],['训练显存',total(rows[1]).toFixed(0)+' GB',Math.ceil(total(rows[1])/80)+' 张 A800（无 ZeRO 切分）'],['每 token 计算量之比','3 ×','训练 6N vs 推理 2N（N 为激活参数）']].map(r=>'<div class="stat"><div class="k">'+r[0]+'</div><div class="v">'+r[1]+'</div><div class="s">'+r[2]+'</div></div>').join('');
+  }
+  ['np5','ctx5','seq5'].forEach(id=>$(id).addEventListener('input',draw)); draw(); addEventListener('resize',draw); matchMedia('(prefers-color-scheme: dark)').addEventListener('change',draw);
+})();
+})();
+</script>
+
+</body>
+</html>

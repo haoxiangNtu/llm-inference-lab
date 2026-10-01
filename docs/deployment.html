@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>部署实录 · LLM Inference Lab</title>
+<meta name="description" content="在百度云 8×A800 单节点上部署 GLM-5.3-Flash、Qwen3.6、Qwen3.8 的完整过程：机器分析、模型选型、两条路线、chroot 代替 Docker、CUDA 前向兼容、下载和编译的坑。">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="site.css">
+</head>
+<body>
+<div class="wrap">
+<header class="top"><a class="brand" href="../index.html">LLM Inference Lab</a>
+<nav><a href="lab.html">原理实验台</a><a href="metrics.html">指标解读</a><a href="benchmark.html">评测报告</a><a class="on" href="deployment.html">部署实录</a><a href="https://github.com/haoxiangNtu/llm-inference-lab">GitHub</a></nav></header>
+
+<div class="eyebrow">Deployment log · 2026-09-29 → 09-30</div>
+<h1>在 8 张 A800 上把 2026 年的开源模型跑起来</h1>
+<p class="lead">一台百度云百舸开发机，8 × A800-SXM4-80GB，驱动 535，没有 Docker，访问不了 HuggingFace。两天时间把 GLM-5.3-Flash（官方 FP8）、Qwen3.6-35B-A3B、Qwen3.8-27B 部署上线并完成评测。这里记录每一步的判断、踩的坑和解法，脚本都在仓库里。</p>
+<div class="toc"><a href="#machine">机器</a><a href="#landscape">模型选型</a><a href="#routeA">路线 A 失败</a><a href="#routeB">路线 B 成功</a><a href="#tech">关键技术点</a><a href="#timeline">时间线</a><a href="#scripts">脚本索引</a></div>
+
+<h2 id="machine">机器和它的限制</h2>
+<div class="tablewrap"><table>
+<tr><th>项目</th><th>实测</th><th>影响</th></tr>
+<tr><td>GPU</td><td>8 × A800-SXM4-80GB，NVLink 全互联 400 GB/s，sm_80</td><td>Ampere 没有 FP8 / FP4 张量核，新一代 MoE 模型的原生内核都是 Hopper 专用</td></tr>
+<tr><td>驱动</td><td>535.261.03，CUDA 12.2，容器内无法升级</td><td>CUDA 12.9 / 13 编译的程序必须走前向兼容库</td></tr>
+<tr><td>CPU / 内存</td><td>容器配额 64 核、512 GB，共享内存 256 GB</td><td>够用；64 核让 vLLM 扩展编译只用 12 分钟</td></tr>
+<tr><td>系统盘</td><td>CFS 300 GB，重启保留</td><td>放环境和解包的镜像</td></tr>
+<tr><td>共享盘</td><td>PFS 并行文件系统 401 TB，单流写 288 MB/s，8 卡并行读 3 GB/s 以上</td><td>模型权重全放这里</td></tr>
+<tr><td>一块 3.5 TB NVMe</td><td>只读挂载</td><td>是平台自己的 nix store，不是数据盘，不用管</td></tr>
+<tr><td>公网</td><td>EIP 200 Mbps 按流量计费，所有入站共享约 25 MB/s</td><td>328 GB 的权重要下 4 小时；HuggingFace 直连被封，ModelScope 可用</td></tr>
+<tr><td>软件</td><td>Ubuntu 22.04，miniforge Python 3.12，没有 gcc、nvcc、docker</td><td>只能 pip / conda 装环境，镜像要用 chroot 跑</td></tr>
+</table></div>
+<div class="note warn">分析时最容易误判的两点：根目录看起来是容器 overlay，其实控制台里它是持久的 CFS 系统盘；那块只读 NVMe 看起来像被浪费的数据盘，其实根本不属于用户。先查控制台再下结论。</div>
+
+<h2 id="landscape">2026 年 9 月的开源模型与 Ampere 可行性</h2>
+<div class="tablewrap"><table>
+<tr><th>模型</th><th>规模</th><th>官方权重</th><th>8 × A800 能否运行</th></tr>
+<tr><td>DeepSeek-V4.1-Flash</td><td>552B，另有 203 GB Engram 表</td><td>FP8 / MXFP8 约 510 GB</td><td>不能，上游 vLLM 无 sm80 路径</td></tr>
+<tr><td>DeepSeek-V4-Flash-0731</td><td>284B，激活 13B</td><td>FP4 + FP8 约 291 GB</td><td>原版不能，只有社区剪枝 W4A16 版配 fork 能跑</td></tr>
+<tr><td>GLM-5.3 / 5.2</td><td>753B</td><td>FP8 约 744 GB</td><td>放不下</td></tr>
+<tr><td>GLM-5.3-Flash</td><td>320B，激活 18B，多模态，MIT</td><td>FP8 约 306 GB</td><td>能，需要 Ampere 补丁，本项目最终跑通</td></tr>
+<tr><td>Qwen3.6-35B-A3B / Qwen3.8-27B</td><td>MoE 3B 激活 / 稠密 27B</td><td>BF16</td><td>原版 vLLM 直接跑</td></tr>
+<tr><td>Wan2.2-T2V-A14B</td><td>14B 视频生成</td><td>BF16</td><td>直接跑；Wan2.5 以后不开源</td></tr>
+</table></div>
+<p>核心判断：Ampere 没有 FP8，但 FP8 权重可以用 Marlin 内核以 W8A16 方式执行（权重 8 位存储、计算时解到 16 位），所以 GLM-5.3-Flash 的官方 FP8 权重是可行的；真正缺的是稀疏注意力和 KPool 索引这些 Hopper 专用内核，社区用 Triton 重写了它们。</p>
+
+<h2 id="routeA">路线 A：官方镜像加补丁，失败</h2>
+<p>第一个方案是 stozpark 的补丁链：以 vLLM 官方的 <code>vllm/vllm-openai:glm53-flash-cu129</code> 镜像为基底，用八个 Python 脚本做精确字符串替换，把 Hopper 专用路径换成 Triton 实现。作者 9 月 1 日在 8 × A100 上验证通过。</p>
+<ul class="timeline">
+<li class="bad">镜像在容器里拉不下来：Docker Hub 直连被封，13 个国内镜像站全部只能拿清单、拿不到镜像层。</li>
+<li class="ok">解法：在本机用一个 400 行的纯 Python 脚本按 Registry v2 协议拉镜像层（10.5 GB，6 MB/s），边下边 rsync 到服务器（2.2 MB/s，80 分钟），服务器上按层解压成 rootfs，用 chroot 运行。</li>
+<li class="ok">chroot 里 8 张卡可见、矩阵乘正常、vLLM 可导入。</li>
+<li class="bad">打补丁时第一个脚本就中断："anchor not found"。原因：vLLM 官方在 9 月 9 日把这个标签重新指向了新构建（主线 commit 385dce36），补丁是针对 8 月 25 日分支构建写的，核心文件差了 600 到 700 行。旧构建在 Docker Hub 上已无标签可寻。</li>
+</ul>
+<div class="note warn">教训：依赖"可变标签"的补丁方案很脆弱。社区补丁要么锁镜像摘要，要么锁源码 commit 自己编译。这个失败的镜像没有白拉，它的 vLLM 0.28 + CUDA 12.9 环境后来直接用来跑了两个 Qwen 模型。</div>
+
+<h2 id="routeB">路线 B：vllm-backport 源码编译，成功</h2>
+<p>第二个方案是 Mrzhiyao 的 glm53-a800-vllm 项目：锁定 wtdcode/vllm-backport 的源码 commit，打一个 3 万行的集成补丁，再覆盖几个在 8 × A800 上线验证过的 Triton 文件，只为 SM80 编译 vLLM 扩展。作者在和我们完全相同的硬件上验证过，单流 46.8 tok/s、1M 上下文。</p>
+<ul class="timeline">
+<li class="ok">基础镜像 <code>lazymio/vllm-backport:v0.11.1-sm80</code>（8.4 GB，CUDA 13.0，Ubuntu 24.04）同样走"本机拉、rsync、解包、chroot"。它自带 nvcc。</li>
+<li class="ok">源码在本机准备（克隆、打补丁、覆盖），121 MB 同步到服务器 17 秒。</li>
+<li class="bad">编译第一次失败：镜像里没有 git，CMake 要从 GitHub 克隆 CUTLASS 等 9 个依赖。</li>
+<li class="bad">装上 git、走代理克隆：12 分钟只拉到 2 MB，放弃。</li>
+<li class="ok">9 个依赖按固定 commit 在本机克隆（2 GB），同步到服务器，通过 <code>VLLM_CUTLASS_SRC_DIR</code> 等 9 个环境变量指给 CMake。编译 12 分钟完成，wheel 251 MB。</li>
+<li class="ok">项目自带的 KPool 内核测试和 CUDA Graph 安全测试在 A800 上全部通过。</li>
+<li class="ok">权重 328 GB 校验完整后，TP4 × PP2 启动：加载 550 秒，KV cache 263 万 token，CUDA Graph 捕获 103 秒，单流 46.7 tok/s，和作者的数字一致。</li>
+</ul>
+
+<h2 id="tech">关键技术点</h2>
+<h3>用 chroot 代替 Docker</h3>
+<p>容器里没有 Docker，但有 CAP_SYS_ADMIN 和 mount 权限。把镜像层解压成目录后，绑定挂载 /proc、/sys、/dev、共享盘和缓存目录，拷入宿主机的 NVIDIA 用户态库（libcuda、libnvidia-ml 等），再用镜像自己的环境变量 <code>chroot</code> 进去执行 <code>vllm serve</code>，效果等同于 <code>docker run --gpus all</code>。脚本见 <code>deploy/glm53_chroot.sh</code>。</p>
+<h3>CUDA 前向兼容</h3>
+<p>驱动 535 只认 CUDA 12.2。CUDA 12.9 编译的 PyTorch 靠"小版本兼容"能跑，但第一次启动 Qwen 时在采样内核报 <code>device kernel image is invalid</code>：驱动自带的 JIT 编译器认不出新工具链生成的 PTX。解法是 NVIDIA 的前向兼容包 cuda-compat，它提供一个新版 libcuda 用户态库，和老内核模块配合工作，数据中心卡支持。镜像里都自带（<code>/usr/local/cuda-12.9/compat</code>），conda 环境里跑 CUDA 13 的 PyTorch 则从 NVIDIA 仓库下载 cuda-compat-13-1 解开用。</p>
+<h3>模型下载的卫生</h3>
+<p>ModelScope 命令行工具在 CDN 读超时后会跳过分片并返回成功，Qwen3.6 "下载完成"时实际有 15 个分片残缺，GLM 有 44 个。必须按远端文件清单逐个核对大小（<code>deploy/verify_model.py</code>）。残缺分片用 aria2c 多连接续传（<code>-c -x 8 -s 8</code>）比官方工具稳得多。注意 aria2 写的是稀疏文件，用 <code>du</code> 看不出进度，看它自己的速率日志。</p>
+<h3>压测客户端的坑</h3>
+<p>conda 环境里 <code>vllm bench serve</code> 一跑就报 libstdc++ 的 CXXABI 版本错误，因为 LD_LIBRARY_PATH 里先找到了系统的旧库，把 <code>$CONDA_PREFIX/lib</code> 加到前面即可。新版 vLLM 把参数分组隐藏，<code>--help=all</code> 才列全。</p>
+<h3>工具调用解析器要和模型匹配</h3>
+<p>Qwen3.8 工具调用首轮 0 分，查记录发现模型输出的是 <code>&lt;tool_call&gt;&lt;function=...&gt;</code> 的 XML 格式，而服务配的是 hermes（JSON）解析器。换成 <code>--tool-call-parser qwen3_xml</code> 后 90%。思考模型做 JSON 抽取时，512 token 的预算会被思考占满，要给到 2048。</p>
+
+<h2 id="timeline">时间线</h2>
+<ul class="timeline">
+<li>09-29 11:50 接入机器，硬件、网络、存储全面摸底。</li>
+<li>12:44 四个模型开始下载；换 apt 源、建 conda 环境、拉补丁仓库。</li>
+<li>13:00 到 14:34 官方镜像本机拉取并上传。</li>
+<li>14:45 chroot 跑通，8 卡可见；15:00 路线 A 补丁失败。</li>
+<li>15:40 Qwen3.6-35B-A3B 在旧镜像上上线，149 tok/s。</li>
+<li>16:00 到 16:45 路线 B 基础镜像上传、解包、依赖克隆、编译完成、内核测试通过。</li>
+<li>17:28 GLM 权重校验完整，自动停 Qwen、拉起 GLM；17:41 GLM 上线。</li>
+<li>09-30 15:00 到 16:40 三个模型的性能矩阵和质量套件跑完，修正三处不公平后出报告。</li>
+</ul>
+
+<h2 id="scripts">脚本索引</h2>
+<div class="tablewrap"><table>
+<tr><th>文件</th><th>用途</th></tr>
+<tr><td><code>deploy/pull_image.py</code></td><td>不用 Docker 从 Registry 拉镜像层并解压成 rootfs，处理 whiteout</td></tr>
+<tr><td><code>deploy/upload_layers.sh</code></td><td>边下载边 rsync 镜像层到服务器</td></tr>
+<tr><td><code>deploy/glm53_chroot.sh</code></td><td>进入 rootfs：挂载、注入驱动库、选择兼容库、带镜像环境变量执行命令</td></tr>
+<tr><td><code>deploy/glm53_build.sh</code></td><td>在 chroot 里用本地依赖编译 SM80 vLLM 扩展并安装</td></tr>
+<tr><td><code>deploy/serve_glm53.sh</code> / <code>serve_qwen36.sh</code></td><td>启动服务的参数集</td></tr>
+<tr><td><code>deploy/verify_model.py</code> / <code>download_models_v2.sh</code></td><td>按远端清单校验权重完整性，带校验的下载队列</td></tr>
+<tr><td><code>deploy/glm53_launch_when_ready.sh</code></td><td>下载完成后自动校验、切换服务的编排</td></tr>
+<tr><td><code>bench/</code></td><td>评测套件，见<a href="metrics.html">指标解读</a></td></tr>
+</table></div>
+<p>服务器地址在公开脚本里已替换为占位符。</p>
+
+<footer>LLM Inference Lab · 在 8 × A800 上部署并评测开源大模型的学习记录 · <a href="https://github.com/haoxiangNtu/llm-inference-lab">源码</a></footer>
+</div>
+</body>
+</html>
