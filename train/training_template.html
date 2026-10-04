@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>训练实录 · LLM Inference Lab</title>
+<meta name="description" content="在 8×A800 上从零训练一个会聊天的模型：分词器、预训练、SFT、强化学习、评测，每个阶段的原理、真实曲线和踩过的坑。">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="site.css">
+<style>
+.flow{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:16px 0}
+.flow .box{background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:12px 14px;min-width:0}
+.flow .box b{display:block;font-size:15px}
+.flow .box span{display:block;font-size:12.5px;color:var(--muted);margin-top:4px}
+.flow .box .n{font-family:var(--font-mono);font-size:11px;color:var(--compute)}
+.qa{border:1px solid var(--line);border-radius:10px;margin:10px 0;overflow:hidden;max-width:80ch}
+.qa .q{background:var(--panel);padding:8px 12px;font-weight:500}
+.qa .a{padding:10px 12px;white-space:pre-wrap;font-size:14px;color:var(--fg)}
+details{margin:10px 0}
+summary{cursor:pointer;color:var(--compute)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="top"><a class="brand" href="../index.html">LLM Inference Lab</a>
+<nav><a href="lab.html">原理实验台</a><a href="metrics.html">指标解读</a><a href="benchmark.html">评测报告</a><a href="deployment.html">部署实录</a><a class="on" href="training.html">训练实录</a><a href="https://github.com/haoxiangNtu/llm-inference-lab">GitHub</a></nav></header>
+
+<div class="eyebrow">Training log · 2026-10-05 · 8 × A800</div>
+<h1>从零训练一个会聊天的模型</h1>
+<p class="lead">前面几页都在用别人训练好的模型。这一页把模型的一生走一遍：训练分词器、预训练、监督微调、强化学习、评测、对话。用的是 Karpathy 的 <a href="https://github.com/karpathy/nanochat">nanochat</a>，几千行代码覆盖全流程，原本为 8 卡单节点设计。下面每个阶段先讲它在做什么，再放这台机器上跑出来的真实数字和曲线。</p>
+__NOTE__
+<div class="toc"><a href="#flow">全流程</a><a href="#tok">分词器</a><a href="#pre">预训练</a><a href="#sft">SFT</a><a href="#rl">强化学习</a><a href="#chat">聊天样例</a><a href="#time">时间账</a><a href="#eng">工程问题</a><a href="#more">其他训练手段</a></div>
+
+<h2 id="flow">全流程：每个阶段让模型多会一件事</h2>
+<div class="flow">
+<div class="box"><span class="n">1</span><b>训练分词器</b><span>把文本切成 32768 种 token。模型看到的不是字，是这些编号。</span></div>
+<div class="box"><span class="n">2</span><b>预训练</b><span>在几十亿 token 的网页文本上做"猜下一个 token"。学会语言和常识，只会续写。</span></div>
+<div class="box"><span class="n">3</span><b>监督微调 SFT</b><span>喂对话数据。学会"你问我答"的格式、选择题、调用计算器。</span></div>
+<div class="box"><span class="n">4</span><b>强化学习 RL</b><span>让模型自己做题，做对的回答加强，做错的减弱。学会在特定任务上真的做对。</span></div>
+<div class="box"><span class="n">5</span><b>评测与对话</b><span>每个阶段后用固定题集量化进步，最后直接聊天看效果。</span></div>
+</div>
+<p>我们跑了两个规模。<b>d12</b> 是 12 层的小模型，和 2018 年的 GPT-1 差不多大，用来把流程走通。<b>d24</b> 是 24 层，目标是达到 2019 年 GPT-2 的水平。nanochat 只用"层数"一个旋钮，宽度、头数、学习率、训练步数都由它推出来。</p>
+<div class="tablewrap"><table>__HEAD____CFG__</table></div>
+
+<h2 id="tok">1. 分词器</h2>
+<p>用 BPE 算法：从 256 个字节出发，反复把语料里最常相邻出现的一对合并成一个新 token，直到词表达到 32768。在 20 亿字符上训练，这台机器用时 __TOK_SECS__ 秒。词表里还预留了 9 个特殊 token，比如 <code>&lt;|user_start|&gt;</code>、<code>&lt;|assistant_start|&gt;</code>、<code>&lt;|python_start|&gt;</code>，预训练时用不到，是给后面的对话格式准备的。</p>
+<p>衡量分词器好坏看压缩率：平均多少字节才用掉一个 token，越大越省。下表是和 GPT-2、GPT-4 的分词器对比，正数表示我们的更省。</p>
+<div class="two" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:18px">
+<div class="tablewrap"><table><tr><th>对比 GPT-2（词表 50257）</th><th class="num">字节</th><th class="num">GPT-2</th><th class="num">我们</th><th class="num">差异</th></tr>__TOK2__</table></div>
+<div class="tablewrap"><table><tr><th>对比 GPT-4（词表 100277）</th><th class="num">字节</th><th class="num">GPT-4</th><th class="num">我们</th><th class="num">差异</th></tr>__TOK4__</table></div>
+</div>
+<div class="note">词表只有 GPT-2 的三分之二，却在训练语料上压得更好，因为它就是在这份语料上训练的。代价也看得见：韩文每个 token 只覆盖 1.19 字节，几乎退化成逐字节编码，因为训练语料基本是英文。分词器决定了模型"擅长读什么"。</div>
+
+<h2 id="pre">2. 预训练</h2>
+<p><b>目标只有一个</b>：给定前面的 token，预测下一个。把语料切成 2048 token 长的片段，模型对每个位置输出一个概率分布，和真实的下一个 token 算交叉熵损失。初始损失是 ln(32768) ≈ 10.4，也就是瞎猜。</p>
+<p><b>模型</b>是标准的 Transformer 加上这几年的改进：旋转位置编码、RMSNorm、ReLU² 激活、Q 和 K 做归一化、每三层短窗口注意力配一层全局注意力。<b>优化器</b>分两组，矩阵参数用 Muon，嵌入用 AdamW，学习率先短暂预热、保持、后 65% 的步数线性衰减。<b>精度</b>是权重存 FP32、计算时转成 BF16，正好对应<a href="lab.html#s5">实验台第 5 站</a>里"FP32 主权重 + BF16 计算"的那笔账。</p>
+<p><b>8 张卡怎么一起练</b>：每张卡跑一个进程，各读不同的数据分片，各自算梯度，然后把梯度平均后一起更新。8 张卡 × 每卡 32 条 × 2048 token，一步就是 52 万 token。大模型每卡放不下那么多，就分 4 次前向反向把梯度累积起来再更新一次。</p>
+<div class="stage"><canvas class="viz" id="cPre" width="1040" height="320"></canvas></div>
+<div class="legend" id="legPre"></div>
+<p>左图是训练损失，右图是验证集的 bpb（每字节多少比特，和分词器无关，越低越好）。</p>
+<div class="tablewrap"><table>__HEAD____PERF__</table></div>
+<div class="note mem"><b>MFU 是训练版的"内核效率"。</b> A800 的 BF16 峰值是 312 TFLOPS，MFU 就是实际用掉的比例。d12 第一次跑只有 27%，日志里有一行警告：FlashAttention 3 内核没加载上，回退到 PyTorch 自带实现后滑动窗口注意力只能用掩码模拟。单独测这一个算子，FA3 是 0.46 ms，掩码版是 3.69 ms。把 FA3 内核离线装好后，d24 的 MFU 到了 45%。</div>
+<p><b>怎么知道预训练出来的模型有多强</b>：CORE 指标，22 个任务的平均分，每个任务把随机水平记为 0、满分记为 1。任务都是续写或选择形式，因为这时模型还不会对话。OpenAI 2019 年的 GPT-2（15 亿参数）是 0.2565。</p>
+<details><summary>展开 22 个 CORE 任务的逐项准确率</summary>
+<div class="tablewrap"><table><tr><th>任务</th><th>类型</th>__CORE_HEAD__</tr>__CORE_TASKS__</table></div></details>
+<p>预训练结束时让模型自由续写，能看出它学到了语法和文体，但内容是编的：</p>
+__BASE_SAMPLES__
+
+<h2 id="sft">3. 监督微调 SFT</h2>
+<p>预训练模型只会续写。SFT 用同样的"猜下一个 token"目标，但数据换成对话，并且<b>只在助手说的那些 token 上算损失</b>，用户说的话和工具返回的结果不算。一条训练样本渲染成 token 后长这样：</p>
+<pre>&lt;|bos|&gt;&lt;|user_start|&gt;一打鸡蛋 12 个，7 打有多少个？&lt;|user_end|&gt;
+&lt;|assistant_start|&gt;一共是 &lt;|python_start|&gt;12*7&lt;|python_end|&gt;&lt;|output_start|&gt;84&lt;|output_end|&gt; 84 个。&lt;|assistant_end|&gt;</pre>
+<p>训练数据是三种混合：46 万条日常对话（SmolTalk）教说话方式，MMLU 辅助集重复 3 遍教选择题格式，GSM8K 重复 4 遍教"遇到算术就调用计算器"。推理时引擎看到 <code>&lt;|python_end|&gt;</code> 就真的去算，把结果塞回上下文。</p>
+<div class="stage"><canvas class="viz" id="cSft" width="1040" height="300"></canvas></div>
+<div class="legend" id="legSft"></div>
+<div class="tablewrap"><table>__HEAD____SFT__</table></div>
+<p>SFT 之后终于可以用对话形式考它了。ChatCORE 是五个任务的平均，同样把随机水平记为 0：</p>
+<div class="tablewrap"><table>__HEAD____EV__</table></div>
+<div class="note">选择题从随机的 25% 涨到三成多，说明格式学会了、知识有一点。但 GSM8K 几乎是零：应用题要连续推理好几步，小模型看过 4 遍标准答案也只是学了个样子。这正是下一步强化学习要解决的。</div>
+
+<h2 id="rl">4. 强化学习</h2>
+<p>SFT 是"照着标准答案学"，RL 是"自己做，做对了才算"。nanochat 的做法是最朴素的 REINFORCE：每道 GSM8K 题让模型采样 16 个不同的回答，答案对的奖励为 1、错的为 0，然后把"高于这道题平均奖励"的回答的概率调高，低于平均的调低。没有 KL 约束，没有 PPO 的裁剪，这是 GRPO 一类方法的最简化版本。</p>
+<div class="stage"><canvas class="viz" id="cRl" width="1040" height="300"></canvas></div>
+<div class="legend" id="legRl"></div>
+<div class="tablewrap"><table>__HEAD____RL__</table></div>
+<div class="note kv"><b>两个值得注意的现象。</b> 一是效果立竿见影：d12 的 GSM8K 从 0.83% 到 10.77%，SFT 看 4 遍答案没学会的东西，RL 让它自己试出来了。二是回答变短了，平均从 262 个 token 降到 106 个：模型发现啰嗦不加分，直接调用计算器给答案最划算。RL 优化的是你给的奖励，不是你心里想的目标，这也是它难用的地方。另外这一步很慢，d12 都花了 73 分钟，因为每步要让模型实际生成 256 条回答，是推理的速度而不是训练的速度。</div>
+
+<h2 id="chat">5. 聊天样例</h2>
+<p>SFT 之后的模型直接回答，未经挑选。小模型的典型表现：语气和格式像模像样，事实经常是错的，算术不调用工具时会编。</p>
+__CHAT_SAMPLES__
+
+<h2 id="time">时间账</h2>
+<div class="tablewrap"><table>__HEAD____TIME__</table></div>
+<p>d12 预训练的墙钟时间里有 19 分钟是卡在下载评测数据包上，纯训练是 24.75 分钟。</p>
+
+<h2 id="eng">这台机器上遇到的工程问题</h2>
+<ul>
+<li><b>语料下载</b>：预训练分片在 HuggingFace 上，镜像站用了一会儿就连不上了。在 ModelScope 找到字节完全一致的镜像（AI-ModelScope/climbmix-400b-shuffle），速度从 3 MB/s 变成 30 MB/s，200 个分片 10 分钟下完。</li>
+<li><b>评测和 SFT 数据集</b>：nanochat 通过 HuggingFace 的 parquet 接口取数，服务器访问不了。在本机按同样的目录结构下载好再同步过去。</li>
+<li><b>评测数据包</b>：26 MB 的文件放在美国的 S3 上，服务器上只有 31 KB/s，训练在第一次 CORE 评测时空等了 19 分钟。</li>
+<li><b>FlashAttention 3</b>：加载器要联网校验，离线不认缓存。给 nanochat 加了几行，从本地目录直接加载内核，MFU 从 27% 提到 45%。</li>
+<li><b>pip 26</b> 在这个网络下载大文件会挂住，降到 pip 24 并换中科大镜像解决。</li>
+</ul>
+<p>补丁、流水线脚本、日志解析和本页的生成脚本都在仓库的 <code>train/</code> 目录。</p>
+
+<h2 id="more">这次没跑、但常用的训练手段</h2>
+<div class="tablewrap"><table>
+<tr><th>手段</th><th>做什么</th><th>什么时候用</th></tr>
+<tr><td>LoRA / QLoRA</td><td>冻结原模型，只训练插在每层旁边的两个小矩阵，参数量不到 1%；QLoRA 再把原模型量化到 4 位</td><td>微调几十亿参数以上的现成模型，一张卡就够，是最常见的"后训练"</td></tr>
+<tr><td>继续预训练</td><td>在领域语料上接着做"猜下一个 token"</td><td>让通用模型熟悉医学、法律、代码库这类专门文本</td></tr>
+<tr><td>DPO 等偏好优化</td><td>给成对的"好回答、差回答"，直接提高好回答的相对概率，不需要单独的奖励模型</td><td>对齐语气、安全性、风格偏好</td></tr>
+<tr><td>RLHF / PPO / GRPO</td><td>本页 RL 的完整版：加上奖励模型或自动判分、KL 约束、裁剪</td><td>推理模型的"思考"能力、代码和数学的可验证任务</td></tr>
+<tr><td>知识蒸馏</td><td>用大模型的输出当标签训练小模型</td><td>要部署成本低的小模型时；前面测的 Flash 系列多半用了它</td></tr>
+<tr><td>量化感知训练</td><td>训练时就模拟低精度</td><td>要以 FP8、INT4 部署且精度损失敏感时</td></tr>
+</table></div>
+<p>下一步的动手计划：拿一个真实可用的开源模型，用 LoRA 在这台机器上做一次微调，再用<a href="benchmark.html">评测报告</a>里那套脚本量化微调前后的差别。</p>
+
+<footer>LLM Inference Lab · 在 8 × A800 上部署并评测开源大模型的学习记录 · <a href="https://github.com/haoxiangNtu/llm-inference-lab">源码</a></footer>
+</div>
+<script>
+const DATA=__DATA__, TAGS=__TAGS__;
+(function(){
+const css=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const COL={d12:"--compute",d24:"--memory"}; const col=t=>css(COL[t]||"--token");
+function fit(c){const r=c.getBoundingClientRect();const dpr=Math.min(2,devicePixelRatio||1);const W=+c.getAttribute('width'),H=+c.getAttribute('height');c.width=Math.round(r.width*dpr);c.height=Math.round(r.width*dpr*H/W);const g=c.getContext('2d');g.setTransform(dpr*r.width/W,0,0,dpr*r.width/W,0,0);g.clearRect(0,0,W,H);g.font='11px '+css('--font-mono');g.textBaseline='middle';return g;}
+function panel(g,o){ // o:{x0,x1,y0,y1,title,series:[{pts:[[x,y]],color,dots,dash}],ymin,ymax,xlabel,xnorm}
+  const xs=[].concat(...o.series.map(s=>s.pts.map(p=>p[0]))), ys=[].concat(...o.series.map(s=>s.pts.map(p=>p[1])));
+  if(!xs.length){g.fillStyle=css('--muted');g.textAlign='left';g.fillText(o.title+'：暂无数据',o.x0,o.y0-12);return;}
+  const xmax=o.xnorm?1:Math.max(...xs), ymin=o.ymin!=null?o.ymin:Math.min(...ys), ymax=o.ymax!=null?o.ymax:Math.max(...ys)*1.05;
+  g.strokeStyle=css('--line');g.beginPath();g.moveTo(o.x0,o.y0);g.lineTo(o.x0,o.y1);g.lineTo(o.x1,o.y1);g.stroke();
+  g.fillStyle=css('--muted');g.textAlign='left';g.fillText(o.title,o.x0,o.y0-14);
+  g.textAlign='right';[0,0.5,1].forEach(t=>{const v=ymin+(ymax-ymin)*t;g.fillText(v>=10?v.toFixed(0):v.toFixed(2),o.x0-6,o.y1-(o.y1-o.y0)*t);});
+  g.textAlign='center';g.fillText(o.xlabel||'step',(o.x0+o.x1)/2,o.y1+26);g.fillText('0',o.x0,o.y1+12);g.fillText(o.xnorm?'100%':String(Math.round(xmax)),o.x1,o.y1+12);
+  o.series.forEach(s=>{const sx=o.xnorm?Math.max(...s.pts.map(p=>p[0]))||1:xmax; const X=p=>o.x0+(o.x1-o.x0)*p[0]/sx, Y=p=>o.y1-(o.y1-o.y0)*(Math.min(ymax,Math.max(ymin,p[1]))-ymin)/(ymax-ymin);
+    g.strokeStyle=s.color;g.fillStyle=s.color;g.lineWidth=s.dots?1.5:2;g.setLineDash(s.dash||[]);g.beginPath();s.pts.forEach((p,i)=>i?g.lineTo(X(p),Y(p)):g.moveTo(X(p),Y(p)));g.stroke();g.setLineDash([]);
+    if(s.dots)s.pts.forEach(p=>{g.beginPath();g.arc(X(p),Y(p),3,0,7);g.fill();});g.lineWidth=1;});
+}
+function smooth(pts,k){const out=[];let acc=0;const q=[];pts.forEach(p=>{q.push(p[1]);acc+=p[1];if(q.length>k)acc-=q.shift();out.push([p[0],acc/q.length]);});return out;}
+function legend(id,items){document.getElementById(id).innerHTML=items.map(i=>'<span><i style="background:'+i[1]+'"></i>'+i[0]+'</span>').join('');}
+function draw(){
+  let g=fit(document.getElementById('cPre'));
+  panel(g,{x0:60,x1:500,y0:40,y1:270,title:'训练损失（横轴为各自训练进度）',ymin:2.4,ymax:5,xnorm:true,xlabel:'训练进度',series:TAGS.map(t=>({pts:DATA[t].loss,color:col(t)}))});
+  panel(g,{x0:600,x1:1020,y0:40,y1:270,title:'验证集 bpb',ymin:0.7,ymax:1.2,xnorm:true,xlabel:'训练进度',series:TAGS.map(t=>({pts:DATA[t].val,color:col(t),dots:true}))});
+  legend('legPre',TAGS.map(t=>[t,col(t)]));
+  g=fit(document.getElementById('cSft'));
+  panel(g,{x0:60,x1:500,y0:40,y1:250,title:'SFT 验证 bpb',xnorm:true,xlabel:'训练进度',series:TAGS.map(t=>({pts:DATA[t].sft_val,color:col(t),dots:true}))});
+  panel(g,{x0:600,x1:1020,y0:40,y1:250,title:'ChatCORE（训练中抽样评测）',ymin:0,xnorm:true,xlabel:'训练进度',series:TAGS.map(t=>({pts:DATA[t].chatcore.map(p=>[p[0],p[1]]),color:col(t),dots:true}))});
+  legend('legSft',TAGS.map(t=>[t,col(t)]));
+  g=fit(document.getElementById('cRl'));
+  panel(g,{x0:60,x1:500,y0:40,y1:250,title:'每步平均奖励（20 步滑动平均）',ymin:0,xlabel:'RL 步数',series:TAGS.filter(t=>DATA[t].reward.length).map(t=>({pts:smooth(DATA[t].reward,20),color:col(t)}))});
+  panel(g,{x0:600,x1:1020,y0:40,y1:250,title:'验证题 pass@1（实线）与 pass@8（虚线）',ymin:0,xlabel:'RL 步数',series:[].concat(...TAGS.filter(t=>DATA[t].pass.length).map(t=>[{pts:DATA[t].pass.map(p=>[p.step,p['pass@1']]),color:col(t),dots:true},{pts:DATA[t].pass.map(p=>[p.step,p['pass@8']]),color:col(t),dash:[5,4]}]))});
+  legend('legRl',TAGS.filter(t=>DATA[t].reward.length).map(t=>[t,col(t)]));
+}
+draw();addEventListener('resize',draw);matchMedia('(prefers-color-scheme: dark)').addEventListener('change',draw);
+})();
+</script>
+</body>
+</html>
