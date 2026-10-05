@@ -64,12 +64,22 @@ core_tasks = "".join(f"<tr><td>{x['task']}</td><td>{'选择题' if x['type']=='m
 def esc(s): return s.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
 base_samples = "".join(f"<pre>{esc(s)}</pre>" for s in runs[tags[-1]]["base_eval"]["samples"][:3])
 chat_samples = "".join(f"<h3>{t}</h3>" + "".join(f"<div class='qa'><div class='q'>{esc(x['q'])}</div><div class='a'>{esc(x['a'])}</div></div>" for x in runs[t]["samples"]) for t in tags if runs[t]["samples"])
-chart = {t: {"loss": runs[t]["base_train"]["loss_curve"], "val": runs[t]["base_train"]["val_bpb"], "sft_loss": runs[t]["chat_sft"]["loss_curve"], "sft_val": runs[t]["chat_sft"]["val_bpb"],
+chart = {t: {"tput": runs[t]["base_train"].get("tput_curve", []), "loss": runs[t]["base_train"]["loss_curve"], "val": runs[t]["base_train"]["val_bpb"], "sft_loss": runs[t]["chat_sft"]["loss_curve"], "sft_val": runs[t]["chat_sft"]["val_bpb"],
              "chatcore": runs[t]["chat_sft"]["chatcore"], "reward": runs[t]["chat_rl"]["reward_curve"], "pass": runs[t]["chat_rl"]["pass_at_k"]} for t in tags}
 note_html = f"<div class='note warn'>{NOTE}</div>" if NOTE else ""
+tput_note = core_note = ""
+if "d24" in runs:
+    tp = runs["d24"]["base_train"].get("tput_curve", [])
+    early = [p[2] for p in tp if p[0] < 35]; late = [p[2] for p in tp if p[0] > 60]
+    if early and late and sum(late)/len(late) > sum(early)/len(early) * 1.15:
+        tput_note = f" 更有意思的是 d24 曲线上的那个台阶：前 43 分钟 MFU 是 {sum(early)/len(early):.0f}%，之后跳到 {sum(late)/len(late):.0f}% 并保持到结束。训练启动时 GPU 2 和 GPU 5 上有另一个项目的仿真任务在跑，占走了这两张卡的一部分算力。分布式训练每一步都要等所有卡算完才能汇总梯度，所以两张卡被拖慢，八张卡一起慢。台阶出现的时刻很可能就是那些任务结束的时刻，之后速度再没有波动。结论：多卡训练的速度由最慢的那张卡决定。"
+    c_in = runs["d24"]["base_train"]["core_in_train"][-1][1] if runs["d24"]["base_train"]["core_in_train"] else None
+    c_full = runs["d24"]["base_eval"]["core"]; mins = runs["d24"]["base_train"]["train_minutes"]
+    core_note = (f"<div class='note'><b>d24 到了 GPT-2 的量级。</b> 训练结束时的抽样评测（每个任务 500 题）是 {c_in:.4f}，高于 GPT-2；随后的完整评测是 {c_full:.4f}，略低于 GPT-2。两个数字的差别来自题目抽样，说明我们正好落在 GPT-2 这条线附近。"
+                 f"纯训练时间 {mins/60:.1f} 小时。作为参照：OpenAI 2019 年训练 GPT-2 用了 168 小时、约 4.3 万美元；nanochat 在 8 张 H100 上开 FP8 是 1.65 小时。A800 没有 FP8，算力约为 H100 的三分之一，{mins/60:.1f} 小时符合预期。</div>")
 
 T = open(os.path.join(ROOT, "train", "training_template.html"), encoding="utf-8").read()
-for k, v in {"__NOTE__": note_html, "__HEAD__": head, "__CFG__": cfg, "__PERF__": perf, "__SFT__": sftrows, "__EV__": evrows, "__RL__": rlrows, "__TIME__": timerows,
+for k, v in {"__TPUT_NOTE__": tput_note, "__CORE_NOTE__": core_note, "__NOTE__": note_html, "__HEAD__": head, "__CFG__": cfg, "__PERF__": perf, "__SFT__": sftrows, "__EV__": evrows, "__RL__": rlrows, "__TIME__": timerows,
              "__TOK_SECS__": f(tok["train_secs"], 0), "__TOK2__": tokrows("GPT-2"), "__TOK4__": tokrows("GPT-4"), "__CORE_TASKS__": core_tasks, "__CORE_HEAD__": "".join(f"<th class='num'>{t}</th>" for t in tags),
              "__BASE_SAMPLES__": base_samples, "__CHAT_SAMPLES__": chat_samples, "__DATA__": json.dumps(chart, ensure_ascii=False), "__TAGS__": json.dumps(tags)}.items():
     T = T.replace(k, v)

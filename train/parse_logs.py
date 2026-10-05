@@ -59,6 +59,7 @@ if steps:
     base["avg_tok_s"] = sum(s["tok_s"] for s in body) / len(body); base["avg_mfu"] = sum(s["mfu"] for s in body) / len(body); base["avg_dt_ms"] = sum(s["dt_ms"] for s in body) / len(body)
     base["last_step"] = steps[-1]["step"]
 base["loss_curve"] = [[s["step"], round(s["loss"], 4)] for s in down(steps)]
+base["tput_curve"] = [[round(s["min"], 2), round(s["tok_s"]), s["mfu"]] for s in down(steps[5:], 300)]
 base["val_bpb"] = [[int(a), float(v)] for a, v in re.findall(r"Step (\d+) \| Validation bpb: ([\d.]+)", b)]
 base["core_in_train"] = [[int(a), float(v)] for a, v in re.findall(r"Step (\d+) \| CORE metric: ([\d.]+)", b)]
 R["base_train"] = base
