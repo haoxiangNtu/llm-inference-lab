@@ -78,8 +78,24 @@ if "d24" in runs:
     core_note = (f"<div class='note'><b>d24 到了 GPT-2 的量级。</b> 训练结束时的抽样评测（每个任务 500 题）是 {c_in:.4f}，高于 GPT-2；随后的完整评测是 {c_full:.4f}，略低于 GPT-2。两个数字的差别来自题目抽样，说明我们正好落在 GPT-2 这条线附近。"
                  f"纯训练时间 {mins/60:.1f} 小时。作为参照：OpenAI 2019 年训练 GPT-2 用了 168 小时、约 4.3 万美元；nanochat 在 8 张 H100 上开 FP8 是 1.65 小时。A800 没有 FP8，算力约为 H100 的三分之一，{mins/60:.1f} 小时符合预期。</div>")
 
+# yardstick table from bench results
+yard = ""
+try:
+    bm = {}
+    for m in ["GLM-5.3-Flash", "Qwen3.8-27B", "Qwen3.6-35B-A3B", "nanochat-d24-sft", "nanochat-d12-sft"]:
+        qp = os.path.join(ROOT, "results", m, "quality.json"); pp = os.path.join(ROOT, "results", m, "perf", "single_128in_256out.json")
+        if os.path.exists(qp): bm[m] = {"q": json.load(open(qp))["tests"], "p": json.load(open(pp)) if os.path.exists(pp) else {}}
+    tests = [("gsm8k", "GSM8K"), ("humaneval", "HumanEval"), ("ceval", "C-Eval"), ("json", "JSON"), ("tools", "工具调用")]
+    rows = ""
+    for m, d in bm.items():
+        cells = "".join(f"<td class='num'>{100*d['q'][t]['summary']['accuracy']:.1f}% <span class='pill'>{d['q'][t]['summary']['correct']}/{d['q'][t]['summary']['n']}</span></td>" if t in d["q"] and d["q"][t]["summary"].get("accuracy") is not None else "<td class='num'>–</td>" for t, _ in tests)
+        tp = d["p"].get("median_tpot_ms"); cells += f"<td class='num'>{(1000/tp):.0f} tok/s</td>" if tp else "<td class='num'>–</td>"
+        rows += f"<tr><td>{m}</td>{cells}</tr>"
+    if rows: yard = "<div class='tablewrap'><table><tr><th>模型</th>" + "".join(f"<th class='num'>{n}</th>" for _, n in tests) + "<th class='num'>单流速度</th></tr>" + rows + "</table></div>"
+except Exception as e:
+    yard = f"<p>（评测结果缺失：{e}）</p>"
 T = open(os.path.join(ROOT, "train", "training_template.html"), encoding="utf-8").read()
-for k, v in {"__TPUT_NOTE__": tput_note, "__CORE_NOTE__": core_note, "__NOTE__": note_html, "__HEAD__": head, "__CFG__": cfg, "__PERF__": perf, "__SFT__": sftrows, "__EV__": evrows, "__RL__": rlrows, "__TIME__": timerows,
+for k, v in {"__YARDSTICK__": yard, "__TPUT_NOTE__": tput_note, "__CORE_NOTE__": core_note, "__NOTE__": note_html, "__HEAD__": head, "__CFG__": cfg, "__PERF__": perf, "__SFT__": sftrows, "__EV__": evrows, "__RL__": rlrows, "__TIME__": timerows,
              "__TOK_SECS__": f(tok["train_secs"], 0), "__TOK2__": tokrows("GPT-2"), "__TOK4__": tokrows("GPT-4"), "__CORE_TASKS__": core_tasks, "__CORE_HEAD__": "".join(f"<th class='num'>{t}</th>" for t in tags),
              "__BASE_SAMPLES__": base_samples, "__CHAT_SAMPLES__": chat_samples, "__DATA__": json.dumps(chart, ensure_ascii=False), "__TAGS__": json.dumps(tags)}.items():
     T = T.replace(k, v)

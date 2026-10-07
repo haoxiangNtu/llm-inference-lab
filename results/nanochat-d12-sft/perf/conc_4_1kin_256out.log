@@ -1,0 +1,160 @@
+Namespace(subparser='bench', bench_type='serve', dispatch_function=<function BenchmarkServingSubcommand.cmd at 0x7f10ec36e840>, trust_remote_code=False, seed=0, num_prompts=8, dataset_name='random', no_stream=False, dataset_path=None, no_oversample=False, skip_chat_template=False, enable_multimodal_chat=False, disable_shuffle=False, custom_output_len=256, custom_ensure_client_side_data=False, spec_bench_output_len=256, spec_bench_category=None, sonnet_input_len=550, sonnet_output_len=150, sonnet_prefix_len=200, sharegpt_output_len=None, timed_trace_chunk_hash_size=16, timed_trace_sec_multiplier=1, timed_trace_label_timestamp='timestamp', timed_trace_label_input_length='input_length', timed_trace_label_output_length='output_length', timed_trace_label_hash_ids='hash_ids', blazedit_min_distance=0.0, blazedit_max_distance=1.0, asr_max_audio_len_sec=inf, asr_min_audio_len_sec=0.0, random_input_len=1024, random_output_len=256, random_range_ratio='0.0', random_prefix_len=0, random_batch_size=1, no_reranker=False, random_mm_base_items_per_request=1, random_mm_num_mm_items_range_ratio=0.0, random_mm_limit_mm_per_prompt={'image': 255, 'video': 1}, random_mm_bucket_config={(256, 256, 1): 0.5, (720, 1280, 1): 0.5, (720, 1280, 16): 0.0}, hf_subset=None, hf_split=None, hf_name=None, hf_output_len=None, bfcl_categories=None, prefix_repetition_prefix_len=256, prefix_repetition_suffix_len=256, prefix_repetition_num_prefixes=10, prefix_repetition_output_len=128, speed_bench_dataset_subset='qualitative', speed_bench_output_len=4096, speed_bench_category=None, label=None, backend='openai-chat', base_url='http://localhost:8021', host='127.0.0.1', port=8000, endpoint='/v1/chat/completions', header=None, max_concurrency=4, model='nanochat-d12-sft', input_len=None, output_len=None, tokenizer='/mnt/pfs/4n3evq/lhx/models/Qwen3.8-27B', tokenizer_mode='auto', use_beam_search=False, logprobs=None, request_rate=inf, burstiness=1.0, probe_request_rate=0.0, disable_tqdm=False, num_warmups=0, profile=False, save_result=True, save_detailed=False, append_result=False, metadata=None, result_dir='/mnt/pfs/4n3evq/lhx/llm_deploy/bench/results/nanochat-d12-sft/perf', result_filename='conc_4_1kin_256out.json', ignore_eos=True, self_timed=None, percentile_metrics='ttft,tpot,itl,e2el', metric_percentiles='50,90,99', goodput=None, request_id_prefix='bench-42515069-', top_p=None, top_k=None, min_p=None, temperature=None, frequency_penalty=None, presence_penalty=None, repetition_penalty=None, served_model_name=None, lora_modules=None, lora_assignment='random', ramp_up_strategy=None, ramp_up_start_rps=None, ramp_up_end_rps=None, ready_check_timeout_sec=0, chat_template_kwargs=None, extra_body=None, skip_tokenizer_init=False, insecure=False, plot_timeline=False, timeline_itl_thresholds='25,50', plot_dataset_stats=False)
+INFO 10-07 08:49:26 [utils.py:90] Sampling input_len from [1024, 1024] and output_len from [256, 256]
+WARNING: /tokenize unavailable, skipping alignment.
+WARNING: vllm bench serve no longer sets temperature==0 (greedy) in requests by default. The default will be determined on the server side and can be model/API specific. For the old behavior, include --temperature=0.
+Starting initial single prompt test run...
+Skipping endpoint ready check.
+Starting main benchmark run...
+Traffic request rate: inf
+Burstiness factor: 1.0 (Poisson process)
+Maximum request concurrency: 4
+  0%|          | 0/8 [00:00<?, ?it/s] 75%|███████▌  | 6/8 [00:02<00:00,  2.15it/s] 88%|████████▊ | 7/8 [00:03<00:00,  2.40it/s]100%|██████████| 8/8 [00:05<00:00,  1.06it/s]100%|██████████| 8/8 [00:05<00:00,  1.36it/s]
+Failed requests during benchmark run detected (capping to 10):
+Error 0: Traceback (most recent call last):
+  File "/root/miniforge/envs/llm/lib/python3.12/site-packages/aiohttp/client_proto.py", line 143, in connection_lost
+    uncompleted = self._parser.feed_eof()
+                  ^^^^^^^^^^^^^^^^^^^^^^^
+  File "aiohttp/_http_parser.pyx", line 590, in aiohttp._http_parser.HttpParser.feed_eof
+aiohttp.http_exceptions.TransferEncodingError: 400, message:
+  Not enough data to satisfy transfer length header.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/root/miniforge/envs/llm/lib/python3.12/site-packages/vllm/benchmarks/lib/endpoint_request_func.py", line 385, in async_request_openai_chat_completions
+    async for chunk_bytes in response.content.iter_any():
+  File "/root/miniforge/envs/llm/lib/python3.12/site-packages/aiohttp/streams.py", line 46, in __anext__
+    rv = await self.read_func()
+         ^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/miniforge/envs/llm/lib/python3.12/site-packages/aiohttp/streams.py", line 460, in readany
+    await self._wait("readany")
+  File "/root/miniforge/envs/llm/lib/python3.12/site-packages/aiohttp/streams.py", line 365, in _wait
+    await waiter
+aiohttp.client_exceptions.ClientPayloadError: Response payload is not completed: <TransferEncodingError: 400, message='Not enough data to satisfy transfer length header.'>
+
+Error 1: Traceback (most recent call last):
+  File "/root/miniforge/envs/llm/lib/python3.12/site-packages/aiohttp/client_proto.py", line 143, in connection_lost
+    uncompleted = self._parser.feed_eof()
+                  ^^^^^^^^^^^^^^^^^^^^^^^
+  File "aiohttp/_http_parser.pyx", line 590, in aiohttp._http_parser.HttpParser.feed_eof
+aiohttp.http_exceptions.TransferEncodingError: 400, message:
+  Not enough data to satisfy transfer length header.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/root/miniforge/envs/llm/lib/python3.12/site-packages/vllm/benchmarks/lib/endpoint_request_func.py", line 385, in async_request_openai_chat_completions
+    async for chunk_bytes in response.content.iter_any():
+  File "/root/miniforge/envs/llm/lib/python3.12/site-packages/aiohttp/streams.py", line 46, in __anext__
+    rv = await self.read_func()
+         ^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/miniforge/envs/llm/lib/python3.12/site-packages/aiohttp/streams.py", line 460, in readany
+    await self._wait("readany")
+  File "/root/miniforge/envs/llm/lib/python3.12/site-packages/aiohttp/streams.py", line 365, in _wait
+    await waiter
+aiohttp.client_exceptions.ClientPayloadError: Response payload is not completed: <TransferEncodingError: 400, message='Not enough data to satisfy transfer length header.'>
+
+Error 2: Traceback (most recent call last):
+  File "/root/miniforge/envs/llm/lib/python3.12/site-packages/aiohttp/client_proto.py", line 143, in connection_lost
+    uncompleted = self._parser.feed_eof()
+                  ^^^^^^^^^^^^^^^^^^^^^^^
+  File "aiohttp/_http_parser.pyx", line 590, in aiohttp._http_parser.HttpParser.feed_eof
+aiohttp.http_exceptions.TransferEncodingError: 400, message:
+  Not enough data to satisfy transfer length header.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/root/miniforge/envs/llm/lib/python3.12/site-packages/vllm/benchmarks/lib/endpoint_request_func.py", line 385, in async_request_openai_chat_completions
+    async for chunk_bytes in response.content.iter_any():
+  File "/root/miniforge/envs/llm/lib/python3.12/site-packages/aiohttp/streams.py", line 46, in __anext__
+    rv = await self.read_func()
+         ^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/miniforge/envs/llm/lib/python3.12/site-packages/aiohttp/streams.py", line 460, in readany
+    await self._wait("readany")
+  File "/root/miniforge/envs/llm/lib/python3.12/site-packages/aiohttp/streams.py", line 365, in _wait
+    await waiter
+aiohttp.client_exceptions.ClientPayloadError: Response payload is not completed: <TransferEncodingError: 400, message='Not enough data to satisfy transfer length header.'>
+
+Error 3: Traceback (most recent call last):
+  File "/root/miniforge/envs/llm/lib/python3.12/site-packages/aiohttp/client_proto.py", line 143, in connection_lost
+    uncompleted = self._parser.feed_eof()
+                  ^^^^^^^^^^^^^^^^^^^^^^^
+  File "aiohttp/_http_parser.pyx", line 590, in aiohttp._http_parser.HttpParser.feed_eof
+aiohttp.http_exceptions.TransferEncodingError: 400, message:
+  Not enough data to satisfy transfer length header.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/root/miniforge/envs/llm/lib/python3.12/site-packages/vllm/benchmarks/lib/endpoint_request_func.py", line 385, in async_request_openai_chat_completions
+    async for chunk_bytes in response.content.iter_any():
+  File "/root/miniforge/envs/llm/lib/python3.12/site-packages/aiohttp/streams.py", line 46, in __anext__
+    rv = await self.read_func()
+         ^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/miniforge/envs/llm/lib/python3.12/site-packages/aiohttp/streams.py", line 460, in readany
+    await self._wait("readany")
+  File "/root/miniforge/envs/llm/lib/python3.12/site-packages/aiohttp/streams.py", line 365, in _wait
+    await waiter
+aiohttp.client_exceptions.ClientPayloadError: Response payload is not completed: <TransferEncodingError: 400, message='Not enough data to satisfy transfer length header.'>
+
+Error 4: Traceback (most recent call last):
+  File "/root/miniforge/envs/llm/lib/python3.12/site-packages/aiohttp/client_proto.py", line 143, in connection_lost
+    uncompleted = self._parser.feed_eof()
+                  ^^^^^^^^^^^^^^^^^^^^^^^
+  File "aiohttp/_http_parser.pyx", line 590, in aiohttp._http_parser.HttpParser.feed_eof
+aiohttp.http_exceptions.TransferEncodingError: 400, message:
+  Not enough data to satisfy transfer length header.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/root/miniforge/envs/llm/lib/python3.12/site-packages/vllm/benchmarks/lib/endpoint_request_func.py", line 385, in async_request_openai_chat_completions
+    async for chunk_bytes in response.content.iter_any():
+  File "/root/miniforge/envs/llm/lib/python3.12/site-packages/aiohttp/streams.py", line 46, in __anext__
+    rv = await self.read_func()
+         ^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/miniforge/envs/llm/lib/python3.12/site-packages/aiohttp/streams.py", line 460, in readany
+    await self._wait("readany")
+  File "/root/miniforge/envs/llm/lib/python3.12/site-packages/aiohttp/streams.py", line 365, in _wait
+    await waiter
+aiohttp.client_exceptions.ClientPayloadError: Response payload is not completed: <TransferEncodingError: 400, message='Not enough data to satisfy transfer length header.'>
+
+tip: install termplotlib and gnuplot to plot the metrics
+============ Serving Benchmark Result ============
+Successful requests:                     3         
+Failed requests:                         5         
+Maximum request concurrency:             4         
+Benchmark duration (s):                  5.87      
+Total input tokens:                      3072      
+Total generated tokens:                  495       
+Request throughput (req/s):              0.51      
+Output token throughput (tok/s):         84.28     
+Peak output token throughput (tok/s):    92.00     
+Peak concurrent requests:                3.00      
+Total token throughput (tok/s):          607.31    
+---------------Time to First Token----------------
+Mean TTFT (ms):                          2.75      
+Median TTFT (ms):                        2.64      
+P50 TTFT (ms):                           2.64      
+P90 TTFT (ms):                           3.11      
+P99 TTFT (ms):                           3.21      
+-----Time per Output Token (excl. 1st token)------
+Mean TPOT (ms):                          110.90    
+Median TPOT (ms):                        23.29     
+P50 TPOT (ms):                           23.29     
+P90 TPOT (ms):                           242.59    
+P99 TPOT (ms):                           291.93    
+---------------Inter-token Latency----------------
+Mean ITL (ms):                           22.16     
+Median ITL (ms):                         11.00     
+P50 ITL (ms):                            11.00     
+P90 ITL (ms):                            12.58     
+P99 ITL (ms):                            13.32     
+----------------End-to-end Latency----------------
+Mean E2EL (ms):                          3865.50   
+Median E2EL (ms):                        2976.75   
+P50 E2EL (ms):                           2976.75   
+P90 E2EL (ms):                           5275.37   
+P99 E2EL (ms):                           5792.56   
+==================================================

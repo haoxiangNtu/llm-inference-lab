@@ -91,6 +91,11 @@ __BASE_SAMPLES__
 <p>SFT 之后的模型直接回答，未经挑选。小模型的典型表现：语气和格式像模像样，事实经常是错的，算术不调用工具时会编。</p>
 __CHAT_SAMPLES__
 
+<h2 id="yard">6. 用同一把尺子量一下</h2>
+<p>把自己训的模型接进<a href="benchmark.html">评测报告</a>那套脚本（通过仓库里的 <code>train/nanochat_server.py</code> 提供 OpenAI 兼容接口），和下载的前沿开源模型并排。nanochat 模型题量减半、上下文 2048、单卡无批处理。</p>
+__YARDSTICK__
+<div class="note">三个观察。一是差距的量级：GSM8K 上 d24 是 5%，GLM-5.3-Flash 是 98.5%；C-Eval 是中文题，而我们的分词器和语料几乎全是英文，d24 把 150 题里的 93 题答到超长被截断。二是 HumanEval 反而不算太差（19.5%），代码在网页语料里占比不小，格式也规整。三是 JSON 抽取 65%，说明 SFT 教会了格式遵循。这些就是一个 2019 年水平、英文为主的 14 亿参数模型该有的样子。</div>
+
 <h2 id="time">时间账</h2>
 <div class="tablewrap"><table>__HEAD____TIME__</table></div>
 <p>d12 预训练的墙钟时间里有 19 分钟是卡在下载评测数据包上，纯训练是 24.75 分钟。</p>

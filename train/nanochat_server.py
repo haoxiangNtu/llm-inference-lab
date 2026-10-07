@@ -51,25 +51,37 @@ def render(messages):
     ids.append(sp["<|assistant_start|>"])
     return ids
 
-def complete(messages, max_tokens, temperature):
+PIECE_MAP = [("<|python_start|>", " [calc: "), ("<|python_end|>", "]"), ("<|output_start|>", " = "), ("<|output_end|>", " ")]
+def stream_tokens(messages, max_tokens, temperature, ignore_eos=False):
+    """Generator: yields decoded text pieces; returns (prompt_tokens, completion_tokens, finish_reason) via StopIteration value."""
     ids = render(messages)
-    max_tokens = max(1, min(max_tokens, SEQ_LEN - len(ids) - 1))
     if len(ids) >= SEQ_LEN - 8:
         raise ValueError(f"prompt has {len(ids)} tokens, model context is {SEQ_LEN}")
-    out, finish = [], "length"
+    max_tokens = max(1, min(max_tokens, SEQ_LEN - len(ids) - 1))
+    n, finish = 0, "length"
     with lock:
         for token_column, _ in engine.generate(ids, num_samples=1, max_tokens=max_tokens, temperature=temperature, top_k=args.top_k, seed=int(time.time() * 1000) % 2**31):
             tok = token_column[0]
-            if tok == sp["<|assistant_end|>"] or tok == bos:
+            if (tok == sp["<|assistant_end|>"] or tok == bos) and not ignore_eos:
                 finish = "stop"; break
-            out.append(tok)
-    text = tokenizer.decode([t for t in out if t not in special_ids or t in (sp["<|output_start|>"], sp["<|output_end|>"])])
-    # make calculator traces readable: <|python_start|>expr<|python_end|><|output_start|>val<|output_end|>
-    for t, rep in [("<|python_start|>", " [calc: "), ("<|python_end|>", "]"), ("<|output_start|>", " = "), ("<|output_end|>", " ")]:
-        text = text.replace(t, rep)
-    return text, len(ids), len(out), finish
+            n += 1
+            if tok in special_ids:
+                piece = dict(PIECE_MAP).get(tokenizer.decode([tok]), "") if tok in (sp["<|python_start|>"], sp["<|python_end|>"], sp["<|output_start|>"], sp["<|output_end|>"]) else ""
+            else:
+                piece = tokenizer.decode([tok])
+            if piece: yield piece
+    return len(ids), n, finish
+
+def complete(messages, max_tokens, temperature, ignore_eos=False):
+    pieces = []; gen = stream_tokens(messages, max_tokens, temperature, ignore_eos)
+    while True:
+        try: pieces.append(next(gen))
+        except StopIteration as e:
+            p, c, finish = e.value; break
+    return "".join(pieces), p, c, finish
 
 class H(BaseHTTPRequestHandler):
+    protocol_version = "HTTP/1.1"  # needed for chunked SSE streaming
     def log_message(self, *a): pass
     def _send(self, code, obj):
         body = json.dumps(obj, ensure_ascii=False).encode()
@@ -82,9 +94,33 @@ class H(BaseHTTPRequestHandler):
     def do_POST(self):
         n = int(self.headers.get("Content-Length") or 0); req = json.loads(self.rfile.read(n) or b"{}")
         if self.path.startswith("/v1/chat/completions"):
+            mt = int(req.get("max_tokens") or req.get("max_completion_tokens") or args.default_max_tokens); temp = float(req.get("temperature", 1.0)); ieos = bool(req.get("ignore_eos", False))
+            if req.get("stream"):
+                try:
+                    gen = stream_tokens(req.get("messages", []), mt, temp, ieos)
+                except ValueError as e:
+                    return self._send(400, {"error": {"message": str(e), "type": "invalid_request_error"}})
+                cid = "chatcmpl-" + uuid.uuid4().hex[:12]; t0 = int(time.time())
+                self.send_response(200); self.send_header("Content-Type", "text/event-stream"); self.send_header("Cache-Control", "no-cache"); self.send_header("Transfer-Encoding", "chunked"); self.end_headers()
+                def chunk(obj):
+                    data = ("data: " + json.dumps(obj, ensure_ascii=False) + "\n\n").encode()
+                    self.wfile.write(f"{len(data):x}\r\n".encode() + data + b"\r\n"); self.wfile.flush()
+                try:
+                    chunk({"id": cid, "object": "chat.completion.chunk", "created": t0, "model": NAME, "choices": [{"index": 0, "delta": {"role": "assistant", "content": ""}, "finish_reason": None}]})
+                    while True:
+                        try: piece = next(gen)
+                        except StopIteration as e:
+                            p, c, finish = e.value; break
+                        chunk({"id": cid, "object": "chat.completion.chunk", "created": t0, "model": NAME, "choices": [{"index": 0, "delta": {"content": piece}, "finish_reason": None}]})
+                    chunk({"id": cid, "object": "chat.completion.chunk", "created": t0, "model": NAME, "choices": [{"index": 0, "delta": {}, "finish_reason": finish}], "usage": {"prompt_tokens": p, "completion_tokens": c, "total_tokens": p + c}})
+                    done = b"data: [DONE]\n\n"
+                    self.wfile.write(f"{len(done):x}\r\n".encode() + done + b"\r\n0\r\n\r\n"); self.wfile.flush()
+                except (BrokenPipeError, ConnectionResetError):
+                    pass
+                return
             try:
                 t0 = time.time()
-                text, p, c, finish = complete(req.get("messages", []), int(req.get("max_tokens") or args.default_max_tokens), float(req.get("temperature", 1.0)))
+                text, p, c, finish = complete(req.get("messages", []), mt, temp, ieos)
                 return self._send(200, {"id": "chatcmpl-" + uuid.uuid4().hex[:12], "object": "chat.completion", "created": int(t0), "model": NAME,
                                         "choices": [{"index": 0, "message": {"role": "assistant", "content": text}, "finish_reason": finish}],
                                         "usage": {"prompt_tokens": p, "completion_tokens": c, "total_tokens": p + c}})

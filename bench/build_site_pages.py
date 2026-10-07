@@ -22,12 +22,14 @@ HEAD = '''<!doctype html>
 '''
 CONFIG = {"GLM-5.3-Flash": "8 × A800，TP4 × PP2，FP8 权重 Marlin W8A16，max-model-len 1M，max-num-seqs 16",
           "Qwen3.6-35B-A3B": "2 × A800，TP2，BF16，max-model-len 128K，max-num-seqs 64",
-          "Qwen3.8-27B": "2 × A800，TP2，BF16，max-model-len 128K，max-num-seqs 64"}
+          "Qwen3.8-27B": "2 × A800，TP2，BF16，max-model-len 128K，max-num-seqs 64",
+          "nanochat-d24-sft": "自己训练的 d24（13.8 亿参数，SFT 后），1 × A800，nanochat 引擎无批处理，上下文 2048，质量题量减半",
+          "nanochat-d12-sft": "自己训练的 d12（2.9 亿参数，SFT 后），1 × A800，nanochat 引擎无批处理，上下文 2048，质量题量减半"}
 ORDER = ["single_128in_256out", "prefill_2k", "prefill_8k", "prefill_32k", "conc_4_1kin_256out", "conc_8_1kin_256out", "conc_16_1kin_256out", "conc_32_1kin_256out", "conc_16_4kin_512out"]
 SCEN = {"single_128in_256out": "单流 128 入 / 256 出", "prefill_2k": "单流 2K 入", "prefill_8k": "单流 8K 入", "prefill_32k": "单流 32K 入",
         "conc_4_1kin_256out": "并发 4，1K 入 / 256 出", "conc_8_1kin_256out": "并发 8，1K 入 / 256 出", "conc_16_1kin_256out": "并发 16，1K 入 / 256 出",
         "conc_32_1kin_256out": "并发 32，1K 入 / 256 出", "conc_16_4kin_512out": "并发 16，4K 入 / 512 出"}
-models = [m for m in ["GLM-5.3-Flash", "Qwen3.6-35B-A3B", "Qwen3.8-27B"] if os.path.isdir(os.path.join(RES, m))]
+models = [m for m in ["GLM-5.3-Flash", "Qwen3.6-35B-A3B", "Qwen3.8-27B", "nanochat-d24-sft", "nanochat-d12-sft"] if os.path.isdir(os.path.join(RES, m))]
 perf, qual = {}, {}
 for m in models:
     perf[m] = {}
@@ -97,10 +99,12 @@ body = f'''{NAV.format(l="", b=' class="on"')}
 
 <h2 id="perf">性能</h2>
 <div class="stage"><canvas class="viz" id="cConc" width="1040" height="320"></canvas></div>
-<div class="legend"><span><i style="background:var(--compute)"></i>GLM-5.3-Flash</span><span><i style="background:var(--token)"></i>Qwen3.6-35B-A3B</span><span><i style="background:var(--memory)"></i>Qwen3.8-27B</span></div>
+<div class="legend"><span><i style="background:var(--compute)"></i>GLM-5.3-Flash</span><span><i style="background:var(--token)"></i>Qwen3.6-35B-A3B</span><span><i style="background:var(--memory)"></i>Qwen3.8-27B</span><span><i style="background:var(--kv)"></i>nanochat-d24-sft</span><span><i style="background:var(--weights)"></i>nanochat-d12-sft</span></div>
 <p>左图是输出吞吐随并发的变化，右图是单请求 TPOT 随并发的变化。并发 1 的点来自 128 入 / 256 出的单流场景，其余来自 1K 入 / 256 出。</p>
 <div class="note mem">三个现象。激活参数决定 decode 速度：同样 2 张卡，Qwen3.6 每步只读 3B 激活参数，Qwen3.8 要读全部 27B，单流速度差 3.5 倍。并发曲线的形状：Qwen3.6 从并发 1 到 32 吞吐涨 11 倍而 TPOT 只从 5.8 涨到 17 ms，这是"权重每步只读一次"的收益。GLM 的吞吐在并发 16 和 32 都是 290 tok/s，32 时 TTFT 跳到 15.6 秒，因为服务的 max-num-seqs 设了 16，多出的请求在排队；加上 Ampere 上的 Triton 回退内核和流水线气泡，每卡吞吐只有 Qwen3.6 的 1/23，是最值得优化的一项。</div>
 {perf_table}
+
+<div class="note kv"><b>关于两行 nanochat。</b> 这是<a href="training.html">训练实录</a>里自己从零训练的模型，通过一个 OpenAI 兼容的小服务接进同一套脚本。它们跑在单张卡的 nanochat 引擎上，没有批处理，上下文只有 2048，所以只测了单流和并发 4、没有长上下文档，质量测试题量减半。数字本身不好看，但"自己训的 GPT-2 量级模型和前沿开源模型差多远"从此有了同一口径的答案。</div>
 
 <h2 id="quality">质量</h2>
 <div class="stage"><canvas class="viz" id="cQual" width="1040" height="300"></canvas></div>
@@ -126,7 +130,7 @@ body = f'''{NAV.format(l="", b=' class="on"')}
 const DATA={json.dumps(chart, ensure_ascii=False)};
 (function(){{
 const css=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
-const COLORS=["--compute","--token","--memory"];
+const COLORS=["--compute","--token","--memory","--kv","--weights"];
 function fit(c){{const r=c.getBoundingClientRect();const dpr=Math.min(2,devicePixelRatio||1);const W=+c.getAttribute('width'),H=+c.getAttribute('height');c.width=Math.round(r.width*dpr);c.height=Math.round(r.width*dpr*H/W);const g=c.getContext('2d');g.setTransform(dpr*r.width/W,0,0,dpr*r.width/W,0,0);return g;}}
 function axes(g,x0,y0,x1,y1){{g.strokeStyle=css('--line');g.beginPath();g.moveTo(x0,y0);g.lineTo(x0,y1);g.lineTo(x1,y1);g.stroke();}}
 function drawConc(){{const c=document.getElementById('cConc');const g=fit(c);g.clearRect(0,0,1040,320);g.font='11px '+css('--font-mono');g.textBaseline='middle';
@@ -139,7 +143,7 @@ function drawQual(){{const c=document.getElementById('cQual');const g=fit(c);g.c
   const x0=50,x1=1020,y0=30,y1=250;axes(g,x0,y0,x1,y1);g.fillStyle=css('--muted');g.textAlign='right';[0,0.5,1].forEach(t=>g.fillText(Math.round(100*t)+'%',x0-6,y1-(y1-y0)*t));
   const gw=(x1-x0)/tests.length,bw=gw/(DATA.models.length+1.2);
   tests.forEach((t,ti)=>{{g.fillStyle=css('--muted');g.textAlign='center';g.fillText(t[1],x0+gw*ti+gw/2,y1+16);DATA.models.forEach((m,mi)=>{{const v=DATA.quality[m][t[0]];if(v==null)return;const x=x0+gw*ti+bw*0.6+bw*mi;const h=(y1-y0)*v;g.fillStyle=css(COLORS[mi]);g.globalAlpha=0.9;g.fillRect(x,y1-h,bw*0.9,h);g.globalAlpha=1;g.fillStyle=css('--fg');g.fillText(Math.round(v*100),x+bw*0.45,y1-h-9);}});}});
-  g.textAlign='left';DATA.models.forEach((m,mi)=>{{g.fillStyle=css(COLORS[mi]);g.fillRect(x0+mi*220,y1+34,10,10);g.fillStyle=css('--muted');g.fillText(m,x0+mi*220+16,y1+39);}});}}
+  g.textAlign='left';DATA.models.forEach((m,mi)=>{{g.fillStyle=css(COLORS[mi]);g.fillRect(x0+mi*190,y1+34,10,10);g.fillStyle=css('--muted');g.fillText(m,x0+mi*190+16,y1+39);}});}}
 function drawNeedle(){{const c=document.getElementById('cNeedle');const g=fit(c);g.clearRect(0,0,1040,280);g.font='11px '+css('--font-mono');g.textBaseline='middle';const x0=60,x1=1020,y0=30,y1=230;axes(g,x0,y0,x1,y1);
   const Ls=[...new Set([].concat(...DATA.models.map(m=>DATA.needle[m].map(q=>q.L))))].sort((a,b)=>a-b);const lx=L=>x0+(x1-x0)*(Math.log2(L)-Math.log2(Ls[0]))/(Math.log2(Ls[Ls.length-1])-Math.log2(Ls[0]));
   const max=Math.max(...[].concat(...DATA.models.map(m=>DATA.needle[m].map(q=>q.lat))))*1.15;g.fillStyle=css('--muted');g.textAlign='center';Ls.forEach(L=>g.fillText(Math.round(L/1024)+'K',lx(L),y1+14));g.fillText('上下文长度（对数轴）',(x0+x1)/2,y1+32);g.textAlign='right';[0,0.5,1].forEach(t=>g.fillText((max*t).toFixed(0)+'s',x0-6,y1-(y1-y0)*t));g.textAlign='left';g.fillText('平均延迟（含 prefill），点上数字是准确率',x0,18);
