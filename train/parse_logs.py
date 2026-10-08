@@ -106,5 +106,7 @@ for q, body in re.findall(r"### (.*?)\n(.*?)(?=\n### |\Z)", sm, re.S):
     a = re.search(r"Assistant: (.*)", body, re.S)
     samples.append({"q": q.strip(), "a": (a.group(1).strip() if a else "").strip()[:900]})
 R["samples"] = samples
+mp = os.path.join(D, "samples_math.json")
+R["samples_math"] = json.load(open(mp))["items"] if os.path.exists(mp) else []
 json.dump(R, open(OUT, "w"), ensure_ascii=False, indent=1)
 print(f"{TAG}: stages={len(stages)} base_steps={len(steps)} val_pts={len(base['val_bpb'])} core_tasks={len(be['core_tasks'])} sft_steps={sft['steps']} rl_steps={rl['steps']} samples={len(samples)} -> {OUT}")

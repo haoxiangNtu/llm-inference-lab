@@ -1,0 +1,5272 @@
+{
+ "model": "nanochat-d12-rl",
+ "base_url": "http://localhost:8030/v1",
+ "started": "2026-10-09 03:50:01",
+ "tests": {
+  "gsm8k": {
+   "summary": {
+    "n": 100,
+    "correct": 9,
+    "accuracy": 0.09,
+    "errors": 0,
+    "truncated": 0,
+    "avg_completion_tokens": 53.13,
+    "avg_latency_s": 1.9172295999526978
+   },
+   "records": [
+    {
+     "content": "There are 3+5= [calc: 3+5] = 8 8 degrees of the oven.\nSo the house is 40-8= [calc: 40-8] = 32 32 degrees long.\n#### 32",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 105,
+      "completion_tokens": 45,
+      "total_tokens": 150
+     },
+     "latency": 1.1550414562225342,
+     "ref": "49",
+     "pred": "32",
+     "correct": false
+    },
+    {
+     "content": "There are 60+40 =  [calc: 60+40] = 100 100 cannolis.\nSo the combined total is 40+100 =  [calc: 40+100] = 140 140 cannolis.\n#### 140",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 102,
+      "completion_tokens": 53,
+      "total_tokens": 155
+     },
+     "latency": 0.7421579360961914,
+     "ref": "200",
+     "pred": "140",
+     "correct": false
+    },
+    {
+     "content": "There are 10*8= [calc: 10*8] = 80 80 colors of crayons.\nThere are 4*6= [calc: 4*6] = 24 24 colors of crayons.\nSo Beatrice bought 80+24= [calc: 80+24] = 104 104 crayons.\n#### 104",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 80,
+      "completion_tokens": 67,
+      "total_tokens": 147
+     },
+     "latency": 1.7442505359649658,
+     "ref": "112",
+     "pred": "104",
+     "correct": false
+    },
+    {
+     "content": "There are 11+8+6= [calc: 11+8+6] = 25 25 square feet of fabric.\nSo the quilt is 25*3= [calc: 25*3] = 75 75 square feet.\n#### 75",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 119,
+      "completion_tokens": 49,
+      "total_tokens": 168
+     },
+     "latency": 2.1896626949310303,
+     "ref": "101",
+     "pred": "75",
+     "correct": false
+    },
+    {
+     "content": "He used to be",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 119,
+      "completion_tokens": 4,
+      "total_tokens": 123
+     },
+     "latency": 1.4949419498443604,
+     "ref": "9",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "She orders 2*7.50=$ [calc: 2*7.50] = 15.0 15.0 of chips\nShe also orders 2*1.50=$ [calc: 2*1.50] = 3.0 3.0 of chips\nShe also orders 2*1.00=$ [calc: 2*1.00] = 2.0 2.0 of cookies\nSo her delivery order is 15+3+2=$ [calc: 15+3+2] = 20 20\n#### 20",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 99,
+      "completion_tokens": 114,
+      "total_tokens": 213
+     },
+     "latency": 2.1156506538391113,
+     "ref": "29",
+     "pred": "20",
+     "correct": false
+    },
+    {
+     "content": "There are 2*725= [calc: 2*725] = 1450 1450 more miles.\nSo that means there are 1450/10,440,000 =  [calc: 1450/10,440,",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 81,
+      "completion_tokens": 50,
+      "total_tokens": 131
+     },
+     "latency": 1.9788787364959717,
+     "ref": "6",
+     "pred": "10440",
+     "correct": false
+    },
+    {
+     "content": "There are 3*6= [calc: 3*6] = 18 18 cages of rats.\nThere are 18*5= [calc: 18*5] = 90 90 cages of hamsters.\nSo each cage has 160/",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 140,
+      "completion_tokens": 48,
+      "total_tokens": 188
+     },
+     "latency": 1.9768579006195068,
+     "ref": "5",
+     "pred": "160",
+     "correct": false
+    },
+    {
+     "content": "The alarm went off 4 * 3= [calc: 4*3] = 12 12 times in one alarm.\nSo the alarm went off 12 + 12=  [calc: 12+12] = 24 24 times in all.\n#### 24",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 121,
+      "completion_tokens": 52,
+      "total_tokens": 173
+     },
+     "latency": 2.4188125133514404,
+     "ref": "22",
+     "pred": "24",
+     "correct": false
+    },
+    {
+     "content": "There are 2000/80 =  [calc: 2000/80] = 25.0 25.0 of flagstones.\nSo, the company will need 25 * 80 =  [calc: 25*80] = 2000 2000 trucks.\n#### 2000",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 81,
+      "completion_tokens": 57,
+      "total_tokens": 138
+     },
+     "latency": 1.9027259349822998,
+     "ref": "3",
+     "pred": "2000",
+     "correct": false
+    },
+    {
+     "content": "Stephen has 300 - 25 = $ [calc: 300-25] = 275 275.\nSo Stephen will be paid 275 + 2 =  [calc: 275+2] = 277 277 in the twelfth month.\n#### 277",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 100,
+      "completion_tokens": 60,
+      "total_tokens": 160
+     },
+     "latency": 1.9976143836975098,
+     "ref": "31",
+     "pred": "277",
+     "correct": false
+    },
+    {
+     "content": "He drills 30+4= [calc: 30+4] = 34 34 more teeth than he drills.\nSo the dentist fixes 34/7 * 100=",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 63,
+      "completion_tokens": 35,
+      "total_tokens": 98
+     },
+     "latency": 1.875610113143921,
+     "ref": "50",
+     "pred": "100",
+     "correct": false
+    },
+    {
+     "content": "He needs 20*1=$ [calc: 20*1] = 20 20 more for the meat\nSo he needs 20+3=$ [calc: 20+3] = 23 23 to make the meat and cheese\n#### 23",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 119,
+      "completion_tokens": 50,
+      "total_tokens": 169
+     },
+     "latency": 1.8439075946807861,
+     "ref": "50",
+     "pred": "23",
+     "correct": false
+    },
+    {
+     "content": "The first dog was 10*2= [calc: 10*2] = 20 20 pounds.\nThe second dog was 20*1/4= [calc: 20*1/4] = 5.0 5.0 pounds.\nAnd the third dog was 44*",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 142,
+      "completion_tokens": 56,
+      "total_tokens": 198
+     },
+     "latency": 1.8388595581054688,
+     "ref": "220",
+     "pred": "44",
+     "correct": false
+    },
+    {
+     "content": "There are 96/4 =  [calc: 96/4] = 24.0 24.0 girls at Small Tree School.\nSo there are 24-5 =  [calc: 24-5] = 19 19 fourth grade boys at Small Tree School.\n#### 19",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 81,
+      "completion_tokens": 56,
+      "total_tokens": 137
+     },
+     "latency": 1.8083128929138184,
+     "ref": "49",
+     "pred": "19",
+     "correct": false
+    },
+    {
+     "content": "There are 3000/2= [calc: 3000/2] = 1500.0 1500.0 students over 16.\nSo there are 1500/4= [calc: 1500/4] = 375.0 375.0 students in the male category.\n#### 37",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 106,
+      "completion_tokens": 63,
+      "total_tokens": 169
+     },
+     "latency": 2.0588083267211914,
+     "ref": "1875",
+     "pred": "37",
+     "correct": false
+    },
+    {
+     "content": "The hospital makes 500*24=$ [calc: 500*24] = 12000 12000 in visits per day.\nSo the hospital makes 12000*200=$ [calc: 12000*200] = 2400000 2400000 from its visits.\n#### 2400",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 88,
+      "completion_tokens": 68,
+      "total_tokens": 156
+     },
+     "latency": 2.2226052284240723,
+     "ref": "10000",
+     "pred": "2400",
+     "correct": false
+    },
+    {
+     "content": "She walks for 3*2= [calc: 3*2] = 6 6 miles on the beach.\nSo it takes her 40/6= [calc: 40/6] = 6.666666666666667 ",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 118,
+      "completion_tokens": 48,
+      "total_tokens": 166
+     },
+     "latency": 2.1459319591522217,
+     "ref": "50",
+     "pred": "6.666666666666667",
+     "correct": false
+    },
+    {
+     "content": "She has 4*25=$ [calc: 4*25] = 100 100 in her piggy bank every day.\nSo she saves 5*100=$ [calc: 5*100] = 500 500 in her piggy bank.\n#### 500",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 87,
+      "completion_tokens": 59,
+      "total_tokens": 146
+     },
+     "latency": 2.17268967628479,
+     "ref": "20",
+     "pred": "500",
+     "correct": false
+    },
+    {
+     "content": "On eBay, the boots are 16 + 4 = $ [calc: 16+4] = 20 20.\nSo, the boots are 20 - 13 = $ [calc: 20-13] = 7 7 more expensive.\n#### 7",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 95,
+      "completion_tokens": 50,
+      "total_tokens": 145
+     },
+     "latency": 2.059485673904419,
+     "ref": "1",
+     "pred": "7",
+     "correct": false
+    },
+    {
+     "content": "He has 4*6=$ [calc: 4*6] = 24 24.\nSo Ali has 24-3/5*10=$ [calc: 24-3/5] = 23.4 23.",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 93,
+      "completion_tokens": 45,
+      "total_tokens": 138
+     },
+     "latency": 1.8541455268859863,
+     "ref": "32",
+     "pred": "23",
+     "correct": false
+    },
+    {
+     "content": "She made 80*3=$ [calc: 80*3] = 240 240 from her work.\nSo she made 240+6=$ [calc: 240+6] = 246 246 from her work.\n#### 246",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 107,
+      "completion_tokens": 53,
+      "total_tokens": 160
+     },
+     "latency": 1.9057180881500244,
+     "ref": "26",
+     "pred": "246",
+     "correct": false
+    },
+    {
+     "content": "There are 2*3= [calc: 2*3] = 6 6 windows in each house.\nThere are also 4*6= [calc: 4*6] = 24 24 windows in each house.\nSo the total windows are ",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 76,
+      "completion_tokens": 49,
+      "total_tokens": 125
+     },
+     "latency": 1.8073430061340332,
+     "ref": "20",
+     "pred": "24",
+     "correct": false
+    },
+    {
+     "content": "A plane travels 1200*3= [calc: 1200*3] = 3600 3600 additional miles in 3 hours.\nSo it would take 3600/2000= [calc: 3600/2000] = 1.8 1.",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 62,
+      "completion_tokens": 53,
+      "total_tokens": 115
+     },
+     "latency": 1.830915927886963,
+     "ref": "5",
+     "pred": "1",
+     "correct": false
+    },
+    {
+     "content": "There are 1000/4= [calc: 1000/4] = 250.0 250.0 pieces of puzzle.\nSo there are 250 - 25 =  [calc: 250-25] = 225 225 pieces of puzzle left.\n#### 225",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 75,
+      "completion_tokens": 60,
+      "total_tokens": 135
+     },
+     "latency": 1.9613149166107178,
+     "ref": "500",
+     "pred": "225",
+     "correct": false
+    },
+    {
+     "content": "There are 14*6= [calc: 14*6] = 84 84 holes.\nSo it takes Nate 84/9= [calc: 84/9] = 9.333333333333334 ",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 96,
+      "completion_tokens": 45,
+      "total_tokens": 141
+     },
+     "latency": 1.8875317573547363,
+     "ref": "4",
+     "pred": "9.333333333333334",
+     "correct": false
+    },
+    {
+     "content": "There are 5*2= [calc: 5*2] = 10 10 hours in 5 people to paint a whole house.\nSo it would take 5*10= [calc: 5*10] = 50 50 hours to paint a whole house.\n#### 50",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 58,
+      "completion_tokens": 55,
+      "total_tokens": 113
+     },
+     "latency": 1.941319465637207,
+     "ref": "48",
+     "pred": "50",
+     "correct": false
+    },
+    {
+     "content": "There are 1000*3= [calc: 1000*3] = 3000 3000 posts in one day.\nSo the total number of posts the group will have in March is 3000*2= [calc: 3000*2] = 6000 6000.\n#### 6000",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 66,
+      "completion_tokens": 61,
+      "total_tokens": 127
+     },
+     "latency": 2.001950979232788,
+     "ref": "93000",
+     "pred": "6000",
+     "correct": false
+    },
+    {
+     "content": "There are 15*3= [calc: 15*3] = 45 45 wolves.\nThere are 45+15= [calc: 45+15] = 60 60 animals.\n#### 60",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 74,
+      "completion_tokens": 39,
+      "total_tokens": 113
+     },
+     "latency": 1.8059017658233643,
+     "ref": "73",
+     "pred": "60",
+     "correct": false
+    },
+    {
+     "content": "There are 16*2=$ [calc: 16*2] = 32 32.\nSo she needs 32/4=$ [calc: 32/4] = 8.0 8.0 of gift bags per invitation.\n#### 8",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 77,
+      "completion_tokens": 49,
+      "total_tokens": 126
+     },
+     "latency": 1.828343391418457,
+     "ref": "24",
+     "pred": "8",
+     "correct": false
+    },
+    {
+     "content": "There are 2*18= [calc: 2*18] = 36 36 miles per hour\nSo the distance is 36+22= [calc: 36+22] = 58 58 miles\n#### 58",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 160,
+      "completion_tokens": 43,
+      "total_tokens": 203
+     },
+     "latency": 1.7143707275390625,
+     "ref": "374",
+     "pred": "58",
+     "correct": false
+    },
+    {
+     "content": "There are 20+3+4 =  [calc: 20+3+4] = 27 27 kilograms of rice.\nSo she gave 27/25 = ",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 80,
+      "completion_tokens": 34,
+      "total_tokens": 114
+     },
+     "latency": 1.4884586334228516,
+     "ref": "175",
+     "pred": "25",
+     "correct": false
+    },
+    {
+     "content": "They make 3*2=$ [calc: 3*2] = 6 6 per glass of lemonade.\nSo they spend 6*20=$ [calc: 6*20] = 120 120 in lemons.\n#### 120",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 91,
+      "completion_tokens": 50,
+      "total_tokens": 141
+     },
+     "latency": 1.5850095748901367,
+     "ref": "15",
+     "pred": "120",
+     "correct": false
+    },
+    {
+     "content": "There are 3 + 1 + 2 =  [calc: 3+1+2] = 6 6 sodas.\nSo Ellen's friend gets 6 * 100 =  [calc: 6*100] = 600 600 soda from a shaken can.\n#### 600",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 134,
+      "completion_tokens": 63,
+      "total_tokens": 197
+     },
+     "latency": 1.7942757606506348,
+     "ref": "25",
+     "pred": "600",
+     "correct": false
+    },
+    {
+     "content": "She sleeped for 2 + 5 =  [calc: 2+5] = 7 7 minutes.\nSo she sleeped for 7 - 6 =  [calc: 7-6] = 1 1 minute.\n#### 1",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 142,
+      "completion_tokens": 48,
+      "total_tokens": 190
+     },
+     "latency": 1.842054843902588,
+     "ref": "452",
+     "pred": "1",
+     "correct": false
+    },
+    {
+     "content": "There are 6 * 20 =  [calc: 6*20] = 120 120 raspberries.\nThere are 67 * 20 =  [calc: 67*20] = 1340 1340 of its fruit.\nSo the total is 120 + 1340 =  [calc: 120+1340] = 1460 1460.\n#### 1460",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 58,
+      "completion_tokens": 77,
+      "total_tokens": 135
+     },
+     "latency": 2.2088215351104736,
+     "ref": "187",
+     "pred": "1460",
+     "correct": false
+    },
+    {
+     "content": "Lee used to be able to run the 400-meter hurdles faster than Gerald, which is 400*10= [calc: 400*10] = 4000 4000 seconds.\nSo the new speed is 400+4000= [calc: 400+4000] = 4400 4400 seconds.\n#### 4400",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 111,
+      "completion_tokens": 72,
+      "total_tokens": 183
+     },
+     "latency": 2.4409217834472656,
+     "ref": "36",
+     "pred": "4400",
+     "correct": false
+    },
+    {
+     "content": "There are 300*5= [calc: 300*5] = 1500 1500 grams of chips.\nSo you can eat 2000/1500= [calc: 2000/1500] = 1.3333333333333333 ",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 84,
+      "completion_tokens": 54,
+      "total_tokens": 138
+     },
+     "latency": 2.2934789657592773,
+     "ref": "48",
+     "pred": "1.3333333333333333",
+     "correct": false
+    },
+    {
+     "content": "There are 30+20+40= [calc: 30+20+40] = 90 90 total cards.\nSo the percentage chance that a randomly picked card is a water type is 90/100*",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 96,
+      "completion_tokens": 43,
+      "total_tokens": 139
+     },
+     "latency": 2.2455008029937744,
+     "ref": "33",
+     "pred": "100",
+     "correct": false
+    },
+    {
+     "content": "There are 55 - 5 =  [calc: 55-5] = 50 50 cookies.\nSo each jar has 50/5 =  [calc: 50/5] = 10.0 10.0 of cookies.\n#### 10",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 59,
+      "completion_tokens": 49,
+      "total_tokens": 108
+     },
+     "latency": 2.016516923904419,
+     "ref": "10",
+     "pred": "10",
+     "correct": true
+    },
+    {
+     "content": "She has 8*0.50=$ [calc: 8*0.50] = 4.0 4.0 of books over a week.\nSo she has 4+2=$ [calc: 4+2] = 6 6 to pay total.\n#### 6",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 86,
+      "completion_tokens": 56,
+      "total_tokens": 142
+     },
+     "latency": 1.8404450416564941,
+     "ref": "6",
+     "pred": "6",
+     "correct": true
+    },
+    {
+     "content": "There are 4500/100",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 119,
+      "completion_tokens": 8,
+      "total_tokens": 127
+     },
+     "latency": 1.4253573417663574,
+     "ref": "30",
+     "pred": "100",
+     "correct": false
+    },
+    {
+     "content": "George has 5 + 3 =  [calc: 5+3] = 8 8 candies.\nSo Nick has 8 + 3 =  [calc: 8+3] = 11 11 candies.\n#### 11",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 61,
+      "completion_tokens": 44,
+      "total_tokens": 105
+     },
+     "latency": 1.4447555541992188,
+     "ref": "16",
+     "pred": "11",
+     "correct": false
+    },
+    {
+     "content": "There are 20*2= [calc: 20*2] = 40 40 sofas.\nSo the total number of sofas and chairs is 20+40= [calc: 20+40] = 60 60.\n#### 60",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 91,
+      "completion_tokens": 47,
+      "total_tokens": 138
+     },
+     "latency": 1.4153013229370117,
+     "ref": "172",
+     "pred": "60",
+     "correct": false
+    },
+    {
+     "content": "There are 8+6= [calc: 8+6] = 14 14 hours in the second day.\nSo Sandy took 14*2= [calc: 14*2] = 28 28 hours in the two days.\n#### 28",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 93,
+      "completion_tokens": 48,
+      "total_tokens": 141
+     },
+     "latency": 1.3412110805511475,
+     "ref": "720",
+     "pred": "28",
+     "correct": false
+    },
+    {
+     "content": "There are 3+4= [calc: 3+4] = 7 7 oranges in the basket.\nSo Ana has 7-4= [calc: 7-4] = 3 3 more oranges than Jane.\n#### 3",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 86,
+      "completion_tokens": 46,
+      "total_tokens": 132
+     },
+     "latency": 1.678802728652954,
+     "ref": "5",
+     "pred": "3",
+     "correct": false
+    },
+    {
+     "content": "There are 110/2 =  [calc: 110/2] = 55.0 55.0 books in the bottom shelf.\nSo she needs 55+55 =  [calc: 55+55] = 110 110 books in the top shelf.\n#### 110",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 107,
+      "completion_tokens": 59,
+      "total_tokens": 166
+     },
+     "latency": 1.800645351409912,
+     "ref": "2",
+     "pred": "110",
+     "correct": false
+    },
+    {
+     "content": "There are 2+1= [calc: 2+1] = 3 3 inches of rain.\nSo there is 3+2= [calc: 3+2] = 5 5 inches of rain on Tuesday.\n#### 5",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 66,
+      "completion_tokens": 46,
+      "total_tokens": 112
+     },
+     "latency": 1.7974708080291748,
+     "ref": "5",
+     "pred": "5",
+     "correct": true
+    },
+    {
+     "content": "There are 5*3= [calc: 5*3] = 15 15 tablespoons of flour.\nThere are 3*0.25= [calc: 3*0.25] = 0.75 0.",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 80,
+      "completion_tokens": 43,
+      "total_tokens": 123
+     },
+     "latency": 1.7674510478973389,
+     "ref": "132",
+     "pred": "0",
+     "correct": false
+    },
+    {
+     "content": "She cut her hair 10+8=$ [calc: 10+8] = 18 18 in haircut.\nSo her cut and color is 18+40=$ [calc: 18+40] = 58 58.\n#### 58",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 78,
+      "completion_tokens": 49,
+      "total_tokens": 127
+     },
+     "latency": 1.7949881553649902,
+     "ref": "100",
+     "pred": "58",
+     "correct": false
+    },
+    {
+     "content": "There are 16*0.03=$ [calc: 16*0.03] = 0.48 0.",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 71,
+      "completion_tokens": 24,
+      "total_tokens": 95
+     },
+     "latency": 1.4920525550842285,
+     "ref": "12",
+     "pred": "0",
+     "correct": false
+    },
+    {
+     "content": "There are 8*2= [calc: 8*2] = 16 16 more weeks in 8.\nSo it will take her 60-16=  [calc: 60-16] = 44 44 more weeks.\n#### 44",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 76,
+      "completion_tokens": 48,
+      "total_tokens": 124
+     },
+     "latency": 1.5078978538513184,
+     "ref": "7",
+     "pred": "44",
+     "correct": false
+    },
+    {
+     "content": "There are 8 - 4 =  [calc: 8-4] = 4 4 more money.\nSo it will take him 12 - 2 =  [calc: 12-2] = 10 10 days to save the remaining amount of money.\n#### 10",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 79,
+      "completion_tokens": 54,
+      "total_tokens": 133
+     },
+     "latency": 1.6036608219146729,
+     "ref": "4",
+     "pred": "10",
+     "correct": false
+    },
+    {
+     "content": "Alice has 6+2= [calc: 6+2] = 8 8 books.\nSo Clara has 20-8= [calc: 20-8] = 12 12 more books than Alice.\n#### 12",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 68,
+      "completion_tokens": 44,
+      "total_tokens": 112
+     },
+     "latency": 1.5568344593048096,
+     "ref": "4",
+     "pred": "12",
+     "correct": false
+    },
+    {
+     "content": "He learns 4*2= [calc: 4*2] = 8 8 recipes per week\nThat means he learns 8*6= [calc: 8*6] = 48 48 recipes per week\n#### 48",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 82,
+      "completion_tokens": 45,
+      "total_tokens": 127
+     },
+     "latency": 1.7468998432159424,
+     "ref": "32",
+     "pred": "48",
+     "correct": false
+    },
+    {
+     "content": "Keegan earned 83 + 91 =  [calc: 83+91] = 174 174 dollars.\nSo, they need 200 - 174 =  [calc: 200-174] = 26 26 more dollars.\n#### 26",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 97,
+      "completion_tokens": 54,
+      "total_tokens": 151
+     },
+     "latency": 1.790773630142212,
+     "ref": "26",
+     "pred": "26",
+     "correct": true
+    },
+    {
+     "content": "He has 3*3= [calc: 3*3] = 9 9 dogs.\nHe has 2 fewer rabbits than dogs, which is 9-2= [calc: 9-2] = 7 7 rabbits.\nSo Larry has 7+1",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 113,
+      "completion_tokens": 52,
+      "total_tokens": 165
+     },
+     "latency": 1.7779088020324707,
+     "ref": "47",
+     "pred": "1",
+     "correct": false
+    },
+    {
+     "content": "She gathered 30/2= [calc: 30/2] = 15.0 15.0 of apples from the tallest trees.\nShe also gathered 15+3= [calc: 15+3] = 18 18 of apples from the shortest trees.\nSo Joanne gathered 500/500= [calc: 500/500] = 1.0 1.0 of apples from the average trees.\n#### 1",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 142,
+      "completion_tokens": 87,
+      "total_tokens": 229
+     },
+     "latency": 2.169905424118042,
+     "ref": "350",
+     "pred": "1",
+     "correct": false
+    },
+    {
+     "content": "There are 5000/7= [calc: 5000/7] = 714.2857142857143 ",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 77,
+      "completion_tokens": 26,
+      "total_tokens": 103
+     },
+     "latency": 1.9995026588439941,
+     "ref": "140000",
+     "pred": "714.2857142857143",
+     "correct": false
+    },
+    {
+     "content": "There are 4*3= [calc: 4*3] = 12 12 cakes.\nSo she bought 12+5= [calc: 12+5] = 17 17 cakes.\n#### 17",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 90,
+      "completion_tokens": 40,
+      "total_tokens": 130
+     },
+     "latency": 1.8817360401153564,
+     "ref": "76",
+     "pred": "17",
+     "correct": false
+    },
+    {
+     "content": "There are 5*10/100 =  [calc: 5*10/100] = 0.5 0.",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 68,
+      "completion_tokens": 26,
+      "total_tokens": 94
+     },
+     "latency": 1.6475574970245361,
+     "ref": "803",
+     "pred": "0",
+     "correct": false
+    },
+    {
+     "content": "There is 50 * 20/100 =  [calc: 50*20/100] = 10.0 10.0 more enrollment in the calligraphy class.\nSo the number of students enrolled this year is 50 + 10 =  [calc: 50+10] = 60 60.\n#### 60",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 69,
+      "completion_tokens": 65,
+      "total_tokens": 134
+     },
+     "latency": 1.455620288848877,
+     "ref": "60",
+     "pred": "60",
+     "correct": true
+    },
+    {
+     "content": "There are 3*10= [calc: 3*10] = 30 30 cars.\nThere are 4*30= [calc: 4*30] = 120 120 cars.\nSo the total number of cars towed is 30+120= [calc: 30+120] = 150 150 cars.\n#### 150",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 74,
+      "completion_tokens": 71,
+      "total_tokens": 145
+     },
+     "latency": 1.8673479557037354,
+     "ref": "54",
+     "pred": "150",
+     "correct": false
+    },
+    {
+     "content": "Carlos collected 27 + 5 =  [calc: 27+5] = 32 32 seashells.\nSo each person gets 32/2 =  [calc: 32/2] = 16.0 16.0 of seashells.\n#### 16",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 99,
+      "completion_tokens": 53,
+      "total_tokens": 152
+     },
+     "latency": 2.0039563179016113,
+     "ref": "20",
+     "pred": "16",
+     "correct": false
+    },
+    {
+     "content": "There are 3*3= [calc: 3*3] = 9 9 families in one phone tree.\nSo in the fourth round of calls, there are 4*9= [calc: 4*9] = 36 36 families.\n#### 36",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 80,
+      "completion_tokens": 51,
+      "total_tokens": 131
+     },
+     "latency": 2.220695972442627,
+     "ref": "81",
+     "pred": "36",
+     "correct": false
+    },
+    {
+     "content": "Toby has 60/300 * 10 =  [calc: 60/300*10] = 2.0 2.0 minutes early.\nSo, Toby is 45 - 2 =  [calc: 45-2] = 43 43 minutes early.\n#### 43",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 110,
+      "completion_tokens": 60,
+      "total_tokens": 170
+     },
+     "latency": 2.1705520153045654,
+     "ref": "20",
+     "pred": "43",
+     "correct": false
+    },
+    {
+     "content": "There are 3+2+8= [calc: 3+2+8] = 13 13 years old.\nSo the total age of the four birds is 13*4= [calc: 13*4] = 52 52.\n#### 52",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 95,
+      "completion_tokens": 50,
+      "total_tokens": 145
+     },
+     "latency": 1.964400053024292,
+     "ref": "51",
+     "pred": "52",
+     "correct": false
+    },
+    {
+     "content": "The first day was 100 + 50 =  [calc: 100+50] = 150 150 customers.\nSo she counts 150 + 50 =  [calc: 150+50] = 200 200 customers on the third day.\n#### 200",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 88,
+      "completion_tokens": 59,
+      "total_tokens": 147
+     },
+     "latency": 1.9865782260894775,
+     "ref": "250",
+     "pred": "200",
+     "correct": false
+    },
+    {
+     "content": "Joey has 214 - 225 =  [calc: 214-225] = -11 11 points.\nSo, Joey is now winning 11 + 10 =  [calc: 11+10] = 21 21 points.\n#### 21",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 77,
+      "completion_tokens": 55,
+      "total_tokens": 132
+     },
+     "latency": 2.0160796642303467,
+     "ref": "5",
+     "pred": "21",
+     "correct": false
+    },
+    {
+     "content": "She baked 2*8= [calc: 2*8] = 16 16 banana bread loaves\nShe also wrapped 16*50=$ [calc: 16*50] = 800 800 in a fundraiser\nSo her raise is 20+800=$ [calc: 20+800] = 820 820\n#### 820",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 109,
+      "completion_tokens": 74,
+      "total_tokens": 183
+     },
+     "latency": 2.141462564468384,
+     "ref": "40",
+     "pred": "820",
+     "correct": false
+    },
+    {
+     "content": "There are 25+15= [calc: 25+15] = 40 40 people.\nSo, 22-40= [calc: 22-40] = -18 18 are left.\n#### 18",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 76,
+      "completion_tokens": 41,
+      "total_tokens": 117
+     },
+     "latency": 2.0705642700195312,
+     "ref": "8",
+     "pred": "18",
+     "correct": false
+    },
+    {
+     "content": "The small pool has 4*4= [calc: 4*4] = 16 16 gallons of water.\nSo the small pool has 16*2= [calc: 16*2] = 32 32 gallons of water.\n#### 32",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 93,
+      "completion_tokens": 48,
+      "total_tokens": 141
+     },
+     "latency": 1.9890413284301758,
+     "ref": "8",
+     "pred": "32",
+     "correct": false
+    },
+    {
+     "content": "He pays 2*60=$ [calc: 2*60] = 120 120.\nSo his final is 3*120=$ [calc: 3*120] = 360 360.\n#### 360",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 58,
+      "completion_tokens": 48,
+      "total_tokens": 106
+     },
+     "latency": 1.926645278930664,
+     "ref": "360",
+     "pred": "360",
+     "correct": true
+    },
+    {
+     "content": "He gave away 40*.25=$ [calc: 40*.25] = 10.0 10.0 of the jeans.\nSo Mike has 50-10=$ [calc: 50-10] = 40 40 left over.\n#### 40",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 88,
+      "completion_tokens": 52,
+      "total_tokens": 140
+     },
+     "latency": 1.7244765758514404,
+     "ref": "20",
+     "pred": "40",
+     "correct": false
+    },
+    {
+     "content": "There were 50*4= [calc: 50*4] = 200 200 cats.\nSo there were 200 - 3/5 =  [calc: 200-3/5] = 199.4 199.",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 77,
+      "completion_tokens": 50,
+      "total_tokens": 127
+     },
+     "latency": 1.7915773391723633,
+     "ref": "12",
+     "pred": "199",
+     "correct": false
+    },
+    {
+     "content": "There are 6+2= [calc: 6+2] = 8 8 tadpoles.\nSo Finn can see 8/3",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 85,
+      "completion_tokens": 27,
+      "total_tokens": 112
+     },
+     "latency": 1.5999786853790283,
+     "ref": "15",
+     "pred": "3",
+     "correct": false
+    },
+    {
+     "content": "He earned 5*10=$ [calc: 5*10] = 50 50 in one hour.\nHe also earned 8*",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 73,
+      "completion_tokens": 27,
+      "total_tokens": 100
+     },
+     "latency": 1.4160077571868896,
+     "ref": "130",
+     "pred": "8",
+     "correct": false
+    },
+    {
+     "content": "She has 5*10=$ [calc: 5*10] = 50 50 in all.\nShe has 6*2= [calc: 6*2] = 12 12 in all.\nSo she has 65-50+12=$ [calc: 65-50+12] = 27 27 left in her budget.\n#### 27",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 142,
+      "completion_tokens": 69,
+      "total_tokens": 211
+     },
+     "latency": 1.5688574314117432,
+     "ref": "5",
+     "pred": "27",
+     "correct": false
+    },
+    {
+     "content": "He used to speak 150*2.5= [calc: 150*2.5] = 375.0 375.0 speed\nSo it would take him 375/10= [calc: 375/10] = 37.5 37.",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 93,
+      "completion_tokens": 56,
+      "total_tokens": 149
+     },
+     "latency": 1.6427364349365234,
+     "ref": "12",
+     "pred": "37",
+     "correct": false
+    },
+    {
+     "content": "There are 20/4 =  [calc: 20/4] = 5.0 5.0 of water.\nThere are 8/1 =  [calc: 8/1] = 8.0 8.0 of water.\nSo Crista needs 5 + 8 =  [calc: 5+8] = 13 13 cups of water every day.\n#### 13",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 97,
+      "completion_tokens": 78,
+      "total_tokens": 175
+     },
+     "latency": 2.0986294746398926,
+     "ref": "12",
+     "pred": "13",
+     "correct": false
+    },
+    {
+     "content": "A man eats 5*4= [calc: 5*4] = 20 20 sandwiches per day.\nAnd his wife eats 4*2= [calc: 4*2] = 8 8 sandwiches per day.\nSo in one week, this family eats 20+8= [calc: 20+8] = 28 28 sandwiches.\n#### 28",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 68,
+      "completion_tokens": 70,
+      "total_tokens": 138
+     },
+     "latency": 2.487062692642212,
+     "ref": "77",
+     "pred": "28",
+     "correct": false
+    },
+    {
+     "content": "There are 7*12=$ [calc: 7*12] = 84 84 for 2 weeks of tutoring.\nSo Alex charges 84+2=$ [calc: 84+2] = 86 86 for 2 weeks of tutoring.\n#### 86",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 55,
+      "completion_tokens": 52,
+      "total_tokens": 107
+     },
+     "latency": 2.330312967300415,
+     "ref": "168",
+     "pred": "86",
+     "correct": false
+    },
+    {
+     "content": "He makes 6*5.50=$ [calc: 6*5.50] = 33.0 33.0 of burger platters.\nHe also makes 9*11=$ [calc: 9*11] = 99 99 of burger platters.\nAnd he also makes 20*1.50=$ [calc: 20*1.50] = 30.0 30.0 of sodas.\nSo his total is 33+99+30=$ [calc: 33+99+30] = 162 162.\n#### 162",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 74,
+      "completion_tokens": 114,
+      "total_tokens": 188
+     },
+     "latency": 2.837735176086426,
+     "ref": "162",
+     "pred": "162",
+     "correct": true
+    },
+    {
+     "content": "There are 5*5= [calc: 5*5] = 25 25 boots that are five times the size of Sophie's.\nSo the average size of shoe worn by the two is 25/2= [calc: 25/2] = 12.5 12.",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 64,
+      "completion_tokens": 56,
+      "total_tokens": 120
+     },
+     "latency": 2.6374857425689697,
+     "ref": "15",
+     "pred": "12",
+     "correct": false
+    },
+    {
+     "content": "She gets 5*4=$ [calc: 5*4] = 20 20.\nShe gets 10*0.30=$ [calc: 10*0.30] = 3.0 3.0.\nShe gets 5*2=$ [calc: 5*2] = 10 10.\nSo, Carly gets 20-3=$ [calc: 20-3] = 17 17.\n#### 17",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 90,
+      "completion_tokens": 86,
+      "total_tokens": 176
+     },
+     "latency": 2.769333839416504,
+     "ref": "17",
+     "pred": "17",
+     "correct": true
+    },
+    {
+     "content": "She used 3*5= [calc: 3*5] = 15 15 brownies.\nSo Carly made 15+2= [calc: 15+2] = 17 17 cupcakes.\n#### 17",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 83,
+      "completion_tokens": 43,
+      "total_tokens": 126
+     },
+     "latency": 2.699737787246704,
+     "ref": "3",
+     "pred": "17",
+     "correct": false
+    },
+    {
+     "content": "Kassidy has 60*3/4=$ [calc: 60*3/4] = 45.0 45.0.\nSo each person has 120+45=$ [calc: 120+45] = 165 165.\n#### 165",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 90,
+      "completion_tokens": 57,
+      "total_tokens": 147
+     },
+     "latency": 2.1956112384796143,
+     "ref": "120",
+     "pred": "165",
+     "correct": false
+    },
+    {
+     "content": "The second tree has a height of 5+6= [calc: 5+6] = 11 11 feet.\nSo the tallest tree is 11*2= [calc: 11*2] = 22 22 feet.\n#### 22",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 91,
+      "completion_tokens": 47,
+      "total_tokens": 138
+     },
+     "latency": 2.1095950603485107,
+     "ref": "34",
+     "pred": "22",
+     "correct": false
+    },
+    {
+     "content": "He collects 3*2= [calc: 3*2] = 6 6 peaches per minute.\nSo he collects 6*3= [calc: 6*3] = 18 18 peaches.\n#### 18",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 55,
+      "completion_tokens": 42,
+      "total_tokens": 97
+     },
+     "latency": 1.7285394668579102,
+     "ref": "360",
+     "pred": "18",
+     "correct": false
+    },
+    {
+     "content": "She has 5*5=$ [calc: 5*5] = 25 25 in one blouse\nShe has 2*2= [calc: 2*2] = 4 4 in one pants\nShe has 1*1=$ [calc: 1*1] = 1 1 in one pair of pants\nSo she spends 25+4+1=$ [calc: 25+4+1] = 30 30 in all\n#### 30",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 106,
+      "completion_tokens": 93,
+      "total_tokens": 199
+     },
+     "latency": 2.1563665866851807,
+     "ref": "235",
+     "pred": "30",
+     "correct": false
+    },
+    {
+     "content": "There are 6*3000= [calc: 6*3000] = 18000 18000.\nSo the population of Chile is 46*18000= [calc: 46*18000] = 828000 828000.\n#### 8280",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 89,
+      "completion_tokens": 56,
+      "total_tokens": 145
+     },
+     "latency": 2.1337616443634033,
+     "ref": "120000",
+     "pred": "8280",
+     "correct": false
+    },
+    {
+     "content": "There are 6*2= [calc: 6*2] = 12 12 reservations per night\nSo they make 12*5=$ [calc: 12*5] = 60 60 a week\n#### 60",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 77,
+      "completion_tokens": 44,
+      "total_tokens": 121
+     },
+     "latency": 2.1065680980682373,
+     "ref": "180",
+     "pred": "60",
+     "correct": false
+    },
+    {
+     "content": "There are 9*2= [calc: 9*2] = 18 18 books in Joseph.\nSo Joseph has 18-2= [calc: 18-2] = 16 16 books.\n#### 16",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 62,
+      "completion_tokens": 42,
+      "total_tokens": 104
+     },
+     "latency": 2.115288734436035,
+     "ref": "16",
+     "pred": "16",
+     "correct": true
+    },
+    {
+     "content": "There are 60*2= [calc: 60*2] = 120 120 inches of floor.\nSo the roof is 120/3= [calc: 120/3] = 40.0 40.0 high.\n#### 40",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 84,
+      "completion_tokens": 51,
+      "total_tokens": 135
+     },
+     "latency": 1.741267442703247,
+     "ref": "240",
+     "pred": "40",
+     "correct": false
+    },
+    {
+     "content": "She has 300*3/4=$ [calc: 300*3/4] = 225.0 225.0 per year.\nSo after 3 years, she has 300+225=$ [calc: 300+225] = 525 525.\n#### 525",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 68,
+      "completion_tokens": 66,
+      "total_tokens": 134
+     },
+     "latency": 1.8405532836914062,
+     "ref": "975",
+     "pred": "525",
+     "correct": false
+    },
+    {
+     "content": "There are 50 * 2 + 10 =  [calc: 50*2+10] = 110 110 Spanish books in English.\nSo there are 50 - 110 =  [calc: 50-110] = -60 60 Spanish books in Spanish.\n#### 60",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 68,
+      "completion_tokens": 60,
+      "total_tokens": 128
+     },
+     "latency": 1.9892797470092773,
+     "ref": "20",
+     "pred": "60",
+     "correct": false
+    },
+    {
+     "content": "There are 5*4= [calc: 5*4] = 20 20 people in 4 hours.\nSo 5*20= [calc: 5*20] = 100 100 jellyfish would be created in 4 hours.\n#### 100",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 60,
+      "completion_tokens": 52,
+      "total_tokens": 112
+     },
+     "latency": 2.0586390495300293,
+     "ref": "72000",
+     "pred": "100",
+     "correct": false
+    },
+    {
+     "content": "There are 8*4= [calc: 8*4] = 32 32 candles in the house.\nThere are 4*5= [calc: 4*5] = 20 20 medium candles.\nSo Brianna's family is using 20+6= [calc: 20+6] = 26 26 candles and flashlights.\n#### 26",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 143,
+      "completion_tokens": 70,
+      "total_tokens": 213
+     },
+     "latency": 2.2378644943237305,
+     "ref": "56",
+     "pred": "26",
+     "correct": false
+    },
+    {
+     "content": "There are 16/2 =  [calc: 16/2] = 8.0 8.0 of minutes in each call.\nSo a 36/8 =  [calc: 36/8] = 4.5 4.5 of minutes is the price of a call.\n#### 4",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 78,
+      "completion_tokens": 60,
+      "total_tokens": 138
+     },
+     "latency": 2.1713762283325195,
+     "ref": "8",
+     "pred": "4",
+     "correct": false
+    },
+    {
+     "content": "There are 4*5= [calc: 4*5] = 20 20 minutes.\nSo Bernadette should leave 20 - 5= [calc: 20-5] = 15 15 earlier than Wayne.\n#### 15",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 142,
+      "completion_tokens": 46,
+      "total_tokens": 188
+     },
+     "latency": 2.0435149669647217,
+     "ref": "17",
+     "pred": "15",
+     "correct": false
+    }
+   ]
+  },
+  "humaneval": {
+   "summary": {
+    "n": 82,
+    "correct": 4,
+    "accuracy": 0.04878048780487805,
+    "errors": 0,
+    "truncated": 0,
+    "avg_completion_tokens": 70.84146341463415,
+    "avg_latency_s": 2.518374725085933
+   },
+   "records": [
+    {
+     "content": "```python\nfrom typing import List\n\n\ndef has_close_elements(numbers: List[float], threshold: float) -> bool:\n    \"\"\" Check if in given list of numbers, are any two numbers closer to each other than\n    given threshold.\n    \"\"\"",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 173,
+      "completion_tokens": 59,
+      "total_tokens": 232
+     },
+     "latency": 0.541163444519043,
+     "task_id": "HumanEval/0",
+     "correct": false,
+     "err": "  File \"/tmp/tmpx4bt166n.py\", line 1\n    ```python\n    ^\nSyntaxError: invalid syntax\n"
+    },
+    {
+     "content": "```python\nfrom typing import List\n\n\ndef separate_paren_groups(paren_string: str) -> List[str]:\n    \"\"\" Input to this function is a string containing multiple groups of nested parentheses. Your goal is to\n    separate those group into separate strings and return the list of those.\n    Separate groups are balanced (each open brace is properly closed) and not nested within each other\n   ",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 173,
+      "completion_tokens": 88,
+      "total_tokens": 261
+     },
+     "latency": 2.195650815963745,
+     "task_id": "HumanEval/1",
+     "correct": false,
+     "err": "  File \"/tmp/tmpj42l6cqp.py\", line 6\n    \"\"\" Input to this function is a string containing multiple groups of nested parentheses. Your goal is to\n    ^\nSyntaxError: unterminated triple-quoted string literal (detected at line 32)\n"
+    },
+    {
+     "content": "def truncate_number(number: float) -> float:\n    \"\"\" Given a positive floating point number, it can be decomposed into\n    and integer part (largest integer smaller than given number) and decimals\n    (leftover part always smaller than 1).\n\n    Return the decimal part of the number.\n    >>> truncate_number(3.5)\n    0.5\n    \"\"\"\n",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 127,
+      "completion_tokens": 95,
+      "total_tokens": 222
+     },
+     "latency": 1.3897631168365479,
+     "task_id": "HumanEval/2",
+     "correct": false,
+     "err": "Traceback (most recent call last):\n  File \"/tmp/tmp1esevz1b.py\", line 26, in <module>\n    check(truncate_number)\n  File \"/tmp/tmp1esevz1b.py\", line 21, in check\n    assert candidate(3.5) == 0.5\n           ^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+     "content": "from typing import List\n\n\ndef below_zero(operations: List[int]) -> bool:\n    \"\"\" You're given a list of deposit and withdrawal operations on a bank account that starts with zero balance. Your task is to detect if at any point the balance of account fallls below zero, and at that point function should return True.\"\"\"\n    return any(balance >= 0 for balance in set(operations) for _ in range(len(operations))))\n",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 164,
+      "completion_tokens": 107,
+      "total_tokens": 271
+     },
+     "latency": 3.1486318111419678,
+     "task_id": "HumanEval/3",
+     "correct": false,
+     "err": "  File \"/tmp/tmpdszmzy3s.py\", line 6\n    return any(balance >= 0 for balance in set(operations) for _ in range(len(operations))))\n                                                                                           ^\nSyntaxError: unmatched ')'\n"
+    },
+    {
+     "content": "```python\nfrom typing import List\n\n\ndef mean_absolute_deviation(numbers: List[float]) -> float:\n    \"\"\" For a given list of input numbers, calculate Mean Absolute Deviation\n    around the mean of this dataset.\n    Mean Absolute Deviation is the average absolute difference between each\n    element and a centerpoint (mean in this case):\n    MAD = average | x - x_mean |\n    >>> mean_absolute_deviation([1.0, 2.0, 3.0, 4.0])\n    1.0\n    \"\"\"\n\n\ndef mean_absolute_deviation(numbers: List[float]) -> float:\n    \"\"\" For a given list of input numbers, calculate Mean Absolute Deviation\n    around the mean o",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 165,
+      "completion_tokens": 295,
+      "total_tokens": 460
+     },
+     "latency": 5.220869541168213,
+     "task_id": "HumanEval/4",
+     "correct": false,
+     "err": "  File \"/tmp/tmpungppdam.py\", line 1\n    ```python\n    ^\nSyntaxError: invalid syntax\n"
+    },
+    {
+     "content": "from typing import List\n\n\ndef intersperse(numbers: List[int], delimeter: int) -> List[int]:\n    \"\"\" Insert a number 'delimeter' between every two consecutive elements of input list `numbers`\n    >>> intersperse([], 4)\n    []\n    >>> intersperse([1, 2, 3], 4)\n    [1, 4, 2, 4, 3]\n    \"\"\"\n    return numbers, delimiter + [numbers[i] for i in range(len(numbers))])\n",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 139,
+      "completion_tokens": 134,
+      "total_tokens": 273
+     },
+     "latency": 5.577197074890137,
+     "task_id": "HumanEval/5",
+     "correct": false,
+     "err": "  File \"/tmp/tmpq_r3gnf6.py\", line 11\n    return numbers, delimiter + [numbers[i] for i in range(len(numbers))])\n                                                                         ^\nSyntaxError: unmatched ')'\n"
+    },
+    {
+     "content": "```python\nfrom typing import List\n\n\ndef parse_nested_parens(paren_string: str) -> List[int]:\n    \"\"\" Input to this function is a string represented multiple groups for nested parentheses separated by spaces.\n    For each of the group, output the deepest level of nesting of parentheses.\n    E.g. (()()) has maximum two levels of nesting while ((())) has three.\n\n    >>> parse_nested_parens('(()()) ((())) () ((())) () ((())()())')\n    [2, 3, 1, 3]\n    \"\"\"\n\n\ndef main():\n    paren_string = input(\"Enter a string: \")\n\n    parsed_string = parse_nested_parens(paren_string)\n\n    print(\"The complete funct",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 170,
+      "completion_tokens": 199,
+      "total_tokens": 369
+     },
+     "latency": 6.555251836776733,
+     "task_id": "HumanEval/6",
+     "correct": false,
+     "err": "  File \"/tmp/tmp7qkw78om.py\", line 1\n    ```python\n    ^\nSyntaxError: invalid syntax\n"
+    },
+    {
+     "content": "from typing import List\n\n\ndef filter_by_substring(strings: List[str], substring: str) -> List[str]:\n    \"\"\" Filter an input list of strings only for ones that contain given substring\n    >>> filter_by_substring([], 'a')\n    []\n    >>> filter_by_substring(['abc', 'bacd', 'cde', 'array'], 'a')\n    ['abc', 'bacd', 'array']\n    \"\"\"\n    return [s for s in strings if substring in s]\n",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 155,
+      "completion_tokens": 138,
+      "total_tokens": 293
+     },
+     "latency": 6.8165504932403564,
+     "task_id": "HumanEval/7",
+     "correct": true,
+     "err": ""
+    },
+    {
+     "content": "```python\nfrom typing import List, Tuple\n\n\ndef sum_product(numbers: List[int]) -> Tuple[int, int]:\n    \"\"\" For a given list of integers, return a tuple consisting of a sum and a product of all the integers in a list.\",\n    Empty sum should be equal to 0 and empty product should be equal to 1.\n    >>> sum_product([])\n    (0, 1)\n    >>> sum_product([1, 2, 3, 4])\n    (10, 24)\n    \"\"\"\n",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 161,
+      "completion_tokens": 130,
+      "total_tokens": 291
+     },
+     "latency": 5.4541943073272705,
+     "task_id": "HumanEval/8",
+     "correct": false,
+     "err": "  File \"/tmp/tmpez66kqzz.py\", line 1\n    ```python\n    ^\nSyntaxError: invalid syntax\n"
+    },
+    {
+     "content": "```python\nfrom typing import List, Tuple\n\n\ndef rolling_max(numbers: List[int]) -> List[int]:\n    \"\"\" From a given list of integers, generate a list of rolling maximum element found until given moment in the sequence.\n    \"\"\"\n\n\ndef main():\n    numbers = [1, 2, 3, 2, 3, 4, 2]\n    print(f\"Rolling maximum {numbers}: {main()}\")\n\n\nif __",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 143,
+      "completion_tokens": 109,
+      "total_tokens": 252
+     },
+     "latency": 5.300169944763184,
+     "task_id": "HumanEval/9",
+     "correct": false,
+     "err": "  File \"/tmp/tmp84mcfthd.py\", line 1\n    ```python\n    ^\nSyntaxError: invalid syntax\n"
+    },
+    {
+     "content": "```python\ndef is_palindrome(string: str) -> bool:\n    \"\"\" Test if given string is a palindrome \"\"\"\n    return string == string[::-1]\n\n\ndef make_palindrome(string: str) -> str:\n    \"\"\" Find the shortest palindrome that begins with a supplied string \"\"\"\n    algorithms.s",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 211,
+      "completion_tokens": 79,
+      "total_tokens": 290
+     },
+     "latency": 4.214659690856934,
+     "task_id": "HumanEval/10",
+     "correct": false,
+     "err": "  File \"/tmp/tmpi0cmjhas.py\", line 1\n    ```python\n    ^\nSyntaxError: invalid syntax\n"
+    },
+    {
+     "content": "```python\nfrom typing import List\n\n\ndef string_xor(a: str, b: str) -> str:\n    \"\"\" Input are two strings a and b consisting only of 1s and 0s.\n    Perform binary XOR on these inputs and return result also as a string.\"",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 119,
+      "completion_tokens": 62,
+      "total_tokens": 181
+     },
+     "latency": 3.553347110748291,
+     "task_id": "HumanEval/11",
+     "correct": false,
+     "err": "  File \"/tmp/tmp3dqjiop3.py\", line 6\n    \"\"\" Input are two strings a and b consisting only of 1s and 0s.\n    ^\nSyntaxError: unterminated triple-quoted string literal (detected at line 23)\n"
+    },
+    {
+     "content": "from typing import List, Optional\n\n\ndef longest(strings: List[str]) -> Optional[str]:\n    \"\"\" Out of list of strings, return the longest one. Return the first one in case of multiple.\"\"\"\n    if not strings:\n        return None\n    return max(strings)\n",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 157,
+      "completion_tokens": 71,
+      "total_tokens": 228
+     },
+     "latency": 2.947394847869873,
+     "task_id": "HumanEval/12",
+     "correct": false,
+     "err": "Traceback (most recent call last):\n  File \"/tmp/tmpjh49x19n.py\", line 25, in <module>\n    check(longest)\n  File \"/tmp/tmpjh49x19n.py\", line 21, in check\n    assert candidate(['x', 'y', 'z']) == 'x'\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+     "content": "def greatest_common_divisor(a: int, b: int) -> int:\n    \"\"\" Return a greatest common divisor of two integers a and b\n    >>> greatest_common_divisor(3, 5)\n    1\n    >>> greatest_common_divisor(25, 15)\n    5\n    \"\"\"\n    return int(b, a) if b == 0 else int(b, b)\n",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 116,
+      "completion_tokens": 102,
+      "total_tokens": 218
+     },
+     "latency": 2.793776273727417,
+     "task_id": "HumanEval/13",
+     "correct": false,
+     "err": "py\", line 20, in check\n    assert candidate(3, 7) == 1\n           ^^^^^^^^^^^^^^^\n  File \"/tmp/tmp44qr8e7c.py\", line 8, in greatest_common_divisor\n    return int(b, a) if b == 0 else int(b, b)\n                                    ^^^^^^^^^\nTypeError: int() can't convert non-string with explicit base\n"
+    },
+    {
+     "content": "from typing import List\n\n\ndef all_prefixes(string: str) -> List[str]:\n    \"\"\" Return list of all prefixes from shortest to longest of the input string\n    >>> all_prefixes('abc')\n    ['a', 'ab', 'abc']\n    \"\"\"\n\ndef get_prefixes(string: str) -> str:\n    \"\"\" Return list of all prefixes from shortest to longest of the input string\n    \"\"\"\n    return [prefixes(string) for prefix in get_prefixes(string)]\n",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 108,
+      "completion_tokens": 137,
+      "total_tokens": 245
+     },
+     "latency": 3.3113343715667725,
+     "task_id": "HumanEval/14",
+     "correct": false,
+     "err": "Traceback (most recent call last):\n  File \"/tmp/tmpmexzuly7.py\", line 30, in <module>\n    check(all_prefixes)\n  File \"/tmp/tmpmexzuly7.py\", line 25, in check\n    assert candidate('') == []\n           ^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+     "content": "```python\ndef string_sequence(n: int) -> str:\n    \"\"\" Return a string containing space-delimited numbers starting from 0 upto n inclusive.\"\"\"\n    return ' '.join([str(i) for i in range(n)]).strip())\n\n# Example usage:\nprint(string_sequence(0))",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 112,
+      "completion_tokens": 76,
+      "total_tokens": 188
+     },
+     "latency": 3.420454502105713,
+     "task_id": "HumanEval/15",
+     "correct": false,
+     "err": "  File \"/tmp/tmp2g5mc92n.py\", line 4\n    return ' '.join([str(i) for i in range(n)]).strip())\n                                                       ^\nSyntaxError: unmatched ')'\n"
+    },
+    {
+     "content": "def count_distinct_characters(string: str) -> int:\n    \"\"\" Given a string, find out how many distinct characters (regardless of case) does it consist of\n    >>> count_distinct_characters('xyzXYZ')\n    3\n    >>> count_distinct_characters('Jerry')\n    4\n    \"\"\"\n    return sum(string.lower() for _ in range(len(string)))\n",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 122,
+      "completion_tokens": 108,
+      "total_tokens": 230
+     },
+     "latency": 3.736396074295044,
+     "task_id": "HumanEval/16",
+     "correct": false,
+     "err": "andidate('abcde') == 5\n           ^^^^^^^^^^^^^^^^^^\n  File \"/tmp/tmpnm0t_ley.py\", line 8, in count_distinct_characters\n    return sum(string.lower() for _ in range(len(string)))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nTypeError: unsupported operand type(s) for +: 'int' and 'str'\n"
+    },
+    {
+     "content": "```",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 221,
+      "completion_tokens": 1,
+      "total_tokens": 222
+     },
+     "latency": 2.869076728820801,
+     "task_id": "HumanEval/17",
+     "correct": false,
+     "err": "  File \"/tmp/tmpz6zua1e7.py\", line 17\n    ```\n    ^\nSyntaxError: invalid syntax\n"
+    },
+    {
+     "content": "def how_many_times(string: str, substring: str) -> int:\n    \"\"\" Find how many times a given substring can be found in the original string. Count overlaping cases.\"\"\"\n    return string.strip() * substring.strip() + string.strip() * substring.strip()\n",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 141,
+      "completion_tokens": 76,
+      "total_tokens": 217
+     },
+     "latency": 2.320493698120117,
+     "task_id": "HumanEval/18",
+     "correct": false,
+     "err": " candidate('', 'x') == 0\n           ^^^^^^^^^^^^^^^^^^\n  File \"/tmp/tmp2u92_x8s.py\", line 3, in how_many_times\n    return string.strip() * substring.strip() + string.strip() * substring.strip()\n           ~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~\nTypeError: can't multiply sequence by non-int of type 'str'\n"
+    },
+    {
+     "content": "from typing import List\n\n\ndef sort_numbers(numbers: str) -> str:\n    \"\"\" Input is a space-delimited string of numberals from 'zero' to 'nine'.\n    Valid choices are 'zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'.\n    Return the string with numbers sorted from smallest to largest\n    >>> sort_numbers('three one five')\n    'one three five'\n    \"\"\"\n",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 152,
+      "completion_tokens": 120,
+      "total_tokens": 272
+     },
+     "latency": 2.752260684967041,
+     "task_id": "HumanEval/19",
+     "correct": false,
+     "err": "Traceback (most recent call last):\n  File \"/tmp/tmpp_42ld9m.py\", line 29, in <module>\n    check(sort_numbers)\n  File \"/tmp/tmpp_42ld9m.py\", line 22, in check\n    assert candidate('') == ''\n           ^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+     "content": "from typing import List, Tuple\n\n\ndef find_closest_elements(numbers: List[float]) -> Tuple[float, float]:\n    \"\"\" From a supplied list of numbers (of length at least two) select and return two that are the closest to each\n    other and return them in order (smaller number, larger number).\n    >>> find_closest_elements([1.0, 2.0, 3.0, 4.0, 5.0, 2.0])\n    (2.0, 2.0)\n    \"\"\"\n\n\ndef find_closest_elements(numbers: List[float]) -> Tuple[float, float]:\n    \"\"\" From a supplied list of numbers (of length at least two) select and return two that are the closest to each\n    other and return them in order (",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 223,
+      "completion_tokens": 247,
+      "total_tokens": 470
+     },
+     "latency": 4.019378662109375,
+     "task_id": "HumanEval/20",
+     "correct": false,
+     "err": "recent call last):\n  File \"/tmp/tmpc0eyothr.py\", line 41, in <module>\n    check(find_closest_elements)\n  File \"/tmp/tmpc0eyothr.py\", line 33, in check\n    assert candidate([1.0, 2.0, 3.9, 4.0, 5.0, 2.2]) == (3.9, 4.0)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+     "content": "```python\nfrom typing import List\n\n\ndef rescale_to_unit(numbers: List[float]) -> List[float]:\n    \"\"\" Given list of numbers (of at least two elements), apply a linear transform to that list,\n    such that the smallest number will become 0 and the largest will become 1\n    >>> rescale_to_unit([1.0, 2.0, 3.0, 4.0, 5.0])\n    [0.0, 0.25, 0.5, 0.75, 1.0]\n    \"\"\"\n\n\ndef main():\n    numbers = [1.0, 2.0, 3.0, 4.0, 5.0]\n    rescale_to_unit(numbers)\n    print",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 167,
+      "completion_tokens": 180,
+      "total_tokens": 347
+     },
+     "latency": 5.610323667526245,
+     "task_id": "HumanEval/21",
+     "correct": false,
+     "err": "  File \"/tmp/tmpduhiyv8o.py\", line 1\n    ```python\n    ^\nSyntaxError: invalid syntax\n"
+    },
+    {
+     "content": "from typing import List, Any\n\n\ndef filter_integers(values: List[Any]) -> List[int]:\n    \"\"\" Filter given list of any python values only for integers\n    >>> filter_integers(['a', 3.14, 5])\n    [5]\n    >>> filter_integers([1, 2, 3, 'abc', {}, []])\n    [1, 2, 3]\n    \"\"\"\n    return [value for value in values if value not in (\"\", \"\").join(map(str, filter_integers)))]\n",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 141,
+      "completion_tokens": 140,
+      "total_tokens": 281
+     },
+     "latency": 6.1680519580841064,
+     "task_id": "HumanEval/22",
+     "correct": false,
+     "err": "\"/tmp/tmplpzfz1oy.py\", line 11\n    return [value for value in values if value not in (\"\", \"\").join(map(str, filter_integers)))]\n                                                                                              ^\nSyntaxError: closing parenthesis ')' does not match opening parenthesis '['\n"
+    },
+    {
+     "content": "def strlen(string: str) -> int:\n    \"\"\"Returns the length of given string\n    >>> strlen('')\n    0\n    >>> strlen('abc')\n    3\n    \"\"\"\n    return len(string)\n",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 86,
+      "completion_tokens": 63,
+      "total_tokens": 149
+     },
+     "latency": 5.641665935516357,
+     "task_id": "HumanEval/23",
+     "correct": true,
+     "err": ""
+    },
+    {
+     "content": "def largest_divisor(n: int) -> int:\n    \"\"\" For a given number n, find the largest number that divides n evenly, smaller than n.\"\"\"\n    return n - largest_divisor(n)\n",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 90,
+      "completion_tokens": 52,
+      "total_tokens": 142
+     },
+     "latency": 3.8713107109069824,
+     "task_id": "HumanEval/24",
+     "correct": false,
+     "err": "largest_divisor\n    return n - largest_divisor(n)\n               ^^^^^^^^^^^^^^^^^^\n  File \"/tmp/tmpscs9yf6s.py\", line 3, in largest_divisor\n    return n - largest_divisor(n)\n               ^^^^^^^^^^^^^^^^^^\n  [Previous line repeated 995 more times]\nRecursionError: maximum recursion depth exceeded\n"
+    },
+    {
+     "content": "```python\nfrom typing import List\n\n\ndef factorize(n: int) -> List[int]:\n    \"\"\" Return list of prime factors of given integer in the order from smallest to largest.\"\"\"\n    factors = []\n    for factor in range(1, n + 1):\n        factors.append(factfact",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 164,
+      "completion_tokens": 69,
+      "total_tokens": 233
+     },
+     "latency": 2.8873519897460938,
+     "task_id": "HumanEval/25",
+     "correct": false,
+     "err": "  File \"/tmp/tmpggsex2bv.py\", line 1\n    ```python\n    ^\nSyntaxError: invalid syntax\n"
+    },
+    {
+     "content": "```python\nfrom typing import List\n\n\ndef remove_duplicates(numbers: List[int]) -> List[int]:\n    \"\"\" From a list of integers, remove all elements that occur more than once.\n    Keep order of elements left the same as in the input.\n    >>> remove_duplicates([1, 2, 3, 2, 4])\n    [1, 3, 4]\n    \"\"\"\n\n\ndef main():\n    numbers = list(map(str, input(\"Enter a list of integers separated by spaces: \").split()))\n    remove_duplicates(numbers)\n\n\nif __",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 130,
+      "completion_tokens": 142,
+      "total_tokens": 272
+     },
+     "latency": 2.893303871154785,
+     "task_id": "HumanEval/26",
+     "correct": false,
+     "err": "  File \"/tmp/tmp1x2dvh5q.py\", line 1\n    ```python\n    ^\nSyntaxError: invalid syntax\n"
+    },
+    {
+     "content": "def flip_case(string: str) -> str:\n    \"\"\" For a given string, flip lowercase characters to uppercase and uppercase to lowercase.\n    >>> flip_case('Hello')\n    'hELLO'\n    \"\"\"\n\n",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 94,
+      "completion_tokens": 62,
+      "total_tokens": 156
+     },
+     "latency": 2.884164810180664,
+     "task_id": "HumanEval/27",
+     "correct": false,
+     "err": "Traceback (most recent call last):\n  File \"/tmp/tmpbi_3hda7.py\", line 23, in <module>\n    check(flip_case)\n  File \"/tmp/tmpbi_3hda7.py\", line 18, in check\n    assert candidate('') == ''\n           ^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+     "content": "from typing import List\n\n\ndef concatenate(strings: List[str]) -> str:\n    \"\"\" Concatenate list of strings into a single string\n    >>> concatenate([])\n    ''\n    >>> concatenate(['a', 'b', 'c'])\n    'abc'\n    \"\"\"\n    return [s + ''.join(strings) for s in strings]\n",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 112,
+      "completion_tokens": 99,
+      "total_tokens": 211
+     },
+     "latency": 3.2893993854522705,
+     "task_id": "HumanEval/28",
+     "correct": false,
+     "err": "Traceback (most recent call last):\n  File \"/tmp/tmp_4s71tio.py\", line 28, in <module>\n    check(concatenate)\n  File \"/tmp/tmp_4s71tio.py\", line 23, in check\n    assert candidate([]) == ''\n           ^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+     "content": "from typing import List\n\n\ndef filter_by_prefix(strings: List[str], prefix: str) -> List[str]:\n    \"\"\" Filter an input list of strings only for ones that start with a given prefix.\n    >>> filter_by_prefix([], 'a')\n    []\n    >>> filter_by_prefix(['abc', 'bcd', 'cde', 'array'], 'a')\n    ['abc', 'array']\n    \"\"\"\n    return [s for s in strings if s.startswith(prefix)]\n",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 152,
+      "completion_tokens": 141,
+      "total_tokens": 293
+     },
+     "latency": 3.9619905948638916,
+     "task_id": "HumanEval/29",
+     "correct": true,
+     "err": ""
+    },
+    {
+     "content": "```python",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 160,
+      "completion_tokens": 2,
+      "total_tokens": 162
+     },
+     "latency": 2.7471847534179688,
+     "task_id": "HumanEval/30",
+     "correct": false,
+     "err": "  File \"/tmp/tmpmpork1h8.py\", line 10\n    ```python\n    ^\nSyntaxError: invalid syntax\n"
+    },
+    {
+     "content": "```python",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 158,
+      "completion_tokens": 2,
+      "total_tokens": 160
+     },
+     "latency": 2.206879138946533,
+     "task_id": "HumanEval/31",
+     "correct": false,
+     "err": "  File \"/tmp/tmp0ey1fkl1.py\", line 20\n    ```python\n    ^\nSyntaxError: invalid syntax\n"
+    },
+    {
+     "content": "```",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 333,
+      "completion_tokens": 1,
+      "total_tokens": 334
+     },
+     "latency": 1.3412902355194092,
+     "task_id": "HumanEval/32",
+     "correct": false,
+     "err": "  File \"/tmp/tmpkdtu0np2.py\", line 24\n    ```\n    ^\nSyntaxError: invalid syntax\n"
+    },
+    {
+     "content": "```python",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 198,
+      "completion_tokens": 2,
+      "total_tokens": 200
+     },
+     "latency": 0.08344411849975586,
+     "task_id": "HumanEval/33",
+     "correct": false,
+     "err": "  File \"/tmp/tmpnu614q1q.py\", line 12\n    ```python\n    ^\nSyntaxError: invalid syntax\n"
+    },
+    {
+     "content": "```python\ndef unique(l: list):\n    \"\"\"Return sorted unique elements in a list\n    >>> unique([5, 3, 5, 2, 3, 3, 9, 0, 123])\n    [0, 2, 3, 5, 9, 123]\n    \"\"\"\n    return sorted(l)[:-1]",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 113,
+      "completion_tokens": 90,
+      "total_tokens": 203
+     },
+     "latency": 0.8699288368225098,
+     "task_id": "HumanEval/34",
+     "correct": false,
+     "err": "  File \"/tmp/tmpggrrfo5l.py\", line 1\n    ```python\n    ^\nSyntaxError: invalid syntax\n"
+    },
+    {
+     "content": "```python",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 131,
+      "completion_tokens": 2,
+      "total_tokens": 133
+     },
+     "latency": 0.8708584308624268,
+     "task_id": "HumanEval/35",
+     "correct": false,
+     "err": "  File \"/tmp/tmpvm60e5_k.py\", line 10\n    ```python\n    ^\nSyntaxError: invalid syntax\n"
+    },
+    {
+     "content": "```python\ndef fizz_buzz(n: int):\n    \"\"\"Return the number of times the digit 7 appears in integers less than n which are divisible by 11 or 13.\"\"\"\"\n    return n % 11 == 0 and n % ",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 125,
+      "completion_tokens": 58,
+      "total_tokens": 183
+     },
+     "latency": 1.3808574676513672,
+     "task_id": "HumanEval/36",
+     "correct": false,
+     "err": " line 3\n    \"\"\"Return the number of times the digit 7 appears in integers less than n which are divisible by 11 or 13.\"\"\"\"\n                                                                                                                 ^\nSyntaxError: unterminated string literal (detected at line 3)\n"
+    },
+    {
+     "content": "def sort_even(l: list):\n    \"\"\"This function takes a list l and returns a list l' such that\n    l' is identical to l in the odd indicies, while its values at the even indicies are equal, but sorted.\n    >>> sort_even([1, 2, 3])\n    [1, 2, 3]\n    >>> sort_even([5, 6, 3, 4])\n    [3, 6, 5, 4]\n    \"\"\"\n    return sorted(l, reverse=True)\n",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 166,
+      "completion_tokens": 132,
+      "total_tokens": 298
+     },
+     "latency": 2.5164976119995117,
+     "task_id": "HumanEval/37",
+     "correct": false,
+     "err": "Traceback (most recent call last):\n  File \"/tmp/tmptsz7v4sc.py\", line 24, in <module>\n    check(sort_even)\n  File \"/tmp/tmptsz7v4sc.py\", line 18, in check\n    assert tuple(candidate([1, 2, 3])) == tuple([1, 2, 3])\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+     "content": "def encode_cyclic(s: str):\n    \"\"\"\n    returns encoded string by cycling groups of three characters.\n    \"\"\"\n    return [s[(3 * i):min((3 * i + 3), len(s))] for i in range((len(s) + 2) // 3)]\n",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 215,
+      "completion_tokens": 75,
+      "total_tokens": 290
+     },
+     "latency": 2.375908136367798,
+     "task_id": "HumanEval/38",
+     "correct": false,
+     "err": "Traceback (most recent call last):\n  File \"/tmp/tmpb8uv6di9.py\", line 42, in <module>\n    check(decode_cyclic)\n  File \"/tmp/tmpb8uv6di9.py\", line 38, in check\n    assert candidate(encoded_str) == str\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+     "content": "```python",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 146,
+      "completion_tokens": 2,
+      "total_tokens": 148
+     },
+     "latency": 2.376885414123535,
+     "task_id": "HumanEval/39",
+     "correct": false,
+     "err": "  File \"/tmp/tmp7vsapl5p.py\", line 17\n    ```python\n    ^\nSyntaxError: invalid syntax\n"
+    },
+    {
+     "content": "```python",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 237,
+      "completion_tokens": 2,
+      "total_tokens": 239
+     },
+     "latency": 1.874786376953125,
+     "task_id": "HumanEval/40",
+     "correct": false,
+     "err": "  File \"/tmp/tmpdmi7u2jc.py\", line 20\n    ```python\n    ^\nSyntaxError: invalid syntax\n"
+    },
+    {
+     "content": "```python",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 189,
+      "completion_tokens": 2,
+      "total_tokens": 191
+     },
+     "latency": 0.7392206192016602,
+     "task_id": "HumanEval/41",
+     "correct": false,
+     "err": "  File \"/tmp/tmp51wpsfq0.py\", line 15\n    ```python\n    ^\nSyntaxError: invalid syntax\n"
+    },
+    {
+     "content": "```python",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 158,
+      "completion_tokens": 2,
+      "total_tokens": 160
+     },
+     "latency": 0.09555244445800781,
+     "task_id": "HumanEval/42",
+     "correct": false,
+     "err": "  File \"/tmp/tmp8x7c3dbf.py\", line 10\n    ```python\n    ^\nSyntaxError: invalid syntax\n"
+    },
+    {
+     "content": "def pairs_sum_to_zero(l):\n    \"\"\"\n    pairs_sum_to_zero takes a list of integers as an input.\n    it returns True if there are two distinct elements in the list that sum to zero, and False otherwise.\n    >>> pairs_sum_to_zero([1, 3, 5, 0])\n    False\n    >>> pairs_sum_to_zero([1, 3, -2, 1])\n    False\n    \"\"\"\n    return sum(l) == 0\n",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 228,
+      "completion_tokens": 126,
+      "total_tokens": 354
+     },
+     "latency": 1.1810662746429443,
+     "task_id": "HumanEval/43",
+     "correct": false,
+     "err": "Traceback (most recent call last):\n  File \"/tmp/tmpz6sw_0gk.py\", line 32, in <module>\n    check(pairs_sum_to_zero)\n  File \"/tmp/tmpz6sw_0gk.py\", line 22, in check\n    assert candidate([2, 4, -5, 3, 5, 7]) == True\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+     "content": "def change_base(x: int, base: int):\n    \"\"\"Change numerical base of input number x to base.\n    return string representation after the conversion.\"\"\"\n    base_num = int(base)\n    return base_num + 2 * base_num\n",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 132,
+      "completion_tokens": 61,
+      "total_tokens": 193
+     },
+     "latency": 1.7006831169128418,
+     "task_id": "HumanEval/44",
+     "correct": false,
+     "err": "Traceback (most recent call last):\n  File \"/tmp/tmpbeg0jo32.py\", line 25, in <module>\n    check(change_base)\n  File \"/tmp/tmpbeg0jo32.py\", line 14, in check\n    assert candidate(8, 3) == \"22\"\n           ^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+     "content": "```python\ndef triangle_area(a, h):\n    \"\"\"Given length of a side and high return area for a triangle.\"\"\"\n    return a * h ** ",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 82,
+      "completion_tokens": 36,
+      "total_tokens": 118
+     },
+     "latency": 2.0044567584991455,
+     "task_id": "HumanEval/45",
+     "correct": false,
+     "err": "  File \"/tmp/tmp33t1q55m.py\", line 1\n    ```python\n    ^\nSyntaxError: invalid syntax\n"
+    },
+    {
+     "content": "def fib4(n: int):\n    \"\"\"The Fib4 number sequence is a sequence similar to the Fibbonacci sequnece that's defined as follows:\n    fib4(0) -> 0\n    fib4(1) -> 0\n    fib4(2) -> 2\n    fib4(3) -> 0\n    fib4(n) -> fib4(n-1) + fib4(n-2) + fib4(n-3) + fib4(n-4)) \n    return fib4(n)[-1] + fib4(n-2) + fib4(n-3) + fib4(n-4)])\n",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 210,
+      "completion_tokens": 146,
+      "total_tokens": 356
+     },
+     "latency": 3.2829740047454834,
+     "task_id": "HumanEval/46",
+     "correct": false,
+     "err": "  File \"/tmp/tmpzhg3p50x.py\", line 2\n    \"\"\"The Fib4 number sequence is a sequence similar to the Fibbonacci sequnece that's defined as follows:\n    ^\nSyntaxError: unterminated triple-quoted string literal (detected at line 24)\n"
+    },
+    {
+     "content": "def median(l: list):\n    \"\"\"Return median of elements in the list l.\n    >>> median([3, 1, 2, 4, 5])\n    3\n    >>> median([-10, 4, 6, 1000, 10, 20])\n    15.0\n    \"\"\"\n    return sorted(l)[len(l) // 2]\n",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 117,
+      "completion_tokens": 100,
+      "total_tokens": 217
+     },
+     "latency": 3.0843193531036377,
+     "task_id": "HumanEval/47",
+     "correct": false,
+     "err": "Traceback (most recent call last):\n  File \"/tmp/tmp71mjugdr.py\", line 25, in <module>\n    check(median)\n  File \"/tmp/tmp71mjugdr.py\", line 18, in check\n    assert candidate([-10, 4, 6, 1000, 10, 20]) == 8.0\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+     "content": "def is_palindrome(text: str):\n    \"\"\"\n    Checks if given string is a palindrome\n    >>> is_palindrome('')\n    True\n    >>> is_palindrome('aba')\n    True\n    >>> is_palindrome('aaaaa')\n    True\n    >>> is_palindrome('zbcd')\n    False\n    \"\"\"\n    return text == text[::-1]\n",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 130,
+      "completion_tokens": 108,
+      "total_tokens": 238
+     },
+     "latency": 3.5038254261016846,
+     "task_id": "HumanEval/48",
+     "correct": true,
+     "err": ""
+    },
+    {
+     "content": "```python",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 151,
+      "completion_tokens": 2,
+      "total_tokens": 153
+     },
+     "latency": 3.200453758239746,
+     "task_id": "HumanEval/49",
+     "correct": false,
+     "err": "  File \"/tmp/tmphc0eyoib.py\", line 16\n    ```python\n    ^\nSyntaxError: invalid syntax\n"
+    },
+    {
+     "content": "```python",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 147,
+      "completion_tokens": 2,
+      "total_tokens": 149
+     },
+     "latency": 1.9208714962005615,
+     "task_id": "HumanEval/50",
+     "correct": false,
+     "err": "  File \"/tmp/tmp4it_pme7.py\", line 14\n    ```python\n    ^\nSyntaxError: invalid syntax\n"
+    },
+    {
+     "content": "```python",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 192,
+      "completion_tokens": 2,
+      "total_tokens": 194
+     },
+     "latency": 1.0417687892913818,
+     "task_id": "HumanEval/51",
+     "correct": false,
+     "err": "  File \"/tmp/tmpf00h99z5.py\", line 19\n    ```python\n    ^\nSyntaxError: invalid syntax\n"
+    },
+    {
+     "content": "def below_threshold(l: list, t: int):\n    \"\"\"Return True if all numbers in the list l are below threshold t.\n    >>> below_threshold([1, 2, 4, 10], 100)\n    True\n    >>> below_threshold([1, 20, 4, 10], 5)\n    False\n    \"\"\"\n    return l == t\n",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 125,
+      "completion_tokens": 99,
+      "total_tokens": 224
+     },
+     "latency": 0.9765572547912598,
+     "task_id": "HumanEval/52",
+     "correct": false,
+     "err": "Traceback (most recent call last):\n  File \"/tmp/tmp9de2aw8m.py\", line 26, in <module>\n    check(below_threshold)\n  File \"/tmp/tmp9de2aw8m.py\", line 17, in check\n    assert candidate([1, 2, 4, 10], 100)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+     "content": "def add(x: int, y: int):\n    \"\"\"Add two numbers x and y\n    >>> add(2, 3)\n    5\n    >>> add(5, 7)\n    12\n    \"\"\"\n",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 88,
+      "completion_tokens": 56,
+      "total_tokens": 144
+     },
+     "latency": 1.4677422046661377,
+     "task_id": "HumanEval/53",
+     "correct": false,
+     "err": "Traceback (most recent call last):\n  File \"/tmp/tmpvjmfexzp.py\", line 30, in <module>\n    check(add)\n  File \"/tmp/tmpvjmfexzp.py\", line 18, in check\n    assert candidate(0, 1) == 1\n           ^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+     "content": "```python",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 223,
+      "completion_tokens": 2,
+      "total_tokens": 225
+     },
+     "latency": 1.4681270122528076,
+     "task_id": "HumanEval/54",
+     "correct": false,
+     "err": "  File \"/tmp/tmpp3yfu3w3.py\", line 19\n    ```python\n    ^\nSyntaxError: invalid syntax\n"
+    },
+    {
+     "content": "```python\ndef fib(n: int):\n    \"\"\"Return n-th Fibonacci number.\"\"\"\"\n    if n <= 0:\n        return \"Error: Input should be a positive integer.\"\n    elif n == 1:\n        return 0\n    elif n == 8:\n        return 1\n    else:\n        fib_sequ",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 92,
+      "completion_tokens": 77,
+      "total_tokens": 169
+     },
+     "latency": 2.129302501678467,
+     "task_id": "HumanEval/55",
+     "correct": false,
+     "err": "  File \"/tmp/tmpj2d1krch.py\", line 3\n    \"\"\"Return n-th Fibonacci number.\"\"\"\"\n                                       ^\nSyntaxError: unterminated string literal (detected at line 3)\n"
+    },
+    {
+     "content": "```python\ndef correct_bracketing(brackets: str):\n    \"\"\" brackets is a string of \"<\" and \">\".\n    return True if every opening bracket has a corresponding closing bracket.\n\n    >>> correct_bracketing(\"<\")\n    False\n    >>> correct_bracketing(\"<>\")\n    True\n    >>> correct_bracketing(\"<<><>>\")\n    True\n    >>> correct_bracketing(\"><<>\")\n    False\n    \"\"\"\n",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 143,
+      "completion_tokens": 110,
+      "total_tokens": 253
+     },
+     "latency": 2.209848165512085,
+     "task_id": "HumanEval/56",
+     "correct": false,
+     "err": "  File \"/tmp/tmpgl27m7v5.py\", line 1\n    ```python\n    ^\nSyntaxError: invalid syntax\n"
+    },
+    {
+     "content": "def monotonic(l: list):\n    \"\"\"Return True is list elements are monotonically increasing or decreasing.\"\"\"\"\n    return [i + l for i, l in enumerate(l) if l >= 0]\n",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 135,
+      "completion_tokens": 56,
+      "total_tokens": 191
+     },
+     "latency": 2.2022669315338135,
+     "task_id": "HumanEval/57",
+     "correct": false,
+     "err": "  File \"/tmp/tmpazw3mxa7.py\", line 2\n    \"\"\"Return True is list elements are monotonically increasing or decreasing.\"\"\"\"\n                                                                                  ^\nSyntaxError: unterminated string literal (detected at line 2)\n"
+    },
+    {
+     "content": "```python",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 159,
+      "completion_tokens": 2,
+      "total_tokens": 161
+     },
+     "latency": 2.205601930618286,
+     "task_id": "HumanEval/58",
+     "correct": false,
+     "err": "  File \"/tmp/tmpixixspig.py\", line 11\n    ```python\n    ^\nSyntaxError: invalid syntax\n"
+    },
+    {
+     "content": "```python\ndef largest_prime_factor(n: int):\n    \"\"\"Return the largest prime factor of n. Assume n > 1 and is not a prime.\"\"\"\"\n    if n < 1:\n        return None\n    else:\n        return max(n, key=fact",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 113,
+      "completion_tokens": 63,
+      "total_tokens": 176
+     },
+     "latency": 2.0826735496520996,
+     "task_id": "HumanEval/59",
+     "correct": false,
+     "err": "  File \"/tmp/tmpy4lzz7zw.py\", line 3\n    \"\"\"Return the largest prime factor of n. Assume n > 1 and is not a prime.\"\"\"\"\n                                                                                ^\nSyntaxError: unterminated string literal (detected at line 3)\n"
+    },
+    {
+     "content": "def sum_to_n(n: int):\n    \"\"\"sum_to_n is a function that sums numbers from 1 to n.\"\"\"\n    return sum(n)\n",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 141,
+      "completion_tokens": 39,
+      "total_tokens": 180
+     },
+     "latency": 1.455617904663086,
+     "task_id": "HumanEval/60",
+     "correct": false,
+     "err": ":\n  File \"/tmp/tmppp5h8y82.py\", line 20, in <module>\n    check(sum_to_n)\n  File \"/tmp/tmppp5h8y82.py\", line 12, in check\n    assert candidate(1) == 1\n           ^^^^^^^^^^^^\n  File \"/tmp/tmppp5h8y82.py\", line 3, in sum_to_n\n    return sum(n)\n           ^^^^^^\nTypeError: 'int' object is not iterable\n"
+    },
+    {
+     "content": "```python\ndef correct_bracketing(brackets: str):\n    \"\"\" brackets is a string of \"(\" and \")\".\n    return True if every opening bracket has a corresponding closing bracket.\n\n    >>> correct_bracketing(\"(\")\n    False\n    >>> correct_bracketing(\"()\")\n    True\n    >>> correct_bracketing(\"(()())\")\n    True\n    >>> correct_bracketing(\"(()())\")\n    False\n    \"\"\"\n",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 141,
+      "completion_tokens": 109,
+      "total_tokens": 250
+     },
+     "latency": 1.9301509857177734,
+     "task_id": "HumanEval/61",
+     "correct": false,
+     "err": "  File \"/tmp/tmpbiuox8no.py\", line 1\n    ```python\n    ^\nSyntaxError: invalid syntax\n"
+    },
+    {
+     "content": "```python",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 152,
+      "completion_tokens": 2,
+      "total_tokens": 154
+     },
+     "latency": 1.9302959442138672,
+     "task_id": "HumanEval/62",
+     "correct": false,
+     "err": "  File \"/tmp/tmpfqeeju1m.py\", line 12\n    ```python\n    ^\nSyntaxError: invalid syntax\n"
+    },
+    {
+     "content": "```python\ndef fibfib(n: int):\n    \"\"\"The FibFib number sequence is a sequence similar to the Fibbonacci sequnece that's defined as follows:\n    fibfib(0) == 0\n    fibfib(1) == 0\n    fibfib(2) == 1\n    fibfib(n) == fibfib(n-1) + fibfib(n-2) + fibfib(n-3))",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 199,
+      "completion_tokens": 103,
+      "total_tokens": 302
+     },
+     "latency": 2.268012285232544,
+     "task_id": "HumanEval/63",
+     "correct": false,
+     "err": "  File \"/tmp/tmp2khfj3c2.py\", line 3\n    \"\"\"The FibFib number sequence is a sequence similar to the Fibbonacci sequnece that's defined as follows:\n    ^\nSyntaxError: unterminated triple-quoted string literal (detected at line 25)\n"
+    },
+    {
+     "content": "```python",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 175,
+      "completion_tokens": 2,
+      "total_tokens": 177
+     },
+     "latency": 1.9389686584472656,
+     "task_id": "HumanEval/64",
+     "correct": false,
+     "err": "  File \"/tmp/tmp6loer8ms.py\", line 18\n    ```python\n    ^\nSyntaxError: invalid syntax\n"
+    },
+    {
+     "content": "def circular_shift(x, shift):\n    \"\"\"Circular shift the digits of the integer x, shift the digits right by shift.\"\"\"\n    return str(x)[::-1] + str(x)[::-1] + str(abs(x)))\n",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 123,
+      "completion_tokens": 61,
+      "total_tokens": 184
+     },
+     "latency": 1.5108599662780762,
+     "task_id": "HumanEval/65",
+     "correct": false,
+     "err": "  File \"/tmp/tmpcbzf8vdg.py\", line 3\n    return str(x)[::-1] + str(x)[::-1] + str(abs(x)))\n                                                    ^\nSyntaxError: unmatched ')'\n"
+    },
+    {
+     "content": "```python",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 161,
+      "completion_tokens": 2,
+      "total_tokens": 163
+     },
+     "latency": 1.5108826160430908,
+     "task_id": "HumanEval/66",
+     "correct": false,
+     "err": "  File \"/tmp/tmp5fdywf_f.py\", line 15\n    ```python\n    ^\nSyntaxError: invalid syntax\n"
+    },
+    {
+     "content": "```",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 260,
+      "completion_tokens": 1,
+      "total_tokens": 261
+     },
+     "latency": 0.6236462593078613,
+     "task_id": "HumanEval/67",
+     "correct": false,
+     "err": "  File \"/tmp/tmp8vg1hp10.py\", line 15\n    ```\n    ^\nSyntaxError: invalid syntax\n"
+    },
+    {
+     "content": "def pluck(arr):\n    \"\"\"\n    \"Given an array representing a branch of a tree that has non-negative integer nodes\n    your task is to pluck one of the nodes and return it.\n    The plucked node should be the node with the smallest even value.\n    If multiple nodes with the same smallest even value are found return the node that has\n    smallest index.\n    \"\"\"\n\n    # Remove duplicates and sort the array\n    arr.sort()\n    return arr[0]\n",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 363,
+      "completion_tokens": 110,
+      "total_tokens": 473
+     },
+     "latency": 1.566159963607788,
+     "task_id": "HumanEval/68",
+     "correct": false,
+     "err": "Traceback (most recent call last):\n  File \"/tmp/tmp4lqa6_q0.py\", line 33, in <module>\n    check(pluck)\n  File \"/tmp/tmp4lqa6_q0.py\", line 19, in check\n    assert candidate([4,2,3]) == [2, 1], \"Error\"\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: Error\n"
+    },
+    {
+     "content": "```python",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 205,
+      "completion_tokens": 2,
+      "total_tokens": 207
+     },
+     "latency": 1.0334622859954834,
+     "task_id": "HumanEval/69",
+     "correct": false,
+     "err": "  File \"/tmp/tmp02y8wylc.py\", line 13\n    ```python\n    ^\nSyntaxError: invalid syntax\n"
+    },
+    {
+     "content": "```python",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 172,
+      "completion_tokens": 2,
+      "total_tokens": 174
+     },
+     "latency": 1.0334255695343018,
+     "task_id": "HumanEval/70",
+     "correct": false,
+     "err": "  File \"/tmp/tmpm4o7yquo.py\", line 13\n    ```python\n    ^\nSyntaxError: invalid syntax\n"
+    },
+    {
+     "content": "```python",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 157,
+      "completion_tokens": 2,
+      "total_tokens": 159
+     },
+     "latency": 1.043341875076294,
+     "task_id": "HumanEval/71",
+     "correct": false,
+     "err": "  File \"/tmp/tmpm1b34i9e.py\", line 13\n    ```python\n    ^\nSyntaxError: invalid syntax\n"
+    },
+    {
+     "content": "```python",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 277,
+      "completion_tokens": 2,
+      "total_tokens": 279
+     },
+     "latency": 0.1015632152557373,
+     "task_id": "HumanEval/72",
+     "correct": false,
+     "err": "  File \"/tmp/tmprtfwccsc.py\", line 20\n    ```python\n    ^\nSyntaxError: invalid syntax\n"
+    },
+    {
+     "content": "```python",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 198,
+      "completion_tokens": 2,
+      "total_tokens": 200
+     },
+     "latency": 0.10294747352600098,
+     "task_id": "HumanEval/73",
+     "correct": false,
+     "err": "  File \"/tmp/tmp6uweppyn.py\", line 13\n    ```python\n    ^\nSyntaxError: invalid syntax\n"
+    },
+    {
+     "content": "```",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 285,
+      "completion_tokens": 1,
+      "total_tokens": 286
+     },
+     "latency": 0.09387087821960449,
+     "task_id": "HumanEval/74",
+     "correct": false,
+     "err": "  File \"/tmp/tmps5r6bvhd.py\", line 16\n    ```\n    ^\nSyntaxError: invalid syntax\n"
+    },
+    {
+     "content": "```python\ndef is_multiply_prime(a):\n    \"\"\"Write a function that returns true if the given number is the multiplication of 3 prime numbers\n    and false otherwise.\":\n    return is_multiply_prime(a) or not",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 122,
+      "completion_tokens": 56,
+      "total_tokens": 178
+     },
+     "latency": 0.5805575847625732,
+     "task_id": "HumanEval/75",
+     "correct": false,
+     "err": "  File \"/tmp/tmph1y1dgjn.py\", line 3\n    \"\"\"Write a function that returns true if the given number is the multiplication of 3 prime numbers\n    ^\nSyntaxError: unterminated triple-quoted string literal (detected at line 22)\n"
+    },
+    {
+     "content": "```python\ndef is_simple_power(x, n):\n    \"\"\"Your task is to write a function that returns true if a number x is a simple power of n and false in other cases.\",\n    x is a simple power of n if n**int",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 202,
+      "completion_tokens": 56,
+      "total_tokens": 258
+     },
+     "latency": 1.0634779930114746,
+     "task_id": "HumanEval/76",
+     "correct": false,
+     "err": "  File \"/tmp/tmpn0voacg7.py\", line 3\n    \"\"\"Your task is to write a function that returns true if a number x is a simple power of n and false in other cases.\",\n    ^\nSyntaxError: unterminated triple-quoted string literal (detected at line 24)\n"
+    },
+    {
+     "content": "```python",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 158,
+      "completion_tokens": 2,
+      "total_tokens": 160
+     },
+     "latency": 1.0620625019073486,
+     "task_id": "HumanEval/77",
+     "correct": false,
+     "err": "  File \"/tmp/tmpr0k9lqen.py\", line 15\n    ```python\n    ^\nSyntaxError: invalid syntax\n"
+    },
+    {
+     "content": "```python\ndef hex_key(num):\n    \"\"\"You have been tasked to write a function that receives \n    a hexadecimal number as a string and counts the number of hexadecimal \n    digits that are primes (prime number, or a prime, is a natural number \n    greater than 1 that is not a product of two smaller natural numbers).\n    Hexadecimal digits are 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, A, B, C, D, E, F.\n    Prime numbers are 2, 3, 5, 7, 11, 13, 17,...\n    So you have to determine a number of the following digits: 2, 3, 5, 7, \n    B (=decimal 11), D (=decimal 13).\n    Note: you may assume the input is always co",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 361,
+      "completion_tokens": 254,
+      "total_tokens": 615
+     },
+     "latency": 3.315753221511841,
+     "task_id": "HumanEval/78",
+     "correct": false,
+     "err": "  File \"/tmp/tmpjppuw_ei.py\", line 3\n    \"\"\"You have been tasked to write a function that receives \n    ^\nSyntaxError: unterminated triple-quoted string literal (detected at line 33)\n"
+    },
+    {
+     "content": "```python\ndef decimal_to_binary(decimal):\n    \"\"\"You will be given a number in decimal form and your task is to convert it to binary format. The function should return a string, with each character representing a binary number.\"\"\"\n    return f\"{decimal_to_binary(decimal)} {decimal_to_binary(decimal)}\"}\n\ndef main():\n    decimal_to_binary(15)\n    print",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 183,
+      "completion_tokens": 102,
+      "total_tokens": 285
+     },
+     "latency": 3.720979690551758,
+     "task_id": "HumanEval/79",
+     "correct": false,
+     "err": "  File \"/tmp/tmpupl3v_dh.py\", line 4\n    return f\"{decimal_to_binary(decimal)} {decimal_to_binary(decimal)}\"}\n                                                                       ^\nSyntaxError: unmatched '}'\n"
+    },
+    {
+     "content": "def is_happy(s):\n    \"\"\"You are given a string s.\n    Your task is to check if the string is happy or not.\n    A string is happy if its length is at least 3 and every 3 consecutive letters are distinct.\",\n    for i, c in enumerate(s):\n        if c == 3 and is_happy(i):\n            return True\n        else:\n            return False\n    return True\n",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 171,
+      "completion_tokens": 97,
+      "total_tokens": 268
+     },
+     "latency": 4.070443391799927,
+     "task_id": "HumanEval/80",
+     "correct": false,
+     "err": "  File \"/tmp/tmp8_qq7np8.py\", line 2\n    \"\"\"You are given a string s.\n    ^\nSyntaxError: unterminated triple-quoted string literal (detected at line 26)\n"
+    },
+    {
+     "content": "```",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 333,
+      "completion_tokens": 1,
+      "total_tokens": 334
+     },
+     "latency": 4.06283712387085,
+     "task_id": "HumanEval/81",
+     "correct": false,
+     "err": "  File \"/tmp/tmpv_a8mxym.py\", line 27\n    ```\n    ^\nSyntaxError: invalid syntax\n"
+    }
+   ]
+  },
+  "ceval": {
+   "summary": {
+    "n": 150,
+    "correct": 3,
+    "accuracy": 0.02,
+    "errors": 0,
+    "truncated": 53,
+    "avg_completion_tokens": 244.73333333333332,
+    "avg_latency_s": 8.660735198656718,
+    "subjects": 50
+   },
+   "records": [
+    {
+     "content": "����������\n������������������������������������\n������������������������������������\n������������������������������������\n������������������������������������\n������������������������������������\n����",
+     "tool_calls": null,
+     "finish": "length",
+     "usage": {
+      "prompt_tokens": 371,
+      "completion_tokens": 512,
+      "total_tokens": 883
+     },
+     "latency": 4.547435283660889,
+     "subject": "accountant",
+     "ref": "D",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "A. 1.5",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 386,
+      "completion_tokens": 6,
+      "total_tokens": 392
+     },
+     "latency": 4.6124162673950195,
+     "subject": "accountant",
+     "ref": "B",
+     "pred": "A",
+     "correct": false
+    },
+    {
+     "content": "�����������������������������的���������",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 271,
+      "completion_tokens": 39,
+      "total_tokens": 310
+     },
+     "latency": 4.972877264022827,
+     "subject": "accountant",
+     "ref": "C",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "^2\\right),x\\in\\left[-\\dfrac{1}{2},\\dfrac{1}{2}\\right)$\nD. $\\ln\\left(1-x-2x^2\\right),x\\in\\left[-\\dfrac{1}{2},\\dfrac{1}{2}\\right)$\n�����������������������������������������������������������������������",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 315,
+      "completion_tokens": 304,
+      "total_tokens": 619
+     },
+     "latency": 7.714954137802124,
+     "subject": "advanced_mathematics",
+     "ref": "D",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "�����������������������������������������������������������������������",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 244,
+      "completion_tokens": 71,
+      "total_tokens": 315
+     },
+     "latency": 3.8215577602386475,
+     "subject": "advanced_mathematics",
+     "ref": "C",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "������������$\\lim_{x\\rightarrow0}\\frac{\\tan2x^2-x^2}{\\sin x^2+3x^2}=$____\nA. $\\frac{1}{2}$\nB. $\\frac{1}{4}$\nC. $\\frac{1}{8}$\nD. $\\frac{3}{5}$",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 171,
+      "completion_tokens": 87,
+      "total_tokens": 258
+     },
+     "latency": 4.532606363296509,
+     "subject": "advanced_mathematics",
+     "ref": "B",
+     "pred": "D",
+     "correct": false
+    },
+    {
+     "content": "�����������������������������������������������������������������������<������>",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 159,
+      "completion_tokens": 79,
+      "total_tokens": 238
+     },
+     "latency": 4.8697288036346436,
+     "subject": "art_studies",
+     "ref": "D",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "��������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������",
+     "tool_calls": null,
+     "finish": "length",
+     "usage": {
+      "prompt_tokens": 148,
+      "completion_tokens": 512,
+      "total_tokens": 660
+     },
+     "latency": 6.629062175750732,
+     "subject": "art_studies",
+     "ref": "D",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "������、��������������____��的�����。\nA. ����������������\nB. �������������\nC. ��������������\nD. �������������",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 187,
+      "completion_tokens": 103,
+      "total_tokens": 290
+     },
+     "latency": 6.8935651779174805,
+     "subject": "art_studies",
+     "ref": "A",
+     "pred": "D",
+     "correct": false
+    },
+    {
+     "content": "�������____\n��������������������������的�������������____\n��������������������������的�������������____\n��������������������������的�������������____\n��������������������������的�������������____\n��������",
+     "tool_calls": null,
+     "finish": "length",
+     "usage": {
+      "prompt_tokens": 196,
+      "completion_tokens": 512,
+      "total_tokens": 708
+     },
+     "latency": 10.661766290664673,
+     "subject": "basic_medicine",
+     "ref": "B",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "�����������������������������������������������������������������������<������>",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 139,
+      "completion_tokens": 79,
+      "total_tokens": 218
+     },
+     "latency": 10.666841268539429,
+     "subject": "basic_medicine",
+     "ref": "D",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "��������������的��������������____\n�����������������������的��������������____\n�����������������������的��������������____\n�����������������������的��������������____\n�����������������������的�������������",
+     "tool_calls": null,
+     "finish": "length",
+     "usage": {
+      "prompt_tokens": 223,
+      "completion_tokens": 512,
+      "total_tokens": 735
+     },
+     "latency": 10.702697038650513,
+     "subject": "basic_medicine",
+     "ref": "A",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "����������������������������������������������������16����������������������������������8����。�������������������������������的��������������������2011���12��31������������������������的���������������。",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 440,
+      "completion_tokens": 247,
+      "total_tokens": 687
+     },
+     "latency": 11.988567113876343,
+     "subject": "business_administration",
+     "ref": "B",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "��������������������������的����������������������������������的����������������������������������的����������������������������������的����������������������������������的���������������������������������",
+     "tool_calls": null,
+     "finish": "length",
+     "usage": {
+      "prompt_tokens": 216,
+      "completion_tokens": 512,
+      "total_tokens": 728
+     },
+     "latency": 11.971118450164795,
+     "subject": "business_administration",
+     "ref": "C",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "�����������������������������������������������������������������������<������>",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 195,
+      "completion_tokens": 79,
+      "total_tokens": 274
+     },
+     "latency": 11.985133409500122,
+     "subject": "business_administration",
+     "ref": "B",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "������������������������������������������������������������",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 177,
+      "completion_tokens": 60,
+      "total_tokens": 237
+     },
+     "latency": 7.99224591255188,
+     "subject": "chinese_language_and_literature",
+     "ref": "C",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "�����������������������������������������������������������������������",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 233,
+      "completion_tokens": 71,
+      "total_tokens": 304
+     },
+     "latency": 6.424635887145996,
+     "subject": "chinese_language_and_literature",
+     "ref": "A",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "���������",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 222,
+      "completion_tokens": 9,
+      "total_tokens": 231
+     },
+     "latency": 1.990407943725586,
+     "subject": "chinese_language_and_literature",
+     "ref": "C",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "A. 102\nB. 98\nC. 104\nD. 108\n\n�����������������������������������������������������������������������<������>",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 256,
+      "completion_tokens": 102,
+      "total_tokens": 358
+     },
+     "latency": 2.1909000873565674,
+     "subject": "civil_servant",
+     "ref": "D",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "�����������������������������的�������������������������������������的�������������������������������������的�������������������������������������的�������������������������������������的������������������",
+     "tool_calls": null,
+     "finish": "length",
+     "usage": {
+      "prompt_tokens": 631,
+      "completion_tokens": 512,
+      "total_tokens": 1143
+     },
+     "latency": 6.185912609100342,
+     "subject": "civil_servant",
+     "ref": "C",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "���������",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 692,
+      "completion_tokens": 9,
+      "total_tokens": 701
+     },
+     "latency": 5.639030456542969,
+     "subject": "civil_servant",
+     "ref": "B",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "����____\n�����������������������的�����������____\n�����������������������的�����������____\n�����������������������的�����������____\n�����������������������的�����������____\n�����������������������的�������",
+     "tool_calls": null,
+     "finish": "length",
+     "usage": {
+      "prompt_tokens": 165,
+      "completion_tokens": 512,
+      "total_tokens": 677
+     },
+     "latency": 10.026875257492065,
+     "subject": "clinical_medicine",
+     "ref": "C",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "������������\n������������\n������������\n������������\n������������\n������������\n������������\n������������\n������������\n������������\n������������\n������������\n������������\n������������\n������������\n�����",
+     "tool_calls": null,
+     "finish": "length",
+     "usage": {
+      "prompt_tokens": 398,
+      "completion_tokens": 512,
+      "total_tokens": 910
+     },
+     "latency": 13.655269145965576,
+     "subject": "clinical_medicine",
+     "ref": "A",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "������\n������������������的���������\n������������������的���������\n������������������的���������\n������������������的���������\n������������������的���������\n������������������的���������\n������������������的",
+     "tool_calls": null,
+     "finish": "length",
+     "usage": {
+      "prompt_tokens": 171,
+      "completion_tokens": 512,
+      "total_tokens": 683
+     },
+     "latency": 13.608096837997437,
+     "subject": "clinical_medicine",
+     "ref": "C",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "���2p������������的����������������������������������\n������������������������\n������������������������\n������������������������\n\n�����������������������������������������������������������������������",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 220,
+      "completion_tokens": 218,
+      "total_tokens": 438
+     },
+     "latency": 15.42667269706726,
+     "subject": "college_chemistry",
+     "ref": "C",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "������������������������、HCI、HAc���$NH_4^+$����������������的��������____\nA. $NH_4^+<HAc<HCl<NH_4^+$\nB. $HAc<HCl<NH_4^+$\nC. $NH_4^+<HCl<NH_4^+$\nD. $HAc<NH_4^+<HCl$",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 211,
+      "completion_tokens": 136,
+      "total_tokens": 347
+     },
+     "latency": 12.153028011322021,
+     "subject": "college_chemistry",
+     "ref": "A",
+     "pred": "D",
+     "correct": false
+    },
+    {
+     "content": "��������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������",
+     "tool_calls": null,
+     "finish": "length",
+     "usage": {
+      "prompt_tokens": 249,
+      "completion_tokens": 512,
+      "total_tokens": 761
+     },
+     "latency": 12.203056812286377,
+     "subject": "college_chemistry",
+     "ref": "D",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "������������������������的������\n����������������������������的������\n����������������������������的������\n����������������������������的������\n����������������������������的������\n������������������������",
+     "tool_calls": null,
+     "finish": "length",
+     "usage": {
+      "prompt_tokens": 239,
+      "completion_tokens": 512,
+      "total_tokens": 751
+     },
+     "latency": 12.224012613296509,
+     "subject": "college_economics",
+     "ref": "A",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "�����������������������������������������������������������������������",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 157,
+      "completion_tokens": 71,
+      "total_tokens": 228
+     },
+     "latency": 10.954896211624146,
+     "subject": "college_economics",
+     "ref": "B",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "�����������������\n��������������的�����������������\n��������������的�����������������\n��������������的�����������������\n��������������的�����������������\n��������������的�����������������\n��������������的��",
+     "tool_calls": null,
+     "finish": "length",
+     "usage": {
+      "prompt_tokens": 251,
+      "completion_tokens": 512,
+      "total_tokens": 763
+     },
+     "latency": 14.317332983016968,
+     "subject": "college_economics",
+     "ref": "C",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "A. 2���\nB. 3���\nC. 4���\nD. 5���",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 211,
+      "completion_tokens": 31,
+      "total_tokens": 242
+     },
+     "latency": 10.00257134437561,
+     "subject": "college_physics",
+     "ref": "A",
+     "pred": "D",
+     "correct": false
+    },
+    {
+     "content": "��������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������",
+     "tool_calls": null,
+     "finish": "length",
+     "usage": {
+      "prompt_tokens": 234,
+      "completion_tokens": 512,
+      "total_tokens": 746
+     },
+     "latency": 9.998349666595459,
+     "subject": "college_physics",
+     "ref": "D",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "��������������������的����������\n������������的��������������������的。������������的�����������������������������的����������������。",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 330,
+      "completion_tokens": 127,
+      "total_tokens": 457
+     },
+     "latency": 10.512672424316406,
+     "subject": "college_physics",
+     "ref": "C",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "�����������������������������������������������������������������������",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 174,
+      "completion_tokens": 71,
+      "total_tokens": 245
+     },
+     "latency": 6.584879636764526,
+     "subject": "college_programming",
+     "ref": "B",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "���������������������������������������������������������\n���������������������������������������������������������\n���������������������������������������������������������",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 187,
+      "completion_tokens": 173,
+      "total_tokens": 360
+     },
+     "latency": 7.855639934539795,
+     "subject": "college_programming",
+     "ref": "D",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "���������������的������\n������������������的������\n������������������的������\n������������������的������\n������������������的������\n������������������的������\n������������������的������\n������������������的��",
+     "tool_calls": null,
+     "finish": "length",
+     "usage": {
+      "prompt_tokens": 273,
+      "completion_tokens": 512,
+      "total_tokens": 785
+     },
+     "latency": 7.849952936172485,
+     "subject": "college_programming",
+     "ref": "A",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "D. ������������������的������������������������������������������\nC. ������������������的�������������������、���������的\n\n�����������������������������������������������������������������������",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 361,
+      "completion_tokens": 189,
+      "total_tokens": 550
+     },
+     "latency": 8.363178968429565,
+     "subject": "computer_architecture",
+     "ref": "B",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "DMA)\n���������������������(DMA)\n���������������������(DMA)\n���������������������(DMA)\n���������������������(DMA)\n������������������������������(DMA)\n������������������������������(DMA)\n���������������",
+     "tool_calls": null,
+     "finish": "length",
+     "usage": {
+      "prompt_tokens": 222,
+      "completion_tokens": 512,
+      "total_tokens": 734
+     },
+     "latency": 12.280444383621216,
+     "subject": "computer_architecture",
+     "ref": "C",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "�����������������32���������������������1MB。��������������������的���������������____。",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 208,
+      "completion_tokens": 80,
+      "total_tokens": 288
+     },
+     "latency": 11.45879054069519,
+     "subject": "computer_architecture",
+     "ref": "C",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "�����������������������������������������������������������������������<������>",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 218,
+      "completion_tokens": 79,
+      "total_tokens": 297
+     },
+     "latency": 7.654734134674072,
+     "subject": "computer_network",
+     "ref": "C",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "������������的������������������。",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 252,
+      "completion_tokens": 32,
+      "total_tokens": 284
+     },
+     "latency": 6.2789740562438965,
+     "subject": "computer_network",
+     "ref": "D",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "�����������������������������������������������������������������������<������>",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 170,
+      "completion_tokens": 79,
+      "total_tokens": 249
+     },
+     "latency": 2.438303232192993,
+     "subject": "computer_network",
+     "ref": "C",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "��������������������������������������������������������������������<������>",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 264,
+      "completion_tokens": 76,
+      "total_tokens": 340
+     },
+     "latency": 2.399421453475952,
+     "subject": "discrete_mathematics",
+     "ref": "D",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "A. 8\nB. 7\nC. 6\nD. 5\n\n�����������������������������������������������������������������������",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 205,
+      "completion_tokens": 91,
+      "total_tokens": 296
+     },
+     "latency": 2.502885341644287,
+     "subject": "discrete_mathematics",
+     "ref": "A",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "��������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������",
+     "tool_calls": null,
+     "finish": "length",
+     "usage": {
+      "prompt_tokens": 150,
+      "completion_tokens": 512,
+      "total_tokens": 662
+     },
+     "latency": 6.799969911575317,
+     "subject": "discrete_mathematics",
+     "ref": "C",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "�����������������������������������������������������������������������<������>",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 188,
+      "completion_tokens": 79,
+      "total_tokens": 267
+     },
+     "latency": 6.789930820465088,
+     "subject": "education_science",
+     "ref": "A",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "������������������的���������������的������������������������的��������的��������。",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 192,
+      "completion_tokens": 78,
+      "total_tokens": 270
+     },
+     "latency": 6.790932655334473,
+     "subject": "education_science",
+     "ref": "B",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "��������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������",
+     "tool_calls": null,
+     "finish": "length",
+     "usage": {
+      "prompt_tokens": 309,
+      "completion_tokens": 512,
+      "total_tokens": 821
+     },
+     "latency": 10.487144708633423,
+     "subject": "education_science",
+     "ref": "D",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "�����������������������������������������������������������������������",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 227,
+      "completion_tokens": 71,
+      "total_tokens": 298
+     },
+     "latency": 6.539991140365601,
+     "subject": "electrical_engineer",
+     "ref": "D",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "��������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������",
+     "tool_calls": null,
+     "finish": "length",
+     "usage": {
+      "prompt_tokens": 324,
+      "completion_tokens": 512,
+      "total_tokens": 836
+     },
+     "latency": 10.352472066879272,
+     "subject": "electrical_engineer",
+     "ref": "B",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "�����������。���������������的���������������。���������������的���������������。���������������的���������������。���������������的���������������。���������������的���������������。���������������的������������",
+     "tool_calls": null,
+     "finish": "length",
+     "usage": {
+      "prompt_tokens": 314,
+      "completion_tokens": 512,
+      "total_tokens": 826
+     },
+     "latency": 14.156007051467896,
+     "subject": "electrical_engineer",
+     "ref": "D",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "��������������������������������������\n��������������������������������������\n��������������������������������������\n��������������������������������������\n��������������������������������������\n�����",
+     "tool_calls": null,
+     "finish": "length",
+     "usage": {
+      "prompt_tokens": 481,
+      "completion_tokens": 512,
+      "total_tokens": 993
+     },
+     "latency": 14.202585935592651,
+     "subject": "environmental_impact_assessment_engineer",
+     "ref": "C",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "����������������������������������������的��������������____。\n������������\n���������������的��������������\n������������\n���������������的��������������\n������������\n���������������的��������������",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 239,
+      "completion_tokens": 189,
+      "total_tokens": 428
+     },
+     "latency": 15.234800100326538,
+     "subject": "environmental_impact_assessment_engineer",
+     "ref": "C",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "���������的��������������������������������������������的��������������������������������������������的��������������������������������������������的��������������������������������������������的����������",
+     "tool_calls": null,
+     "finish": "length",
+     "usage": {
+      "prompt_tokens": 474,
+      "completion_tokens": 512,
+      "total_tokens": 986
+     },
+     "latency": 15.245789289474487,
+     "subject": "environmental_impact_assessment_engineer",
+     "ref": "D",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "���的���____。\n�����������������������������������的������������������������������������������������的���____。\n�����������������������������������的������������������������������������������������的���____。",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 418,
+      "completion_tokens": 363,
+      "total_tokens": 781
+     },
+     "latency": 13.966045379638672,
+     "subject": "fire_engineer",
+     "ref": "C",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "������������������������������������������������������������������������的��������������的������������������������、�������������������������。��������������������������的���������____。",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 403,
+      "completion_tokens": 177,
+      "total_tokens": 580
+     },
+     "latency": 11.011117696762085,
+     "subject": "fire_engineer",
+     "ref": "B",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "��������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������",
+     "tool_calls": null,
+     "finish": "length",
+     "usage": {
+      "prompt_tokens": 657,
+      "completion_tokens": 512,
+      "total_tokens": 1169
+     },
+     "latency": 13.84578824043274,
+     "subject": "fire_engineer",
+     "ref": "C",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "��������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������",
+     "tool_calls": null,
+     "finish": "length",
+     "usage": {
+      "prompt_tokens": 451,
+      "completion_tokens": 512,
+      "total_tokens": 963
+     },
+     "latency": 13.823887348175049,
+     "subject": "high_school_biology",
+     "ref": "C",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "���的���������������的���������������的���������������的���������������的���������������的���������������的���������������的���������������的���������������的���������������的���������������的���������������的����",
+     "tool_calls": null,
+     "finish": "length",
+     "usage": {
+      "prompt_tokens": 447,
+      "completion_tokens": 512,
+      "total_tokens": 959
+     },
+     "latency": 15.161181688308716,
+     "subject": "high_school_biology",
+     "ref": "C",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "A. $\\frac{1}{2}$\nB. $\\frac{1}{{2}^{n}-1}$\nC. $\\frac{1}{{2}^{n}}$\nD. $\\frac{1}{4}$",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 249,
+      "completion_tokens": 50,
+      "total_tokens": 299
+     },
+     "latency": 14.030244588851929,
+     "subject": "high_school_biology",
+     "ref": "A",
+     "pred": "D",
+     "correct": false
+    },
+    {
+     "content": "A. 3",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 250,
+      "completion_tokens": 4,
+      "total_tokens": 254
+     },
+     "latency": 9.570558547973633,
+     "subject": "high_school_chemistry",
+     "ref": "B",
+     "pred": "A",
+     "correct": false
+    },
+    {
+     "content": "���������������的������������������������������������������������������������������������������������������",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 393,
+      "completion_tokens": 106,
+      "total_tokens": 499
+     },
+     "latency": 6.008550405502319,
+     "subject": "high_school_chemistry",
+     "ref": "A",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "�������������������������������������������������������的������的����������� 1���1��������������的���������____",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 357,
+      "completion_tokens": 105,
+      "total_tokens": 462
+     },
+     "latency": 2.392960548400879,
+     "subject": "high_school_chemistry",
+     "ref": "D",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "�������������������������������������������������������������������������������������",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 426,
+      "completion_tokens": 85,
+      "total_tokens": 511
+     },
+     "latency": 2.6986067295074463,
+     "subject": "high_school_chinese",
+     "ref": "C",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "������的��������\t____\n�����������������的��������\t____\n�����������������的��������\t____\n�����������������的��������\t____\n�����������������的��������\t____\n�����������������的��������\t____\n�����������������的�",
+     "tool_calls": null,
+     "finish": "length",
+     "usage": {
+      "prompt_tokens": 391,
+      "completion_tokens": 512,
+      "total_tokens": 903
+     },
+     "latency": 7.2076311111450195,
+     "subject": "high_school_chinese",
+     "ref": "B",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "��\n���������������������������������������������������������������������������������\n���������������������������������������������������������������������������������\n���������������������������������",
+     "tool_calls": null,
+     "finish": "length",
+     "usage": {
+      "prompt_tokens": 478,
+      "completion_tokens": 512,
+      "total_tokens": 990
+     },
+     "latency": 10.770066976547241,
+     "subject": "high_school_chinese",
+     "ref": "D",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "B. ������\nC. ������\nD. ������",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 410,
+      "completion_tokens": 29,
+      "total_tokens": 439
+     },
+     "latency": 10.096433639526367,
+     "subject": "high_school_geography",
+     "ref": "D",
+     "pred": "D",
+     "correct": true
+    },
+    {
+     "content": "�������������的�������������������____\n������、������\n���������、���������\n������、���������\n���������",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 232,
+      "completion_tokens": 95,
+      "total_tokens": 327
+     },
+     "latency": 10.201845407485962,
+     "subject": "high_school_geography",
+     "ref": "D",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "��������\n�������������������������\n�������������������������\n�������������������������\n�������������������������\n�������������������������\n�������������������������\n�������������������������\n���������",
+     "tool_calls": null,
+     "finish": "length",
+     "usage": {
+      "prompt_tokens": 239,
+      "completion_tokens": 512,
+      "total_tokens": 751
+     },
+     "latency": 10.15804648399353,
+     "subject": "high_school_geography",
+     "ref": "A",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "������������������������������������������������������������<������>",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 269,
+      "completion_tokens": 68,
+      "total_tokens": 337
+     },
+     "latency": 6.26696252822876,
+     "subject": "high_school_history",
+     "ref": "C",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "���������",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 359,
+      "completion_tokens": 9,
+      "total_tokens": 368
+     },
+     "latency": 6.094575643539429,
+     "subject": "high_school_history",
+     "ref": "C",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "������������������������������的�����������������������������������������������������������。�����������������������的�����____",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 281,
+      "completion_tokens": 121,
+      "total_tokens": 402
+     },
+     "latency": 6.320090293884277,
+     "subject": "high_school_history",
+     "ref": "C",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "�����������������������������������������������������������������������<������>",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 264,
+      "completion_tokens": 79,
+      "total_tokens": 343
+     },
+     "latency": 2.521167755126953,
+     "subject": "high_school_mathematics",
+     "ref": "A",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "A. -2\nB. 2\nC. -4\nD. 4",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 188,
+      "completion_tokens": 19,
+      "total_tokens": 207
+     },
+     "latency": 2.081873655319214,
+     "subject": "high_school_mathematics",
+     "ref": "D",
+     "pred": "D",
+     "correct": true
+    },
+    {
+     "content": "������������������������������������������的�������������������������“����������������”“����������������”“����������”“��������������”����������������������������������������������的�����������������____",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 498,
+      "completion_tokens": 228,
+      "total_tokens": 726
+     },
+     "latency": 4.018200874328613,
+     "subject": "high_school_mathematics",
+     "ref": "B",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "�������������������������������������������������������������������������������������������������的���������:���������:������>",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 397,
+      "completion_tokens": 125,
+      "total_tokens": 522
+     },
+     "latency": 4.058530569076538,
+     "subject": "high_school_physics",
+     "ref": "B",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "��������������������������的���____\nA. ������������������\nB. ���������������������������������\nC. �������������������������\nD. ����������������������������",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 270,
+      "completion_tokens": 151,
+      "total_tokens": 421
+     },
+     "latency": 4.680948972702026,
+     "subject": "high_school_physics",
+     "ref": "B",
+     "pred": "D",
+     "correct": false
+    },
+    {
+     "content": "��������������������的�������������9m/s�������������120m�����������������5m/s�������������������的���____\n��������������5m/s�������������������的���������������",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 312,
+      "completion_tokens": 150,
+      "total_tokens": 462
+     },
+     "latency": 5.8611838817596436,
+     "subject": "high_school_physics",
+     "ref": "A",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "��������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������",
+     "tool_calls": null,
+     "finish": "length",
+     "usage": {
+      "prompt_tokens": 822,
+      "completion_tokens": 512,
+      "total_tokens": 1334
+     },
+     "latency": 8.316844463348389,
+     "subject": "high_school_politics",
+     "ref": "B",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "��������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������",
+     "tool_calls": null,
+     "finish": "length",
+     "usage": {
+      "prompt_tokens": 544,
+      "completion_tokens": 512,
+      "total_tokens": 1056
+     },
+     "latency": 11.74547004699707,
+     "subject": "high_school_politics",
+     "ref": "C",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "���������",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 423,
+      "completion_tokens": 9,
+      "total_tokens": 432
+     },
+     "latency": 10.501858949661255,
+     "subject": "high_school_politics",
+     "ref": "A",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "��������的�����������������������____\n����������������������的����������������������的�����������������������____\n����������������������的����������������������的�����������������������____\n���������������",
+     "tool_calls": null,
+     "finish": "length",
+     "usage": {
+      "prompt_tokens": 222,
+      "completion_tokens": 512,
+      "total_tokens": 734
+     },
+     "latency": 13.647204160690308,
+     "subject": "ideological_and_moral_cultivation",
+     "ref": "B",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "��������������的�����������������____\n��������������的���������������������������������������������������������������",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 173,
+      "completion_tokens": 112,
+      "total_tokens": 285
+     },
+     "latency": 10.251594543457031,
+     "subject": "ideological_and_moral_cultivation",
+     "ref": "D",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "��������的������������的���____",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 391,
+      "completion_tokens": 26,
+      "total_tokens": 417
+     },
+     "latency": 5.926097869873047,
+     "subject": "ideological_and_moral_cultivation",
+     "ref": "C",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "���������������的������������������的���������������������",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 593,
+      "completion_tokens": 56,
+      "total_tokens": 649
+     },
+     "latency": 6.353693723678589,
+     "subject": "law",
+     "ref": "D",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "����������������������������������������������������������",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 276,
+      "completion_tokens": 58,
+      "total_tokens": 334
+     },
+     "latency": 2.3767199516296387,
+     "subject": "law",
+     "ref": "C",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "������������������������的���������������������������的���������������������������的���������������������������",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 399,
+      "completion_tokens": 108,
+      "total_tokens": 507
+     },
+     "latency": 2.2515525817871094,
+     "subject": "law",
+     "ref": "B",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "���������������������������������������的�����������������14������������������������������������的���������������������?",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 449,
+      "completion_tokens": 117,
+      "total_tokens": 566
+     },
+     "latency": 3.0665225982666016,
+     "subject": "legal_professional",
+     "ref": "B",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "�������������������������������������������������������������������������������������������������������������������������������的�����������������������������������������������的��������������的���������",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 844,
+      "completion_tokens": 246,
+      "total_tokens": 1090
+     },
+     "latency": 4.769338130950928,
+     "subject": "legal_professional",
+     "ref": "D",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "��������������������������������������������������������������������������������������������������������������。�������������������������������、�������的�����������������������������������������������的?",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 556,
+      "completion_tokens": 203,
+      "total_tokens": 759
+     },
+     "latency": 6.0235137939453125,
+     "subject": "legal_professional",
+     "ref": "C",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "���������������������������������的�����������。�����������的��������������������������������的������。",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 470,
+      "completion_tokens": 98,
+      "total_tokens": 568
+     },
+     "latency": 5.951267242431641,
+     "subject": "logic",
+     "ref": "D",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "���������的�������������������������的���������������的������������������������的������。",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 1059,
+      "completion_tokens": 84,
+      "total_tokens": 1143
+     },
+     "latency": 5.642938137054443,
+     "subject": "logic",
+     "ref": "C",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "�������������的�������������������������������������������������������的���������������������������������������������������。�����������������������������������������������������������������������������。",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 568,
+      "completion_tokens": 231,
+      "total_tokens": 799
+     },
+     "latency": 5.456422328948975,
+     "subject": "logic",
+     "ref": "C",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "�����������������������������������������������������������������������<������>",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 227,
+      "completion_tokens": 79,
+      "total_tokens": 306
+     },
+     "latency": 4.396860122680664,
+     "subject": "mao_zedong_thought",
+     "ref": "C",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "�������������������������������的\n�����������������������������������������������的\n����������������������������������������������������������的\n����������������������������������������������������������",
+     "tool_calls": null,
+     "finish": "length",
+     "usage": {
+      "prompt_tokens": 240,
+      "completion_tokens": 512,
+      "total_tokens": 752
+     },
+     "latency": 8.051872968673706,
+     "subject": "mao_zedong_thought",
+     "ref": "A",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "����������������������的���������������������������������������。",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 304,
+      "completion_tokens": 63,
+      "total_tokens": 367
+     },
+     "latency": 7.88248348236084,
+     "subject": "mao_zedong_thought",
+     "ref": "D",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "������������������的������������������\n����������������������������������������������������",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 195,
+      "completion_tokens": 90,
+      "total_tokens": 285
+     },
+     "latency": 6.641697406768799,
+     "subject": "marxism",
+     "ref": "D",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "�����������������������������������������������������������������������",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 209,
+      "completion_tokens": 71,
+      "total_tokens": 280
+     },
+     "latency": 6.5521299839019775,
+     "subject": "marxism",
+     "ref": "B",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "��������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������",
+     "tool_calls": null,
+     "finish": "length",
+     "usage": {
+      "prompt_tokens": 221,
+      "completion_tokens": 512,
+      "total_tokens": 733
+     },
+     "latency": 6.518197774887085,
+     "subject": "marxism",
+     "ref": "C",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "��������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������",
+     "tool_calls": null,
+     "finish": "length",
+     "usage": {
+      "prompt_tokens": 260,
+      "completion_tokens": 512,
+      "total_tokens": 772
+     },
+     "latency": 10.527223587036133,
+     "subject": "metrology_engineer",
+     "ref": "C",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "��������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������",
+     "tool_calls": null,
+     "finish": "length",
+     "usage": {
+      "prompt_tokens": 176,
+      "completion_tokens": 512,
+      "total_tokens": 688
+     },
+     "latency": 14.282960891723633,
+     "subject": "metrology_engineer",
+     "ref": "B",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "�����������������\n���������的����������������\n�����������������������������的����������������____。",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 397,
+      "completion_tokens": 93,
+      "total_tokens": 490
+     },
+     "latency": 14.504525423049927,
+     "subject": "metrology_engineer",
+     "ref": "C",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "���������������������、���������������������������������������的���������������������������������������������������的������������",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 434,
+      "completion_tokens": 126,
+      "total_tokens": 560
+     },
+     "latency": 11.125354290008545,
+     "subject": "middle_school_biology",
+     "ref": "B",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "�����������������������������������������������������������������������",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 263,
+      "completion_tokens": 71,
+      "total_tokens": 334
+     },
+     "latency": 7.192495107650757,
+     "subject": "middle_school_biology",
+     "ref": "B",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "�����������������������������������������������������������������������������",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 225,
+      "completion_tokens": 77,
+      "total_tokens": 302
+     },
+     "latency": 3.350395917892456,
+     "subject": "middle_school_biology",
+     "ref": "A",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "�����____\n������������的��������____\n������������的��������____\n������������的��������____\n������������的��������____\n������������的��������____\n������������的��������____\n������������的��������____\n��������",
+     "tool_calls": null,
+     "finish": "length",
+     "usage": {
+      "prompt_tokens": 195,
+      "completion_tokens": 512,
+      "total_tokens": 707
+     },
+     "latency": 7.018698692321777,
+     "subject": "middle_school_chemistry",
+     "ref": "A",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "���������的���____\n����������������200mL。����������������的�������������的���____\n����������������200mL。����������������的�������������的���____\n����������������200mL。����������������的�������������的���____",
+     "tool_calls": null,
+     "finish": "length",
+     "usage": {
+      "prompt_tokens": 287,
+      "completion_tokens": 512,
+      "total_tokens": 799
+     },
+     "latency": 10.488331317901611,
+     "subject": "middle_school_chemistry",
+     "ref": "D",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "���������",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 288,
+      "completion_tokens": 9,
+      "total_tokens": 297
+     },
+     "latency": 9.929240942001343,
+     "subject": "middle_school_chemistry",
+     "ref": "A",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "������������������������������������������������的���____\n�������������������������������������������������的���____\n�������������������������������������������������的���____\n���������������������������",
+     "tool_calls": null,
+     "finish": "length",
+     "usage": {
+      "prompt_tokens": 297,
+      "completion_tokens": 512,
+      "total_tokens": 809
+     },
+     "latency": 13.799641609191895,
+     "subject": "middle_school_geography",
+     "ref": "D",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "��������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������",
+     "tool_calls": null,
+     "finish": "length",
+     "usage": {
+      "prompt_tokens": 402,
+      "completion_tokens": 512,
+      "total_tokens": 914
+     },
+     "latency": 13.80726671218872,
+     "subject": "middle_school_geography",
+     "ref": "D",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "����������������������������������、����������������������������������������<������>",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 224,
+      "completion_tokens": 83,
+      "total_tokens": 307
+     },
+     "latency": 9.967418909072876,
+     "subject": "middle_school_geography",
+     "ref": "C",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "��������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������",
+     "tool_calls": null,
+     "finish": "length",
+     "usage": {
+      "prompt_tokens": 303,
+      "completion_tokens": 512,
+      "total_tokens": 815
+     },
+     "latency": 14.407708406448364,
+     "subject": "middle_school_history",
+     "ref": "C",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "�����������������������������������������������������������������������<������>",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 251,
+      "completion_tokens": 79,
+      "total_tokens": 330
+     },
+     "latency": 10.823471069335938,
+     "subject": "middle_school_history",
+     "ref": "A",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "��������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������",
+     "tool_calls": null,
+     "finish": "length",
+     "usage": {
+      "prompt_tokens": 370,
+      "completion_tokens": 512,
+      "total_tokens": 882
+     },
+     "latency": 10.846678018569946,
+     "subject": "middle_school_history",
+     "ref": "B",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "A. -1",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 370,
+      "completion_tokens": 4,
+      "total_tokens": 374
+     },
+     "latency": 10.130168676376343,
+     "subject": "middle_school_mathematics",
+     "ref": "D",
+     "pred": "A",
+     "correct": false
+    },
+    {
+     "content": "���������50�������������������������������40����������������� 129500���������������$350\\times1.4x+200\\times1.4\\times\\left(x+50\\right)=129500$   ����������的������������������������ ���������的������____",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 468,
+      "completion_tokens": 224,
+      "total_tokens": 692
+     },
+     "latency": 7.567451000213623,
+     "subject": "middle_school_mathematics",
+     "ref": "C",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "��������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������",
+     "tool_calls": null,
+     "finish": "length",
+     "usage": {
+      "prompt_tokens": 601,
+      "completion_tokens": 512,
+      "total_tokens": 1113
+     },
+     "latency": 11.109304189682007,
+     "subject": "middle_school_mathematics",
+     "ref": "B",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "�����������������������������������������������������������������������<������>",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 335,
+      "completion_tokens": 79,
+      "total_tokens": 414
+     },
+     "latency": 7.255527019500732,
+     "subject": "middle_school_physics",
+     "ref": "B",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "�����������������������������������������������������������������������",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 169,
+      "completion_tokens": 71,
+      "total_tokens": 240
+     },
+     "latency": 7.859351396560669,
+     "subject": "middle_school_physics",
+     "ref": "C",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "����������������������������������������������������������������������的����������������的�������������____",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 277,
+      "completion_tokens": 102,
+      "total_tokens": 379
+     },
+     "latency": 6.804739475250244,
+     "subject": "middle_school_physics",
+     "ref": "A",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "����������������的���������\n������������的����������\n����������的�����������\n�����������的����������\n�����������的����������",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 233,
+      "completion_tokens": 119,
+      "total_tokens": 352
+     },
+     "latency": 3.3402867317199707,
+     "subject": "middle_school_politics",
+     "ref": "A",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "����������������������������������������������������。���������������������������������的�����������������������������������������������������������������������。���������������������������������的�������",
+     "tool_calls": null,
+     "finish": "length",
+     "usage": {
+      "prompt_tokens": 452,
+      "completion_tokens": 512,
+      "total_tokens": 964
+     },
+     "latency": 7.2923431396484375,
+     "subject": "middle_school_politics",
+     "ref": "C",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "�100�����������������的�����������������������������������800��������������������������������������������������3�������������10000��。����������������、�����������������、����������������、����������������",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 520,
+      "completion_tokens": 262,
+      "total_tokens": 782
+     },
+     "latency": 9.005483388900757,
+     "subject": "middle_school_politics",
+     "ref": "D",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "��������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������",
+     "tool_calls": null,
+     "finish": "length",
+     "usage": {
+      "prompt_tokens": 322,
+      "completion_tokens": 512,
+      "total_tokens": 834
+     },
+     "latency": 12.695816993713379,
+     "subject": "modern_chinese_history",
+     "ref": "D",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "��������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������",
+     "tool_calls": null,
+     "finish": "length",
+     "usage": {
+      "prompt_tokens": 204,
+      "completion_tokens": 512,
+      "total_tokens": 716
+     },
+     "latency": 16.09912633895874,
+     "subject": "modern_chinese_history",
+     "ref": "D",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "��������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������",
+     "tool_calls": null,
+     "finish": "length",
+     "usage": {
+      "prompt_tokens": 426,
+      "completion_tokens": 512,
+      "total_tokens": 938
+     },
+     "latency": 16.03895664215088,
+     "subject": "modern_chinese_history",
+     "ref": "C",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "���������������������������的�������������������������。\n���������������������������的�������������������������。",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 213,
+      "completion_tokens": 109,
+      "total_tokens": 322
+     },
+     "latency": 14.655542612075806,
+     "subject": "operating_system",
+     "ref": "D",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "��������������������的���的���____。\n��������������������的���的���____。\n��������������������的���的���____。",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 210,
+      "completion_tokens": 92,
+      "total_tokens": 302
+     },
+     "latency": 10.869426012039185,
+     "subject": "operating_system",
+     "ref": "A",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "��������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������",
+     "tool_calls": null,
+     "finish": "length",
+     "usage": {
+      "prompt_tokens": 232,
+      "completion_tokens": 512,
+      "total_tokens": 744
+     },
+     "latency": 10.915425300598145,
+     "subject": "operating_system",
+     "ref": "D",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "������������������������������������������������������������������������",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 209,
+      "completion_tokens": 72,
+      "total_tokens": 281
+     },
+     "latency": 6.96445631980896,
+     "subject": "physician",
+     "ref": "A",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "A. VitB2\nB. VitD\nC. VitA",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 257,
+      "completion_tokens": 15,
+      "total_tokens": 272
+     },
+     "latency": 6.127933740615845,
+     "subject": "physician",
+     "ref": "C",
+     "pred": "C",
+     "correct": true
+    },
+    {
+     "content": "��������____\n��������������������的�����������____\n��������������������的�����������____\n��������������������的�����������____\n��������������������的�����������____\n��������������������的�����������____\n��",
+     "tool_calls": null,
+     "finish": "length",
+     "usage": {
+      "prompt_tokens": 210,
+      "completion_tokens": 512,
+      "total_tokens": 722
+     },
+     "latency": 9.828890323638916,
+     "subject": "physician",
+     "ref": "C",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "��������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������",
+     "tool_calls": null,
+     "finish": "length",
+     "usage": {
+      "prompt_tokens": 167,
+      "completion_tokens": 512,
+      "total_tokens": 679
+     },
+     "latency": 9.8357572555542,
+     "subject": "plant_protection",
+     "ref": "B",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "��������������������������������������������������������������������<������>",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 203,
+      "completion_tokens": 76,
+      "total_tokens": 279
+     },
+     "latency": 9.87216329574585,
+     "subject": "plant_protection",
+     "ref": "A",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "�����������������������������������������������������������������������<������>",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 227,
+      "completion_tokens": 79,
+      "total_tokens": 306
+     },
+     "latency": 10.447492361068726,
+     "subject": "plant_protection",
+     "ref": "B",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "��������������������������������������������������������������",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 351,
+      "completion_tokens": 62,
+      "total_tokens": 413
+     },
+     "latency": 6.495105028152466,
+     "subject": "probability_and_statistics",
+     "ref": "C",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "�����������������������的����������",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 291,
+      "completion_tokens": 34,
+      "total_tokens": 325
+     },
+     "latency": 2.279003143310547,
+     "subject": "probability_and_statistics",
+     "ref": "C",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "�����������������������������������������������������������������������<������>",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 230,
+      "completion_tokens": 79,
+      "total_tokens": 309
+     },
+     "latency": 2.3140506744384766,
+     "subject": "probability_and_statistics",
+     "ref": "C",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "�����������������������������������������。",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 163,
+      "completion_tokens": 42,
+      "total_tokens": 205
+     },
+     "latency": 1.9808540344238281,
+     "subject": "professional_tour_guide",
+     "ref": "C",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "�����������������������������������������������������������������������<������>",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 147,
+      "completion_tokens": 79,
+      "total_tokens": 226
+     },
+     "latency": 2.127627372741699,
+     "subject": "professional_tour_guide",
+     "ref": "D",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "����������������������������������������������������。\n����������������������������������������������������。",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 168,
+      "completion_tokens": 107,
+      "total_tokens": 275
+     },
+     "latency": 2.769953966140747,
+     "subject": "professional_tour_guide",
+     "ref": "B",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "�������的�����������������������������������������的�����������������������������������������的�����������������������������������������的�����������������������������������������的������������������������",
+     "tool_calls": null,
+     "finish": "length",
+     "usage": {
+      "prompt_tokens": 298,
+      "completion_tokens": 512,
+      "total_tokens": 810
+     },
+     "latency": 6.575059175491333,
+     "subject": "sports_science",
+     "ref": "D",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "������\n����������������������������\n����������������������������\n����������������������������\n����������������������������\n����������������������������\n����������������������������\n�������������������",
+     "tool_calls": null,
+     "finish": "length",
+     "usage": {
+      "prompt_tokens": 179,
+      "completion_tokens": 512,
+      "total_tokens": 691
+     },
+     "latency": 10.738866329193115,
+     "subject": "sports_science",
+     "ref": "D",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "�����������\n��������������的�����������\n��������������的�����������\n��������������的�����������\n��������������的�����������\n��������������的�����������\n��������������的�����������\n��������������的�����������",
+     "tool_calls": null,
+     "finish": "length",
+     "usage": {
+      "prompt_tokens": 179,
+      "completion_tokens": 512,
+      "total_tokens": 691
+     },
+     "latency": 14.4890615940094,
+     "subject": "sports_science",
+     "ref": "B",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "��������������������\n������������\n������������\n���������������\n```",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 311,
+      "completion_tokens": 64,
+      "total_tokens": 375
+     },
+     "latency": 14.10972261428833,
+     "subject": "tax_accountant",
+     "ref": "D",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "��������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������",
+     "tool_calls": null,
+     "finish": "length",
+     "usage": {
+      "prompt_tokens": 452,
+      "completion_tokens": 512,
+      "total_tokens": 964
+     },
+     "latency": 14.180909395217896,
+     "subject": "tax_accountant",
+     "ref": "C",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "��������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������",
+     "tool_calls": null,
+     "finish": "length",
+     "usage": {
+      "prompt_tokens": 578,
+      "completion_tokens": 512,
+      "total_tokens": 1090
+     },
+     "latency": 14.207726001739502,
+     "subject": "tax_accountant",
+     "ref": "B",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "�������������������������������������������\n���������������������������\n�������������������������������的�������������������������的�����",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 498,
+      "completion_tokens": 135,
+      "total_tokens": 633
+     },
+     "latency": 10.96329379081726,
+     "subject": "teacher_qualification",
+     "ref": "D",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "�����������������������������������������������������������������������<������>",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 162,
+      "completion_tokens": 79,
+      "total_tokens": 241
+     },
+     "latency": 11.096116065979004,
+     "subject": "teacher_qualification",
+     "ref": "B",
+     "pred": null,
+     "correct": false
+    },
+    {
+     "content": "����������������、��������������。�����������的����������������������������������������������������������的��������������������������������������������������������的����������������������������������的____。",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 422,
+      "completion_tokens": 221,
+      "total_tokens": 643
+     },
+     "latency": 8.48197627067566,
+     "subject": "teacher_qualification",
+     "ref": "B",
+     "pred": null,
+     "correct": false
+    }
+   ]
+  },
+  "json": {
+   "summary": {
+    "n": 20,
+    "correct": 0,
+    "accuracy": 0.0,
+    "errors": 0,
+    "truncated": 0,
+    "avg_completion_tokens": 1.0,
+    "avg_latency_s": 0.0718674898147583
+   },
+   "records": [
+    {
+     "content": "```",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 48,
+      "completion_tokens": 1,
+      "total_tokens": 49
+     },
+     "latency": 0.02127814292907715,
+     "correct": false,
+     "parsed": null
+    },
+    {
+     "content": "```",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 47,
+      "completion_tokens": 1,
+      "total_tokens": 48
+     },
+     "latency": 0.04052376747131348,
+     "correct": false,
+     "parsed": null
+    },
+    {
+     "content": "```",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 80,
+      "completion_tokens": 1,
+      "total_tokens": 81
+     },
+     "latency": 0.05987739562988281,
+     "correct": false,
+     "parsed": null
+    },
+    {
+     "content": "```",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 48,
+      "completion_tokens": 1,
+      "total_tokens": 49
+     },
+     "latency": 0.07904553413391113,
+     "correct": false,
+     "parsed": null
+    },
+    {
+     "content": "```",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 47,
+      "completion_tokens": 1,
+      "total_tokens": 48
+     },
+     "latency": 0.0778055191040039,
+     "correct": false,
+     "parsed": null
+    },
+    {
+     "content": "```",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 80,
+      "completion_tokens": 1,
+      "total_tokens": 81
+     },
+     "latency": 0.0781259536743164,
+     "correct": false,
+     "parsed": null
+    },
+    {
+     "content": "```",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 48,
+      "completion_tokens": 1,
+      "total_tokens": 49
+     },
+     "latency": 0.07783818244934082,
+     "correct": false,
+     "parsed": null
+    },
+    {
+     "content": "```",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 47,
+      "completion_tokens": 1,
+      "total_tokens": 48
+     },
+     "latency": 0.07770085334777832,
+     "correct": false,
+     "parsed": null
+    },
+    {
+     "content": "```",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 80,
+      "completion_tokens": 1,
+      "total_tokens": 81
+     },
+     "latency": 0.07770681381225586,
+     "correct": false,
+     "parsed": null
+    },
+    {
+     "content": "```",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 48,
+      "completion_tokens": 1,
+      "total_tokens": 49
+     },
+     "latency": 0.07755136489868164,
+     "correct": false,
+     "parsed": null
+    },
+    {
+     "content": "```",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 47,
+      "completion_tokens": 1,
+      "total_tokens": 48
+     },
+     "latency": 0.07802915573120117,
+     "correct": false,
+     "parsed": null
+    },
+    {
+     "content": "```",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 80,
+      "completion_tokens": 1,
+      "total_tokens": 81
+     },
+     "latency": 0.07740974426269531,
+     "correct": false,
+     "parsed": null
+    },
+    {
+     "content": "```",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 48,
+      "completion_tokens": 1,
+      "total_tokens": 49
+     },
+     "latency": 0.07684803009033203,
+     "correct": false,
+     "parsed": null
+    },
+    {
+     "content": "```",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 47,
+      "completion_tokens": 1,
+      "total_tokens": 48
+     },
+     "latency": 0.07691311836242676,
+     "correct": false,
+     "parsed": null
+    },
+    {
+     "content": "```",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 80,
+      "completion_tokens": 1,
+      "total_tokens": 81
+     },
+     "latency": 0.0765237808227539,
+     "correct": false,
+     "parsed": null
+    },
+    {
+     "content": "```",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 48,
+      "completion_tokens": 1,
+      "total_tokens": 49
+     },
+     "latency": 0.07778406143188477,
+     "correct": false,
+     "parsed": null
+    },
+    {
+     "content": "```",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 47,
+      "completion_tokens": 1,
+      "total_tokens": 48
+     },
+     "latency": 0.07746601104736328,
+     "correct": false,
+     "parsed": null
+    },
+    {
+     "content": "```",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 80,
+      "completion_tokens": 1,
+      "total_tokens": 81
+     },
+     "latency": 0.07658600807189941,
+     "correct": false,
+     "parsed": null
+    },
+    {
+     "content": "```",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 48,
+      "completion_tokens": 1,
+      "total_tokens": 49
+     },
+     "latency": 0.07634925842285156,
+     "correct": false,
+     "parsed": null
+    },
+    {
+     "content": "```",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 47,
+      "completion_tokens": 1,
+      "total_tokens": 48
+     },
+     "latency": 0.07598710060119629,
+     "correct": false,
+     "parsed": null
+    }
+   ]
+  },
+  "tools": {
+   "summary": {
+    "n": 10,
+    "correct": 1,
+    "accuracy": 0.1,
+    "errors": 0,
+    "truncated": 0,
+    "avg_completion_tokens": 25.6,
+    "avg_latency_s": 0.6379535436630249
+   },
+   "records": [
+    {
+     "content": "The weather in Tokyo is mostly sunny with a high of 75 degrees Fahrenheit (18 degrees Celsius) and a low of 50 degrees Fahrenheit (",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 13,
+      "completion_tokens": 29,
+      "total_tokens": 42
+     },
+     "latency": 0.2678399085998535,
+     "expected": "get_weather",
+     "got": null,
+     "correct": false
+    },
+    {
+     "content": "�����������������������������",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 30,
+      "completion_tokens": 29,
+      "total_tokens": 59
+     },
+     "latency": 0.5390105247497559,
+     "expected": "get_weather",
+     "got": null,
+     "correct": false
+    },
+    {
+     "content": "100 US dollars is equal to 100/",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 15,
+      "completion_tokens": 11,
+      "total_tokens": 26
+     },
+     "latency": 0.6460645198822021,
+     "expected": "convert_currency",
+     "got": null,
+     "correct": false
+    },
+    {
+     "content": "��� 250 �������������������",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 30,
+      "completion_tokens": 26,
+      "total_tokens": 56
+     },
+     "latency": 0.8837151527404785,
+     "expected": "convert_currency",
+     "got": null,
+     "correct": false
+    },
+    {
+     "content": "Yes, in Cairo, the temperature is 86 degrees Fahrenheit.",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 17,
+      "completion_tokens": 15,
+      "total_tokens": 32
+     },
+     "latency": 0.7606019973754883,
+     "expected": "get_weather",
+     "got": null,
+     "correct": false
+    },
+    {
+     "content": "There are 14",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 14,
+      "completion_tokens": 4,
+      "total_tokens": 18
+     },
+     "latency": 0.5359320640563965,
+     "expected": "convert_currency",
+     "got": null,
+     "correct": false
+    },
+    {
+     "content": "���的�����",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 21,
+      "completion_tokens": 9,
+      "total_tokens": 30
+     },
+     "latency": 0.5187416076660156,
+     "expected": "get_weather",
+     "got": null,
+     "correct": false
+    },
+    {
+     "content": "������ 1000 �������������",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 27,
+      "completion_tokens": 23,
+      "total_tokens": 50
+     },
+     "latency": 0.4975612163543701,
+     "expected": "convert_currency",
+     "got": null,
+     "correct": false
+    },
+    {
+     "content": "\"Temperature in Paris please, Celsius\"",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 12,
+      "completion_tokens": 8,
+      "total_tokens": 20
+     },
+     "latency": 0.4359867572784424,
+     "expected": "get_weather",
+     "got": null,
+     "correct": false
+    },
+    {
+     "content": "casts its golden glow upon the waves, and the moon casts its silvery light upon the tides. It is a place of awe, where the beauty of nature is awe-inspiring, and the power of the sea is awe-inspiring.",
+     "tool_calls": null,
+     "finish": "stop",
+     "usage": {
+      "prompt_tokens": 13,
+      "completion_tokens": 102,
+      "total_tokens": 115
+     },
+     "latency": 1.294081687927246,
+     "expected": null,
+     "got": null,
+     "correct": true
+    }
+   ]
+  }
+ },
+ "finished": "2026-10-09 03:57:12"
+}

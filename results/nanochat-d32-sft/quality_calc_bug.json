@@ -1,7 +1,7 @@
 {
  "model": "nanochat-d32-sft",
  "base_url": "http://localhost:8022/v1",
- "started": "2026-10-09 03:50:01",
+ "started": "2026-10-08 17:43:27",
  "tests": {
   "gsm8k": {
    "summary": {
@@ -11,7 +11,7 @@
     "errors": 0,
     "truncated": 11,
     "avg_completion_tokens": 242.42,
-    "avg_latency_s": 20.280820672512053
+    "avg_latency_s": 28.368809909820556
    },
    "records": [
     {
@@ -23,7 +23,7 @@
       "completion_tokens": 266,
       "total_tokens": 371
      },
-     "latency": 5.9768712520599365,
+     "latency": 8.498580932617188,
      "ref": "49",
      "pred": "70",
      "correct": false
@@ -37,7 +37,7 @@
       "completion_tokens": 190,
       "total_tokens": 292
      },
-     "latency": 9.985937595367432,
+     "latency": 14.382583379745483,
      "ref": "200",
      "pred": "9",
      "correct": false
@@ -51,7 +51,7 @@
       "completion_tokens": 316,
       "total_tokens": 396
      },
-     "latency": 16.73388409614563,
+     "latency": 28.890538930892944,
      "ref": "112",
      "pred": "480",
      "correct": false
@@ -65,7 +65,7 @@
       "completion_tokens": 166,
       "total_tokens": 285
      },
-     "latency": 20.27171492576599,
+     "latency": 19.58631420135498,
      "ref": "101",
      "pred": "100",
      "correct": false
@@ -79,7 +79,7 @@
       "completion_tokens": 235,
       "total_tokens": 354
      },
-     "latency": 19.288479328155518,
+     "latency": 27.271263122558594,
      "ref": "9",
      "pred": "3.00",
      "correct": false
@@ -93,7 +93,7 @@
       "completion_tokens": 215,
       "total_tokens": 314
      },
-     "latency": 19.856271505355835,
+     "latency": 27.815937519073486,
      "ref": "29",
      "pred": "31.20",
      "correct": false
@@ -107,7 +107,7 @@
       "completion_tokens": 168,
       "total_tokens": 249
      },
-     "latency": 16.66559886932373,
+     "latency": 27.38431715965271,
      "ref": "6",
      "pred": "52800",
      "correct": false
@@ -121,7 +121,7 @@
       "completion_tokens": 263,
       "total_tokens": 403
      },
-     "latency": 18.775959730148315,
+     "latency": 25.382938385009766,
      "ref": "5",
      "pred": "16",
      "correct": false
@@ -135,7 +135,7 @@
       "completion_tokens": 146,
       "total_tokens": 267
      },
-     "latency": 16.951570987701416,
+     "latency": 22.687777757644653,
      "ref": "22",
      "pred": "24",
      "correct": false
@@ -149,7 +149,7 @@
       "completion_tokens": 184,
       "total_tokens": 265
      },
-     "latency": 16.344615936279297,
+     "latency": 21.60172700881958,
      "ref": "3",
      "pred": "5625",
      "correct": false
@@ -163,7 +163,7 @@
       "completion_tokens": 512,
       "total_tokens": 612
      },
-     "latency": 23.64368462562561,
+     "latency": 31.653327226638794,
      "ref": "31",
      "pred": "11",
      "correct": false
@@ -177,7 +177,7 @@
       "completion_tokens": 216,
       "total_tokens": 279
      },
-     "latency": 22.572171688079834,
+     "latency": 31.115900993347168,
      "ref": "50",
      "pred": "113.33",
      "correct": false
@@ -191,7 +191,7 @@
       "completion_tokens": 184,
       "total_tokens": 303
      },
-     "latency": 23.295671701431274,
+     "latency": 32.1737117767334,
      "ref": "50",
      "pred": "20",
      "correct": false
@@ -205,7 +205,7 @@
       "completion_tokens": 224,
       "total_tokens": 366
      },
-     "latency": 24.212106943130493,
+     "latency": 33.301114559173584,
      "ref": "220",
      "pred": "215",
      "correct": false
@@ -219,7 +219,7 @@
       "completion_tokens": 174,
       "total_tokens": 255
      },
-     "latency": 17.05799412727356,
+     "latency": 23.549010515213013,
      "ref": "49",
      "pred": "2",
      "correct": false
@@ -233,7 +233,7 @@
       "completion_tokens": 293,
       "total_tokens": 399
      },
-     "latency": 18.670841693878174,
+     "latency": 25.39220428466797,
      "ref": "1875",
      "pred": "1500",
      "correct": false
@@ -247,7 +247,7 @@
       "completion_tokens": 144,
       "total_tokens": 232
      },
-     "latency": 17.84437608718872,
+     "latency": 24.747434377670288,
      "ref": "10000",
      "pred": "4500",
      "correct": false
@@ -261,7 +261,7 @@
       "completion_tokens": 250,
       "total_tokens": 368
      },
-     "latency": 18.350301265716553,
+     "latency": 25.598653316497803,
      "ref": "50",
      "pred": "3",
      "correct": false
@@ -275,7 +275,7 @@
       "completion_tokens": 260,
       "total_tokens": 347
      },
-     "latency": 20.26777958869934,
+     "latency": 27.930896520614624,
      "ref": "20",
      "pred": "550",
      "correct": false
@@ -289,7 +289,7 @@
       "completion_tokens": 174,
       "total_tokens": 269
      },
-     "latency": 17.77093195915222,
+     "latency": 24.237393617630005,
      "ref": "1",
      "pred": "4",
      "correct": false
@@ -303,7 +303,7 @@
       "completion_tokens": 155,
       "total_tokens": 248
      },
-     "latency": 18.042486429214478,
+     "latency": 24.192816734313965,
      "ref": "32",
      "pred": "120",
      "correct": false
@@ -317,7 +317,7 @@
       "completion_tokens": 203,
       "total_tokens": 310
      },
-     "latency": 16.984060525894165,
+     "latency": 22.542752742767334,
      "ref": "26",
      "pred": "0.45",
      "correct": false
@@ -331,7 +331,7 @@
       "completion_tokens": 165,
       "total_tokens": 241
      },
-     "latency": 14.90192461013794,
+     "latency": 20.171766757965088,
      "ref": "20",
      "pred": "18",
      "correct": false
@@ -345,7 +345,7 @@
       "completion_tokens": 512,
       "total_tokens": 574
      },
-     "latency": 22.275394201278687,
+     "latency": 30.01934289932251,
      "ref": "5",
      "pred": "2000",
      "correct": false
@@ -359,7 +359,7 @@
       "completion_tokens": 512,
       "total_tokens": 587
      },
-     "latency": 29.76348376274109,
+     "latency": 40.83811020851135,
      "ref": "500",
      "pred": "333",
      "correct": false
@@ -373,7 +373,7 @@
       "completion_tokens": 512,
       "total_tokens": 608
      },
-     "latency": 36.196669578552246,
+     "latency": 50.85787272453308,
      "ref": "4",
      "pred": "6",
      "correct": false
@@ -387,7 +387,7 @@
       "completion_tokens": 208,
       "total_tokens": 266
      },
-     "latency": 37.17458724975586,
+     "latency": 51.8855357170105,
      "ref": "48",
      "pred": "5",
      "correct": false
@@ -401,7 +401,7 @@
       "completion_tokens": 180,
       "total_tokens": 246
      },
-     "latency": 29.981441020965576,
+     "latency": 42.502307653427124,
      "ref": "93000",
      "pred": "3131",
      "correct": false
@@ -415,7 +415,7 @@
       "completion_tokens": 114,
       "total_tokens": 188
      },
-     "latency": 21.604825258255005,
+     "latency": 30.833377838134766,
      "ref": "73",
      "pred": "40",
      "correct": false
@@ -429,7 +429,7 @@
       "completion_tokens": 270,
       "total_tokens": 347
      },
-     "latency": 16.677756786346436,
+     "latency": 23.330368757247925,
      "ref": "24",
      "pred": "4",
      "correct": false
@@ -443,7 +443,7 @@
       "completion_tokens": 274,
       "total_tokens": 434
      },
-     "latency": 18.00211787223816,
+     "latency": 25.449681043624878,
      "ref": "374",
      "pred": "12",
      "correct": false
@@ -457,7 +457,7 @@
       "completion_tokens": 191,
       "total_tokens": 271
      },
-     "latency": 18.29344868659973,
+     "latency": 25.75698494911194,
      "ref": "175",
      "pred": "73",
      "correct": false
@@ -471,7 +471,7 @@
       "completion_tokens": 512,
       "total_tokens": 603
      },
-     "latency": 26.705729961395264,
+     "latency": 37.24125003814697,
      "ref": "15",
      "pred": "10",
      "correct": false
@@ -485,7 +485,7 @@
       "completion_tokens": 328,
       "total_tokens": 462
      },
-     "latency": 28.01620054244995,
+     "latency": 38.77889609336853,
      "ref": "25",
      "pred": "75",
      "correct": false
@@ -499,7 +499,7 @@
       "completion_tokens": 370,
       "total_tokens": 512
      },
-     "latency": 30.039714097976685,
+     "latency": 41.42699933052063,
      "ref": "452",
      "pred": "60",
      "correct": false
@@ -513,7 +513,7 @@
       "completion_tokens": 149,
       "total_tokens": 207
      },
-     "latency": 29.049424648284912,
+     "latency": 40.40460801124573,
      "ref": "187",
      "pred": "36000",
      "correct": false
@@ -527,7 +527,7 @@
       "completion_tokens": 286,
       "total_tokens": 397
      },
-     "latency": 24.4444637298584,
+     "latency": 33.43351697921753,
      "ref": "36",
      "pred": "10.8",
      "correct": false
@@ -541,7 +541,7 @@
       "completion_tokens": 222,
       "total_tokens": 306
      },
-     "latency": 22.065917015075684,
+     "latency": 29.92803192138672,
      "ref": "48",
      "pred": "1800",
      "correct": false
@@ -555,7 +555,7 @@
       "completion_tokens": 188,
       "total_tokens": 284
      },
-     "latency": 18.22605276107788,
+     "latency": 24.69286060333252,
      "ref": "33",
      "pred": "33.33",
      "correct": false
@@ -569,7 +569,7 @@
       "completion_tokens": 118,
       "total_tokens": 177
      },
-     "latency": 17.575274229049683,
+     "latency": 23.46249556541443,
      "ref": "10",
      "pred": "9",
      "correct": false
@@ -583,7 +583,7 @@
       "completion_tokens": 263,
       "total_tokens": 349
      },
-     "latency": 17.008878231048584,
+     "latency": 23.29296875,
      "ref": "6",
      "pred": "20.00",
      "correct": false
@@ -597,7 +597,7 @@
       "completion_tokens": 316,
       "total_tokens": 435
      },
-     "latency": 19.037710666656494,
+     "latency": 26.552732944488525,
      "ref": "30",
      "pred": "6000",
      "correct": false
@@ -611,7 +611,7 @@
       "completion_tokens": 115,
       "total_tokens": 176
      },
-     "latency": 17.51686406135559,
+     "latency": 24.535150289535522,
      "ref": "16",
      "pred": "6",
      "correct": false
@@ -625,7 +625,7 @@
       "completion_tokens": 131,
       "total_tokens": 222
      },
-     "latency": 17.811853408813477,
+     "latency": 25.008146286010742,
      "ref": "172",
      "pred": "80",
      "correct": false
@@ -639,7 +639,7 @@
       "completion_tokens": 174,
       "total_tokens": 267
      },
-     "latency": 15.789242029190063,
+     "latency": 21.81825304031372,
      "ref": "720",
      "pred": "960",
      "correct": false
@@ -653,7 +653,7 @@
       "completion_tokens": 512,
       "total_tokens": 598
      },
-     "latency": 19.784441232681274,
+     "latency": 27.04259490966797,
      "ref": "5",
      "pred": "4",
      "correct": false
@@ -667,7 +667,7 @@
       "completion_tokens": 337,
       "total_tokens": 444
      },
-     "latency": 24.642040967941284,
+     "latency": 33.40170979499817,
      "ref": "2",
      "pred": "11",
      "correct": false
@@ -681,7 +681,7 @@
       "completion_tokens": 90,
       "total_tokens": 156
      },
-     "latency": 23.848900079727173,
+     "latency": 32.142502784729004,
      "ref": "5",
      "pred": "5",
      "correct": true
@@ -695,7 +695,7 @@
       "completion_tokens": 267,
       "total_tokens": 347
      },
-     "latency": 25.86348247528076,
+     "latency": 35.16519498825073,
      "ref": "132",
      "pred": "16",
      "correct": false
@@ -709,7 +709,7 @@
       "completion_tokens": 179,
       "total_tokens": 257
      },
-     "latency": 18.930548191070557,
+     "latency": 25.706844091415405,
      "ref": "100",
      "pred": "620",
      "correct": false
@@ -723,7 +723,7 @@
       "completion_tokens": 174,
       "total_tokens": 245
      },
-     "latency": 15.246079206466675,
+     "latency": 21.039161682128906,
      "ref": "12",
      "pred": "9.60",
      "correct": false
@@ -737,7 +737,7 @@
       "completion_tokens": 159,
       "total_tokens": 235
      },
-     "latency": 16.589524030685425,
+     "latency": 23.21605086326599,
      "ref": "7",
      "pred": "60",
      "correct": false
@@ -751,7 +751,7 @@
       "completion_tokens": 177,
       "total_tokens": 256
      },
-     "latency": 14.836521625518799,
+     "latency": 19.971160173416138,
      "ref": "4",
      "pred": "7",
      "correct": false
@@ -765,7 +765,7 @@
       "completion_tokens": 144,
       "total_tokens": 212
      },
-     "latency": 14.177391052246094,
+     "latency": 18.794185400009155,
      "ref": "4",
      "pred": "14",
      "correct": false
@@ -779,7 +779,7 @@
       "completion_tokens": 278,
       "total_tokens": 360
      },
-     "latency": 16.371811628341675,
+     "latency": 22.603408098220825,
      "ref": "32",
      "pred": "6",
      "correct": false
@@ -793,7 +793,7 @@
       "completion_tokens": 140,
       "total_tokens": 237
      },
-     "latency": 16.0292489528656,
+     "latency": 22.171168565750122,
      "ref": "26",
      "pred": "200",
      "correct": false
@@ -807,7 +807,7 @@
       "completion_tokens": 181,
       "total_tokens": 294
      },
-     "latency": 15.96368670463562,
+     "latency": 23.154685020446777,
      "ref": "47",
      "pred": "33",
      "correct": false
@@ -821,7 +821,7 @@
       "completion_tokens": 359,
       "total_tokens": 501
      },
-     "latency": 20.373202085494995,
+     "latency": 30.353143215179443,
      "ref": "350",
      "pred": "20",
      "correct": false
@@ -835,7 +835,7 @@
       "completion_tokens": 232,
       "total_tokens": 309
      },
-     "latency": 19.481903314590454,
+     "latency": 28.51042890548706,
      "ref": "140000",
      "pred": "0",
      "correct": false
@@ -849,7 +849,7 @@
       "completion_tokens": 110,
       "total_tokens": 200
      },
-     "latency": 18.83204984664917,
+     "latency": 27.544731616973877,
      "ref": "76",
      "pred": "104",
      "correct": false
@@ -863,7 +863,7 @@
       "completion_tokens": 188,
       "total_tokens": 256
      },
-     "latency": 18.967260360717773,
+     "latency": 28.021222352981567,
      "ref": "803",
      "pred": "1050",
      "correct": false
@@ -877,7 +877,7 @@
       "completion_tokens": 167,
       "total_tokens": 236
      },
-     "latency": 14.931649208068848,
+     "latency": 22.00608515739441,
      "ref": "60",
      "pred": "72",
      "correct": false
@@ -891,7 +891,7 @@
       "completion_tokens": 177,
       "total_tokens": 251
      },
-     "latency": 13.805638074874878,
+     "latency": 20.58004856109619,
      "ref": "54",
      "pred": "30",
      "correct": false
@@ -905,7 +905,7 @@
       "completion_tokens": 114,
       "total_tokens": 213
      },
-     "latency": 13.906337976455688,
+     "latency": 20.685075998306274,
      "ref": "20",
      "pred": "7",
      "correct": false
@@ -919,7 +919,7 @@
       "completion_tokens": 195,
       "total_tokens": 275
      },
-     "latency": 14.057860612869263,
+     "latency": 20.818556547164917,
      "ref": "81",
      "pred": "81",
      "correct": true
@@ -933,7 +933,7 @@
       "completion_tokens": 255,
       "total_tokens": 365
      },
-     "latency": 15.911970138549805,
+     "latency": 22.927152156829834,
      "ref": "20",
      "pred": "10",
      "correct": false
@@ -947,7 +947,7 @@
       "completion_tokens": 512,
       "total_tokens": 607
      },
-     "latency": 22.896369218826294,
+     "latency": 32.56902480125427,
      "ref": "51",
      "pred": "15",
      "correct": false
@@ -961,7 +961,7 @@
       "completion_tokens": 292,
       "total_tokens": 380
      },
-     "latency": 26.63454794883728,
+     "latency": 37.99834728240967,
      "ref": "250",
      "pred": "1",
      "correct": false
@@ -975,7 +975,7 @@
       "completion_tokens": 153,
       "total_tokens": 230
      },
-     "latency": 25.753358364105225,
+     "latency": 36.20755076408386,
      "ref": "5",
      "pred": "451",
      "correct": false
@@ -989,7 +989,7 @@
       "completion_tokens": 241,
       "total_tokens": 350
      },
-     "latency": 25.475938081741333,
+     "latency": 36.16344618797302,
      "ref": "40",
      "pred": "0.08",
      "correct": false
@@ -1003,7 +1003,7 @@
       "completion_tokens": 187,
       "total_tokens": 263
      },
-     "latency": 18.665756702423096,
+     "latency": 26.414121627807617,
      "ref": "8",
      "pred": "4.75",
      "correct": false
@@ -1017,7 +1017,7 @@
       "completion_tokens": 154,
       "total_tokens": 247
      },
-     "latency": 15.70449686050415,
+     "latency": 22.058035612106323,
      "ref": "8",
      "pred": "56",
      "correct": false
@@ -1031,7 +1031,7 @@
       "completion_tokens": 228,
       "total_tokens": 286
      },
-     "latency": 17.43248462677002,
+     "latency": 24.39465570449829,
      "ref": "360",
      "pred": "540",
      "correct": false
@@ -1045,7 +1045,7 @@
       "completion_tokens": 197,
       "total_tokens": 285
      },
-     "latency": 16.445504665374756,
+     "latency": 23.086636066436768,
      "ref": "20",
      "pred": "50.00",
      "correct": false
@@ -1059,7 +1059,7 @@
       "completion_tokens": 147,
       "total_tokens": 224
      },
-     "latency": 15.555464267730713,
+     "latency": 21.79392170906067,
      "ref": "12",
      "pred": "35",
      "correct": false
@@ -1073,7 +1073,7 @@
       "completion_tokens": 252,
       "total_tokens": 337
      },
-     "latency": 17.681334495544434,
+     "latency": 24.4413845539093,
      "ref": "15",
      "pred": "14",
      "correct": false
@@ -1087,7 +1087,7 @@
       "completion_tokens": 203,
       "total_tokens": 276
      },
-     "latency": 17.001814126968384,
+     "latency": 23.955129146575928,
      "ref": "130",
      "pred": "340",
      "correct": false
@@ -1101,7 +1101,7 @@
       "completion_tokens": 191,
       "total_tokens": 333
      },
-     "latency": 17.028626918792725,
+     "latency": 23.84202766418457,
      "ref": "5",
      "pred": "35",
      "correct": false
@@ -1115,7 +1115,7 @@
       "completion_tokens": 395,
       "total_tokens": 488
      },
-     "latency": 22.25083327293396,
+     "latency": 31.441603422164917,
      "ref": "12",
      "pred": "450",
      "correct": false
@@ -1129,7 +1129,7 @@
       "completion_tokens": 308,
       "total_tokens": 405
      },
-     "latency": 23.419784784317017,
+     "latency": 33.25591158866882,
      "ref": "12",
      "pred": "13",
      "correct": false
@@ -1143,7 +1143,7 @@
       "completion_tokens": 221,
       "total_tokens": 289
      },
-     "latency": 23.857216596603394,
+     "latency": 33.6520357131958,
      "ref": "77",
      "pred": "40",
      "correct": false
@@ -1157,7 +1157,7 @@
       "completion_tokens": 80,
       "total_tokens": 135
      },
-     "latency": 21.380816221237183,
+     "latency": 30.333356380462646,
      "ref": "168",
      "pred": "2",
      "correct": false
@@ -1171,7 +1171,7 @@
       "completion_tokens": 147,
       "total_tokens": 221
      },
-     "latency": 16.145203351974487,
+     "latency": 22.88921880722046,
      "ref": "162",
      "pred": "143.50",
      "correct": false
@@ -1185,7 +1185,7 @@
       "completion_tokens": 259,
       "total_tokens": 323
      },
-     "latency": 15.14057731628418,
+     "latency": 21.619486331939697,
      "ref": "15",
      "pred": "75",
      "correct": false
@@ -1199,7 +1199,7 @@
       "completion_tokens": 214,
       "total_tokens": 304
      },
-     "latency": 14.973751306533813,
+     "latency": 21.490416526794434,
      "ref": "17",
      "pred": "50",
      "correct": false
@@ -1213,7 +1213,7 @@
       "completion_tokens": 303,
       "total_tokens": 386
      },
-     "latency": 19.71960186958313,
+     "latency": 27.96046733856201,
      "ref": "3",
      "pred": "4",
      "correct": false
@@ -1227,7 +1227,7 @@
       "completion_tokens": 512,
       "total_tokens": 602
      },
-     "latency": 27.59197759628296,
+     "latency": 38.819477558135986,
      "ref": "120",
      "pred": "3",
      "correct": false
@@ -1241,7 +1241,7 @@
       "completion_tokens": 108,
       "total_tokens": 199
      },
-     "latency": 24.447577238082886,
+     "latency": 34.41840171813965,
      "ref": "34",
      "pred": "22",
      "correct": false
@@ -1255,7 +1255,7 @@
       "completion_tokens": 91,
       "total_tokens": 146
      },
-     "latency": 21.889801502227783,
+     "latency": 30.780787706375122,
      "ref": "360",
      "pred": "3",
      "correct": false
@@ -1269,7 +1269,7 @@
       "completion_tokens": 239,
       "total_tokens": 345
      },
-     "latency": 20.494691133499146,
+     "latency": 28.804131031036377,
      "ref": "235",
      "pred": "50.00",
      "correct": false
@@ -1283,7 +1283,7 @@
       "completion_tokens": 512,
       "total_tokens": 601
      },
-     "latency": 20.37998366355896,
+     "latency": 28.6966552734375,
      "ref": "120000",
      "pred": "15600",
      "correct": false
@@ -1297,7 +1297,7 @@
       "completion_tokens": 512,
       "total_tokens": 589
      },
-     "latency": 28.750438451766968,
+     "latency": 41.33252811431885,
      "ref": "180",
      "pred": "15",
      "correct": false
@@ -1311,7 +1311,7 @@
       "completion_tokens": 74,
       "total_tokens": 136
      },
-     "latency": 28.44920516014099,
+     "latency": 40.71024036407471,
      "ref": "16",
      "pred": "16",
      "correct": true
@@ -1325,7 +1325,7 @@
       "completion_tokens": 230,
       "total_tokens": 314
      },
-     "latency": 28.328385591506958,
+     "latency": 40.725945711135864,
      "ref": "240",
      "pred": "60",
      "correct": false
@@ -1339,7 +1339,7 @@
       "completion_tokens": 216,
       "total_tokens": 284
      },
-     "latency": 22.039194345474243,
+     "latency": 32.040066719055176,
      "ref": "975",
      "pred": "3",
      "correct": false
@@ -1353,7 +1353,7 @@
       "completion_tokens": 301,
       "total_tokens": 369
      },
-     "latency": 17.688472747802734,
+     "latency": 24.551573276519775,
      "ref": "20",
      "pred": "8.25",
      "correct": false
@@ -1367,7 +1367,7 @@
       "completion_tokens": 251,
       "total_tokens": 311
      },
-     "latency": 21.331412315368652,
+     "latency": 29.9417827129364,
      "ref": "72000",
      "pred": "4",
      "correct": false
@@ -1381,7 +1381,7 @@
       "completion_tokens": 310,
       "total_tokens": 453
      },
-     "latency": 22.989304065704346,
+     "latency": 32.274040937423706,
      "ref": "56",
      "pred": "1208",
      "correct": false
@@ -1395,7 +1395,7 @@
       "completion_tokens": 207,
       "total_tokens": 285
      },
-     "latency": 22.863312005996704,
+     "latency": 31.960302352905273,
      "ref": "8",
      "pred": "9.00",
      "correct": false
@@ -1409,7 +1409,7 @@
       "completion_tokens": 512,
       "total_tokens": 654
      },
-     "latency": 27.400997400283813,
+     "latency": 38.24471592903137,
      "ref": "17",
      "pred": "13",
      "correct": false
@@ -1424,7 +1424,7 @@
     "errors": 0,
     "truncated": 19,
     "avg_completion_tokens": 314.3170731707317,
-    "avg_latency_s": 26.309856414794922
+    "avg_latency_s": 36.200861738949285
    },
    "records": [
     {
@@ -1436,10 +1436,10 @@
       "completion_tokens": 272,
       "total_tokens": 445
      },
-     "latency": 5.814460515975952,
+     "latency": 8.047508716583252,
      "task_id": "HumanEval/0",
      "correct": false,
-     "err": " 16, in has_close_elements\n    return is_close_to(numbers, threshold)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/tmpgmy5u9qg.py\", line 14, in is_close_to\n    return abs(num1 - num2) <= threshold\n               ~~~~~^~~~~~\nTypeError: unsupported operand type(s) for -: 'list' and 'float'\n"
+     "err": " 16, in has_close_elements\n    return is_close_to(numbers, threshold)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/tmp3vv0sfyb.py\", line 14, in is_close_to\n    return abs(num1 - num2) <= threshold\n               ~~~~~^~~~~~\nTypeError: unsupported operand type(s) for -: 'list' and 'float'\n"
     },
     {
      "content": "from typing import List\n\n\ndef separate_paren_groups(paren_string: str) -> List[str]:\n    \"\"\" Input to this function is a string containing multiple groups of nested parentheses. Your goal is to\n    separate those group into separate strings and return the list of those.\n    Separate groups are balanced (each open brace is properly closed) and not nested within each other\n    Ignore any spaces in the input string.\n    >>> separate_paren_groups('( ) (( )) (( )( ))')\n    ['()', '(())', '(()())']\n    \"\"\"\n\n    def separate_paren_groups_helper(paren_string: str) -> List[str]:\n        open_braces = p",
@@ -1450,10 +1450,10 @@
       "completion_tokens": 296,
       "total_tokens": 469
      },
-     "latency": 12.202162265777588,
+     "latency": 16.731916904449463,
      "task_id": "HumanEval/1",
      "correct": false,
-     "err": "Traceback (most recent call last):\n  File \"/tmp/tmpliwxv3im.py\", line 49, in <module>\n    check(separate_paren_groups)\n  File \"/tmp/tmpliwxv3im.py\", line 37, in check\n    assert candidate('(()()) ((())) () ((())()())') == [\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+     "err": "Traceback (most recent call last):\n  File \"/tmp/tmpdtpg147q.py\", line 49, in <module>\n    check(separate_paren_groups)\n  File \"/tmp/tmpdtpg147q.py\", line 37, in check\n    assert candidate('(()()) ((())) () ((())()())') == [\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
     },
     {
      "content": "def truncate_number(number: float) -> float:\n    \"\"\" Given a positive floating point number, it can be decomposed into\n    and integer part (largest integer smaller than given number) and decimals\n    (leftover part always smaller than 1).\n\n    Return the decimal part of the number.\n    >>> truncate_number(3.5)\n    0.5\n    \"\"\"\n\n    def decimal_part(number: float) -> float:\n        \"\"\" Given a positive floating point number, it can be decomposed into\n        and integer part (largest integer smaller than given number) and decimals\n        (leftover part always smaller than 1).\n\n        Return t",
@@ -1464,10 +1464,10 @@
       "completion_tokens": 258,
       "total_tokens": 385
      },
-     "latency": 24.193379878997803,
+     "latency": 24.390116691589355,
      "task_id": "HumanEval/2",
      "correct": false,
-     "err": " number - decimal_part(number)\n                    ^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/tmp4ztk1j1j.py\", line 19, in decimal_part\n    return number - decimal_part(number)\n                    ^^^^^^^^^^^^^^^^^^^^\n  [Previous line repeated 994 more times]\nRecursionError: maximum recursion depth exceeded\n"
+     "err": " number - decimal_part(number)\n                    ^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/tmpzga1yv5f.py\", line 19, in decimal_part\n    return number - decimal_part(number)\n                    ^^^^^^^^^^^^^^^^^^^^\n  [Previous line repeated 994 more times]\nRecursionError: maximum recursion depth exceeded\n"
     },
     {
      "content": "from typing import List\n\n\ndef below_zero(operations: List[int]) -> bool:\n    \"\"\" You're given a list of deposit and withdrawal operations on a bank account that starts with\n    zero balance. Your task is to detect if at any point the balance of account fallls below zero,\n    and at that point function should return True. Otherwise it should return False.\n    >>> below_zero([1, 2, 3])\n    False\n    >>> below_zero([1, 2, -4, 5])\n    True\n    \"\"\"\n\n    def detect_falling_balance(account: List[int]) -> bool:\n        \"\"\" Detect if the balance of account falls below zero.\"\"\"\n        return sum(accoun",
@@ -1478,10 +1478,10 @@
       "completion_tokens": 304,
       "total_tokens": 468
      },
-     "latency": 18.639660835266113,
+     "latency": 33.23884963989258,
      "task_id": "HumanEval/3",
      "correct": false,
-     "err": "k(below_zero)\n  File \"/tmp/tmpyh8c_y83.py\", line 30, in check\n    assert candidate([]) == False\n           ^^^^^^^^^^^^^\n  File \"/tmp/tmpyh8c_y83.py\", line 18, in below_zero\n    return detect_falling_balance(account)\n                                  ^^^^^^^\nNameError: name 'account' is not defined\n"
+     "err": "k(below_zero)\n  File \"/tmp/tmpmkbfzzob.py\", line 30, in check\n    assert candidate([]) == False\n           ^^^^^^^^^^^^^\n  File \"/tmp/tmpmkbfzzob.py\", line 18, in below_zero\n    return detect_falling_balance(account)\n                                  ^^^^^^^\nNameError: name 'account' is not defined\n"
     },
     {
      "content": "from typing import List\n\n\ndef mean_absolute_deviation(numbers: List[float]) -> float:\n    \"\"\" For a given list of input numbers, calculate Mean Absolute Deviation\n    around the mean of this dataset.\n    Mean Absolute Deviation is the average absolute difference between each\n    element and a centerpoint (mean in this case):\n    MAD = average | x - x_mean |\n    >>> mean_absolute_deviation([1.0, 2.0, 3.0, 4.0])\n    1.0\n    \"\"\"\n\n    # Calculate the mean of the dataset\n    mean = sum(numbers) / len(numbers)\n\n    # Calculate the absolute difference between each number and the mean\n    absolute_dif",
@@ -1492,7 +1492,7 @@
       "completion_tokens": 316,
       "total_tokens": 481
      },
-     "latency": 25.148930549621582,
+     "latency": 34.270408630371094,
      "task_id": "HumanEval/4",
      "correct": true,
      "err": ""
@@ -1506,10 +1506,10 @@
       "completion_tokens": 218,
       "total_tokens": 357
      },
-     "latency": 23.341750860214233,
+     "latency": 32.074259519577026,
      "task_id": "HumanEval/5",
      "correct": false,
-     "err": "Traceback (most recent call last):\n  File \"/tmp/tmpwmpdpo4y.py\", line 37, in <module>\n    check(intersperse)\n  File \"/tmp/tmpwmpdpo4y.py\", line 32, in check\n    assert candidate([], 7) == []\n           ^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+     "err": "Traceback (most recent call last):\n  File \"/tmp/tmpfas4i_th.py\", line 37, in <module>\n    check(intersperse)\n  File \"/tmp/tmpfas4i_th.py\", line 32, in check\n    assert candidate([], 7) == []\n           ^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
     },
     {
      "content": "```python\nfrom typing import List\n\n\ndef parse_nested_parens(paren_string: str) -> List[int]:\n    \"\"\" Input to this function is a string represented multiple groups for nested parentheses separated by spaces.\n    For each of the group, output the deepest level of nesting of parentheses.\n    E.g. (()()) has maximum two levels of nesting while ((())) has three.\n\n    >>> parse_nested_parens('(()()) ((())) () ((())()())')\n    [2, 3, 1, 3]\n    \"\"\"\n\n\ndef parse_nested_parens(paren_string: str) -> List[int]:\n    \"\"\" Input to this function is a string represented multiple groups for nested parentheses s",
@@ -1520,10 +1520,10 @@
       "completion_tokens": 512,
       "total_tokens": 682
      },
-     "latency": 27.762348175048828,
+     "latency": 39.15142250061035,
      "task_id": "HumanEval/6",
      "correct": false,
-     "err": "  File \"/tmp/tmp03rtqplt.py\", line 36\n    \"\"\" Input to this function is a string represented multiple groups for nested parentheses separated by spaces.\n    ^\nSyntaxError: unterminated triple-quoted string literal (detected at line 57)\n"
+     "err": "  File \"/tmp/tmp8x4jmpe6.py\", line 36\n    \"\"\" Input to this function is a string represented multiple groups for nested parentheses separated by spaces.\n    ^\nSyntaxError: unterminated triple-quoted string literal (detected at line 57)\n"
     },
     {
      "content": "```python\nfrom typing import List\n\n\ndef filter_by_substring(strings: List[str], substring: str) -> List[str]:\n    \"\"\" Filter an input list of strings only for ones that contain given substring\n    >>> filter_by_substring([], 'a')\n    []\n    >>> filter_by_substring(['abc', 'bacd', 'cde', 'array'], 'a')\n    ['abc', 'bacd', 'array']\n    \"\"\"\n\n\ndef filter_by_substring(strings: List[str], substring: str) -> List[str]:\n    \"\"\" Filter an input list of strings only for ones that contain given substring\n    >>> filter_by_substring([], 'a')\n    []\n    >>> filter_by_substring(['abc', 'bacd', 'cde', 'array",
@@ -1534,10 +1534,10 @@
       "completion_tokens": 512,
       "total_tokens": 667
      },
-     "latency": 33.22752857208252,
+     "latency": 45.150583028793335,
      "task_id": "HumanEval/7",
      "correct": false,
-     "err": "  File \"/tmp/tmpf590abd4.py\", line 42\n    \"\"\" Filter an input list of strings only for ones that contain given substring\n    ^\nSyntaxError: unterminated triple-quoted string literal (detected at line 59)\n"
+     "err": "  File \"/tmp/tmpr9_uez3o.py\", line 42\n    \"\"\" Filter an input list of strings only for ones that contain given substring\n    ^\nSyntaxError: unterminated triple-quoted string literal (detected at line 59)\n"
     },
     {
      "content": "```python\nfrom typing import List, Tuple\n\n\ndef sum_product(numbers: List[int]) -> Tuple[int, int]:\n    \"\"\" For a given list of integers, return a tuple consisting of a sum and a product of all the integers in a list.\n    Empty sum should be equal to 0 and empty product should be equal to 1.\n    >>> sum_product([])\n    (0, 1)\n    >>> sum_product([1, 2, 3, 4])\n    (10, 24)\n    \"\"\"\n\n\ndef sum_product(numbers: List[int]) -> Tuple[int, int]:\n    \"\"\" For a given list of integers, return a tuple consisting of a sum and a product of all the integers in a list.\n    Empty sum should be equal to 0 and emp",
@@ -1548,10 +1548,10 @@
       "completion_tokens": 512,
       "total_tokens": 673
      },
-     "latency": 37.67605233192444,
+     "latency": 51.084959745407104,
      "task_id": "HumanEval/8",
      "correct": false,
-     "err": "  File \"/tmp/tmpz4ttc163.py\", line 46\n    \"\"\" For a given list of\n    ^\nSyntaxError: unterminated triple-quoted string literal (detected at line 64)\n"
+     "err": "  File \"/tmp/tmp9gpxf709.py\", line 46\n    \"\"\" For a given list of\n    ^\nSyntaxError: unterminated triple-quoted string literal (detected at line 64)\n"
     },
     {
      "content": "```python\nfrom typing import List, Tuple\n\n\ndef rolling_max(numbers: List[int]) -> List[int]:\n    \"\"\" From a given list of integers, generate a list of rolling maximum element found until given moment\n    in the sequence.\n    >>> rolling_max([1, 2, 3, 2, 3, 4, 2])\n    [1, 2, 3, 3, 3, 4, 4]\n    \"\"\"\n\n\ndef rolling_max_helper(numbers: List[int], max_so_far: int = 0) -> List[int]:\n    \"\"\" Helper function to find the rolling maximum element found until the given moment.\n    >>> rolling_max_helper([1, 2, 3, 2, 3, 4, 2])\n    [1, 2, 3, 3, 3, 4, 4]\n    \"\"\"\n\n\ndef rolling_max(numbers: List[int], max_so_far",
@@ -1562,10 +1562,10 @@
       "completion_tokens": 512,
       "total_tokens": 655
      },
-     "latency": 43.920649766922,
+     "latency": 59.545693159103394,
      "task_id": "HumanEval/9",
      "correct": false,
-     "err": "  File \"/tmp/tmpzvm325uk.py\", line 36\n    \"\"\" Helper function to find the rolling maximum element found until the given moment.\n    ^\nSyntaxError: unterminated triple-quoted string literal (detected at line 54)\n"
+     "err": "  File \"/tmp/tmpuvihj7gg.py\", line 36\n    \"\"\" Helper function to find the rolling maximum element found until the given moment.\n    ^\nSyntaxError: unterminated triple-quoted string literal (detected at line 54)\n"
     },
     {
      "content": "Here's the completed function:\n\n```python\ndef is_palindrome(string: str) -> bool:\n    \"\"\" Test if given string is a palindrome \"\"\"\n    return string == string[::-1]\n\n\ndef make_palindrome(string: str) -> str:\n    \"\"\" Find the shortest palindrome that begins with a supplied string.\n    Algorithm idea is simple:\n    - Find the longest postfix of supplied string that is a palindrome.\n    - Append to the end of the string reverse of a string prefix that comes before the palindromic suffix.\n    >>> make_palindrome('')\n    ''\n    >>> make_palindrome('cat')\n    'catac'\n    >>> make_palindrome('cata')\n",
@@ -1576,10 +1576,10 @@
       "completion_tokens": 512,
       "total_tokens": 723
      },
-     "latency": 44.008533000946045,
+     "latency": 60.218942403793335,
      "task_id": "HumanEval/10",
      "correct": false,
-     "err": "  File \"/tmp/tmpuircecer.py\", line 1\n    Here's the completed function:\n        ^\nSyntaxError: unterminated string literal (detected at line 1)\n"
+     "err": "  File \"/tmp/tmp9w_851cy.py\", line 1\n    Here's the completed function:\n        ^\nSyntaxError: unterminated string literal (detected at line 1)\n"
     },
     {
      "content": "from typing import List\n\n\ndef string_xor(a: str, b: str) -> str:\n    \"\"\" Input are two strings a and b consisting only of 1s and 0s.\n    Perform binary XOR on these inputs and return result also as a string.\n    >>> string_xor('010', '110')\n    '100'\n    \"\"\"\n\n    # Convert inputs to binary strings\n    a_binary = bin(a)[2:]\n    b_binary = bin(b)[2:]\n\n    # Perform XOR operation\n    result = a_binary ^ b_binary\n\n    # Convert result back to string\n    result_str = str(result)\n\n    return result_str\n",
@@ -1590,10 +1590,10 @@
       "completion_tokens": 221,
       "total_tokens": 340
      },
-     "latency": 37.68255019187927,
+     "latency": 51.78118562698364,
      "task_id": "HumanEval/11",
      "correct": false,
-     "err": "ile \"/tmp/tmpem1vgg4j.py\", line 33, in check\n    assert candidate('111000', '101010') == '010010'\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/tmpem1vgg4j.py\", line 12, in string_xor\n    a_binary = bin(a)[2:]\n               ^^^^^^\nTypeError: 'str' object cannot be interpreted as an integer\n"
+     "err": "ile \"/tmp/tmpzb_6etl4.py\", line 33, in check\n    assert candidate('111000', '101010') == '010010'\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/tmpzb_6etl4.py\", line 12, in string_xor\n    a_binary = bin(a)[2:]\n               ^^^^^^\nTypeError: 'str' object cannot be interpreted as an integer\n"
     },
     {
      "content": "```python\nfrom typing import List, Optional\n\n\ndef longest(strings: List[str]) -> Optional[str]:\n    \"\"\" Out of list of strings, return the longest one. Return the first one in case of multiple\n    strings of the same length. Return None in case the input list is empty.\n    >>> longest([])\n\n    >>> longest(['a', 'b', 'c'])\n    'a'\n    >>> longest(['a', 'bb', 'ccc'])\n    'ccc'\n    \"\"\"\n\n\ndef longest_function(strings: List[str]) -> Optional[str]:\n    \"\"\" Out of list of strings, return the longest one. Return the first one in case of multiple\n    strings of the same length. Return None in case the ",
@@ -1604,10 +1604,10 @@
       "completion_tokens": 512,
       "total_tokens": 669
      },
-     "latency": 37.34512209892273,
+     "latency": 52.2118616104126,
      "task_id": "HumanEval/12",
      "correct": false,
-     "err": "  File \"/tmp/tmpl2k7wspb.py\", line 42\n    \"\"\" Out of list of strings, return the longest one. Return the first one in case of multiple\n    ^\nSyntaxError: unterminated triple-quoted string literal (detected at line 62)\n"
+     "err": "  File \"/tmp/tmpqnx4yk_e.py\", line 42\n    \"\"\" Out of list of strings, return the longest one. Return the first one in case of multiple\n    ^\nSyntaxError: unterminated triple-quoted string literal (detected at line 62)\n"
     },
     {
      "content": "def greatest_common_divisor(a: int, b: int) -> int:\n    \"\"\" Return a greatest common divisor of two integers a and b\n    >>> greatest_common_divisor(3, 5)\n    1\n    >>> greatest_common_divisor(25, 15)\n    5\n    \"\"\"\n\n    def gcd(a, b):\n        while b:\n            a, b = b, a % b\n        return a\n\n    return gcd(a, b)\n",
@@ -1618,7 +1618,7 @@
       "completion_tokens": 191,
       "total_tokens": 307
      },
-     "latency": 30.604823350906372,
+     "latency": 42.83863663673401,
      "task_id": "HumanEval/13",
      "correct": true,
      "err": ""
@@ -1632,10 +1632,10 @@
       "completion_tokens": 308,
       "total_tokens": 416
      },
-     "latency": 26.26218032836914,
+     "latency": 36.38029742240906,
      "task_id": "HumanEval/14",
      "correct": false,
-     "err": "7vbdky.py\", line 29, in all_prefixes\n    prefixes = all_prefixes_helper(string, [])\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/tmpd67vbdky.py\", line 17, in all_prefixes_helper\n    while string[i] != prefixes[i]:\n                       ~~~~~~~~^^^\nIndexError: list index out of range\n"
+     "err": "_jfv5q.py\", line 29, in all_prefixes\n    prefixes = all_prefixes_helper(string, [])\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/tmpth_jfv5q.py\", line 17, in all_prefixes_helper\n    while string[i] != prefixes[i]:\n                       ~~~~~~~~^^^\nIndexError: list index out of range\n"
     },
     {
      "content": "def string_sequence(n: int) -> str:\n    \"\"\" Return a string containing space-delimited numbers starting from 0 upto n inclusive.\n    >>> string_sequence(0)\n    '0'\n    >>> string_sequence(5)\n    '0 1 2 3 4 5'\n    \"\"\"\n    return ' '.join(str(n) for n in range(0, n + 1))\n",
@@ -1646,7 +1646,7 @@
       "completion_tokens": 183,
       "total_tokens": 295
      },
-     "latency": 25.54670286178589,
+     "latency": 35.40883708000183,
      "task_id": "HumanEval/15",
      "correct": true,
      "err": ""
@@ -1660,10 +1660,10 @@
       "completion_tokens": 268,
       "total_tokens": 390
      },
-     "latency": 20.346624612808228,
+     "latency": 28.079007148742676,
      "task_id": "HumanEval/16",
      "correct": false,
-     "err": "mp/tmpk2ltrqe1.py\", line 35, in check\n    assert candidate('abcde') == 5\n           ^^^^^^^^^^^^^^^^^^\n  File \"/tmp/tmpk2ltrqe1.py\", line 18, in count_distinct_characters\n    if char not in distinct_characters:\n       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nTypeError: argument of type 'int' is not iterable\n"
+     "err": "mp/tmp6g2wieuv.py\", line 35, in check\n    assert candidate('abcde') == 5\n           ^^^^^^^^^^^^^^^^^^\n  File \"/tmp/tmp6g2wieuv.py\", line 18, in count_distinct_characters\n    if char not in distinct_characters:\n       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nTypeError: argument of type 'int' is not iterable\n"
     },
     {
      "content": "from typing import List\n\n\ndef parse_music(music_string: str) -> List[int]:\n    \"\"\" Input to this function is a string representing musical notes in a special ASCII format.\n    Your task is to parse this string and return list of integers corresponding to how many beats does each\n    not last.\n\n    Here is a legend:\n    'o' - whole note, lasts four beats\n    'o|' - half note, lasts two beats\n    '.|' - quater note, lasts one beat\n\n    >>> parse_music('o o| .| o| o| .| .| .| .| .| o o')\n    [4, 2, 1, 2, 2, 1, 1, 1, 1, 4, 4]\n    \"\"\"\n\n    notes = []\n    for char in music_string:\n        if char ==",
@@ -1674,10 +1674,10 @@
       "completion_tokens": 453,
       "total_tokens": 674
      },
-     "latency": 25.93842339515686,
+     "latency": 36.143956661224365,
      "task_id": "HumanEval/17",
      "correct": false,
-     "err": "/tmp_cmf9fir.py\", line 46, in check\n    assert candidate('o o o o') == [4, 4, 4, 4]\n           ^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/tmp_cmf9fir.py\", line 26, in parse_music\n    elif char == 'o|'.join(notes):\n                 ^^^^^^^^^^^^^^^^\nTypeError: sequence item 0: expected str instance, int found\n"
+     "err": "/tmp6g2_e77o.py\", line 46, in check\n    assert candidate('o o o o') == [4, 4, 4, 4]\n           ^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/tmp6g2_e77o.py\", line 26, in parse_music\n    elif char == 'o|'.join(notes):\n                 ^^^^^^^^^^^^^^^^\nTypeError: sequence item 0: expected str instance, int found\n"
     },
     {
      "content": "def how_many_times(string: str, substring: str) -> int:\n    \"\"\" Find how many times a given substring can be found in the original string. Count overlaping cases.\n    >>> how_many_times('', 'a')\n    0\n    >>> how_many_times('aaa', 'a')\n    3\n    >>> how_many_times('aaaa', 'aa')\n    3\n    \"\"\"\n\n    def count_overlapping_cases(string: str, substring: str) -> int:\n        \"\"\" Count the number of times a given substring can be found in the original string.\n        Count overlaping cases.\n        \"\"\"\n        count = 0\n        for i in range(len(string)):\n            if string[i:i+len(substring)] == ",
@@ -1688,7 +1688,7 @@
       "completion_tokens": 332,
       "total_tokens": 473
      },
-     "latency": 26.49555778503418,
+     "latency": 37.05113863945007,
      "task_id": "HumanEval/18",
      "correct": true,
      "err": ""
@@ -1702,10 +1702,10 @@
       "completion_tokens": 512,
       "total_tokens": 664
      },
-     "latency": 33.47490406036377,
+     "latency": 46.8532919883728,
      "task_id": "HumanEval/19",
      "correct": false,
-     "err": "  File \"/tmp/tmpg84e96ue.py\", line 42\n    \"\"\" Input is a space-delimited string of numberals from 'zero' to 'nine'.\n    ^\nSyntaxError: unterminated triple-quoted string literal (detected at line 61)\n"
+     "err": "  File \"/tmp/tmpswkulndr.py\", line 42\n    \"\"\" Input is a space-delimited string of numberals from 'zero' to 'nine'.\n    ^\nSyntaxError: unterminated triple-quoted string literal (detected at line 61)\n"
     },
     {
      "content": "```python\nfrom typing import List, Tuple\n\n\ndef find_closest_elements(numbers: List[float]) -> Tuple[float, float]:\n    \"\"\" From a supplied list of numbers (of length at least two) select and return two that are the closest to each\n    other and return them in order (smaller number, larger number).\n    >>> find_closest_elements([1.0, 2.0, 3.0, 4.0, 5.0, 2.2])\n    (2.0, 2.0)\n    >>> find_closest_elements([1.0, 2.0, 3.0, 4.0, 5.0, 2.0])\n    (2.0, 2.0)\n    \"\"\"\n\n\ndef find_closest_elements(numbers: List[float]) -> Tuple[float, float]:\n    \"\"\" From a supplied list of numbers (of length at least two) ",
@@ -1716,10 +1716,10 @@
       "completion_tokens": 512,
       "total_tokens": 735
      },
-     "latency": 38.7541184425354,
+     "latency": 54.232558727264404,
      "task_id": "HumanEval/20",
      "correct": false,
-     "err": "  File \"/tmp/tmpm06ghpvr.py\", line 26\n    \"\"\" From a supplied list of numbers (of length at least two) select and return two that are the closest to each\n    ^\nSyntaxError: unterminated triple-quoted string literal (detected at line 49)\n"
+     "err": "  File \"/tmp/tmpozgodbhk.py\", line 26\n    \"\"\" From a supplied list of numbers (of length at least two) select and return two that are the closest to each\n    ^\nSyntaxError: unterminated triple-quoted string literal (detected at line 49)\n"
     },
     {
      "content": "from typing import List\n\n\ndef rescale_to_unit(numbers: List[float]) -> List[float]:\n    \"\"\" Given list of numbers (of at least two elements), apply a linear transform to that list,\n    such that the smallest number will become 0 and the largest will become 1\n    >>> rescale_to_unit([1.0, 2.0, 3.0, 4.0, 5.0])\n    [0.0, 0.25, 0.5, 0.75, 1.0]\n    \"\"\"\n\n    def linear_transform(numbers: List[float], min_value: float, max_value: float) -> List[float]:\n        \"\"\" Apply a linear transform to the list of numbers, such that the smallest number\n        becomes 0 and the largest becomes 1\n        \"\"\"\n   ",
@@ -1730,10 +1730,10 @@
       "completion_tokens": 227,
       "total_tokens": 394
      },
-     "latency": 33.96492314338684,
+     "latency": 47.68969488143921,
      "task_id": "HumanEval/21",
      "correct": false,
-     "err": "Traceback (most recent call last):\n  File \"/tmp/tmpeui_pzhp.py\", line 36, in <module>\n    check(rescale_to_unit)\n  File \"/tmp/tmpeui_pzhp.py\", line 30, in check\n    assert candidate([100.0, 49.9]) == [1.0, 0.0]\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+     "err": "Traceback (most recent call last):\n  File \"/tmp/tmpf0mcddg1.py\", line 36, in <module>\n    check(rescale_to_unit)\n  File \"/tmp/tmpf0mcddg1.py\", line 30, in check\n    assert candidate([100.0, 49.9]) == [1.0, 0.0]\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
     },
     {
      "content": "from typing import List, Any\n\n\ndef filter_integers(values: List[Any]) -> List[int]:\n    \"\"\" Filter given list of any python values only for integers\n    >>> filter_integers(['a', 3.14, 5])\n    [5]\n    >>> filter_integers([1, 2, 3, 'abc', {}, []])\n    [1, 2, 3]\n    \"\"\"\n\n    return [value for value in values if isinstance(value, int)]\n",
@@ -1744,7 +1744,7 @@
       "completion_tokens": 174,
       "total_tokens": 315
      },
-     "latency": 30.550658464431763,
+     "latency": 43.15393018722534,
      "task_id": "HumanEval/22",
      "correct": true,
      "err": ""
@@ -1758,7 +1758,7 @@
       "completion_tokens": 106,
       "total_tokens": 192
      },
-     "latency": 21.87342143058777,
+     "latency": 31.283799409866333,
      "task_id": "HumanEval/23",
      "correct": true,
      "err": ""
@@ -1772,10 +1772,10 @@
       "completion_tokens": 171,
       "total_tokens": 261
      },
-     "latency": 14.547192335128784,
+     "latency": 21.00442147254944,
      "task_id": "HumanEval/24",
      "correct": false,
-     "err": "Traceback (most recent call last):\n  File \"/tmp/tmpua8ihsti.py\", line 29, in <module>\n    check(largest_divisor)\n  File \"/tmp/tmpua8ihsti.py\", line 24, in check\n    assert candidate(10) == 5\n           ^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+     "err": "Traceback (most recent call last):\n  File \"/tmp/tmp5aye0ts1.py\", line 29, in <module>\n    check(largest_divisor)\n  File \"/tmp/tmp5aye0ts1.py\", line 24, in check\n    assert candidate(10) == 5\n           ^^^^^^^^^^^^^^^^^^\nAssertionError\n"
     },
     {
      "content": "```python\nfrom typing import List\n\n\ndef factorize(n: int) -> List[int]:\n    \"\"\" Return list of prime factors of given integer in the order from smallest to largest.\n    Each of the factors should be listed number of times corresponding to how many times it appeares in factorization.\n    Input number should be equal to the product of all factors\n    >>> factorize(8)\n    [2, 2, 2]\n    >>> factorize(25)\n    [5, 5]\n    >>> factorize(70)\n    [2, 5, 7]\n    \"\"\"\n\n\ndef factorize(n: int) -> List[int]:\n    \"\"\" Return list of prime factors of given integer in the order from smallest to largest.\n    Each o",
@@ -1786,10 +1786,10 @@
       "completion_tokens": 512,
       "total_tokens": 676
      },
-     "latency": 20.5047504901886,
+     "latency": 29.029542446136475,
      "task_id": "HumanEval/25",
      "correct": false,
-     "err": "  File \"/tmp/tmp6ow9352f.py\", line 1\n    ```python\n    ^\nSyntaxError: invalid syntax\n"
+     "err": "  File \"/tmp/tmp3uevyv_b.py\", line 1\n    ```python\n    ^\nSyntaxError: invalid syntax\n"
     },
     {
      "content": "from typing import List\n\ndef remove_duplicates(numbers: List[int]) -> List[int]:\n    \"\"\" From a list of integers, remove all elements that occur more than once.\n    Keep order of elements left the same as in the input.\n    >>> remove_duplicates([1, 2, 3, 2, 4])\n    [1, 3, 4]\n    \"\"\"\n\n    seen = set()\n    return [num for num in numbers if not (num in seen or seen.add(num))]\n\n# Example usage:\nnumbers = [1, 2, 3, 2, 4]\nprint(remove_duplicates(numbers))  # Output: [1, 3, 4]\n",
@@ -1800,10 +1800,10 @@
       "completion_tokens": 269,
       "total_tokens": 399
      },
-     "latency": 22.72733998298645,
+     "latency": 31.175797939300537,
      "task_id": "HumanEval/26",
      "correct": false,
-     "err": "Traceback (most recent call last):\n  File \"/tmp/tmprnxy8sii.py\", line 32, in <module>\n    check(remove_duplicates)\n  File \"/tmp/tmprnxy8sii.py\", line 29, in check\n    assert candidate([1, 2, 3, 2, 4, 3, 5]) == [1, 4, 5]\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+     "err": "Traceback (most recent call last):\n  File \"/tmp/tmpb0xopkhd.py\", line 32, in <module>\n    check(remove_duplicates)\n  File \"/tmp/tmpb0xopkhd.py\", line 29, in check\n    assert candidate([1, 2, 3, 2, 4, 3, 5]) == [1, 4, 5]\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
     },
     {
      "content": "def flip_case(string: str) -> str:\n    \"\"\" For a given string, flip lowercase characters to uppercase and uppercase to lowercase.\n    >>> flip_case('Hello')\n    'hELLO'\n    \"\"\"\n    return lambda s: s.upper() if s.islower() else s.lower()\n\n# Example usage:\nprint(flip_case('Hello'))  # Output: 'hELLO'\n",
@@ -1814,10 +1814,10 @@
       "completion_tokens": 107,
       "total_tokens": 201
      },
-     "latency": 22.789052486419678,
+     "latency": 30.78688931465149,
      "task_id": "HumanEval/27",
      "correct": false,
-     "err": "Traceback (most recent call last):\n  File \"/tmp/tmpv4sqq1y7.py\", line 26, in <module>\n    check(flip_case)\n  File \"/tmp/tmpv4sqq1y7.py\", line 21, in check\n    assert candidate('') == ''\n           ^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+     "err": "Traceback (most recent call last):\n  File \"/tmp/tmpohv9i591.py\", line 26, in <module>\n    check(flip_case)\n  File \"/tmp/tmpohv9i591.py\", line 21, in check\n    assert candidate('') == ''\n           ^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
     },
     {
      "content": "```python\nfrom typing import List\n\n\ndef concatenate(strings: List[str]) -> str:\n    \"\"\" Concatenate list of strings into a single string\n    >>> concatenate([])\n    ''\n    >>> concatenate(['a', 'b', 'c'])\n    'abc'\n    \"\"\"\n\n\ndef concatenate(strings: List[str]) -> str:\n    \"\"\" Concatenate list of strings into a single string\n    >>> concatenate([])\n    ''\n    >>> concatenate(['a', 'b', 'c'])\n    'abc'\n    \"\"\"\n\n\ndef concatenate(strings: List[str]) -> str:\n    \"\"\" Concatenate list of strings into a single string\n    >>> concatenate([])\n    ''\n    >>> concatenate(['a', 'b', 'c'])\n    'abc'\n    \"\"\"",
@@ -1828,10 +1828,10 @@
       "completion_tokens": 512,
       "total_tokens": 624
      },
-     "latency": 30.068437099456787,
+     "latency": 40.72541356086731,
      "task_id": "HumanEval/28",
      "correct": false,
-     "err": "  File \"/tmp/tmpeejxz_xl.py\", line 1\n    ```python\n    ^\nSyntaxError: invalid syntax\n"
+     "err": "  File \"/tmp/tmp6jlygy45.py\", line 1\n    ```python\n    ^\nSyntaxError: invalid syntax\n"
     },
     {
      "content": "from typing import List\n\n\ndef filter_by_prefix(strings: List[str], prefix: str) -> List[str]:\n    \"\"\" Filter an input list of strings only for ones that start with a given prefix.\n    >>> filter_by_prefix([], 'a')\n    []\n    >>> filter_by_prefix(['abc', 'bcd', 'cde', 'array'], 'a')\n    ['abc', 'array']\n    \"\"\"\n\n    def filter_function(string: str) -> bool:\n        return string.startswith(prefix)\n\n    return [filter_function(string, prefix) for string in strings]\n",
@@ -1842,10 +1842,10 @@
       "completion_tokens": 226,
       "total_tokens": 378
      },
-     "latency": 24.00842809677124,
+     "latency": 32.25630974769592,
      "task_id": "HumanEval/29",
      "correct": false,
-     "err": "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/tmpf5ltp7dq.py\", line 15, in filter_by_prefix\n    return [filter_function(string, prefix) for string in strings]\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nTypeError: filter_by_prefix.<locals>.filter_function() takes 1 positional argument but 2 were given\n"
+     "err": "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/tmpe5_pfj05.py\", line 15, in filter_by_prefix\n    return [filter_function(string, prefix) for string in strings]\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nTypeError: filter_by_prefix.<locals>.filter_function() takes 1 positional argument but 2 were given\n"
     },
     {
      "content": "def get_positive(l: list) -> list:\n    \"\"\"Return only positive numbers in the list.\n    >>> get_positive([-1, 2, -4, 5, 6])\n    [2, 5, 6]\n    >>> get_positive([5, 3, -5, 2, -3, 3, 9, 0, 123, 1, -10])\n    [5, 3, 2, 3, 9, 123, 1]\n    \"\"\"\n\n    return [num for num in l if num > 0]\n",
@@ -1856,7 +1856,7 @@
       "completion_tokens": 182,
       "total_tokens": 342
      },
-     "latency": 21.93799376487732,
+     "latency": 29.966487884521484,
      "task_id": "HumanEval/30",
      "correct": true,
      "err": ""
@@ -1870,7 +1870,7 @@
       "completion_tokens": 196,
       "total_tokens": 354
      },
-     "latency": 23.86011838912964,
+     "latency": 33.01185631752014,
      "task_id": "HumanEval/31",
      "correct": true,
      "err": ""
@@ -1884,10 +1884,10 @@
       "completion_tokens": 512,
       "total_tokens": 845
      },
-     "latency": 24.04055094718933,
+     "latency": 32.64082741737366,
      "task_id": "HumanEval/32",
      "correct": false,
-     "err": "  File \"/tmp/tmprh6n1sin.py\", line 36\n    \"\"\" xs are coefficients of a polynomial.\n    ^\nSyntaxError: unterminated triple-quoted string literal (detected at line 67)\n"
+     "err": "  File \"/tmp/tmpw1a6zpnz.py\", line 36\n    \"\"\" xs are coefficients of a polynomial.\n    ^\nSyntaxError: unterminated triple-quoted string literal (detected at line 67)\n"
     },
     {
      "content": "def sort_third(l: list) -> list:\n    \"\"\"This function takes a list l and returns a list l' such that l' is identical to l in the indicies that are not divisible by three, while its values at the indicies that are divisible by three are equal\n    to the values of the corresponding indicies of l, but sorted.\n    >>> sort_third([1, 2, 3])\n    [1, 2, 3]\n    >>> sort_third([5, 6, 3, 4, 8, 9, 2])\n    [2, 6, 3, 4, 8, 9, 5]\n    \"\"\"\n\n    def key_func(l):\n        return l % 3 == 0\n\n    return sorted(l, key=key_func)\n",
@@ -1898,10 +1898,10 @@
       "completion_tokens": 306,
       "total_tokens": 504
      },
-     "latency": 25.809380531311035,
+     "latency": 35.23038125038147,
      "task_id": "HumanEval/33",
      "correct": false,
-     "err": "File \"/tmp/tmp27inok3_.py\", line 32, in <module>\n    check(sort_third)\n  File \"/tmp/tmp27inok3_.py\", line 25, in check\n    assert tuple(candidate([5, 6, 3, 4, 8, 9, 2])) == tuple([2, 6, 3, 4, 8, 9, 5])\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+     "err": "File \"/tmp/tmpf8rk8x2s.py\", line 32, in <module>\n    check(sort_third)\n  File \"/tmp/tmpf8rk8x2s.py\", line 25, in check\n    assert tuple(candidate([5, 6, 3, 4, 8, 9, 2])) == tuple([2, 6, 3, 4, 8, 9, 5])\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
     },
     {
      "content": "import heapq\n\ndef unique(l: list):\n    \"\"\"Return sorted unique elements in a list\n    >>> unique([5, 3, 5, 2, 3, 3, 9, 0, 123])\n    [0, 2, 3, 5, 9, 123]\n    \"\"\"\n\n    return sorted(set(l))\n",
@@ -1912,7 +1912,7 @@
       "completion_tokens": 336,
       "total_tokens": 449
      },
-     "latency": 29.158048391342163,
+     "latency": 40.0618953704834,
      "task_id": "HumanEval/34",
      "correct": true,
      "err": ""
@@ -1926,7 +1926,7 @@
       "completion_tokens": 161,
       "total_tokens": 292
      },
-     "latency": 28.3775532245636,
+     "latency": 38.709171533584595,
      "task_id": "HumanEval/35",
      "correct": true,
      "err": ""
@@ -1940,10 +1940,10 @@
       "completion_tokens": 256,
       "total_tokens": 381
      },
-     "latency": 22.77978825569153,
+     "latency": 31.549127340316772,
      "task_id": "HumanEval/36",
      "correct": false,
-     "err": "Traceback (most recent call last):\n  File \"/tmp/tmpfglmtq8h.py\", line 34, in <module>\n    check(fizz_buzz)\n  File \"/tmp/tmpfglmtq8h.py\", line 23, in check\n    assert candidate(50) == 0\n           ^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+     "err": "Traceback (most recent call last):\n  File \"/tmp/tmpt4gkjmie.py\", line 34, in <module>\n    check(fizz_buzz)\n  File \"/tmp/tmpt4gkjmie.py\", line 23, in check\n    assert candidate(50) == 0\n           ^^^^^^^^^^^^^^^^^^\nAssertionError\n"
     },
     {
      "content": "def sort_even(l: list) -> list:\n    \"\"\"This function takes a list l and returns a list l' such that l' is identical to l in the odd indicies, while its values at the even indicies are equal to the values of the even indicies of l, but sorted.\n    >>> sort_even([1, 2, 3])\n    [1, 2, 3]\n    >>> sort_even([5, 6, 3, 4])\n    [3, 6, 5, 4]\n    \"\"\"\n\n    return sorted(l, key=lambda x: x % 2)\n",
@@ -1954,10 +1954,10 @@
       "completion_tokens": 234,
       "total_tokens": 400
      },
-     "latency": 21.237493991851807,
+     "latency": 29.35477066040039,
      "task_id": "HumanEval/37",
      "correct": false,
-     "err": "Traceback (most recent call last):\n  File \"/tmp/tmplosyxart.py\", line 24, in <module>\n    check(sort_even)\n  File \"/tmp/tmplosyxart.py\", line 18, in check\n    assert tuple(candidate([1, 2, 3])) == tuple([1, 2, 3])\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+     "err": "Traceback (most recent call last):\n  File \"/tmp/tmpc0nwe_0u.py\", line 24, in <module>\n    check(sort_even)\n  File \"/tmp/tmpc0nwe_0u.py\", line 18, in check\n    assert tuple(candidate([1, 2, 3])) == tuple([1, 2, 3])\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
     },
     {
      "content": "def encode_cyclic(s: str):\n    \"\"\"\n    returns encoded string by cycling groups of three characters.\n    \"\"\"\n    # split string to groups. Each of length 3.\n    groups = [s[(3 * i):min((3 * i + 3), len(s))] for i in range((len(s) + 2) // 3)]\n    # cycle elements in each group. Unless group has fewer elements than 3.\n    groups = [(group[1:] + group[0]) if len(group) == 3 else group for group in groups]\n    return \"\".join(groups)\n\n\ndef decode_cyclic(s: str):\n    \"\"\"\n    takes as input string encoded with encode_cyclic function. Returns decoded string.\n    \"\"\"\n    return encode_cyclic(s)\n",
@@ -1968,10 +1968,10 @@
       "completion_tokens": 264,
       "total_tokens": 479
      },
-     "latency": 19.549708604812622,
+     "latency": 27.29026174545288,
      "task_id": "HumanEval/38",
      "correct": false,
-     "err": "Traceback (most recent call last):\n  File \"/tmp/tmp_uo4rz13.py\", line 36, in <module>\n    check(decode_cyclic)\n  File \"/tmp/tmp_uo4rz13.py\", line 32, in check\n    assert candidate(encoded_str) == str\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+     "err": "Traceback (most recent call last):\n  File \"/tmp/tmpqez6pgc9.py\", line 36, in <module>\n    check(decode_cyclic)\n  File \"/tmp/tmpqez6pgc9.py\", line 32, in check\n    assert candidate(encoded_str) == str\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
     },
     {
      "content": "def prime_fib(n: int) -> int:\n    \"\"\"\n    prime_fib returns n-th number that is a Fibonacci number and it's also prime.\n    >>> prime_fib(1)\n    2\n    >>> prime_fib(2)\n    3\n    >>> prime_fib(3)\n    5\n    >>> prime_fib(4)\n    13\n    >>> prime_fib(5)\n    89\n    \"\"\"\n\n    def is_prime(n: int) -> bool:\n        \"\"\"\n        checks if n is prime.\n        \"\"\"\n        if n < 2:\n            return False\n        for i in range(2, int(n**0.5) + 1):\n            if n % i == 0:\n                return False\n        return True\n\n    return n if is_prime(n) else n\n",
@@ -1982,10 +1982,10 @@
       "completion_tokens": 279,
       "total_tokens": 425
      },
-     "latency": 22.040794134140015,
+     "latency": 31.331372261047363,
      "task_id": "HumanEval/39",
      "correct": false,
-     "err": "Traceback (most recent call last):\n  File \"/tmp/tmpwrzictz5.py\", line 49, in <module>\n    check(prime_fib)\n  File \"/tmp/tmpwrzictz5.py\", line 36, in check\n    assert candidate(1) == 2\n           ^^^^^^^^^^^^^^^^^\nAssertionError\n"
+     "err": "Traceback (most recent call last):\n  File \"/tmp/tmpcfsmob89.py\", line 49, in <module>\n    check(prime_fib)\n  File \"/tmp/tmpcfsmob89.py\", line 36, in check\n    assert candidate(1) == 2\n           ^^^^^^^^^^^^^^^^^\nAssertionError\n"
     },
     {
      "content": "def triples_sum_to_zero(l: list) -> bool:\n    \"\"\"\n    triples_sum_to_zero takes a list of integers as an input.\n    it returns True if there are three distinct elements in the list that\n    sum to zero, and False otherwise.\n\n    >>> triples_sum_to_zero([1, 3, 5, 0])\n    False\n    >>> triples_sum_to_zero([1, 3, -2, 1])\n    True\n    >>> triples_sum_to_zero([1, 2, 3, 7])\n    False\n    >>> triples_sum_to_zero([2, 4, -5, 3, 9, 7])\n    True\n    >>> triples_sum_to_zero([1])\n    False\n    \"\"\"\n\n    def is_zero_consecutive(l: list) -> bool:\n        \"\"\"\n        checks if there are three distinct elements",
@@ -1996,10 +1996,10 @@
       "completion_tokens": 306,
       "total_tokens": 543
      },
-     "latency": 23.114869356155396,
+     "latency": 32.80854630470276,
      "task_id": "HumanEval/40",
      "correct": false,
-     "err": "Traceback (most recent call last):\n  File \"/tmp/tmp1ki4ecxr.py\", line 49, in <module>\n    check(triples_sum_to_zero)\n  File \"/tmp/tmp1ki4ecxr.py\", line 39, in check\n    assert candidate([1, 3, -2, 1]) == True\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+     "err": "Traceback (most recent call last):\n  File \"/tmp/tmpepd2yv36.py\", line 49, in <module>\n    check(triples_sum_to_zero)\n  File \"/tmp/tmpepd2yv36.py\", line 39, in check\n    assert candidate([1, 3, -2, 1]) == True\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
     },
     {
      "content": "def car_race_collision(n: int):\n    \"\"\"\n    Imagine a road that's a perfectly straight infinitely long line.\n    n cars are driving left to right;  simultaneously, a different set of n cars\n    are driving right to left.   The two sets of cars start out being very far from\n    each other.  All cars move in the same speed.  Two cars are said to collide\n    when a car that's moving left to right hits a car that's moving right to left.\n    However, the cars are infinitely sturdy and strong; as a result, they continue\n    moving in their trajectory as if they did not collide.\n\n    This function ou",
@@ -2010,10 +2010,10 @@
       "completion_tokens": 320,
       "total_tokens": 509
      },
-     "latency": 24.994686603546143,
+     "latency": 35.32196378707886,
      "task_id": "HumanEval/41",
      "correct": false,
-     "err": "Traceback (most recent call last):\n  File \"/tmp/tmpmp49qzm5.py\", line 37, in <module>\n    check(car_race_collision)\n  File \"/tmp/tmpmp49qzm5.py\", line 29, in check\n    assert candidate(2) == 4\n           ^^^^^^^^^^^^^^^^^\nAssertionError\n"
+     "err": "Traceback (most recent call last):\n  File \"/tmp/tmpih79lj46.py\", line 37, in <module>\n    check(car_race_collision)\n  File \"/tmp/tmpih79lj46.py\", line 29, in check\n    assert candidate(2) == 4\n           ^^^^^^^^^^^^^^^^^\nAssertionError\n"
     },
     {
      "content": "def incr_list(l: list) -> callable:\n    \"\"\"Return list with elements incremented by 1.\n    >>> incr_list([1, 2, 3])\n    [2, 3, 4]\n    >>> incr_list([5, 3, 5, 2, 3, 3, 9, 0, 123])\n    [6, 4, 6, 3, 4, 4, 10, 1, 124]\n    \"\"\"\n\n    def increment_list(l: list) -> callable:\n        \"\"\"Return list with elements incremented by 1.\n        >>> increment_list([1, 2, 3])\n        [2, 3, 4]\n        >>> increment_list([5, 3, 5, 2, 3, 3, 9, 0, 123])\n        [6, 4, 6, 3, 4, 4, 10, 1, 124]\n        \"\"\"\n\n    return increment_list(l)\n",
@@ -2024,10 +2024,10 @@
       "completion_tokens": 262,
       "total_tokens": 420
      },
-     "latency": 25.14354920387268,
+     "latency": 35.44728970527649,
      "task_id": "HumanEval/42",
      "correct": false,
-     "err": "Traceback (most recent call last):\n  File \"/tmp/tmphb1_sg9e.py\", line 32, in <module>\n    check(incr_list)\n  File \"/tmp/tmphb1_sg9e.py\", line 26, in check\n    assert candidate([]) == []\n           ^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+     "err": "Traceback (most recent call last):\n  File \"/tmp/tmprwzl7zth.py\", line 32, in <module>\n    check(incr_list)\n  File \"/tmp/tmprwzl7zth.py\", line 26, in check\n    assert candidate([]) == []\n           ^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
     },
     {
      "content": "def pairs_sum_to_zero(l):\n    \"\"\"\n    pairs_sum_to_zero takes a list of integers as an input.\n    it returns True if there are two distinct elements in the list that\n    sum to zero, and False otherwise.\n    >>> pairs_sum_to_zero([1, 3, 5, 0])\n    False\n    >>> pairs_sum_to_zero([1, 3, -2, 1])\n    False\n    >>> pairs_sum_to_zero([1, 2, 3, 7])\n    False\n    >>> pairs_sum_to_zero([2, 4, -5, 3, 5, 7])\n    True\n    >>> pairs_sum_to_zero([1])\n    False\n    \"\"\"\n\n    return len(set(l)) == 1\n",
@@ -2038,10 +2038,10 @@
       "completion_tokens": 263,
       "total_tokens": 491
      },
-     "latency": 24.81356716156006,
+     "latency": 34.665594816207886,
      "task_id": "HumanEval/43",
      "correct": false,
-     "err": "Traceback (most recent call last):\n  File \"/tmp/tmprwymg8il.py\", line 40, in <module>\n    check(pairs_sum_to_zero)\n  File \"/tmp/tmprwymg8il.py\", line 30, in check\n    assert candidate([2, 4, -5, 3, 5, 7]) == True\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+     "err": "Traceback (most recent call last):\n  File \"/tmp/tmpvde9g266.py\", line 40, in <module>\n    check(pairs_sum_to_zero)\n  File \"/tmp/tmpvde9g266.py\", line 30, in check\n    assert candidate([2, 4, -5, 3, 5, 7]) == True\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
     },
     {
      "content": "```python\ndef change_base(x: int, base: int):\n    \"\"\"Change numerical base of input number x to base.\n    return string representation after the conversion.\n    base numbers are less than 10.\n    >>> change_base(8, 3)\n    '22'\n    >>> change_base(8, 2)\n    '1000'\n    >>> change_base(7, 2)\n    '111'\n    \"\"\"\n\ndef change_base(x: int, base: int):\n    \"\"\"Change numerical base of input number x to base.\n    return string representation after the conversion.\n    base numbers are less than 10.\n    >>> change_base(8, 3)\n    '22'\n    >>> change_base(8, 2)\n    '1000'\n    >>> change_base(7, 2)\n    '111'\n ",
@@ -2052,10 +2052,10 @@
       "completion_tokens": 512,
       "total_tokens": 644
      },
-     "latency": 29.22085976600647,
+     "latency": 40.57843327522278,
      "task_id": "HumanEval/44",
      "correct": false,
-     "err": "  File \"/tmp/tmpcujr1rei.py\", line 63\n    \"\"\"Change numerical base of input number x to base.\n    ^\nSyntaxError: unterminated triple-quoted string literal (detected at line 83)\n"
+     "err": "  File \"/tmp/tmpw29kmu4h.py\", line 63\n    \"\"\"Change numerical base of input number x to base.\n    ^\nSyntaxError: unterminated triple-quoted string literal (detected at line 83)\n"
     },
     {
      "content": "def triangle_area(a, h):\n    \"\"\"Given length of a side and high return area for a triangle.\n    >>> triangle_area(5, 3)\n    7.5\n    \"\"\"\n    return 0.5 * a * h\n",
@@ -2066,7 +2066,7 @@
       "completion_tokens": 130,
       "total_tokens": 212
      },
-     "latency": 25.073015689849854,
+     "latency": 34.79124927520752,
      "task_id": "HumanEval/45",
      "correct": true,
      "err": ""
@@ -2080,10 +2080,10 @@
       "completion_tokens": 457,
       "total_tokens": 667
      },
-     "latency": 29.148377180099487,
+     "latency": 39.93250012397766,
      "task_id": "HumanEval/46",
      "correct": false,
-     "err": "# Output: 4\n          ^^^^^^^\n  File \"/tmp/tmpm12hdaon.py\", line 26, in fib4\n    fib4_sequence.append(fib4_sequence[-1] + fib4_sequence[-2] + fib4_sequence[-3] + fib4_sequence[-4])\n                                                                 ~~~~~~~~~~~~~^^^^\nIndexError: list index out of range\n"
+     "err": "# Output: 4\n          ^^^^^^^\n  File \"/tmp/tmpmg8iw2qs.py\", line 26, in fib4\n    fib4_sequence.append(fib4_sequence[-1] + fib4_sequence[-2] + fib4_sequence[-3] + fib4_sequence[-4])\n                                                                 ~~~~~~~~~~~~~^^^^\nIndexError: list index out of range\n"
     },
     {
      "content": "def median(l: list) -> float:\n    \"\"\"Return median of elements in the list l.\n    >>> median([3, 1, 2, 4, 5])\n    3\n    >>> median([-10, 4, 6, 1000, 10, 20])\n    15.0\n    \"\"\"\n    return sorted(l)[len(l) // 2]\n",
@@ -2094,10 +2094,10 @@
       "completion_tokens": 155,
       "total_tokens": 272
      },
-     "latency": 26.82598042488098,
+     "latency": 36.941566944122314,
      "task_id": "HumanEval/47",
      "correct": false,
-     "err": "Traceback (most recent call last):\n  File \"/tmp/tmpse_fzddi.py\", line 25, in <module>\n    check(median)\n  File \"/tmp/tmpse_fzddi.py\", line 18, in check\n    assert candidate([-10, 4, 6, 1000, 10, 20]) == 8.0\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+     "err": "Traceback (most recent call last):\n  File \"/tmp/tmp93olzmkt.py\", line 25, in <module>\n    check(median)\n  File \"/tmp/tmp93olzmkt.py\", line 18, in check\n    assert candidate([-10, 4, 6, 1000, 10, 20]) == 8.0\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
     },
     {
      "content": "def is_palindrome(text: str):\n    \"\"\"\n    Checks if given string is a palindrome\n    >>> is_palindrome('')\n    True\n    >>> is_palindrome('aba')\n    True\n    >>> is_palindrome('aaaaa')\n    True\n    >>> is_palindrome('zbcd')\n    False\n    \"\"\"\n\n    # Remove non-alphanumeric characters and convert to lowercase\n    cleaned_text = ''.join(char for char in text if char.isalnum()).lower()\n    \n    # Compare the cleaned text with its reverse\n    return cleaned_text == cleaned_text[::-1]\n\n# Example usage:\nprint(is_palindrome('aba'))  # True\nprint(is_palindrome('aaaaa'))  # True\nprint(is_palindrome('zbc",
@@ -2108,7 +2108,7 @@
       "completion_tokens": 218,
       "total_tokens": 348
      },
-     "latency": 20.496994733810425,
+     "latency": 28.100242853164673,
      "task_id": "HumanEval/48",
      "correct": true,
      "err": ""
@@ -2122,10 +2122,10 @@
       "completion_tokens": 512,
       "total_tokens": 663
      },
-     "latency": 28.69064688682556,
+     "latency": 39.34024739265442,
      "task_id": "HumanEval/49",
      "correct": false,
-     "err": "  File \"/tmp/tmpod7gd9jn.py\", line 1\n    ```python\n    ^\nSyntaxError: invalid syntax\n"
+     "err": "  File \"/tmp/tmpzzsithnq.py\", line 1\n    ```python\n    ^\nSyntaxError: invalid syntax\n"
     },
     {
      "content": "def encode_shift(s: str):\n    \"\"\"\n    returns encoded string by shifting every character by 5 in the alphabet.\n    \"\"\"\n    return \"\".join([chr(((ord(ch) + 5 - ord(\"a\")) % 26) + ord(\"a\")) for ch in s])\n\ndef decode_shift(s: str):\n    \"\"\"\n    takes as input string encoded with encode_shift function. Returns decoded string.\n    \"\"\"\n    return \"\".join([chr(((ord(ch) + 5 - ord(\"a\")) % 26) + ord(\"a\")) for ch in s])\n",
@@ -2136,10 +2136,10 @@
       "completion_tokens": 233,
       "total_tokens": 380
      },
-     "latency": 24.024693965911865,
+     "latency": 33.11343717575073,
      "task_id": "HumanEval/50",
      "correct": false,
-     "err": "Traceback (most recent call last):\n  File \"/tmp/tmp4bru_gy6.py\", line 32, in <module>\n    check(decode_shift)\n  File \"/tmp/tmp4bru_gy6.py\", line 28, in check\n    assert candidate(copy.deepcopy(encoded_str)) == str\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+     "err": "Traceback (most recent call last):\n  File \"/tmp/tmpd1_e5gcg.py\", line 32, in <module>\n    check(decode_shift)\n  File \"/tmp/tmpd1_e5gcg.py\", line 28, in check\n    assert candidate(copy.deepcopy(encoded_str)) == str\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
     },
     {
      "content": "```python\ndef remove_vowels(text):\n    \"\"\"\n    remove_vowels is a function that takes string and returns string without vowels.\n    >>> remove_vowels('')\n    ''\n    >>> remove_vowels(\"abcdef\\nghijklm\")\n    'bcdf\\nghjklm'\n    >>> remove_vowels('abcdef')\n    'bcdf'\n    >>> remove_vowels('aaaaa')\n    ''\n    >>> remove_vowels('aaBAA')\n    'B'\n    >>> remove_vowels('zbcd')\n    'zbcd'\n    \"\"\"\n\ndef remove_vowels(text):\n    \"\"\"\n    remove_vowels is a function that takes string and returns string without vowels.\n    >>> remove_vowels('')\n    ''\n    >>> remove_vowels(\"abcdef\\nghijklm\")\n    'bcdf\\nghjklm",
@@ -2150,10 +2150,10 @@
       "completion_tokens": 512,
       "total_tokens": 704
      },
-     "latency": 31.797135829925537,
+     "latency": 43.45531368255615,
      "task_id": "HumanEval/51",
      "correct": false,
-     "err": "  File \"/tmp/tmpuue9ebuq.py\", line 54\n    \"\"\"\n    ^\nSyntaxError: unterminated triple-quoted string literal (detected at line 74)\n"
+     "err": "  File \"/tmp/tmpbu5l8nex.py\", line 54\n    \"\"\"\n    ^\nSyntaxError: unterminated triple-quoted string literal (detected at line 74)\n"
     },
     {
      "content": "def below_threshold(l: list, t: int):\n    \"\"\"Return True if all numbers in the list l are below threshold t.\n    >>> below_threshold([1, 2, 4, 10], 100)\n    True\n    >>> below_threshold([1, 20, 4, 10], 5)\n    False\n    \"\"\"\n    return all(num < t for num in l)\n",
@@ -2164,7 +2164,7 @@
       "completion_tokens": 162,
       "total_tokens": 287
      },
-     "latency": 30.637193202972412,
+     "latency": 42.047364711761475,
      "task_id": "HumanEval/52",
      "correct": true,
      "err": ""
@@ -2178,10 +2178,10 @@
       "completion_tokens": 155,
       "total_tokens": 243
      },
-     "latency": 22.968466997146606,
+     "latency": 31.743449449539185,
      "task_id": "HumanEval/53",
      "correct": false,
-     "err": "Traceback (most recent call last):\n  File \"/tmp/tmptptf69p_.py\", line 31, in <module>\n    check(add)\n  File \"/tmp/tmptptf69p_.py\", line 19, in check\n    assert candidate(0, 1) == 1\n           ^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+     "err": "Traceback (most recent call last):\n  File \"/tmp/tmpsk2q137q.py\", line 31, in <module>\n    check(add)\n  File \"/tmp/tmpsk2q137q.py\", line 19, in check\n    assert candidate(0, 1) == 1\n           ^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
     },
     {
      "content": "```python\ndef same_chars(s0: str, s1: str):\n    \"\"\"\n    Check if two words have the same characters.\n    >>> same_chars('eabcdzzzz', 'dddzzzzzzzddeddabc')\n    True\n    >>> same_chars('abcd', 'dddddddabc')\n    True\n    >>> same_chars('dddddddabc', 'abcd')\n    True\n    >>> same_chars('eabcdzzzz', 'dddzzzzzzzddddabc')\n    False\n    >>> same_chars('abcd', 'dddddddabc')\n    False\n    >>> same_chars('eabcdzzzz', 'ddddddddabc')\n    False\n    >>> same_chars('abcd', 'dddddddabc')\n    False\n    >>> same_chars('abcd', 'dddddddabc')\n    False\n    >>> same_chars('abcd', 'dddddddabc')\n    False\n    >>> same",
@@ -2192,10 +2192,10 @@
       "completion_tokens": 512,
       "total_tokens": 735
      },
-     "latency": 28.680991888046265,
+     "latency": 39.74686145782471,
      "task_id": "HumanEval/54",
      "correct": false,
-     "err": "  File \"/tmp/tmpgyezsglx.py\", line 3\n    \"\"\"\n    ^\nSyntaxError: unterminated triple-quoted string literal (detected at line 63)\n"
+     "err": "  File \"/tmp/tmpunt4ts9r.py\", line 3\n    \"\"\"\n    ^\nSyntaxError: unterminated triple-quoted string literal (detected at line 63)\n"
     },
     {
      "content": "def fib(n: int):\n    \"\"\"Return n-th Fibonacci number.\n    >>> fib(10)\n    55\n    >>> fib(1)\n    1\n    >>> fib(8)\n    21\n    \"\"\"\n    if n <= 0:\n        raise ValueError(\"n must be a positive integer\")\n    elif n == 1:\n        return 1\n    else:\n        return fib(n-1) + fib(n-2)\n",
@@ -2206,10 +2206,10 @@
       "completion_tokens": 207,
       "total_tokens": 299
      },
-     "latency": 22.056705951690674,
+     "latency": 30.49106240272522,
      "task_id": "HumanEval/55",
      "correct": false,
-     "err": "2)\n           ^^^^^^^^\n  File \"/tmp/tmpbzd_e__4.py\", line 15, in fib\n    return fib(n-1) + fib(n-2)\n           ^^^^^^^^\n  [Previous line repeated 6 more times]\n  File \"/tmp/tmpbzd_e__4.py\", line 11, in fib\n    raise ValueError(\"n must be a positive integer\")\nValueError: n must be a positive integer\n"
+     "err": "2)\n           ^^^^^^^^\n  File \"/tmp/tmpa_0nhkx5.py\", line 15, in fib\n    return fib(n-1) + fib(n-2)\n           ^^^^^^^^\n  [Previous line repeated 6 more times]\n  File \"/tmp/tmpa_0nhkx5.py\", line 11, in fib\n    raise ValueError(\"n must be a positive integer\")\nValueError: n must be a positive integer\n"
     },
     {
      "content": "```python\ndef correct_bracketing(brackets: str):\n    \"\"\" brackets is a string of \"<\" and \">\".\n    return True if every opening bracket has a corresponding closing bracket.\n\n    >>> correct_bracketing(\"<\")\n    False\n    >>> correct_bracketing(\"<>\")\n    True\n    >>> correct_bracketing(\"<<><>>\")\n    True\n    >>> correct_bracketing(\"><<>\")\n    False\n    \"\"\"\n\ndef correct_bracketing(brackets: str):\n    \"\"\" brackets is a string of \"<\" and \">\".\n    return True if every opening bracket has a corresponding closing bracket.\n\n    >>> correct_bracketing(\"<\")\n    False\n    >>> correct_bracketing(\"<>\")\n    T",
@@ -2220,10 +2220,10 @@
       "completion_tokens": 512,
       "total_tokens": 655
      },
-     "latency": 29.384984731674194,
+     "latency": 40.07966613769531,
      "task_id": "HumanEval/56",
      "correct": false,
-     "err": "  File \"/tmp/tmppus5bgzy.py\", line 59\n    \"\"\" brackets is a string of \"<\" and \">\".\n    ^\nSyntaxError: unterminated triple-quoted string literal (detected at line 89)\n"
+     "err": "  File \"/tmp/tmpl9cufit5.py\", line 59\n    \"\"\" brackets is a string of \"<\" and \">\".\n    ^\nSyntaxError: unterminated triple-quoted string literal (detected at line 89)\n"
     },
     {
      "content": "def monotonic(l: list) -> bool:\n    \"\"\"Return True is list elements are monotonically increasing or decreasing.\n    >>> monotonic([1, 2, 4, 20])\n    True\n    >>> monotonic([1, 20, 4, 10])\n    False\n    >>> monotonic([4, 1, 0, -10])\n    True\n    \"\"\"\n\n    return len(l) > 0 and len(l[0]) > 0 and len(l[-1]) > 0 and len(l[-1]) < len(l[0])\n",
@@ -2234,10 +2234,10 @@
       "completion_tokens": 229,
       "total_tokens": 364
      },
-     "latency": 30.932632207870483,
+     "latency": 41.85837483406067,
      "task_id": "HumanEval/57",
      "correct": false,
-     "err": "\n    assert candidate([1, 2, 4, 10]) == True\n           ^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/tmp0x518lbl.py\", line 11, in monotonic\n    return len(l) > 0 and len(l[0]) > 0 and len(l[-1]) > 0 and len(l[-1]) < len(l[0])\n                          ^^^^^^^^^\nTypeError: object of type 'int' has no len()\n"
+     "err": "\n    assert candidate([1, 2, 4, 10]) == True\n           ^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/tmpwqdrq_vd.py\", line 11, in monotonic\n    return len(l) > 0 and len(l[0]) > 0 and len(l[-1]) > 0 and len(l[-1]) < len(l[0])\n                          ^^^^^^^^^\nTypeError: object of type 'int' has no len()\n"
     },
     {
      "content": "def common(l1: list, l2: list):\n    \"\"\"Return sorted unique common elements for two lists.\n    >>> common([1, 4, 3, 34, 653, 2, 5], [5, 7, 1, 5, 9, 653, 121])\n    [1, 5, 653]\n    >>> common([5, 3, 2, 8], [3, 2])\n    [2, 3]\n\n    \"\"\"\n\n    return sorted(set(l1) & set(l2))\n",
@@ -2248,7 +2248,7 @@
       "completion_tokens": 203,
       "total_tokens": 362
      },
-     "latency": 24.43267583847046,
+     "latency": 33.12382674217224,
      "task_id": "HumanEval/58",
      "correct": true,
      "err": ""
@@ -2262,7 +2262,7 @@
       "completion_tokens": 252,
       "total_tokens": 365
      },
-     "latency": 25.410178422927856,
+     "latency": 34.54299783706665,
      "task_id": "HumanEval/59",
      "correct": true,
      "err": ""
@@ -2276,7 +2276,7 @@
       "completion_tokens": 284,
       "total_tokens": 425
      },
-     "latency": 20.59138059616089,
+     "latency": 28.45673155784607,
      "task_id": "HumanEval/60",
      "correct": true,
      "err": ""
@@ -2290,10 +2290,10 @@
       "completion_tokens": 248,
       "total_tokens": 389
      },
-     "latency": 21.069401502609253,
+     "latency": 29.109423875808716,
      "task_id": "HumanEval/61",
      "correct": false,
-     "err": "Traceback (most recent call last):\n  File \"/tmp/tmpv1eaetu0.py\", line 39, in <module>\n    check(correct_bracketing)\n  File \"/tmp/tmpv1eaetu0.py\", line 24, in check\n    assert candidate(\"()\")\n           ^^^^^^^^^^^^^^^\nAssertionError\n"
+     "err": "Traceback (most recent call last):\n  File \"/tmp/tmp6381bjnr.py\", line 39, in <module>\n    check(correct_bracketing)\n  File \"/tmp/tmp6381bjnr.py\", line 24, in check\n    assert candidate(\"()\")\n           ^^^^^^^^^^^^^^^\nAssertionError\n"
     },
     {
      "content": "def derivative(xs: list):\n    \"\"\" xs represent coefficients of a polynomial.\n    xs[0] + xs[1] * x + xs[2] * x^2 + ....\n     Return derivative of this polynomial in the same form.\n    >>> derivative([3, 1, 2, 4, 5])\n    [1, 4, 12, 20]\n    >>> derivative([1, 2, 3])\n    [2, 6]\n    \"\"\"\n\n    def derivative_helper(coefficients: list) -> list:\n        \"\"\" Helper function to calculate derivative of a polynomial.\n        Args:\n            coefficients (list): List of coefficients of the polynomial.\n        Returns:\n            list: List of derivatives of the polynomial.\n        \"\"\"\n        return [co",
@@ -2304,10 +2304,10 @@
       "completion_tokens": 311,
       "total_tokens": 463
      },
-     "latency": 23.398704290390015,
+     "latency": 31.935576677322388,
      "task_id": "HumanEval/62",
      "correct": false,
-     "err": "Traceback (most recent call last):\n  File \"/tmp/tmpvmvn1c2b.py\", line 37, in <module>\n    check(derivative)\n  File \"/tmp/tmpvmvn1c2b.py\", line 29, in check\n    assert candidate([3, 1, 2, 4, 5]) == [1, 4, 12, 20]\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+     "err": "Traceback (most recent call last):\n  File \"/tmp/tmpfy24waol.py\", line 37, in <module>\n    check(derivative)\n  File \"/tmp/tmpfy24waol.py\", line 29, in check\n    assert candidate([3, 1, 2, 4, 5]) == [1, 4, 12, 20]\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
     },
     {
      "content": "def fibfib(n: int) -> int:\n    \"\"\"The FibFib number sequence is a sequence similar to the Fibbonacci sequnece that's defined as follows:\n    fibfib(0) == 0\n    fibfib(1) == 0\n    fibfib(2) == 1\n    fibfib(n) == fibfib(n-1) + fibfib(n-2) + fibfib(n-3).\n    Please write a function to efficiently compute the n-th element of the fibfib number sequence.\n    >>> fibfib(1)\n    0\n    >>> fibfib(5)\n    4\n    >>> fibfib(8)\n    24\n    \"\"\"\n\n    def fibfib_helper(n: int) -> int:\n        if n <= 1:\n            return n\n        return fibfib_helper(n-1) + fibfib_helper(n-2) + fibfib_helper(n-3)\n\n    return f",
@@ -2318,10 +2318,10 @@
       "completion_tokens": 371,
       "total_tokens": 570
      },
-     "latency": 26.055091381072998,
+     "latency": 35.402875900268555,
      "task_id": "HumanEval/63",
      "correct": false,
-     "err": "Traceback (most recent call last):\n  File \"/tmp/tmpiw52yuqr.py\", line 40, in <module>\n    check(fibfib)\n  File \"/tmp/tmpiw52yuqr.py\", line 30, in check\n    assert candidate(2) == 1\n           ^^^^^^^^^^^^^^^^^\nAssertionError\n"
+     "err": "Traceback (most recent call last):\n  File \"/tmp/tmpjqdu8hn5.py\", line 40, in <module>\n    check(fibfib)\n  File \"/tmp/tmpjqdu8hn5.py\", line 30, in check\n    assert candidate(2) == 1\n           ^^^^^^^^^^^^^^^^^\nAssertionError\n"
     },
     {
      "content": "def vowels_count(s):\n    \"\"\"Write a function vowels_count which takes a string representing\n    a word as input and returns the number of vowels in the string.\n    Vowels in this case are 'a', 'e', 'i', 'o', 'u'. Here, 'y' is also a\n    vowel, but only when it is at the end of the given word.\n\n    Example:\n    >>> vowels_count(\"abcde\")\n    2\n    >>> vowels_count(\"ACEDY\")\n    3\n    \"\"\"\n\n    def count_vowels(word):\n        vowels = 'aeiouAEIOU'\n        return sum(1 for char in word if char in vowels)\n\n    return count_vowels(s)\n",
@@ -2332,10 +2332,10 @@
       "completion_tokens": 248,
       "total_tokens": 423
      },
-     "latency": 25.31257915496826,
+     "latency": 34.317261695861816,
      "task_id": "HumanEval/64",
      "correct": false,
-     "err": "Traceback (most recent call last):\n  File \"/tmp/tmp6u9zu42o.py\", line 37, in <module>\n    check(vowels_count)\n  File \"/tmp/tmp6u9zu42o.py\", line 26, in check\n    assert candidate(\"key\") == 2, \"Test 3\"\n           ^^^^^^^^^^^^^^^^^^^^^\nAssertionError: Test 3\n"
+     "err": "Traceback (most recent call last):\n  File \"/tmp/tmp2r10z2ik.py\", line 37, in <module>\n    check(vowels_count)\n  File \"/tmp/tmp2r10z2ik.py\", line 26, in check\n    assert candidate(\"key\") == 2, \"Test 3\"\n           ^^^^^^^^^^^^^^^^^^^^^\nAssertionError: Test 3\n"
     },
     {
      "content": "def circular_shift(x, shift):\n    \"\"\"Circular shift the digits of the integer x, shift the digits right by shift and return the result as a string.\n    If shift > number of digits, return digits reversed.\n    >>> circular_shift(12, 1)\n    \"21\"\n    >>> circular_shift(12, 2)\n    \"12\"\n    \"\"\"\n    if shift > len(x):\n        return str(x)[::-1]\n    return str(x)[::-1] + circular_shift(x, shift)\n",
@@ -2346,10 +2346,10 @@
       "completion_tokens": 194,
       "total_tokens": 317
      },
-     "latency": 24.185768127441406,
+     "latency": 32.8284912109375,
      "task_id": "HumanEval/65",
      "correct": false,
-     "err": " in <module>\n    check(circular_shift)\n  File \"/tmp/tmpthd7q5uh.py\", line 17, in check\n    assert candidate(100, 2) == \"001\"\n           ^^^^^^^^^^^^^^^^^\n  File \"/tmp/tmpthd7q5uh.py\", line 9, in circular_shift\n    if shift > len(x):\n               ^^^^^^\nTypeError: object of type 'int' has no len()\n"
+     "err": " in <module>\n    check(circular_shift)\n  File \"/tmp/tmptto2nx9u.py\", line 17, in check\n    assert candidate(100, 2) == \"001\"\n           ^^^^^^^^^^^^^^^^^\n  File \"/tmp/tmptto2nx9u.py\", line 9, in circular_shift\n    if shift > len(x):\n               ^^^^^^\nTypeError: object of type 'int' has no len()\n"
     },
     {
      "content": "def digitSum(s):\n    \"\"\"Task\n    Write a function that takes a string as input and returns the sum of the upper characters only\n    ASCII codes.\n\n    Examples:\n        digitSum(\"\") => 0\n        digitSum(\"abAB\") => 131\n        digitSum(\"abcCd\") => 67\n        digitSum(\"helloE\") => 69\n        digitSum(\"woArBld\") => 131\n        digitSum(\"aAaaaXa\") => 153\n    \"\"\"\n\n    def sum_ascii_codes(s):\n        return sum(ord(c) for c in s)\n\n    return sum_ascii_codes\n",
@@ -2360,10 +2360,10 @@
       "completion_tokens": 220,
       "total_tokens": 381
      },
-     "latency": 22.15051031112671,
+     "latency": 30.636961698532104,
      "task_id": "HumanEval/66",
      "correct": false,
-     "err": "Traceback (most recent call last):\n  File \"/tmp/tmpy_unjl4g.py\", line 39, in <module>\n    check(digitSum)\n  File \"/tmp/tmpy_unjl4g.py\", line 25, in check\n    assert candidate(\"\") == 0, \"Error\"\n           ^^^^^^^^^^^^^^^^^^\nAssertionError: Error\n"
+     "err": "Traceback (most recent call last):\n  File \"/tmp/tmp8tueyt0k.py\", line 39, in <module>\n    check(digitSum)\n  File \"/tmp/tmp8tueyt0k.py\", line 25, in check\n    assert candidate(\"\") == 0, \"Error\"\n           ^^^^^^^^^^^^^^^^^^\nAssertionError: Error\n"
     },
     {
      "content": "def fruit_distribution(s, n):\n    \"\"\"\n    In this task, you will be given a string that represents a number of apples and oranges \n    that are distributed in a basket of fruit this basket contains \n    apples, oranges, and mango fruits. Given the string that represents the total number of \n    the oranges and apples and an integer that represent the total number of the fruits \n    in the basket return the number of the mango fruits in the basket.\n    for examble:\n    fruit_distribution(\"5 apples and 6 oranges\", 19) -> 8\n    fruit_distribution(\"0 apples and 1 oranges\",3) -> 3\n    fruit_distrib",
@@ -2374,10 +2374,10 @@
       "completion_tokens": 304,
       "total_tokens": 564
      },
-     "latency": 20.50196647644043,
+     "latency": 28.367415189743042,
      "task_id": "HumanEval/67",
      "correct": false,
-     "err": "Traceback (most recent call last):\n  File \"/tmp/tmparwcipoo.py\", line 33, in <module>\n    check(fruit_distribution)\n  File \"/tmp/tmparwcipoo.py\", line 24, in check\n    assert candidate(\"5 apples and 6 oranges\",19) == 8\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+     "err": "Traceback (most recent call last):\n  File \"/tmp/tmpovthmj1p.py\", line 33, in <module>\n    check(fruit_distribution)\n  File \"/tmp/tmpovthmj1p.py\", line 24, in check\n    assert candidate(\"5 apples and 6 oranges\",19) == 8\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
     },
     {
      "content": "def pluck(arr):\n    \"\"\"\n    Given an array representing a branch of a tree that has non-negative integer nodes\n    your task is to pluck one of the nodes and return it.\n    The plucked node should be the node with the smallest even value.\n    If multiple nodes with the same smallest even value are found return the node that has smallest index.\n    The plucked node should be returned in a list, [ smalest_value, its index ],\n    If there are no even values or the given array is empty, return [].\n\n    Example 1:\n        Input: [4,2,3]\n        Output: [2, 1]\n        Explanation: 2 has the smallest",
@@ -2388,10 +2388,10 @@
       "completion_tokens": 434,
       "total_tokens": 797
      },
-     "latency": 24.509401559829712,
+     "latency": 33.923739194869995,
      "task_id": "HumanEval/68",
      "correct": false,
-     "err": "^^^^^^^\n  File \"/tmp/tmpra7nsvm6.py\", line 42, in pluck\n    return pluck_helper(arr, 0, [2, 1])\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/tmpra7nsvm6.py\", line 36, in pluck_helper\n    if node.value == smalest_value:\n       ^^^^^^^^^^\nAttributeError: 'list' object has no attribute 'value'\n"
+     "err": "^^^^^^^\n  File \"/tmp/tmplvyn6fbq.py\", line 42, in pluck\n    return pluck_helper(arr, 0, [2, 1])\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/tmplvyn6fbq.py\", line 36, in pluck_helper\n    if node.value == smalest_value:\n       ^^^^^^^^^^\nAttributeError: 'list' object has no attribute 'value'\n"
     },
     {
      "content": "def search(lst):\n    \"\"\"\n    You are given a non-empty list of positive integers. Return the greatest integer that is greater than \n    zero, and has a frequency greater than or equal to the value of the integer itself. \n    If no such a value exist, return -1.\n    Examples:\n        search([4, 1, 2, 2, 3, 1]) == 2\n        search([1, 2, 2, 3, 3, 3, 4, 4, 4]) == 3\n        search([5, 5, 4, 4, 4]) == -1\n    \"\"\"\n    freq = {}\n    for num in lst:\n        if num >= 0:\n            freq[num] = freq.get(num, 0) + 1\n    return max(freq, key=freq.get)\n",
@@ -2402,10 +2402,10 @@
       "completion_tokens": 265,
       "total_tokens": 470
      },
-     "latency": 25.992722511291504,
+     "latency": 35.93993782997131,
      "task_id": "HumanEval/69",
      "correct": false,
-     "err": "Traceback (most recent call last):\n  File \"/tmp/tmpyp8ppj_p.py\", line 51, in <module>\n    check(search)\n  File \"/tmp/tmpyp8ppj_p.py\", line 21, in check\n    assert candidate([5, 5, 5, 5, 1]) == 1\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+     "err": "Traceback (most recent call last):\n  File \"/tmp/tmped8h7nd1.py\", line 51, in <module>\n    check(search)\n  File \"/tmp/tmped8h7nd1.py\", line 21, in check\n    assert candidate([5, 5, 5, 5, 1]) == 1\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
     },
     {
      "content": "def strange_sort_list(lst):\n    \"\"\"\n    Given list of integers, return list in strange order.\n    Strange sorting, is when you start with the minimum value,\n    then maximum of the remaining integers, then minimum and so on.\n\n    Examples:\n    strange_sort_list([1, 2, 3, 4]) == [1, 4, 2, 3]\n    strange_sort_list([5, 5, 5, 5]) == [5, 5, 5, 5]\n    strange_sort_list([]) == []\n    '''\n\n    def strange_sort_list_helper(lst):\n        if len(lst) == 0:\n            return []\n        min_val = min(lst)\n        max_val = max(lst)\n        return [lst[i] for i in range(min_val, max_val + 1)]\n\n    return s",
@@ -2416,10 +2416,10 @@
       "completion_tokens": 305,
       "total_tokens": 477
      },
-     "latency": 27.840054273605347,
+     "latency": 37.96314024925232,
      "task_id": "HumanEval/70",
      "correct": false,
-     "err": "  File \"/tmp/tmp0z_21z_f.py\", line 2\n    \"\"\"\n    ^\nSyntaxError: unterminated triple-quoted string literal (detected at line 41)\n"
+     "err": "  File \"/tmp/tmpkvogt1i2.py\", line 2\n    \"\"\"\n    ^\nSyntaxError: unterminated triple-quoted string literal (detected at line 41)\n"
     },
     {
      "content": "def triangle_area(a, b, c):\n    \"\"\"\n    Given the lengths of the three sides of a triangle. Return the area of\n    the triangle rounded to 2 decimal points if the three sides form a valid triangle.\n    Otherwise return -1\n    Three sides make a valid triangle when the sum of any two sides is greater\n    than the third side.\n    Example:\n    triangle_area(3, 4, 5) == 6.00\n    triangle_area(1, 2, 10) == -1\n    \"\"\"\n    if a + b <= c or a + c <= b or b + c <= a:\n        return -1\n    return round(a * b * c, 2)\n",
@@ -2430,10 +2430,10 @@
       "completion_tokens": 223,
       "total_tokens": 380
      },
-     "latency": 26.156846046447754,
+     "latency": 36.0190863609314,
      "task_id": "HumanEval/71",
      "correct": false,
-     "err": "e 34, in <module>\n    check(triangle_area)\n  File \"/tmp/tmpywpzcpph.py\", line 20, in check\n    assert candidate(3, 4, 5) == 6.00, \"This prints if this assert fails 1 (good for debugging!)\"\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: This prints if this assert fails 1 (good for debugging!)\n"
+     "err": "e 34, in <module>\n    check(triangle_area)\n  File \"/tmp/tmp1s8gsrcu.py\", line 20, in check\n    assert candidate(3, 4, 5) == 6.00, \"This prints if this assert fails 1 (good for debugging!)\"\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: This prints if this assert fails 1 (good for debugging!)\n"
     },
     {
      "content": "```python\ndef will_it_fly(q, w):\n    '''\n    Write a function that returns True if the object q will fly, and False otherwise.\n    The object q will fly if it's balanced (it is a palindromic list) and the sum of its elements is less than or equal the maximum possible weight w.\n\n    Example:\n    will_it_fly([1, 2], 5) ��� False \n    # 1+2 is less than the maximum possible weight, but it's unbalanced.\n\n    will_it_fly([3, 2, 3], 1) ��� False\n    # it's balanced, but 3+2+3 is more than the maximum possible weight.\n\n    will_it_fly([3, 2, 3], 9) ��� True\n    # 3+2+3 is less than the maximum possib",
@@ -2444,10 +2444,10 @@
       "completion_tokens": 512,
       "total_tokens": 789
      },
-     "latency": 27.715139150619507,
+     "latency": 38.51020693778992,
      "task_id": "HumanEval/72",
      "correct": false,
-     "err": "  File \"/tmp/tmptfjavvn8.py\", line 22\n    '''\n    ^\nSyntaxError: unterminated triple-quoted string literal (detected at line 61)\n"
+     "err": "  File \"/tmp/tmp7xa99tae.py\", line 22\n    '''\n    ^\nSyntaxError: unterminated triple-quoted string literal (detected at line 61)\n"
     },
     {
      "content": "def smallest_change(arr):\n    \"\"\"\n    Given an array arr of integers, find the minimum number of elements that\n    need to be changed to make the array palindromic. A palindromic array is an array\n    that is read the same backwards and forwards. In one change, you can change\n    one element to any other element.\n\n    For example:\n    smallest_change([1,2,3,5,4,7,9,6]) == 4\n    smallest_change([1, 2, 3, 4, 3, 2, 2]) == 1\n    smallest_change([1, 2, 3, 2, 1]) == 0\n    \"\"\"\n\n    def is_palindrome(arr):\n        return arr == arr[::-1]\n\n    def change_one(arr, target):\n        if len(arr) <= 1:\n    ",
@@ -2458,10 +2458,10 @@
       "completion_tokens": 331,
       "total_tokens": 529
      },
-     "latency": 29.133228302001953,
+     "latency": 39.92607927322388,
      "task_id": "HumanEval/73",
      "correct": false,
-     "err": "Traceback (most recent call last):\n  File \"/tmp/tmp3t4neic0.py\", line 42, in <module>\n    check(smallest_change)\n  File \"/tmp/tmp3t4neic0.py\", line 29, in check\n    assert candidate([1,2,3,5,4,7,9,6]) == 4\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+     "err": "Traceback (most recent call last):\n  File \"/tmp/tmpnbbku8ll.py\", line 42, in <module>\n    check(smallest_change)\n  File \"/tmp/tmpnbbku8ll.py\", line 29, in check\n    assert candidate([1,2,3,5,4,7,9,6]) == 4\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
     },
     {
      "content": "def total_match(lst1, lst2):\n    '''\n    Write a function that accepts two lists of strings and returns the list that has \n    total number of chars in the all strings of the list less than the other list.\n\n    if the two lists have the same number of chars, return the first list.\n\n    Examples\n    total_match([], []) ��� []\n    total_match(['hi', 'admin'], ['hI', 'Hi']) ��� ['hI', 'Hi']\n    total_match(['hi', 'admin'], ['hi', 'hi', 'admin', 'project']) ��� ['hi', 'admin']\n    total_match(['hi', 'admin'], ['hI', 'hi', 'hi']) ��� ['hI', 'hi', 'hi']\n    total_match(['4'], ['1', '2', '3', '4', '5",
@@ -2472,10 +2472,10 @@
       "completion_tokens": 337,
       "total_tokens": 622
      },
-     "latency": 29.935569763183594,
+     "latency": 40.52187418937683,
      "task_id": "HumanEval/74",
      "correct": false,
-     "err": "k (most recent call last):\n  File \"/tmp/tmpo1l9c7pv.py\", line 42, in <module>\n    check(total_match)\n  File \"/tmp/tmpo1l9c7pv.py\", line 27, in check\n    assert candidate(['hi', 'admin'], ['hi', 'hi']) == ['hi', 'hi']\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+     "err": "k (most recent call last):\n  File \"/tmp/tmp4lr7uwfo.py\", line 42, in <module>\n    check(total_match)\n  File \"/tmp/tmp4lr7uwfo.py\", line 27, in check\n    assert candidate(['hi', 'admin'], ['hi', 'hi']) == ['hi', 'hi']\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
     },
     {
      "content": "def is_multiply_prime(a):\n    \"\"\"Return true if the given number is the multiplication of 3 prime numbers and false otherwise.\n    Knowing that (a) is less than 100.\n    Example:\n    is_multiply_prime(30) == True\n    30 = 2 * 3 * 5\n    \"\"\"\n    if a < 2:\n        return False\n    if a == 2:\n        return True\n    if a % 2 == 0:\n        return False\n    max_divisor = int(a**0.5) + 1\n    for d in range(3, max_divisor, 2):\n        if a % d == 0:\n            return False\n    return True\n",
@@ -2486,10 +2486,10 @@
       "completion_tokens": 286,
       "total_tokens": 408
      },
-     "latency": 31.235100984573364,
+     "latency": 42.16451334953308,
      "task_id": "HumanEval/75",
      "correct": false,
-     "err": "Traceback (most recent call last):\n  File \"/tmp/tmptud9hjfj.py\", line 36, in <module>\n    check(is_multiply_prime)\n  File \"/tmp/tmptud9hjfj.py\", line 23, in check\n    assert candidate(5) == False\n           ^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+     "err": "Traceback (most recent call last):\n  File \"/tmp/tmpxa0nvdwt.py\", line 36, in <module>\n    check(is_multiply_prime)\n  File \"/tmp/tmpxa0nvdwt.py\", line 23, in check\n    assert candidate(5) == False\n           ^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
     },
     {
      "content": "def is_simple_power(x, n):\n    \"\"\"Your task is to write a function that returns true if a number x is a simple\n    power of n and false in other cases.\n    x is a simple power of n if n**int=x\n    For example:\n    is_simple_power(1, 4) => true\n    is_simple_power(2, 2) => true\n    is_simple_power(8, 2) => true\n    is_simple_power(3, 2) => false\n    is_simple_power(3, 1) => false\n    is_simple_power(5, 3) => false\n    \"\"\"\n\n    if n == 1:\n        return True\n    elif n == 2:\n        return True\n    elif n % 2 == 0:\n        return is_simple_power(x, n // 2)\n    else:\n        return is_simple_powe",
@@ -2500,10 +2500,10 @@
       "completion_tokens": 317,
       "total_tokens": 519
      },
-     "latency": 27.14830756187439,
+     "latency": 35.986069202423096,
      "task_id": "HumanEval/76",
      "correct": false,
-     "err": " <module>\n    check(is_simple_power)\n  File \"/tmp/tmpobxuglgt.py\", line 28, in check\n    assert candidate(143214, 16)== False, \"This prints if this assert fails 1 (good for debugging!)\"\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: This prints if this assert fails 1 (good for debugging!)\n"
+     "err": " <module>\n    check(is_simple_power)\n  File \"/tmp/tmpewxm0e5a.py\", line 28, in check\n    assert candidate(143214, 16)== False, \"This prints if this assert fails 1 (good for debugging!)\"\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: This prints if this assert fails 1 (good for debugging!)\n"
     },
     {
      "content": "def iscube(a):\n    \"\"\"\n    Write a function that takes an integer a and returns True \n    if this integer is a cube of some integer number.\n    Note: you may assume the input is always valid.\n    Examples:\n    iscube(1) ==> True\n    iscube(2) ==> False\n    iscube(-1) ==> True\n    iscube(64) ==> True\n    iscube(0) ==> True\n    iscube(180) ==> False\n    \"\"\"\n    return isinstance(a, int) and a > 0 and a ** 3 == a\n",
@@ -2514,10 +2514,10 @@
       "completion_tokens": 204,
       "total_tokens": 362
      },
-     "latency": 24.391006231307983,
+     "latency": 32.62480640411377,
      "task_id": "HumanEval/77",
      "correct": false,
-     "err": "raceback (most recent call last):\n  File \"/tmp/tmpwzh1gt95.py\", line 34, in <module>\n    check(iscube)\n  File \"/tmp/tmpwzh1gt95.py\", line 22, in check\n    assert candidate(-1) == True, \"Third test error: \" + str(candidate(-1))\n           ^^^^^^^^^^^^^^^^^^^^^\nAssertionError: Third test error: False\n"
+     "err": "raceback (most recent call last):\n  File \"/tmp/tmp9n38fcj0.py\", line 34, in <module>\n    check(iscube)\n  File \"/tmp/tmp9n38fcj0.py\", line 22, in check\n    assert candidate(-1) == True, \"Third test error: \" + str(candidate(-1))\n           ^^^^^^^^^^^^^^^^^^^^^\nAssertionError: Third test error: False\n"
     },
     {
      "content": "```python\ndef hex_key(num):\n    \"\"\"You have been tasked to write a function that receives \n    a hexadecimal number as a string and counts the number of hexadecimal \n    digits that are primes (prime number, or a prime, is a natural number \n    greater than 1 that is not a product of two smaller natural numbers).\n    Hexadecimal digits are 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, A, B, C, D, E, F.\n    Prime numbers are 2, 3, 5, 7, 11, 13, 17,...\n    So you have to determine a number of the following digits: 2, 3, 5, 7, \n    B (=decimal 11), D (=decimal 13).\n    Note: you may assume the input is always co",
@@ -2528,10 +2528,10 @@
       "completion_tokens": 512,
       "total_tokens": 873
      },
-     "latency": 28.140899181365967,
+     "latency": 38.36106038093567,
      "task_id": "HumanEval/78",
      "correct": false,
-     "err": "  File \"/tmp/tmp0sgambj3.py\", line 1\n    ```python\n    ^\nSyntaxError: invalid syntax\n"
+     "err": "  File \"/tmp/tmp3hezyf36.py\", line 1\n    ```python\n    ^\nSyntaxError: invalid syntax\n"
     },
     {
      "content": "def decimal_to_binary(decimal):\n    \"\"\"You will be given a number in decimal form and your task is to convert it to binary format.\n    The function should return a string, with each character representing a binary number. Each\n    character in the string will be '0' or '1'.\n\n    There will be an extra couple of characters 'db' at the beginning and at the end of the string.\n    The extra characters are there to help with the format.\n\n    Examples:\n    decimal_to_binary(15)   # returns \"db1111db\"\n    decimal_to_binary(32)   # returns \"db100000db\"\n    \"\"\"\n\n    return bin(decimal)[2:]\n",
@@ -2542,10 +2542,10 @@
       "completion_tokens": 239,
       "total_tokens": 422
      },
-     "latency": 27.264623403549194,
+     "latency": 36.99286770820618,
      "task_id": "HumanEval/79",
      "correct": false,
-     "err": "Traceback (most recent call last):\n  File \"/tmp/tmp0jpu58gn.py\", line 30, in <module>\n    check(decimal_to_binary)\n  File \"/tmp/tmp0jpu58gn.py\", line 20, in check\n    assert candidate(0) == \"db0db\"\n           ^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+     "err": "Traceback (most recent call last):\n  File \"/tmp/tmpv09nswnd.py\", line 30, in <module>\n    check(decimal_to_binary)\n  File \"/tmp/tmpv09nswnd.py\", line 20, in check\n    assert candidate(0) == \"db0db\"\n           ^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
     },
     {
      "content": "def is_happy(s):\n    \"\"\"You are given a string s.\n    Your task is to check if the string is happy or not.\n    A string is happy if its length is at least 3 and every 3 consecutive letters are distinct\n    For example:\n    is_happy(a) => False\n    is_happy(aa) => False\n    is_happy(abcd) => True\n    is_happy(aabb) => False\n    is_happy(adb) => True\n    is_happy(xyy) => False\n    \"\"\"\n\n    # Check if the string is happy\n    if len(s) < 3:\n        return False\n\n    # Check if the string is happy\n    for i in range(3, len(s)):\n        if s[i] != s[i-3]:\n            return False\n\n    return True\n",
@@ -2556,10 +2556,10 @@
       "completion_tokens": 259,
       "total_tokens": 430
      },
-     "latency": 26.063239336013794,
+     "latency": 35.44546318054199,
      "task_id": "HumanEval/80",
      "correct": false,
-     "err": "Traceback (most recent call last):\n  File \"/tmp/tmpmxk8bq_r.py\", line 39, in <module>\n    check(is_happy)\n  File \"/tmp/tmpmxk8bq_r.py\", line 31, in check\n    assert candidate(\"abcd\") == True , \"abcd\"\n           ^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: abcd\n"
+     "err": "Traceback (most recent call last):\n  File \"/tmp/tmpjnks592m.py\", line 39, in <module>\n    check(is_happy)\n  File \"/tmp/tmpjnks592m.py\", line 31, in check\n    assert candidate(\"abcd\") == True , \"abcd\"\n           ^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: abcd\n"
     },
     {
      "content": "```python\ndef numerical_letter_grade(grades):\n    \"\"\"It is the last week of the semester and the teacher has to give the grades\n    to students. The teacher has been making her own algorithm for grading.\n    The only problem is, she has lost the code she used for grading.\n    She has given you a list of GPAs for some students and you have to write \n    a function that can output a list of letter grades using the following table:\n             GPA       |    Letter grade\n              4.0                A+\n            > 3.7                A \n            > 3.3                A- \n            > 3.0",
@@ -2570,10 +2570,10 @@
       "completion_tokens": 512,
       "total_tokens": 845
      },
-     "latency": 32.556382179260254,
+     "latency": 43.76970839500427,
      "task_id": "HumanEval/81",
      "correct": false,
-     "err": "  File \"/tmp/tmpe8xx95m4.py\", line 1\n    ```python\n    ^\nSyntaxError: invalid syntax\n"
+     "err": "  File \"/tmp/tmp4xs89v8t.py\", line 1\n    ```python\n    ^\nSyntaxError: invalid syntax\n"
     }
    ]
   },
@@ -2585,7 +2585,7 @@
     "errors": 0,
     "truncated": 87,
     "avg_completion_tokens": 366.24666666666667,
-    "avg_latency_s": 31.189937017758687,
+    "avg_latency_s": 42.35204432169596,
     "subjects": 50
    },
    "records": [
@@ -2598,7 +2598,7 @@
       "completion_tokens": 277,
       "total_tokens": 648
      },
-     "latency": 16.880486488342285,
+     "latency": 8.096833229064941,
      "subject": "accountant",
      "ref": "D",
      "pred": null,
@@ -2613,7 +2613,7 @@
       "completion_tokens": 512,
       "total_tokens": 898
      },
-     "latency": 11.033146619796753,
+     "latency": 22.568011045455933,
      "subject": "accountant",
      "ref": "B",
      "pred": null,
@@ -2628,7 +2628,7 @@
       "completion_tokens": 512,
       "total_tokens": 783
      },
-     "latency": 27.801440238952637,
+     "latency": 37.529385566711426,
      "subject": "accountant",
      "ref": "C",
      "pred": null,
@@ -2643,7 +2643,7 @@
       "completion_tokens": 512,
       "total_tokens": 827
      },
-     "latency": 38.612451791763306,
+     "latency": 51.817386865615845,
      "subject": "advanced_mathematics",
      "ref": "D",
      "pred": null,
@@ -2658,7 +2658,7 @@
       "completion_tokens": 217,
       "total_tokens": 461
      },
-     "latency": 32.223281145095825,
+     "latency": 49.879817724227905,
      "subject": "advanced_mathematics",
      "ref": "C",
      "pred": null,
@@ -2673,7 +2673,7 @@
       "completion_tokens": 512,
       "total_tokens": 683
      },
-     "latency": 37.352827310562134,
+     "latency": 50.30323600769043,
      "subject": "advanced_mathematics",
      "ref": "B",
      "pred": null,
@@ -2688,7 +2688,7 @@
       "completion_tokens": 69,
       "total_tokens": 228
      },
-     "latency": 28.024110317230225,
+     "latency": 37.51829743385315,
      "subject": "art_studies",
      "ref": "D",
      "pred": null,
@@ -2703,7 +2703,7 @@
       "completion_tokens": 512,
       "total_tokens": 660
      },
-     "latency": 28.279365062713623,
+     "latency": 38.06859254837036,
      "subject": "art_studies",
      "ref": "D",
      "pred": null,
@@ -2718,7 +2718,7 @@
       "completion_tokens": 512,
       "total_tokens": 699
      },
-     "latency": 34.557480335235596,
+     "latency": 47.02728080749512,
      "subject": "art_studies",
      "ref": "A",
      "pred": null,
@@ -2733,7 +2733,7 @@
       "completion_tokens": 347,
       "total_tokens": 543
      },
-     "latency": 30.930017232894897,
+     "latency": 42.27856135368347,
      "subject": "basic_medicine",
      "ref": "B",
      "pred": null,
@@ -2748,7 +2748,7 @@
       "completion_tokens": 512,
       "total_tokens": 651
      },
-     "latency": 40.278024673461914,
+     "latency": 55.25625729560852,
      "subject": "basic_medicine",
      "ref": "D",
      "pred": null,
@@ -2763,7 +2763,7 @@
       "completion_tokens": 512,
       "total_tokens": 735
      },
-     "latency": 40.20586133003235,
+     "latency": 56.01977849006653,
      "subject": "basic_medicine",
      "ref": "A",
      "pred": null,
@@ -2778,7 +2778,7 @@
       "completion_tokens": 4,
       "total_tokens": 444
      },
-     "latency": 29.395585298538208,
+     "latency": 41.05523681640625,
      "subject": "business_administration",
      "ref": "B",
      "pred": "B",
@@ -2793,7 +2793,7 @@
       "completion_tokens": 512,
       "total_tokens": 728
      },
-     "latency": 32.923624992370605,
+     "latency": 47.182642459869385,
      "subject": "business_administration",
      "ref": "C",
      "pred": null,
@@ -2808,7 +2808,7 @@
       "completion_tokens": 512,
       "total_tokens": 707
      },
-     "latency": 32.9718656539917,
+     "latency": 47.53585433959961,
      "subject": "business_administration",
      "ref": "B",
      "pred": null,
@@ -2823,7 +2823,7 @@
       "completion_tokens": 512,
       "total_tokens": 689
      },
-     "latency": 32.980916023254395,
+     "latency": 47.88227581977844,
      "subject": "chinese_language_and_literature",
      "ref": "C",
      "pred": null,
@@ -2838,7 +2838,7 @@
       "completion_tokens": 512,
       "total_tokens": 745
      },
-     "latency": 43.99488592147827,
+     "latency": 63.47341728210449,
      "subject": "chinese_language_and_literature",
      "ref": "A",
      "pred": null,
@@ -2853,7 +2853,7 @@
       "completion_tokens": 512,
       "total_tokens": 734
      },
-     "latency": 43.95535898208618,
+     "latency": 62.362974882125854,
      "subject": "chinese_language_and_literature",
      "ref": "C",
      "pred": null,
@@ -2868,7 +2868,7 @@
       "completion_tokens": 88,
       "total_tokens": 344
      },
-     "latency": 34.86788821220398,
+     "latency": 49.54980278015137,
      "subject": "civil_servant",
      "ref": "D",
      "pred": null,
@@ -2883,7 +2883,7 @@
       "completion_tokens": 512,
       "total_tokens": 1143
      },
-     "latency": 34.81802725791931,
+     "latency": 48.157169342041016,
      "subject": "civil_servant",
      "ref": "C",
      "pred": null,
@@ -2898,7 +2898,7 @@
       "completion_tokens": 512,
       "total_tokens": 1204
      },
-     "latency": 34.71434235572815,
+     "latency": 47.338311433792114,
      "subject": "civil_servant",
      "ref": "B",
      "pred": null,
@@ -2913,7 +2913,7 @@
       "completion_tokens": 113,
       "total_tokens": 278
      },
-     "latency": 26.36691427230835,
+     "latency": 35.54179096221924,
      "subject": "clinical_medicine",
      "ref": "C",
      "pred": null,
@@ -2928,7 +2928,7 @@
       "completion_tokens": 112,
       "total_tokens": 510
      },
-     "latency": 26.863019704818726,
+     "latency": 36.01820707321167,
      "subject": "clinical_medicine",
      "ref": "A",
      "pred": "D",
@@ -2943,7 +2943,7 @@
       "completion_tokens": 167,
       "total_tokens": 338
      },
-     "latency": 19.506863355636597,
+     "latency": 26.64919424057007,
      "subject": "clinical_medicine",
      "ref": "C",
      "pred": null,
@@ -2958,7 +2958,7 @@
       "completion_tokens": 173,
       "total_tokens": 393
      },
-     "latency": 12.234634399414062,
+     "latency": 16.797621250152588,
      "subject": "college_chemistry",
      "ref": "C",
      "pred": null,
@@ -2973,7 +2973,7 @@
       "completion_tokens": 207,
       "total_tokens": 418
      },
-     "latency": 14.209890842437744,
+     "latency": 19.69166922569275,
      "subject": "college_chemistry",
      "ref": "A",
      "pred": null,
@@ -2988,7 +2988,7 @@
       "completion_tokens": 512,
       "total_tokens": 761
      },
-     "latency": 22.78175163269043,
+     "latency": 31.693750858306885,
      "subject": "college_chemistry",
      "ref": "D",
      "pred": null,
@@ -3003,7 +3003,7 @@
       "completion_tokens": 512,
       "total_tokens": 751
      },
-     "latency": 30.082340002059937,
+     "latency": 41.662959575653076,
      "subject": "college_economics",
      "ref": "A",
      "pred": null,
@@ -3018,7 +3018,7 @@
       "completion_tokens": 512,
       "total_tokens": 669
      },
-     "latency": 37.21506905555725,
+     "latency": 51.25572395324707,
      "subject": "college_economics",
      "ref": "B",
      "pred": null,
@@ -3033,7 +3033,7 @@
       "completion_tokens": 512,
       "total_tokens": 763
      },
-     "latency": 43.74569487571716,
+     "latency": 59.593032360076904,
      "subject": "college_economics",
      "ref": "C",
      "pred": null,
@@ -3048,7 +3048,7 @@
       "completion_tokens": 512,
       "total_tokens": 723
      },
-     "latency": 43.72485113143921,
+     "latency": 59.62261486053467,
      "subject": "college_physics",
      "ref": "A",
      "pred": null,
@@ -3063,7 +3063,7 @@
       "completion_tokens": 512,
       "total_tokens": 746
      },
-     "latency": 43.829694986343384,
+     "latency": 59.13736343383789,
      "subject": "college_physics",
      "ref": "D",
      "pred": null,
@@ -3078,7 +3078,7 @@
       "completion_tokens": 512,
       "total_tokens": 842
      },
-     "latency": 43.86503005027771,
+     "latency": 59.38041281700134,
      "subject": "college_physics",
      "ref": "C",
      "pred": null,
@@ -3093,7 +3093,7 @@
       "completion_tokens": 512,
       "total_tokens": 686
      },
-     "latency": 43.96014881134033,
+     "latency": 59.767762422561646,
      "subject": "college_programming",
      "ref": "B",
      "pred": null,
@@ -3108,7 +3108,7 @@
       "completion_tokens": 150,
       "total_tokens": 337
      },
-     "latency": 36.22872495651245,
+     "latency": 49.08557081222534,
      "subject": "college_programming",
      "ref": "D",
      "pred": null,
@@ -3123,7 +3123,7 @@
       "completion_tokens": 133,
       "total_tokens": 406
      },
-     "latency": 28.06247043609619,
+     "latency": 38.82620549201965,
      "subject": "college_programming",
      "ref": "A",
      "pred": null,
@@ -3138,7 +3138,7 @@
       "completion_tokens": 82,
       "total_tokens": 443
      },
-     "latency": 18.924917459487915,
+     "latency": 26.17769742012024,
      "subject": "computer_architecture",
      "ref": "B",
      "pred": null,
@@ -3153,7 +3153,7 @@
       "completion_tokens": 512,
       "total_tokens": 734
      },
-     "latency": 18.710687160491943,
+     "latency": 26.20479130744934,
      "subject": "computer_architecture",
      "ref": "C",
      "pred": null,
@@ -3168,7 +3168,7 @@
       "completion_tokens": 512,
       "total_tokens": 720
      },
-     "latency": 26.44596838951111,
+     "latency": 36.62378406524658,
      "subject": "computer_architecture",
      "ref": "C",
      "pred": null,
@@ -3183,7 +3183,7 @@
       "completion_tokens": 512,
       "total_tokens": 730
      },
-     "latency": 34.499770402908325,
+     "latency": 47.19285750389099,
      "subject": "computer_network",
      "ref": "C",
      "pred": null,
@@ -3198,7 +3198,7 @@
       "completion_tokens": 183,
       "total_tokens": 435
      },
-     "latency": 36.61576318740845,
+     "latency": 50.163973808288574,
      "subject": "computer_network",
      "ref": "D",
      "pred": "D",
@@ -3213,7 +3213,7 @@
       "completion_tokens": 512,
       "total_tokens": 682
      },
-     "latency": 36.82598352432251,
+     "latency": 50.052081823349,
      "subject": "computer_network",
      "ref": "C",
      "pred": null,
@@ -3228,7 +3228,7 @@
       "completion_tokens": 38,
       "total_tokens": 302
      },
-     "latency": 26.716373920440674,
+     "latency": 36.141010999679565,
      "subject": "discrete_mathematics",
      "ref": "D",
      "pred": null,
@@ -3243,7 +3243,7 @@
       "completion_tokens": 185,
       "total_tokens": 390
      },
-     "latency": 19.801225185394287,
+     "latency": 26.74091410636902,
      "subject": "discrete_mathematics",
      "ref": "A",
      "pred": "D",
@@ -3258,7 +3258,7 @@
       "completion_tokens": 512,
       "total_tokens": 662
      },
-     "latency": 26.78777313232422,
+     "latency": 36.41987586021423,
      "subject": "discrete_mathematics",
      "ref": "C",
      "pred": null,
@@ -3273,7 +3273,7 @@
       "completion_tokens": 188,
       "total_tokens": 376
      },
-     "latency": 19.741366863250732,
+     "latency": 26.841260194778442,
      "subject": "education_science",
      "ref": "A",
      "pred": null,
@@ -3288,7 +3288,7 @@
       "completion_tokens": 512,
       "total_tokens": 704
      },
-     "latency": 29.810869932174683,
+     "latency": 40.7810754776001,
      "subject": "education_science",
      "ref": "B",
      "pred": null,
@@ -3303,7 +3303,7 @@
       "completion_tokens": 236,
       "total_tokens": 545
      },
-     "latency": 30.912335872650146,
+     "latency": 41.98027539253235,
      "subject": "education_science",
      "ref": "D",
      "pred": null,
@@ -3318,7 +3318,7 @@
       "completion_tokens": 512,
       "total_tokens": 739
      },
-     "latency": 30.830673456192017,
+     "latency": 41.87902069091797,
      "subject": "electrical_engineer",
      "ref": "D",
      "pred": "D",
@@ -3333,7 +3333,7 @@
       "completion_tokens": 512,
       "total_tokens": 836
      },
-     "latency": 37.68982410430908,
+     "latency": 51.589858055114746,
      "subject": "electrical_engineer",
      "ref": "B",
      "pred": null,
@@ -3348,7 +3348,7 @@
       "completion_tokens": 512,
       "total_tokens": 826
      },
-     "latency": 37.73787260055542,
+     "latency": 51.26143407821655,
      "subject": "electrical_engineer",
      "ref": "D",
      "pred": null,
@@ -3363,7 +3363,7 @@
       "completion_tokens": 235,
       "total_tokens": 716
      },
-     "latency": 37.8026704788208,
+     "latency": 51.41446328163147,
      "subject": "environmental_impact_assessment_engineer",
      "ref": "C",
      "pred": null,
@@ -3378,7 +3378,7 @@
       "completion_tokens": 512,
       "total_tokens": 751
      },
-     "latency": 37.8436017036438,
+     "latency": 51.47850584983826,
      "subject": "environmental_impact_assessment_engineer",
      "ref": "C",
      "pred": null,
@@ -3393,7 +3393,7 @@
       "completion_tokens": 73,
       "total_tokens": 547
      },
-     "latency": 28.524478673934937,
+     "latency": 38.77474498748779,
      "subject": "environmental_impact_assessment_engineer",
      "ref": "D",
      "pred": null,
@@ -3408,7 +3408,7 @@
       "completion_tokens": 334,
       "total_tokens": 752
      },
-     "latency": 24.640710592269897,
+     "latency": 34.02498507499695,
      "subject": "fire_engineer",
      "ref": "C",
      "pred": null,
@@ -3423,7 +3423,7 @@
       "completion_tokens": 512,
       "total_tokens": 915
      },
-     "latency": 30.496413946151733,
+     "latency": 41.907580614089966,
      "subject": "fire_engineer",
      "ref": "B",
      "pred": null,
@@ -3438,7 +3438,7 @@
       "completion_tokens": 147,
       "total_tokens": 804
      },
-     "latency": 22.806127071380615,
+     "latency": 31.236430406570435,
      "subject": "fire_engineer",
      "ref": "C",
      "pred": null,
@@ -3453,7 +3453,7 @@
       "completion_tokens": 425,
       "total_tokens": 876
      },
-     "latency": 30.252180337905884,
+     "latency": 41.29968786239624,
      "subject": "high_school_biology",
      "ref": "C",
      "pred": null,
@@ -3468,7 +3468,7 @@
       "completion_tokens": 512,
       "total_tokens": 959
      },
-     "latency": 34.1045298576355,
+     "latency": 46.37733864784241,
      "subject": "high_school_biology",
      "ref": "C",
      "pred": null,
@@ -3483,7 +3483,7 @@
       "completion_tokens": 512,
       "total_tokens": 761
      },
-     "latency": 34.053181171417236,
+     "latency": 46.8126916885376,
      "subject": "high_school_biology",
      "ref": "A",
      "pred": null,
@@ -3498,7 +3498,7 @@
       "completion_tokens": 512,
       "total_tokens": 762
      },
-     "latency": 41.68357181549072,
+     "latency": 57.48461675643921,
      "subject": "high_school_chemistry",
      "ref": "B",
      "pred": null,
@@ -3513,7 +3513,7 @@
       "completion_tokens": 512,
       "total_tokens": 905
      },
-     "latency": 43.61482095718384,
+     "latency": 59.761740922927856,
      "subject": "high_school_chemistry",
      "ref": "A",
      "pred": "D",
@@ -3528,7 +3528,7 @@
       "completion_tokens": 304,
       "total_tokens": 661
      },
-     "latency": 39.204551219940186,
+     "latency": 54.220351696014404,
      "subject": "high_school_chemistry",
      "ref": "D",
      "pred": null,
@@ -3543,7 +3543,7 @@
       "completion_tokens": 34,
       "total_tokens": 460
      },
-     "latency": 29.00010871887207,
+     "latency": 40.00422763824463,
      "subject": "high_school_chinese",
      "ref": "C",
      "pred": "D",
@@ -3558,7 +3558,7 @@
       "completion_tokens": 279,
       "total_tokens": 670
      },
-     "latency": 24.187235593795776,
+     "latency": 33.6217143535614,
      "subject": "high_school_chinese",
      "ref": "B",
      "pred": null,
@@ -3573,7 +3573,7 @@
       "completion_tokens": 512,
       "total_tokens": 990
      },
-     "latency": 24.184154987335205,
+     "latency": 33.836753845214844,
      "subject": "high_school_chinese",
      "ref": "D",
      "pred": null,
@@ -3588,7 +3588,7 @@
       "completion_tokens": 177,
       "total_tokens": 587
      },
-     "latency": 21.469929933547974,
+     "latency": 29.554745197296143,
      "subject": "high_school_geography",
      "ref": "D",
      "pred": null,
@@ -3603,7 +3603,7 @@
       "completion_tokens": 136,
       "total_tokens": 368
      },
-     "latency": 23.639901161193848,
+     "latency": 32.3924515247345,
      "subject": "high_school_geography",
      "ref": "D",
      "pred": null,
@@ -3618,7 +3618,7 @@
       "completion_tokens": 93,
       "total_tokens": 332
      },
-     "latency": 19.678977966308594,
+     "latency": 26.418179035186768,
      "subject": "high_school_geography",
      "ref": "A",
      "pred": null,
@@ -3633,7 +3633,7 @@
       "completion_tokens": 512,
       "total_tokens": 781
      },
-     "latency": 19.5963716506958,
+     "latency": 26.666971445083618,
      "subject": "high_school_history",
      "ref": "C",
      "pred": null,
@@ -3648,7 +3648,7 @@
       "completion_tokens": 512,
       "total_tokens": 871
      },
-     "latency": 26.70371651649475,
+     "latency": 36.63476061820984,
      "subject": "high_school_history",
      "ref": "C",
      "pred": null,
@@ -3663,7 +3663,7 @@
       "completion_tokens": 512,
       "total_tokens": 793
      },
-     "latency": 34.60273766517639,
+     "latency": 47.56604194641113,
      "subject": "high_school_history",
      "ref": "C",
      "pred": null,
@@ -3678,7 +3678,7 @@
       "completion_tokens": 512,
       "total_tokens": 776
      },
-     "latency": 43.58115315437317,
+     "latency": 60.21406316757202,
      "subject": "high_school_mathematics",
      "ref": "A",
      "pred": "D",
@@ -3693,7 +3693,7 @@
       "completion_tokens": 512,
       "total_tokens": 700
      },
-     "latency": 43.576759338378906,
+     "latency": 59.85650396347046,
      "subject": "high_school_mathematics",
      "ref": "D",
      "pred": null,
@@ -3708,7 +3708,7 @@
       "completion_tokens": 512,
       "total_tokens": 1010
      },
-     "latency": 43.70422649383545,
+     "latency": 58.985618352890015,
      "subject": "high_school_mathematics",
      "ref": "B",
      "pred": null,
@@ -3723,7 +3723,7 @@
       "completion_tokens": 203,
       "total_tokens": 600
      },
-     "latency": 37.34292531013489,
+     "latency": 50.110944986343384,
      "subject": "high_school_physics",
      "ref": "B",
      "pred": null,
@@ -3738,7 +3738,7 @@
       "completion_tokens": 512,
       "total_tokens": 782
      },
-     "latency": 37.32079315185547,
+     "latency": 49.31759977340698,
      "subject": "high_school_physics",
      "ref": "B",
      "pred": null,
@@ -3753,7 +3753,7 @@
       "completion_tokens": 149,
       "total_tokens": 461
      },
-     "latency": 29.655660152435303,
+     "latency": 38.689292430877686,
      "subject": "high_school_physics",
      "ref": "A",
      "pred": "D",
@@ -3768,7 +3768,7 @@
       "completion_tokens": 512,
       "total_tokens": 1334
      },
-     "latency": 29.652586460113525,
+     "latency": 38.9448778629303,
      "subject": "high_school_politics",
      "ref": "B",
      "pred": null,
@@ -3783,7 +3783,7 @@
       "completion_tokens": 89,
       "total_tokens": 633
      },
-     "latency": 27.12382483482361,
+     "latency": 35.53059411048889,
      "subject": "high_school_politics",
      "ref": "C",
      "pred": null,
@@ -3798,7 +3798,7 @@
       "completion_tokens": 512,
       "total_tokens": 935
      },
-     "latency": 27.054996728897095,
+     "latency": 35.33647632598877,
      "subject": "high_school_politics",
      "ref": "A",
      "pred": null,
@@ -3813,7 +3813,7 @@
       "completion_tokens": 512,
       "total_tokens": 734
      },
-     "latency": 34.822341442108154,
+     "latency": 45.909340143203735,
      "subject": "ideological_and_moral_cultivation",
      "ref": "B",
      "pred": null,
@@ -3828,7 +3828,7 @@
       "completion_tokens": 90,
       "total_tokens": 263
      },
-     "latency": 25.740933656692505,
+     "latency": 34.0013952255249,
      "subject": "ideological_and_moral_cultivation",
      "ref": "D",
      "pred": null,
@@ -3843,7 +3843,7 @@
       "completion_tokens": 253,
       "total_tokens": 644
      },
-     "latency": 29.164615392684937,
+     "latency": 38.86649250984192,
      "subject": "ideological_and_moral_cultivation",
      "ref": "C",
      "pred": null,
@@ -3858,7 +3858,7 @@
       "completion_tokens": 50,
       "total_tokens": 643
      },
-     "latency": 19.391960859298706,
+     "latency": 26.22629451751709,
      "subject": "law",
      "ref": "D",
      "pred": null,
@@ -3873,7 +3873,7 @@
       "completion_tokens": 512,
       "total_tokens": 788
      },
-     "latency": 19.389119863510132,
+     "latency": 26.442370653152466,
      "subject": "law",
      "ref": "C",
      "pred": null,
@@ -3888,7 +3888,7 @@
       "completion_tokens": 277,
       "total_tokens": 676
      },
-     "latency": 23.321022033691406,
+     "latency": 31.9720139503479,
      "subject": "law",
      "ref": "B",
      "pred": null,
@@ -3903,7 +3903,7 @@
       "completion_tokens": 120,
       "total_tokens": 569
      },
-     "latency": 20.572555541992188,
+     "latency": 28.127800464630127,
      "subject": "legal_professional",
      "ref": "B",
      "pred": null,
@@ -3918,7 +3918,7 @@
       "completion_tokens": 512,
       "total_tokens": 1356
      },
-     "latency": 30.436529874801636,
+     "latency": 41.27392768859863,
      "subject": "legal_professional",
      "ref": "D",
      "pred": null,
@@ -3933,7 +3933,7 @@
       "completion_tokens": 512,
       "total_tokens": 1068
      },
-     "latency": 30.321316719055176,
+     "latency": 41.53754949569702,
      "subject": "legal_professional",
      "ref": "C",
      "pred": null,
@@ -3948,7 +3948,7 @@
       "completion_tokens": 512,
       "total_tokens": 982
      },
-     "latency": 35.417712450027466,
+     "latency": 48.29523229598999,
      "subject": "logic",
      "ref": "D",
      "pred": null,
@@ -3963,7 +3963,7 @@
       "completion_tokens": 512,
       "total_tokens": 1571
      },
-     "latency": 43.70737910270691,
+     "latency": 59.23265552520752,
      "subject": "logic",
      "ref": "C",
      "pred": null,
@@ -3978,7 +3978,7 @@
       "completion_tokens": 512,
       "total_tokens": 1080
      },
-     "latency": 43.620755672454834,
+     "latency": 58.688774824142456,
      "subject": "logic",
      "ref": "C",
      "pred": null,
@@ -3993,7 +3993,7 @@
       "completion_tokens": 29,
       "total_tokens": 256
      },
-     "latency": 33.41724467277527,
+     "latency": 44.28299570083618,
      "subject": "mao_zedong_thought",
      "ref": "C",
      "pred": "A",
@@ -4008,7 +4008,7 @@
       "completion_tokens": 512,
       "total_tokens": 752
      },
-     "latency": 33.45850157737732,
+     "latency": 43.69261312484741,
      "subject": "mao_zedong_thought",
      "ref": "A",
      "pred": null,
@@ -4023,7 +4023,7 @@
       "completion_tokens": 512,
       "total_tokens": 816
      },
-     "latency": 33.44003391265869,
+     "latency": 43.38564920425415,
      "subject": "mao_zedong_thought",
      "ref": "D",
      "pred": null,
@@ -4038,7 +4038,7 @@
       "completion_tokens": 512,
       "total_tokens": 707
      },
-     "latency": 33.43170356750488,
+     "latency": 43.641648292541504,
      "subject": "marxism",
      "ref": "D",
      "pred": null,
@@ -4053,7 +4053,7 @@
       "completion_tokens": 16,
       "total_tokens": 225
      },
-     "latency": 33.14781093597412,
+     "latency": 43.317782402038574,
      "subject": "marxism",
      "ref": "B",
      "pred": "A",
@@ -4068,7 +4068,7 @@
       "completion_tokens": 512,
       "total_tokens": 733
      },
-     "latency": 33.07967567443848,
+     "latency": 43.330923318862915,
      "subject": "marxism",
      "ref": "C",
      "pred": null,
@@ -4083,7 +4083,7 @@
       "completion_tokens": 94,
       "total_tokens": 354
      },
-     "latency": 24.248735666275024,
+     "latency": 31.7461678981781,
      "subject": "metrology_engineer",
      "ref": "C",
      "pred": null,
@@ -4098,7 +4098,7 @@
       "completion_tokens": 157,
       "total_tokens": 333
      },
-     "latency": 16.77890920639038,
+     "latency": 21.937841176986694,
      "subject": "metrology_engineer",
      "ref": "B",
      "pred": null,
@@ -4113,7 +4113,7 @@
       "completion_tokens": 141,
       "total_tokens": 538
      },
-     "latency": 19.39706778526306,
+     "latency": 25.350223302841187,
      "subject": "metrology_engineer",
      "ref": "C",
      "pred": null,
@@ -4128,7 +4128,7 @@
       "completion_tokens": 512,
       "total_tokens": 946
      },
-     "latency": 19.24198007583618,
+     "latency": 25.720325469970703,
      "subject": "middle_school_biology",
      "ref": "B",
      "pred": null,
@@ -4143,7 +4143,7 @@
       "completion_tokens": 512,
       "total_tokens": 775
      },
-     "latency": 28.108081102371216,
+     "latency": 37.68433380126953,
      "subject": "middle_school_biology",
      "ref": "B",
      "pred": null,
@@ -4158,7 +4158,7 @@
       "completion_tokens": 215,
       "total_tokens": 440
      },
-     "latency": 29.329543828964233,
+     "latency": 39.699934244155884,
      "subject": "middle_school_biology",
      "ref": "A",
      "pred": null,
@@ -4173,7 +4173,7 @@
       "completion_tokens": 512,
       "total_tokens": 707
      },
-     "latency": 37.34428095817566,
+     "latency": 51.12211084365845,
      "subject": "middle_school_chemistry",
      "ref": "A",
      "pred": "A",
@@ -4188,7 +4188,7 @@
       "completion_tokens": 512,
       "total_tokens": 799
      },
-     "latency": 37.45709991455078,
+     "latency": 51.76319217681885,
      "subject": "middle_school_chemistry",
      "ref": "D",
      "pred": null,
@@ -4203,7 +4203,7 @@
       "completion_tokens": 151,
       "total_tokens": 439
      },
-     "latency": 29.756389379501343,
+     "latency": 42.19902563095093,
      "subject": "middle_school_chemistry",
      "ref": "A",
      "pred": "D",
@@ -4218,7 +4218,7 @@
       "completion_tokens": 167,
       "total_tokens": 464
      },
-     "latency": 28.684754371643066,
+     "latency": 40.63464689254761,
      "subject": "middle_school_geography",
      "ref": "D",
      "pred": null,
@@ -4233,7 +4233,7 @@
       "completion_tokens": 12,
       "total_tokens": 414
      },
-     "latency": 17.97227716445923,
+     "latency": 25.66544485092163,
      "subject": "middle_school_geography",
      "ref": "D",
      "pred": "B",
@@ -4248,7 +4248,7 @@
       "completion_tokens": 15,
       "total_tokens": 239
      },
-     "latency": 7.406100511550903,
+     "latency": 10.772583961486816,
      "subject": "middle_school_geography",
      "ref": "C",
      "pred": null,
@@ -4263,7 +4263,7 @@
       "completion_tokens": 512,
       "total_tokens": 815
      },
-     "latency": 15.215295314788818,
+     "latency": 20.71692442893982,
      "subject": "middle_school_history",
      "ref": "C",
      "pred": null,
@@ -4278,7 +4278,7 @@
       "completion_tokens": 512,
       "total_tokens": 763
      },
-     "latency": 22.5970139503479,
+     "latency": 31.509294509887695,
      "subject": "middle_school_history",
      "ref": "A",
      "pred": null,
@@ -4293,7 +4293,7 @@
       "completion_tokens": 512,
       "total_tokens": 882
      },
-     "latency": 33.24868178367615,
+     "latency": 46.507688999176025,
      "subject": "middle_school_history",
      "ref": "B",
      "pred": null,
@@ -4308,7 +4308,7 @@
       "completion_tokens": 512,
       "total_tokens": 882
      },
-     "latency": 43.80624294281006,
+     "latency": 61.47221875190735,
      "subject": "middle_school_mathematics",
      "ref": "D",
      "pred": null,
@@ -4323,7 +4323,7 @@
       "completion_tokens": 464,
       "total_tokens": 932
      },
-     "latency": 42.71623182296753,
+     "latency": 59.98212790489197,
      "subject": "middle_school_mathematics",
      "ref": "C",
      "pred": null,
@@ -4338,7 +4338,7 @@
       "completion_tokens": 474,
       "total_tokens": 1075
      },
-     "latency": 41.91830039024353,
+     "latency": 57.41509175300598,
      "subject": "middle_school_mathematics",
      "ref": "B",
      "pred": null,
@@ -4353,7 +4353,7 @@
       "completion_tokens": 512,
       "total_tokens": 847
      },
-     "latency": 41.891782999038696,
+     "latency": 56.939793825149536,
      "subject": "middle_school_physics",
      "ref": "B",
      "pred": null,
@@ -4368,7 +4368,7 @@
       "completion_tokens": 512,
       "total_tokens": 681
      },
-     "latency": 42.026090145111084,
+     "latency": 56.29263877868652,
      "subject": "middle_school_physics",
      "ref": "C",
      "pred": null,
@@ -4383,7 +4383,7 @@
       "completion_tokens": 18,
       "total_tokens": 295
      },
-     "latency": 32.51214241981506,
+     "latency": 43.33698582649231,
      "subject": "middle_school_physics",
      "ref": "A",
      "pred": null,
@@ -4398,7 +4398,7 @@
       "completion_tokens": 512,
       "total_tokens": 745
      },
-     "latency": 33.233641624450684,
+     "latency": 45.0879271030426,
      "subject": "middle_school_politics",
      "ref": "A",
      "pred": null,
@@ -4413,7 +4413,7 @@
       "completion_tokens": 126,
       "total_tokens": 578
      },
-     "latency": 25.06313395500183,
+     "latency": 33.94705009460449,
      "subject": "middle_school_politics",
      "ref": "C",
      "pred": null,
@@ -4428,7 +4428,7 @@
       "completion_tokens": 221,
       "total_tokens": 741
      },
-     "latency": 18.776171445846558,
+     "latency": 25.60516047477722,
      "subject": "middle_school_politics",
      "ref": "D",
      "pred": null,
@@ -4443,7 +4443,7 @@
       "completion_tokens": 512,
       "total_tokens": 834
      },
-     "latency": 29.20734453201294,
+     "latency": 39.97190022468567,
      "subject": "modern_chinese_history",
      "ref": "D",
      "pred": null,
@@ -4458,7 +4458,7 @@
       "completion_tokens": 512,
       "total_tokens": 716
      },
-     "latency": 29.38667392730713,
+     "latency": 40.08115601539612,
      "subject": "modern_chinese_history",
      "ref": "D",
      "pred": null,
@@ -4473,7 +4473,7 @@
       "completion_tokens": 333,
       "total_tokens": 759
      },
-     "latency": 33.80948853492737,
+     "latency": 45.84619736671448,
      "subject": "modern_chinese_history",
      "ref": "C",
      "pred": "D",
@@ -4488,7 +4488,7 @@
       "completion_tokens": 512,
       "total_tokens": 725
      },
-     "latency": 39.9113085269928,
+     "latency": 54.172380685806274,
      "subject": "operating_system",
      "ref": "D",
      "pred": null,
@@ -4503,7 +4503,7 @@
       "completion_tokens": 512,
       "total_tokens": 722
      },
-     "latency": 39.90948939323425,
+     "latency": 53.77259969711304,
      "subject": "operating_system",
      "ref": "A",
      "pred": "B",
@@ -4518,7 +4518,7 @@
       "completion_tokens": 512,
       "total_tokens": 744
      },
-     "latency": 39.83196020126343,
+     "latency": 53.28851008415222,
      "subject": "operating_system",
      "ref": "D",
      "pred": null,
@@ -4533,7 +4533,7 @@
       "completion_tokens": 512,
       "total_tokens": 721
      },
-     "latency": 43.61987924575806,
+     "latency": 58.57555389404297,
      "subject": "physician",
      "ref": "A",
      "pred": null,
@@ -4548,7 +4548,7 @@
       "completion_tokens": 512,
       "total_tokens": 769
      },
-     "latency": 43.69974994659424,
+     "latency": 58.655760288238525,
      "subject": "physician",
      "ref": "C",
      "pred": null,
@@ -4563,7 +4563,7 @@
       "completion_tokens": 512,
       "total_tokens": 722
      },
-     "latency": 43.855454206466675,
+     "latency": 59.491642475128174,
      "subject": "physician",
      "ref": "C",
      "pred": null,
@@ -4578,7 +4578,7 @@
       "completion_tokens": 512,
       "total_tokens": 679
      },
-     "latency": 43.79838442802429,
+     "latency": 59.541017055511475,
      "subject": "plant_protection",
      "ref": "B",
      "pred": null,
@@ -4593,7 +4593,7 @@
       "completion_tokens": 512,
       "total_tokens": 715
      },
-     "latency": 43.87916660308838,
+     "latency": 59.29071235656738,
      "subject": "plant_protection",
      "ref": "A",
      "pred": null,
@@ -4608,7 +4608,7 @@
       "completion_tokens": 512,
       "total_tokens": 739
      },
-     "latency": 43.95565581321716,
+     "latency": 59.24903750419617,
      "subject": "plant_protection",
      "ref": "B",
      "pred": null,
@@ -4623,7 +4623,7 @@
       "completion_tokens": 512,
       "total_tokens": 863
      },
-     "latency": 44.01918053627014,
+     "latency": 58.466164112091064,
      "subject": "probability_and_statistics",
      "ref": "C",
      "pred": null,
@@ -4638,7 +4638,7 @@
       "completion_tokens": 512,
       "total_tokens": 803
      },
-     "latency": 43.95380997657776,
+     "latency": 57.92264699935913,
      "subject": "probability_and_statistics",
      "ref": "C",
      "pred": "D",
@@ -4653,7 +4653,7 @@
       "completion_tokens": 512,
       "total_tokens": 742
      },
-     "latency": 43.948082447052,
+     "latency": 57.23450326919556,
      "subject": "probability_and_statistics",
      "ref": "C",
      "pred": null,
@@ -4668,7 +4668,7 @@
       "completion_tokens": 90,
       "total_tokens": 253
      },
-     "latency": 34.867517948150635,
+     "latency": 45.27825713157654,
      "subject": "professional_tour_guide",
      "ref": "C",
      "pred": null,
@@ -4683,7 +4683,7 @@
       "completion_tokens": 5,
       "total_tokens": 152
      },
-     "latency": 23.943798303604126,
+     "latency": 30.960921049118042,
      "subject": "professional_tour_guide",
      "ref": "D",
      "pred": null,
@@ -4698,7 +4698,7 @@
       "completion_tokens": 110,
       "total_tokens": 278
      },
-     "latency": 15.492010593414307,
+     "latency": 19.743767023086548,
      "subject": "professional_tour_guide",
      "ref": "B",
      "pred": null,
@@ -4713,7 +4713,7 @@
       "completion_tokens": 103,
       "total_tokens": 401
      },
-     "latency": 6.681376695632935,
+     "latency": 8.738679647445679,
      "subject": "sports_science",
      "ref": "D",
      "pred": "D",
@@ -4728,7 +4728,7 @@
       "completion_tokens": 169,
       "total_tokens": 348
      },
-     "latency": 8.390083312988281,
+     "latency": 10.502274513244629,
      "subject": "sports_science",
      "ref": "D",
      "pred": null,
@@ -4743,7 +4743,7 @@
       "completion_tokens": 512,
       "total_tokens": 691
      },
-     "latency": 19.316737174987793,
+     "latency": 25.108372926712036,
      "subject": "sports_science",
      "ref": "B",
      "pred": null,
@@ -4758,7 +4758,7 @@
       "completion_tokens": 512,
       "total_tokens": 823
      },
-     "latency": 27.817915439605713,
+     "latency": 36.834593296051025,
      "subject": "tax_accountant",
      "ref": "D",
      "pred": null,
@@ -4773,7 +4773,7 @@
       "completion_tokens": 317,
       "total_tokens": 769
      },
-     "latency": 32.395997047424316,
+     "latency": 42.84250068664551,
      "subject": "tax_accountant",
      "ref": "C",
      "pred": null,
@@ -4788,7 +4788,7 @@
       "completion_tokens": 512,
       "total_tokens": 1090
      },
-     "latency": 39.71076822280884,
+     "latency": 52.67653751373291,
      "subject": "tax_accountant",
      "ref": "B",
      "pred": null,
@@ -4803,7 +4803,7 @@
       "completion_tokens": 224,
       "total_tokens": 722
      },
-     "latency": 33.43863368034363,
+     "latency": 44.069132804870605,
      "subject": "teacher_qualification",
      "ref": "D",
      "pred": null,
@@ -4818,7 +4818,7 @@
       "completion_tokens": 74,
       "total_tokens": 236
      },
-     "latency": 24.12465238571167,
+     "latency": 31.638550758361816,
      "subject": "teacher_qualification",
      "ref": "B",
      "pred": null,
@@ -4833,7 +4833,7 @@
       "completion_tokens": 231,
       "total_tokens": 653
      },
-     "latency": 22.281883239746094,
+     "latency": 29.369218826293945,
      "subject": "teacher_qualification",
      "ref": "B",
      "pred": null,
@@ -4849,7 +4849,7 @@
     "errors": 0,
     "truncated": 0,
     "avg_completion_tokens": 53.15,
-    "avg_latency_s": 4.323917269706726
+    "avg_latency_s": 5.694636297225952
    },
    "records": [
     {
@@ -4861,7 +4861,7 @@
       "completion_tokens": 44,
       "total_tokens": 92
      },
-     "latency": 0.9749407768249512,
+     "latency": 1.5026023387908936,
      "correct": true,
      "parsed": {
       "name": "Alice",
@@ -4882,7 +4882,7 @@
       "completion_tokens": 50,
       "total_tokens": 97
      },
-     "latency": 2.070737600326538,
+     "latency": 2.851799726486206,
      "correct": true,
      "parsed": {
       "name": "Bob",
@@ -4904,7 +4904,7 @@
       "completion_tokens": 71,
       "total_tokens": 151
      },
-     "latency": 3.6041812896728516,
+     "latency": 4.857908248901367,
      "correct": false,
      "parsed": {
       "name": "������",
@@ -4926,7 +4926,7 @@
       "completion_tokens": 44,
       "total_tokens": 92
      },
-     "latency": 4.570834636688232,
+     "latency": 6.2094807624816895,
      "correct": true,
      "parsed": {
       "name": "Alice",
@@ -4947,7 +4947,7 @@
       "completion_tokens": 50,
       "total_tokens": 97
      },
-     "latency": 4.678399324417114,
+     "latency": 6.234832286834717,
      "correct": true,
      "parsed": {
       "name": "Bob",
@@ -4969,7 +4969,7 @@
       "completion_tokens": 71,
       "total_tokens": 151
      },
-     "latency": 5.1359758377075195,
+     "latency": 7.055569410324097,
      "correct": false,
      "parsed": {
       "name": "������",
@@ -4991,7 +4991,7 @@
       "completion_tokens": 44,
       "total_tokens": 92
      },
-     "latency": 4.572184324264526,
+     "latency": 6.339487552642822,
      "correct": true,
      "parsed": {
       "name": "Alice",
@@ -5012,7 +5012,7 @@
       "completion_tokens": 50,
       "total_tokens": 97
      },
-     "latency": 4.6969006061553955,
+     "latency": 6.2561728954315186,
      "correct": true,
      "parsed": {
       "name": "Bob",
@@ -5034,7 +5034,7 @@
       "completion_tokens": 71,
       "total_tokens": 151
      },
-     "latency": 5.158200979232788,
+     "latency": 6.770776033401489,
      "correct": false,
      "parsed": {
       "name": "������",
@@ -5056,7 +5056,7 @@
       "completion_tokens": 44,
       "total_tokens": 92
      },
-     "latency": 4.578526258468628,
+     "latency": 5.858000993728638,
      "correct": true,
      "parsed": {
       "name": "Alice",
@@ -5077,7 +5077,7 @@
       "completion_tokens": 50,
       "total_tokens": 97
      },
-     "latency": 4.685368061065674,
+     "latency": 6.060127258300781,
      "correct": true,
      "parsed": {
       "name": "Bob",
@@ -5099,7 +5099,7 @@
       "completion_tokens": 71,
       "total_tokens": 151
      },
-     "latency": 5.14771842956543,
+     "latency": 6.6343207359313965,
      "correct": false,
      "parsed": {
       "name": "������",
@@ -5121,7 +5121,7 @@
       "completion_tokens": 44,
       "total_tokens": 92
      },
-     "latency": 4.56185507774353,
+     "latency": 6.0472705364227295,
      "correct": true,
      "parsed": {
       "name": "Alice",
@@ -5142,7 +5142,7 @@
       "completion_tokens": 43,
       "total_tokens": 90
      },
-     "latency": 4.531133651733398,
+     "latency": 5.90276575088501,
      "correct": true,
      "parsed": {
       "name": "Bob",
@@ -5162,7 +5162,7 @@
       "completion_tokens": 71,
       "total_tokens": 151
      },
-     "latency": 4.984827041625977,
+     "latency": 6.417386531829834,
      "correct": false,
      "parsed": {
       "name": "������",
@@ -5184,7 +5184,7 @@
       "completion_tokens": 44,
       "total_tokens": 92
      },
-     "latency": 4.391831874847412,
+     "latency": 5.805979251861572,
      "correct": true,
      "parsed": {
       "name": "Alice",
@@ -5205,7 +5205,7 @@
       "completion_tokens": 43,
       "total_tokens": 90
      },
-     "latency": 4.366754531860352,
+     "latency": 5.417927980422974,
      "correct": true,
      "parsed": {
       "name": "Bob",
@@ -5225,7 +5225,7 @@
       "completion_tokens": 71,
       "total_tokens": 151
      },
-     "latency": 4.972775220870972,
+     "latency": 6.343806743621826,
      "correct": false,
      "parsed": {
       "name": "������",
@@ -5247,7 +5247,7 @@
       "completion_tokens": 44,
       "total_tokens": 92
      },
-     "latency": 4.4043967723846436,
+     "latency": 5.6996026039123535,
      "correct": true,
      "parsed": {
       "name": "Alice",
@@ -5268,7 +5268,7 @@
       "completion_tokens": 43,
       "total_tokens": 90
      },
-     "latency": 4.390803098678589,
+     "latency": 5.626908302307129,
      "correct": true,
      "parsed": {
       "name": "Bob",
@@ -5289,7 +5289,7 @@
     "errors": 0,
     "truncated": 4,
     "avg_completion_tokens": 311.6,
-    "avg_latency_s": 22.709050941467286
+    "avg_latency_s": 30.416256499290466
    },
    "records": [
     {
@@ -5301,7 +5301,7 @@
       "completion_tokens": 216,
       "total_tokens": 229
      },
-     "latency": 4.636225461959839,
+     "latency": 6.271356582641602,
      "expected": "get_weather",
      "got": null,
      "correct": false
@@ -5315,7 +5315,7 @@
       "completion_tokens": 512,
       "total_tokens": 542
      },
-     "latency": 15.517255544662476,
+     "latency": 24.038767099380493,
      "expected": "get_weather",
      "got": null,
      "correct": false
@@ -5329,7 +5329,7 @@
       "completion_tokens": 98,
       "total_tokens": 113
      },
-     "latency": 28.619245290756226,
+     "latency": 9.0248441696167,
      "expected": "convert_currency",
      "got": null,
      "correct": false
@@ -5343,7 +5343,7 @@
       "completion_tokens": 512,
       "total_tokens": 542
      },
-     "latency": 26.514873027801514,
+     "latency": 38.96750831604004,
      "expected": "convert_currency",
      "got": null,
      "correct": false
@@ -5357,7 +5357,7 @@
       "completion_tokens": 107,
       "total_tokens": 124
      },
-     "latency": 26.317287921905518,
+     "latency": 35.94724369049072,
      "expected": "get_weather",
      "got": null,
      "correct": false
@@ -5371,7 +5371,7 @@
       "completion_tokens": 102,
       "total_tokens": 116
      },
-     "latency": 17.64146137237549,
+     "latency": 36.21862030029297,
      "expected": "convert_currency",
      "got": null,
      "correct": false
@@ -5385,7 +5385,7 @@
       "completion_tokens": 512,
       "total_tokens": 533
      },
-     "latency": 17.65168833732605,
+     "latency": 36.30766272544861,
      "expected": "get_weather",
      "got": null,
      "correct": false
@@ -5399,7 +5399,7 @@
       "completion_tokens": 512,
       "total_tokens": 539
      },
-     "latency": 26.53729009628296,
+     "latency": 35.06670689582825,
      "expected": "convert_currency",
      "got": null,
      "correct": false
@@ -5413,7 +5413,7 @@
       "completion_tokens": 266,
       "total_tokens": 278
      },
-     "latency": 29.9232919216156,
+     "latency": 38.906893730163574,
      "expected": "get_weather",
      "got": null,
      "correct": false
@@ -5427,7 +5427,7 @@
       "completion_tokens": 279,
       "total_tokens": 292
      },
-     "latency": 33.73189043998718,
+     "latency": 43.41296148300171,
      "expected": null,
      "got": null,
      "correct": true
@@ -5435,5 +5435,5 @@
    ]
   }
  },
- "finished": "2026-10-09 04:28:57"
+ "finished": "2026-10-08 18:36:46"
 }

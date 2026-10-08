@@ -53,6 +53,14 @@ rlrows = "".join([
     row("训练中 pass@1（400 题）", lambda r: (f"{r['chat_rl']['pass_at_k'][0]['pass@1']*100:.1f}% → {max(p['pass@1'] for p in r['chat_rl']['pass_at_k'])*100:.1f}%" if r["chat_rl"]["pass_at_k"] else "–")),
     row("平均回答长度（token）", lambda r: (f"{r['chat_rl']['reward_curve'][0][2]:.0f} → {r['chat_rl']['reward_curve'][-1][2]:.0f}" if r["chat_rl"]["reward_curve"] else "–")),
 ])
+EV5 = ["ARC-Easy", "ARC-Challenge", "MMLU", "GSM8K", "HumanEval", "ChatCORE"]
+def rl_cell(r, k):
+    a, b = r["chat_eval_sft"].get(k), r["chat_eval_rl"].get(k)
+    if a is None or b is None: return "–"
+    if k == "ChatCORE": return f"{a:.3f} → {b:.3f}"
+    d = b - a; cls = "ok" if d >= 1 else ("bad" if d <= -1 else "")
+    return f"{a:.1f}% → {b:.1f}% <span class='{cls}'>{d:+.1f}</span>"
+rleval = "".join(row(k, lambda r, k=k: rl_cell(r, k)) for k in EV5)
 STAGES = [("tok_train", "训练分词器"), ("tok_eval", "分词器评测"), ("base_train", "预训练"), ("base_eval", "基础模型评测"), ("chat_sft", "SFT"), ("chat_eval_sft", "对话评测"), ("chat_rl", "强化学习"), ("chat_eval_rl", "RL 后评测")]
 timerows = "".join(row(lbl, lambda r, n=n: hms(st(r, n))) for n, lbl in STAGES)
 r0 = runs[tags[0]]
@@ -87,7 +95,7 @@ if "d24" in runs:
 yard = ""
 try:
     bm = {}
-    for m in ["GLM-5.3-Flash", "Qwen3.8-27B", "Qwen3.6-35B-A3B", "nanochat-d32-sft", "nanochat-d24-sft", "nanochat-d12-sft"]:
+    for m in ["GLM-5.3-Flash", "Qwen3.8-27B", "Qwen3.6-35B-A3B", "nanochat-d32-sft", "nanochat-d32-rl", "nanochat-d24-sft", "nanochat-d24-rl", "nanochat-d12-sft", "nanochat-d12-rl"]:
         qp = os.path.join(ROOT, "results", m, "quality.json"); pp = os.path.join(ROOT, "results", m, "perf", "single_128in_256out.json")
         if os.path.exists(qp): bm[m] = {"q": json.load(open(qp))["tests"], "p": json.load(open(pp)) if os.path.exists(pp) else {}}
     tests = [("gsm8k", "GSM8K"), ("humaneval", "HumanEval"), ("ceval", "C-Eval"), ("json", "JSON"), ("tools", "工具调用")]
@@ -99,8 +107,88 @@ try:
     if rows: yard = "<div class='tablewrap'><table><tr><th>模型</th>" + "".join(f"<th class='num'>{n}</th>" for _, n in tests) + "<th class='num'>单流速度</th></tr>" + rows + "</table></div>"
 except Exception as e:
     yard = f"<p>（评测结果缺失：{e}）</p>"
+# ---- RL narrative computed from the runs
+rl_runs = [t for t in tags if runs[t]["chat_eval_rl"].get("GSM8K") is not None and runs[t]["chat_eval_sft"].get("GSM8K") is not None]
+def pk(r, which):
+    p = r["chat_rl"]["pass_at_k"]
+    if not p: return None, None
+    if which == "first":
+        ks = sorted(int(k.split("@")[1]) for k in p[0] if k.startswith("pass@")); return p[0]["pass@1"], (ks[-1], p[0][f"pass@{ks[-1]}"])
+    return max(x["pass@1"] for x in p), None
+rl_note = ""
+if rl_runs:
+    gains = "，".join(f"{t} 从 {runs[t]['chat_eval_sft']['GSM8K']:.2f}% 到 {runs[t]['chat_eval_rl']['GSM8K']:.2f}%" for t in rl_runs)
+    lens = "，".join(f"{t} 从 {runs[t]['chat_rl']['reward_curve'][0][2]:.0f} 到 {runs[t]['chat_rl']['reward_curve'][-1][2]:.0f}" for t in rl_runs if runs[t]["chat_rl"]["reward_curve"])
+    big = rl_runs[-1]; p1_0, (kmax, pk_0) = pk(runs[big], "first"); p1_best, _ = pk(runs[big], "best")
+    hrs = "，".join(f"{t} {st(runs[t],'chat_rl')/3600:.1f} 小时" for t in rl_runs if st(runs[t],'chat_rl'))
+    rl_note = (f"<div class='note kv'><b>三个现象。</b> 一是效果立竿见影，而且模型越大收益越大：GSM8K 上 {gains}。SFT 让模型看了 4 遍标准答案都没学会的东西，RL 让它自己试出来了。"
+               f"二是 RL 不是凭空教会新本事，而是把偶尔能做对变成稳定做对：第 0 步时 {big} 对一道题采样 {kmax} 次、至少对一次的比例已经是 {pk_0*100:.0f}%，单次只对 {p1_0*100:.1f}%；训练后单次做对的比例升到 {p1_best*100:.1f}%。"
+               f"三是回答变短了，平均 token 数 {lens}：模型发现啰嗦不加分，超过 256 个 token 被截断还会丢分，直接调用计算器给答案最划算。RL 优化的是你给的奖励，不是你心里想的目标。"
+               f"这一步很慢，{hrs}，因为每步要让模型实际生成 256 条回答，走的是推理的速度。d24 和 d32 把每题的 16 个回答放进一次生成调用，d12 当时分两次，算法完全相同。</div>")
+rl_eval_note = ""
+if rl_runs:
+    he = "，".join(f"{t} {runs[t]['chat_eval_rl']['HumanEval']-runs[t]['chat_eval_sft']['HumanEval']:+.1f}" for t in rl_runs if runs[t]['chat_eval_rl'].get('HumanEval') is not None)
+    rl_eval_note = (f"<div class='note warn'><b>选择题几乎不动，写代码明显变差。</b> ARC 和 MMLU 的变化都在一两个点以内，属于正常波动。HumanEval 三个模型都掉了，分别是 {he} 个点。"
+                    "RL 只奖励数学题的最终答案，模型就把所有回答都往短而直接的风格上推，写代码需要的完整函数和细节被一起压掉了。"
+                    "这就是常说的对齐税：针对一个目标优化，会拿别的能力来换。工业界的做法是把多种任务混在一起做 RL，或者在 RL 目标里加一项约束，让模型别离 SFT 版本太远，也就是 PPO 和 GRPO 里的 KL 惩罚。nanochat 为了简单把它去掉了。</div>")
+import re as _re
+_CALL = _re.compile(r"&lt;\|python_start\|&gt;(.*?)&lt;\|python_end\|&gt;(?:&lt;\|output_start\|&gt;(.*?)&lt;\|output_end\|&gt;)?", _re.S)
+def calc_html(t):
+    # a call whose expression the calculator rejected has no output part: show it with "?" instead of leaving a tag open
+    t = _CALL.sub(lambda m: f"<span class='calc'>计算器 {m.group(1)} = {m.group(2) if m.group(2) is not None else '?'}</span>", esc(t))
+    return _re.sub(r"&lt;\|[a-z_]+\|&gt;", "", t)
+def badge(x): return f"<span class='{'ok' if x['correct'] else 'bad'}'>{'✓ 对' if x['correct'] else '✗ 错'}</span>"
+rl_samples = ""
+for t in reversed(rl_runs):
+    items = [it for it in runs[t].get("samples_math", []) if "sft" in it and "rl" in it]
+    if not items: continue
+    gsm = [it for it in items if it["kind"] == "gsm8k"]
+    pick = [it for it in gsm if it["rl"]["correct"] and not it["sft"]["correct"]][:2] + [it for it in gsm if not it["rl"]["correct"]][:1] + [it for it in items if it["kind"] == "arith"]
+    blocks = ""
+    for it in pick:
+        blocks += (f"<div class='qa'><div class='q'>{esc(it['q'])} <span class='pill'>参考答案 {esc(str(it['ref']))}</span></div><div class='duo'>"
+                   + "".join(f"<div><div class='h'>{lab} · {badge(it[src])} · {it[src]['tokens']} token · 计算器 {it[src]['tool_calls']} 次</div>{calc_html(it[src]['text'])}</div>" for src, lab in (("sft", "SFT 后"), ("rl", "RL 后")))
+                   + "</div></div>")
+    ns = sum(it["sft"]["correct"] for it in gsm); nr = sum(it["rl"]["correct"] for it in gsm)
+    cs = sum(it["sft"]["tool_calls"] for it in gsm); cr = sum(it["rl"]["tool_calls"] for it in gsm)
+    ts = sum(it["sft"]["tokens"] for it in gsm) / max(1, len(gsm)); tr = sum(it["rl"]["tokens"] for it in gsm) / max(1, len(gsm))
+    rl_samples += (f"<h3>{t}：{len(gsm)} 道测试题里，SFT 做对 {ns} 道，RL 做对 {nr} 道</h3>"
+                   f"<p>同样 {len(gsm)} 道题，计算器调用从 {cs} 次变成 {cr} 次，平均回答长度从 {ts:.0f} 个 token 变成 {tr:.0f} 个。下面挑了 RL 做对而 SFT 没做对的题、一道 RL 也没做对的题，以及一道简单乘法。</p>" + blocks)
+yard_note = ""
+try:
+    def acc(m, t):
+        x = bm.get(m, {}).get("q", {}).get(t, {}).get("summary", {})
+        return None if not x or x.get("accuracy") is None else 100 * x["accuracy"]
+    g32s, g32r, glm = acc("nanochat-d32-sft", "gsm8k"), acc("nanochat-d32-rl", "gsm8k"), acc("GLM-5.3-Flash", "gsm8k")
+    h32s, h32r = acc("nanochat-d32-sft", "humaneval"), acc("nanochat-d32-rl", "humaneval")
+    nano_rl = runs.get("d32", {}).get("chat_eval_rl", {}).get("GSM8K")
+    ce = [acc(m, "ceval") for m in bm if m.startswith("nanochat") and acc(m, "ceval") is not None]
+    bug_parts = []
+    for m in ["nanochat-d12-rl", "nanochat-d24-rl", "nanochat-d32-rl"]:
+        bp = os.path.join(ROOT, "results", m, "quality_calc_bug.json")
+        if os.path.exists(bp) and acc(m, "gsm8k") is not None:
+            ob = json.load(open(bp))["tests"]["gsm8k"]["summary"]["accuracy"] * 100
+            bug_parts.append(f"{m.replace('nanochat-', '')} 从 {ob:.0f}% 变成 {acc(m, 'gsm8k'):.0f}%")
+    txt = ("<b>一个修正。</b> 第一次测时，接口服务在工作线程里跑生成，而 nanochat 的计算器靠 SIGALRM 设超时，只能在主线程里用。"
+           "每次调用计算器都悄悄失败，模型拿不到结果就停止作答。"
+           + (f"RL 后的模型几乎每一步都调用计算器、算完立刻写 #### 答案，受害最重，GSM8K 上 {'，'.join(bug_parts)}。SFT 版本的回答本来就冗长、常被截断，修复前后几乎不变，HumanEval 也不受影响。" if bug_parts else "")
+           + "上表是修复后的数字。")
+    if None not in (g32s, g32r, glm):
+        txt += f"<br><b>观察。</b> 差距仍是数量级的：GSM8K 上 d32 做完 RL 是 {g32r:.0f}%，GLM-5.3-Flash 是 {glm:.1f}%。RL 的效果在这把尺子上也看得到，d32 从 {g32s:.0f}% 升到 {g32r:.0f}%。"
+        if nano_rl is not None and g32r < nano_rl - 8:
+            txt += (f"但比 nanochat 自己评测的 {nano_rl:.1f}% 低：这把尺子会在题目后面加一句要求按步骤解题、最后一行写 #### 数字，"
+                    "RL 训练时见到的却是不带这句话的原题。小模型对提示词格式的变化非常敏感，RL 学到的东西有一部分是绑在训练格式上的。")
+        elif nano_rl is not None:
+            txt += f"这和 nanochat 自己在 1319 道题上评测的 {nano_rl:.1f}% 一致，这里只抽了 100 道题，误差大约正负 4 个点。"
+    if None not in (h32s, h32r):
+        txt += f" HumanEval 在 RL 之后同样下降，d32 从 {h32s:.0f}% 到 {h32r:.0f}%，和上面 nanochat 自己评测里看到的对齐税一致。"
+    if ce:
+        txt += f" C-Eval 是中文题，分词器和语料几乎全是英文，自训模型最高只有 {max(ce):.0f}%，还不到四选一随机猜的 25%。"
+    yard_note = f"<div class='note'>{txt}</div>"
+except Exception as e:
+    yard_note = ""
 T = open(os.path.join(ROOT, "train", "training_template.html"), encoding="utf-8").read()
-for k, v in {"__YARDSTICK__": yard, "__TPUT_NOTE__": tput_note, "__CORE_NOTE__": core_note, "__NOTE__": note_html, "__HEAD__": head, "__CFG__": cfg, "__PERF__": perf, "__SFT__": sftrows, "__EV__": evrows, "__RL__": rlrows, "__TIME__": timerows,
+for k, v in {"__YARD_NOTE__": yard_note, "__RL_NOTE__": rl_note, "__RL_EVAL__": rleval, "__RL_EVAL_NOTE__": rl_eval_note, "__RL_SAMPLES__": rl_samples, "__YARDSTICK__": yard, "__TPUT_NOTE__": tput_note, "__CORE_NOTE__": core_note, "__NOTE__": note_html, "__HEAD__": head, "__CFG__": cfg, "__PERF__": perf, "__SFT__": sftrows, "__EV__": evrows, "__RL__": rlrows, "__TIME__": timerows,
              "__TOK_SECS__": f(tok["train_secs"], 0), "__TOK2__": tokrows("GPT-2"), "__TOK4__": tokrows("GPT-4"), "__CORE_TASKS__": core_tasks, "__CORE_HEAD__": "".join(f"<th class='num'>{t}</th>" for t in tags),
              "__BASE_SAMPLES__": base_samples, "__CHAT_SAMPLES__": chat_samples, "__DATA__": json.dumps(chart, ensure_ascii=False), "__TAGS__": json.dumps(tags)}.items():
     T = T.replace(k, v)

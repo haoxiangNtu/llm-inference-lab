@@ -18,6 +18,22 @@ args = ap.parse_args()
 from nanochat.common import compute_init, autodetect_device_type
 from nanochat.checkpoint_manager import load_model
 from nanochat.engine import Engine
+# nanochat's calculator guards eval() with a SIGALRM timeout, and Python only lets the main thread install signal
+# handlers. Requests here run on worker threads, so every calculator call raised inside eval_with_timeout, returned
+# None, no result was injected after <|python_end|>, and the model simply ended its answer. Keep the alarm on the
+# main thread; on worker threads rely on use_calculator's own whitelist (digits/operators only, no **), which
+# already bounds how long eval() can run.
+import contextlib
+import nanochat.engine as _nanochat_engine
+_signal_timeout = _nanochat_engine.timeout
+@contextlib.contextmanager
+def _thread_safe_timeout(duration, formula):
+    if threading.current_thread() is threading.main_thread():
+        with _signal_timeout(duration, formula):
+            yield
+    else:
+        yield
+_nanochat_engine.timeout = _thread_safe_timeout
 device_type = autodetect_device_type()
 _, _, _, _, device = compute_init(device_type)
 model, tokenizer, meta = load_model(args.source, device, phase="eval", model_tag=args.model_tag, step=args.step)

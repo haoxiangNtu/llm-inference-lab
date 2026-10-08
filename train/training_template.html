@@ -16,6 +16,12 @@
 .qa{border:1px solid var(--line);border-radius:10px;margin:10px 0;overflow:hidden;max-width:80ch}
 .qa .q{background:var(--panel);padding:8px 12px;font-weight:500}
 .qa .a{padding:10px 12px;white-space:pre-wrap;font-size:14px;color:var(--fg)}
+.duo{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:0;border-top:1px solid var(--line)}
+.duo>div{padding:10px 12px;min-width:0;font-size:13.5px;white-space:pre-wrap}
+.duo>div+div{border-left:1px solid var(--line)}
+.duo .h{font-family:var(--font-mono);font-size:11.5px;color:var(--muted);margin-bottom:6px;white-space:normal}
+.ok{color:var(--token);font-weight:600}.bad{color:var(--warn);font-weight:600}
+.calc{background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:0 4px;font-family:var(--font-mono);font-size:12.5px}
 details{margin:10px 0}
 summary{cursor:pointer;color:var(--compute)}
 </style>
@@ -81,11 +87,18 @@ __BASE_SAMPLES__
 <div class="note">选择题从随机的 25% 涨到三成多，说明格式学会了、知识有一点。但 GSM8K 几乎是零：应用题要连续推理好几步，小模型看过 4 遍标准答案也只是学了个样子。这正是下一步强化学习要解决的。</div>
 
 <h2 id="rl">4. 强化学习</h2>
-<p>SFT 是"照着标准答案学"，RL 是"自己做，做对了才算"。nanochat 的做法是最朴素的 REINFORCE：每道 GSM8K 题让模型采样 16 个不同的回答，答案对的奖励为 1、错的为 0，然后把"高于这道题平均奖励"的回答的概率调高，低于平均的调低。没有 KL 约束，没有 PPO 的裁剪，这是 GRPO 一类方法的最简化版本。</p>
+<p>SFT 是"照着标准答案学"，RL 是"自己做，做对了才算"。三个模型都做了 RL，用的是同一份 GSM8K 训练集，一共 467 步。nanochat 的做法是最朴素的 REINFORCE：每道 GSM8K 题让模型采样 16 个不同的回答，答案对的奖励为 1、错的为 0，然后把"高于这道题平均奖励"的回答的概率调高，低于平均的调低。没有 KL 约束，没有 PPO 的裁剪，这是 GRPO 一类方法的最简化版本。</p>
 <div class="stage"><canvas class="viz" id="cRl" width="1040" height="300"></canvas></div>
 <div class="legend" id="legRl"></div>
 <div class="tablewrap"><table>__HEAD____RL__</table></div>
-<div class="note kv"><b>两个值得注意的现象。</b> 一是效果立竿见影：d12 的 GSM8K 从 0.83% 到 10.77%，SFT 看 4 遍答案没学会的东西，RL 让它自己试出来了。二是回答变短了，平均从 262 个 token 降到 106 个：模型发现啰嗦不加分，直接调用计算器给答案最划算。RL 优化的是你给的奖励，不是你心里想的目标，这也是它难用的地方。另外这一步很慢，d12 都花了 73 分钟，因为每步要让模型实际生成 256 条回答，是推理的速度而不是训练的速度。</div>
+__RL_NOTE__
+<h3>RL 换来了什么，又付出了什么</h3>
+<p>下表是 nanochat 自带的对话评测，同一套题分别考 SFT 后和 RL 后的模型。RL 只在 GSM8K 的训练集上做，别的任务一题都没练过。</p>
+<div class="tablewrap"><table>__HEAD____RL_EVAL__</table></div>
+__RL_EVAL_NOTE__
+<h3>同一道题，RL 前后怎么答</h3>
+<p>贪心解码，题目来自 GSM8K 测试集，RL 训练时没见过。灰底的部分是模型调用计算器、引擎把结果填回去的地方。</p>
+__RL_SAMPLES__
 
 <h2 id="chat">5. 聊天样例</h2>
 <p>SFT 之后的模型直接回答，未经挑选。小模型的典型表现：语气和格式像模像样，事实经常是错的，算术不调用工具时会编。</p>
@@ -94,7 +107,7 @@ __CHAT_SAMPLES__
 <h2 id="yard">6. 用同一把尺子量一下</h2>
 <p>把自己训的模型接进<a href="benchmark.html">评测报告</a>那套脚本（通过仓库里的 <code>train/nanochat_server.py</code> 提供 OpenAI 兼容接口），和下载的前沿开源模型并排。nanochat 模型题量减半、上下文 2048、单卡无批处理。</p>
 __YARDSTICK__
-<div class="note">三个观察。一是差距的量级：GSM8K 上 d24 是 5%，GLM-5.3-Flash 是 98.5%；C-Eval 是中文题，而我们的分词器和语料几乎全是英文，d24 把 150 题里的 93 题答到超长被截断。二是 HumanEval 反而不算太差（19.5%），代码在网页语料里占比不小，格式也规整。三是 JSON 抽取 65%，说明 SFT 教会了格式遵循。这些就是一个 2019 年水平、英文为主的 14 亿参数模型该有的样子。</div>
+__YARD_NOTE__
 
 <h2 id="time">时间账</h2>
 <div class="tablewrap"><table>__HEAD____TIME__</table></div>
