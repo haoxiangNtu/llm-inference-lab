@@ -39,7 +39,7 @@ __NOTE__
 <div class="box"><span class="n">4</span><b>强化学习 RL</b><span>让模型自己做题，做对的回答加强，做错的减弱。学会在特定任务上真的做对。</span></div>
 <div class="box"><span class="n">5</span><b>评测与对话</b><span>每个阶段后用固定题集量化进步，最后直接聊天看效果。</span></div>
 </div>
-<p>我们跑了两个规模。<b>d12</b> 是 12 层的小模型，和 2018 年的 GPT-1 差不多大，用来把流程走通。<b>d24</b> 是 24 层，目标是达到 2019 年 GPT-2 的水平。nanochat 只用"层数"一个旋钮，宽度、头数、学习率、训练步数都由它推出来。</p>
+<p>我们跑了三个规模。<b>d12</b> 是 12 层的小模型，和 2018 年的 GPT-1 差不多大，用来把流程走通。<b>d24</b> 是 24 层，目标是达到 2019 年 GPT-2 的水平。<b>d32</b> 是 32 层、28 亿参数，是这台机器上"值得做"的边界，因为另一张卡被别的任务占着，它只用了 4 张卡、跑了两天多。nanochat 只用"层数"一个旋钮，宽度、头数、学习率、训练步数都由它推出来。</p>
 <div class="tablewrap"><table>__HEAD____CFG__</table></div>
 
 <h2 id="tok">1. 分词器</h2>
@@ -128,7 +128,7 @@ __YARDSTICK__
 const DATA=__DATA__, TAGS=__TAGS__;
 (function(){
 const css=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
-const COL={d12:"--compute",d24:"--memory"}; const col=t=>css(COL[t]||"--token");
+const COL={d12:"--compute",d24:"--memory",d32:"--token"}; const col=t=>css(COL[t]||"--token");
 function fit(c){const r=c.getBoundingClientRect();const dpr=Math.min(2,devicePixelRatio||1);const W=+c.getAttribute('width'),H=+c.getAttribute('height');c.width=Math.round(r.width*dpr);c.height=Math.round(r.width*dpr*H/W);const g=c.getContext('2d');g.setTransform(dpr*r.width/W,0,0,dpr*r.width/W,0,0);g.clearRect(0,0,W,H);g.font='11px '+css('--font-mono');g.textBaseline='middle';return g;}
 function panel(g,o){ // o:{x0,x1,y0,y1,title,series:[{pts:[[x,y]],color,dots,dash}],ymin,ymax,xlabel,xnorm}
   const xs=[].concat(...o.series.map(s=>s.pts.map(p=>p[0]))), ys=[].concat(...o.series.map(s=>s.pts.map(p=>p[1])));
@@ -146,8 +146,8 @@ function smooth(pts,k){const out=[];let acc=0;const q=[];pts.forEach(p=>{q.push(
 function legend(id,items){document.getElementById(id).innerHTML=items.map(i=>'<span><i style="background:'+i[1]+'"></i>'+i[0]+'</span>').join('');}
 function draw(){
   let g=fit(document.getElementById('cPre'));
-  panel(g,{x0:60,x1:500,y0:40,y1:270,title:'训练损失（横轴为各自训练进度）',ymin:2.4,ymax:5,xnorm:true,xlabel:'训练进度',series:TAGS.map(t=>({pts:DATA[t].loss,color:col(t)}))});
-  panel(g,{x0:600,x1:1020,y0:40,y1:270,title:'验证集 bpb',ymin:0.7,ymax:1.2,xnorm:true,xlabel:'训练进度',series:TAGS.map(t=>({pts:DATA[t].val,color:col(t),dots:true}))});
+  panel(g,{x0:60,x1:500,y0:40,y1:270,title:'训练损失（横轴为各自训练进度）',ymin:2.0,ymax:5,xnorm:true,xlabel:'训练进度',series:TAGS.map(t=>({pts:DATA[t].loss,color:col(t)}))});
+  panel(g,{x0:600,x1:1020,y0:40,y1:270,title:'验证集 bpb',ymin:0.6,ymax:1.2,xnorm:true,xlabel:'训练进度',series:TAGS.map(t=>({pts:DATA[t].val,color:col(t),dots:true}))});
   legend('legPre',TAGS.map(t=>[t,col(t)]));
   g=fit(document.getElementById('cTput'));
   panel(g,{x0:60,x1:1020,y0:40,y1:190,title:'MFU %（横轴为训练时间，分钟）',ymin:0,ymax:80,xlabel:'分钟',series:TAGS.map(t=>({pts:DATA[t].tput.map(p=>[p[0],p[2]]),color:col(t)}))});

@@ -75,14 +75,19 @@ if "d24" in runs:
         tput_note = f" 更有意思的是 d24 曲线上的那个台阶：前 43 分钟 MFU 是 {sum(early)/len(early):.0f}%，之后跳到 {sum(late)/len(late):.0f}% 并保持到结束。训练启动时 GPU 2 和 GPU 5 上有另一个项目的仿真任务在跑，占走了这两张卡的一部分算力。分布式训练每一步都要等所有卡算完才能汇总梯度，所以两张卡被拖慢，八张卡一起慢。台阶出现的时刻很可能就是那些任务结束的时刻，之后速度再没有波动。结论：多卡训练的速度由最慢的那张卡决定。"
     c_in = runs["d24"]["base_train"]["core_in_train"][-1][1] if runs["d24"]["base_train"]["core_in_train"] else None
     c_full = runs["d24"]["base_eval"]["core"]; mins = runs["d24"]["base_train"]["train_minutes"]
+    d32_note = ""
+    if "d32" in runs:
+        r32 = runs["d32"]; gh32 = r32["base_train"]["train_minutes"] / 60 * 4; gh24 = mins / 60 * 8
+        d32_note = (f" <b>d32 的收益。</b> 完整评测 CORE {r32['base_eval']['core']:.4f}，比 d24 高 {r32['base_eval']['core']-c_full:.2f}。它用了 {gh32:.0f} GPU 小时（4 卡 × {r32['base_train']['train_minutes']/60:.1f} 小时），d24 是 {gh24:.0f} GPU 小时，算力多 {gh32/gh24:.1f} 倍。"
+                    f"按之前的外推，5 倍算力大约加 0.05，实际加了 {r32['base_eval']['core']-c_full:.2f}，说明在这个区间里规模的回报比保守估计更好。")
     core_note = (f"<div class='note'><b>d24 到了 GPT-2 的量级。</b> 训练结束时的抽样评测（每个任务 500 题）是 {c_in:.4f}，高于 GPT-2；随后的完整评测是 {c_full:.4f}，略低于 GPT-2。两个数字的差别来自题目抽样，说明我们正好落在 GPT-2 这条线附近。"
-                 f"纯训练时间 {mins/60:.1f} 小时。作为参照：OpenAI 2019 年训练 GPT-2 用了 168 小时、约 4.3 万美元；nanochat 在 8 张 H100 上开 FP8 是 1.65 小时。A800 没有 FP8，算力约为 H100 的三分之一，{mins/60:.1f} 小时符合预期。</div>")
+                 f"纯训练时间 {mins/60:.1f} 小时。作为参照：OpenAI 2019 年训练 GPT-2 用了 168 小时、约 4.3 万美元；nanochat 在 8 张 H100 上开 FP8 是 1.65 小时。A800 没有 FP8，算力约为 H100 的三分之一，{mins/60:.1f} 小时符合预期。{d32_note}</div>")
 
 # yardstick table from bench results
 yard = ""
 try:
     bm = {}
-    for m in ["GLM-5.3-Flash", "Qwen3.8-27B", "Qwen3.6-35B-A3B", "nanochat-d24-sft", "nanochat-d12-sft"]:
+    for m in ["GLM-5.3-Flash", "Qwen3.8-27B", "Qwen3.6-35B-A3B", "nanochat-d32-sft", "nanochat-d24-sft", "nanochat-d12-sft"]:
         qp = os.path.join(ROOT, "results", m, "quality.json"); pp = os.path.join(ROOT, "results", m, "perf", "single_128in_256out.json")
         if os.path.exists(qp): bm[m] = {"q": json.load(open(qp))["tests"], "p": json.load(open(pp)) if os.path.exists(pp) else {}}
     tests = [("gsm8k", "GSM8K"), ("humaneval", "HumanEval"), ("ceval", "C-Eval"), ("json", "JSON"), ("tools", "工具调用")]
