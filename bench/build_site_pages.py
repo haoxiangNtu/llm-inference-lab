@@ -5,7 +5,7 @@ import glob, json, os, re, sys
 ROOT = sys.argv[1]; LAB_SRC = sys.argv[2] if len(sys.argv) > 2 else None
 RES = os.path.join(ROOT, "results")
 NAV = '''<header class="top"><a class="brand" href="../index.html">LLM Inference Lab</a>
-<nav><a{l} href="lab.html">原理实验台</a><a href="metrics.html">指标解读</a><a{b} href="benchmark.html">评测报告</a><a href="deployment.html">部署实录</a><a href="training.html">训练实录</a><a href="https://github.com/haoxiangNtu/llm-inference-lab">GitHub</a></nav></header>'''
+<nav><a{l} href="lab.html">原理实验台</a><a href="notes.html">原理问答</a><a href="metrics.html">指标解读</a><a{b} href="benchmark.html">评测报告</a><a href="deployment.html">部署实录</a><a href="training.html">训练实录</a><a href="https://github.com/haoxiangNtu/llm-inference-lab">GitHub</a></nav></header>'''
 FOOT = '<footer>LLM Inference Lab · 在 8 × A800 上部署并评测开源大模型的学习记录 · <a href="https://github.com/haoxiangNtu/llm-inference-lab">源码</a></footer>'
 HEAD = '''<!doctype html>
 <html lang="zh-CN">

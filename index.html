@@ -11,14 +11,15 @@
 <body>
 <div class="wrap">
 <header class="top"><a class="brand" href="index.html">LLM Inference Lab</a>
-<nav><a href="docs/lab.html">原理实验台</a><a href="docs/metrics.html">指标解读</a><a href="docs/benchmark.html">评测报告</a><a href="docs/deployment.html">部署实录</a><a href="docs/training.html">训练实录</a><a href="https://github.com/haoxiangNtu/llm-inference-lab">GitHub</a></nav></header>
+<nav><a href="docs/lab.html">原理实验台</a><a href="docs/notes.html">原理问答</a><a href="docs/metrics.html">指标解读</a><a href="docs/benchmark.html">评测报告</a><a href="docs/deployment.html">部署实录</a><a href="docs/training.html">训练实录</a><a href="https://github.com/haoxiangNtu/llm-inference-lab">GitHub</a></nav></header>
 
 <div class="eyebrow">8 × A800 · vLLM · 2026-09</div>
 <h1>通过亲手部署来理解大模型</h1>
-<p class="lead">这是一份学习记录：一台百度云上的 8 卡 A800 机器，把 GLM-5.3-Flash、Qwen3.6-35B-A3B、Qwen3.8-27B 部署上线，设计一套性能和质量指标跑完评测，把推理过程中 GPU 到底在做什么做成可以拨弄的实验台，最后从零训练一个自己的模型。五个部分可以按任意顺序看。</p>
+<p class="lead">这是一份学习记录：一台百度云上的 8 卡 A800 机器，把 GLM-5.3-Flash、Qwen3.6-35B-A3B、Qwen3.8-27B 部署上线，设计一套性能和质量指标跑完评测，把推理过程中 GPU 到底在做什么做成可以拨弄的实验台，最后从零训练一个自己的模型。各部分可以按任意顺序看。</p>
 
 <div class="cards">
 <a class="card" href="docs/lab.html"><div class="t">原理实验台</div><div class="d">六个可交互的实验：一次生成的全景、prefill 与 decode 的算力墙和带宽墙、KV cache 分页的 3D 视图、多卡并行方案、训练与推理的内存账、指标对号入座。参数取自真实部署。</div></a>
+<a class="card" href="docs/notes.html"><div class="t">原理问答</div><div class="d">学习过程中问过的原理问题：decode 每步多久、312 TFLOPS 怎么来、批处理为什么能共享权重、TP4 × PP2、宽度是什么、自训模型相当于几 B、8 张卡从零训练的天花板。每个答案都对上了实测数字。</div></a>
 <a class="card" href="docs/metrics.html"><div class="t">指标解读</div><div class="d">vLLM 是什么；TTFT、TPOT、吞吐、P99、KV 容量各对应推理的哪个阶段；GSM8K、HumanEval、C-Eval、大海捞针、JSON、工具调用怎么判分，以及这套评测的局限。</div></a>
 <a class="card" href="docs/benchmark.html"><div class="t">评测报告</div><div class="d">三个模型在同一套脚本下的性能矩阵（并发 1 到 32、输入 128 到 32K）和质量成绩，附图表、思考模式开销和测试过程中修正的三处不公平。</div></a>
 <a class="card" href="docs/deployment.html"><div class="t">部署实录</div><div class="d">机器分析、模型选型、失败的路线 A 和成功的路线 B、chroot 代替 Docker、CUDA 前向兼容、下载和编译的坑，按时间线记录，脚本全部开源。</div></a>
@@ -33,6 +34,7 @@
 <div class="stat"><div class="k">GSM8K 最高</div><div class="v">98.5%</div><div class="s">GLM-5.3-Flash，200 题</div></div>
 <div class="stat"><div class="k">128K 大海捞针</div><div class="v">15 / 15</div><div class="s">GLM，10 秒内返回</div></div>
 <div class="stat"><div class="k">从零训练 d24</div><div class="v">CORE 0.258</div><div class="s">13.8 亿参数，8 卡 5.1 小时，GPT-2 量级</div></div>
+<div class="stat"><div class="k">强化学习后 d32 的 GSM8K</div><div class="v">23.7%</div><div class="s">SFT 后只有 4.4%，代价是 HumanEval 掉 6 个点</div></div>
 <div class="stat"><div class="k">编译 SM80 扩展</div><div class="v">12 分钟</div><div class="s">64 核，9 个依赖本地化</div></div>
 </div>
 
@@ -40,6 +42,7 @@
 <ol>
 <li>先打开<a href="docs/lab.html#s2">实验台第 2 站</a>，把并发从 1 拖到 32，理解为什么吞吐涨而单请求变慢。</li>
 <li>读<a href="docs/metrics.html">指标解读</a>，把 TTFT、TPOT、吞吐和刚才看到的现象对上。</li>
+<li>遇到"为什么"的时候翻<a href="docs/notes.html">原理问答</a>，把算式一步步对上实测数字。</li>
 <li>看<a href="docs/benchmark.html">评测报告</a>的并发曲线，验证 MoE 激活参数小的模型为什么快 3.5 倍。</li>
 <li>读<a href="docs/deployment.html">部署实录</a>，了解把这些模型跑起来要过哪些关。</li>
 <li>最后看<a href="docs/training.html">训练实录</a>，从分词器到强化学习把模型的一生走一遍。</li>
@@ -49,6 +52,7 @@
 <div class="tablewrap"><table>
 <tr><th>目录</th><th>内容</th></tr>
 <tr><td><code>docs/</code></td><td>本站页面，静态 HTML，可直接打开</td></tr>
+<tr><td><code>src/</code></td><td>原理实验台的源文件，<code>bench/build_site_pages.py</code> 用它生成 docs/lab.html</td></tr>
 <tr><td><code>bench/</code></td><td>评测套件：quality.py、perf.sh、report.py、run_model.sh</td></tr>
 <tr><td><code>deploy/</code></td><td>部署脚本：不用 Docker 拉镜像、chroot 运行、SM80 编译、权重校验、服务启动</td></tr>
 <tr><td><code>train/</code></td><td>从零训练的流水线、国内网络补丁、日志解析和页面生成脚本</td></tr>

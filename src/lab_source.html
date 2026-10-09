@@ -1,12 +1,5 @@
-<!doctype html>
-<html lang="zh-CN">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>原理实验台 · LLM Inference Lab</title>
-<meta name="description" content="六个可交互实验：一次生成的全景、prefill 与 decode、KV cache 分页 3D 视图、多卡并行、训练与推理的内存账、指标对号入座。">
+<title>LLM 推理原理实验室</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap">
-<link rel="stylesheet" href="site.css">
 <style>
 /* Layout: a vertical lab notebook — each station has a canvas/3D stage on top and its controls + notes below.
    Dark-first (GPU memory feels like a dark oscilloscope), light variant for daytime reading. */
@@ -74,14 +67,8 @@ code{font-family:var(--font-mono);font-size:13px;background:var(--panel);padding
 @media (prefers-reduced-motion: reduce){.anim-note{display:block}}
 .anim-note{display:none;font-size:12px;color:var(--muted)}
 </style>
-</head>
-<body>
-<div class="wrap">
-
 
 <div class="wrap">
-<header class="top"><a class="brand" href="../index.html">LLM Inference Lab</a>
-<nav><a class="on" href="lab.html">原理实验台</a><a href="notes.html">原理问答</a><a href="metrics.html">指标解读</a><a href="benchmark.html">评测报告</a><a href="deployment.html">部署实录</a><a href="training.html">训练实录</a><a href="https://github.com/haoxiangNtu/llm-inference-lab">GitHub</a></nav></header>
   <div class="eyebrow">Inference Lab · 8 × A800 现场版</div>
   <h1>大模型推理时，GPU 到底在忙什么</h1>
   <p class="lead">六个可以动手拨弄的"实验台"，把 prefill、decode、KV cache、并行切分和训练的内存账算清楚。所有默认参数都取自你这台机器和刚部署的模型，理论值旁边尽量放上实测值，方便对号入座。</p>
@@ -177,7 +164,6 @@ code{font-family:var(--font-mono);font-size:13px;background:var(--panel);padding
     </table></div>
     <p>后面两个 Qwen 模型的完整报告出来后，可以把它们的数字填进第 2 站的模型下拉框里做对比：同样的硬件，稠密 27B、MoE 3B 激活、MoE 18B 激活三种结构的 TPOT 曲线会很不一样。</p>
   </section>
-<footer>LLM Inference Lab · 在 8 × A800 上部署并评测开源大模型的学习记录 · <a href="https://github.com/haoxiangNtu/llm-inference-lab">源码</a></footer>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
@@ -452,6 +438,3 @@ const hex = (s)=>{ const c=document.createElement('canvas').getContext('2d'); c.
 })();
 })();
 </script>
-
-</body>
-</html>

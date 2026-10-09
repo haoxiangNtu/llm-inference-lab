@@ -7,6 +7,7 @@
 | 页面 | 内容 |
 |---|---|
 | [原理实验台](https://haoxiangntu.github.io/llm-inference-lab/docs/lab.html) | 六个可交互实验：prefill 与 decode、KV cache 分页 3D、多卡并行、训练与推理内存账 |
+| [原理问答](https://haoxiangntu.github.io/llm-inference-lab/docs/notes.html) | decode 耗时推导、312 TFLOPS、批处理与 MoE、TP4 × PP2、宽度、自训模型相当于几 B、从零训练的天花板 |
 | [指标解读](https://haoxiangntu.github.io/llm-inference-lab/docs/metrics.html) | vLLM 是什么，TTFT / TPOT / 吞吐 / P99，各质量测试的判分方式 |
 | [评测报告](https://haoxiangntu.github.io/llm-inference-lab/docs/benchmark.html) | GLM-5.3-Flash、Qwen3.6-35B-A3B、Qwen3.8-27B 的性能矩阵与质量成绩 |
 | [训练实录](https://haoxiangntu.github.io/llm-inference-lab/docs/training.html) | 从零训练：分词器、预训练、SFT、强化学习的原理、曲线和时间账（nanochat，8×A800） |
@@ -16,6 +17,7 @@
 
 ```
 docs/      站点页面（静态 HTML）
+src/       原理实验台源文件：python3 bench/build_site_pages.py . src/lab_source.html 生成 docs/lab.html 与 docs/benchmark.html
 bench/     评测套件：quality.py（质量）、perf.sh（性能矩阵）、report.py（汇总）、run_model.sh
 deploy/    部署脚本：pull_image.py（不用 Docker 拉镜像）、glm53_chroot.sh、glm53_build.sh、serve_*.sh、verify_model.py
 train/     从零训练：run_pipeline.sh、国内网络补丁、parse_logs.py、build_training_page.py

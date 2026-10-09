@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>原理问答 · LLM Inference Lab</title>
+<meta name="description" content="学习过程中问过的原理问题：decode 每步耗时怎么估算、312 TFLOPS 怎么来、批处理为什么能共享权重、TP4×PP2 是什么、宽度是什么、自训模型相当于几 B、8 张卡从零训练的天花板。每个答案都对上了这台机器的实测数字。">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="site.css">
+</head>
+<body>
+<div class="wrap">
+<header class="top"><a class="brand" href="../index.html">LLM Inference Lab</a>
+<nav><a href="lab.html">原理实验台</a><a class="on" href="notes.html">原理问答</a><a href="metrics.html">指标解读</a><a href="benchmark.html">评测报告</a><a href="deployment.html">部署实录</a><a href="training.html">训练实录</a><a href="https://github.com/haoxiangNtu/llm-inference-lab">GitHub</a></nav></header>
+
+<div class="eyebrow">Q &amp; A</div>
+<h1>学习过程中问过的原理问题</h1>
+<p class="lead">部署和训练的过程中冒出来的问题，每个答案都尽量对上这台 8 × A800 上测到的真实数字。可以和<a href="lab.html">原理实验台</a>对照着看：实验台负责拨动参数看现象，这一页负责把算式一步步写出来。</p>
+<div class="toc"><a href="#decode">decode 每步多久</a><a href="#tflops">312 TFLOPS</a><a href="#batch">批处理与 MoE</a><a href="#tppp">TP4 × PP2</a><a href="#width">宽度</a><a href="#size">相当于几 B</a><a href="#ceiling">从零训练的天花板</a></div>
+
+<h2 id="decode">1. decode 每一步要多久：理论下限和实测</h2>
+<h3>为什么生成一个 token 要把权重读一遍</h3>
+<p>模型每一层的核心运算是矩阵乘向量：权重矩阵 W 乘以当前 token 的向量 x。W 存在显存里，计算核心要用它，就得把每个数从显存搬到核心里。生成一个 token 时 x 只有一个，所以每个权重恰好被用一次。结论是：每生成一个 token，所有参与计算的权重都要从显存完整读一遍。</p>
+<h3>代入 GLM-5.3-Flash 的四个数字</h3>
+<div class="tablewrap"><table>
+<tr><th>数字</th><th>取值</th><th>来历</th></tr>
+<tr><td>参与计算的参数</td><td class="num">18B</td><td>它是 MoE，总共 320B，路由器每个 token 只挑几个专家，加上注意力部分约 18B，其余 302B 这一步不碰</td></tr>
+<tr><td>每个参数的字节数</td><td class="num">1</td><td>FP8 权重，8 位就是 1 字节；BF16 是 2 字节</td></tr>
+<tr><td>同时分担的卡数</td><td class="num">4</td><td>张量并行把每个矩阵切成 4 片，4 张卡同时各读各的</td></tr>
+<tr><td>显存带宽</td><td class="num">2 TB/s</td><td>A800 的 HBM2e，约每秒 2000 GB</td></tr>
+</table></div>
+<pre><code>每步要读的总字节 = 18 × 10⁹ 个参数 × 1 字节 = 18 GB
+每张卡要读的字节 = 18 GB ÷ 4                = 4.5 GB
+每步时间下限     = 4.5 GB ÷ 2000 GB/s       ≈ 2.3 ms
+
+同一步的计算量   = 2 × 18 × 10⁹             = 3.6 × 10¹⁰ 次浮点运算
+4 张卡的峰值算力 = 4 × 312 × 10¹²           = 1.25 × 10¹⁵ 次/秒
+计算耗时         ≈ 0.03 ms</code></pre>
+<p>算只要 0.03 毫秒，搬数据要 2.3 毫秒，差了近 80 倍。计算核心绝大部分时间在等数据，所以 decode 的速度由显存带宽决定，这就是"带宽墙"。</p>
+<h3>"理论下限"和实测差多少</h3>
+<p>理论下限的意思是：假设显存带宽被 100% 用满，除了搬权重没有任何别的耗时，最快能多快。它只由硬件规格和模型大小决定，是物理上不可能突破的地板，不是对实际速度的预测。实际耗时可以拆成两部分：</p>
+<pre><code>实测每步时间 = 搬权重的时间（公式算的这部分） + 固定开销</code></pre>
+<div class="tablewrap"><table>
+<tr><th>模型与部署</th><th class="num">每卡每步读取</th><th class="num">理论下限</th><th class="num">单流实测 TPOT</th><th class="num">固定开销</th><th class="num">理论占实测</th></tr>
+<tr><td>Qwen3.8-27B，稠密，BF16，2 卡</td><td class="num">27B × 2 ÷ 2 = 27 GB</td><td class="num">13.5 ms</td><td class="num">20.6 ms</td><td class="num">7.1 ms</td><td class="num">65%</td></tr>
+<tr><td>Qwen3.6-35B-A3B，激活 3B，BF16，2 卡</td><td class="num">3B × 2 ÷ 2 = 3 GB</td><td class="num">1.5 ms</td><td class="num">5.8 ms</td><td class="num">4.3 ms</td><td class="num">26%</td></tr>
+<tr><td>GLM-5.3-Flash，激活 18B，FP8，TP4 × PP2</td><td class="num">18B × 1 ÷ 4 = 4.5 GB</td><td class="num">2.3 ms</td><td class="num">20.1 ms</td><td class="num">17.8 ms</td><td class="num">11%</td></tr>
+</table></div>
+<p>固定开销和模型大小关系不大：每步几千个内核启动、每层一次跨卡 all-reduce、流水线两段之间的交接、采样和调度。Qwen3.8 搬权重要 13.5 ms，固定开销只是配角，所以实测和理论最接近。Qwen3.6 搬权重只要 1.5 ms，固定开销反而成了主角。GLM 在 Ampere 上走的是 Triton 回退内核，稀疏注意力和 FP8 都没有原生硬件支持，固定开销最大。CUDA Graph、内核融合、原生 FP8 硬件要解决的，正是这部分差距。</p>
+<div class="note">理论下限还漏掉了 KV cache：每步还要把历史 token 的 K、V 读一遍，上下文越长读得越多。长上下文时它会变成不能忽略的一项，这也是 GLM 用 MLA 把 KV 压小的原因，见<a href="lab.html#s3">实验台第 3 站</a>。</div>
+
+<h2 id="tflops">2. A800 的 312 TFLOPS 是怎么算出来的</h2>
+<p>312 TFLOPS 是单张卡 BF16 的峰值算力，是 NVIDIA 给 A100 标的规格。A800 的计算部分和 A100 完全相同，只把 NVLink 从 600 GB/s 砍到了 400 GB/s。这个数不是测出来的，是从芯片结构直接乘出来的：</p>
+<pre><code>108 个 SM × 每个 4 个 Tensor Core × 每周期 256 次乘加 × 每次乘加 2 次运算 × 1.41 × 10⁹ 周期/秒
+= 221,184 × 1.41 × 10⁹
+≈ 312 × 10¹² 次/秒</code></pre>
+<p>1.41 GHz 就是在这台机器上用 nvidia-smi 查到的最高 SM 频率。用同样的方法验证 FP32 规格：普通计算核心 6912 个，每周期各做 1 次乘加，6912 × 2 × 1.41 × 10⁹ ≈ 19.5 TFLOPS，正好是官方标称值。312 是它的 16 倍，这就是 Tensor Core 的价值。</p>
+<div class="tablewrap"><table>
+<tr><th>精度</th><th class="num">峰值</th><th>走哪种电路</th></tr>
+<tr><td>FP32</td><td class="num">19.5 TFLOPS</td><td>普通核心</td></tr>
+<tr><td>TF32</td><td class="num">156 TFLOPS</td><td>Tensor Core</td></tr>
+<tr><td>FP16 / BF16</td><td class="num">312 TFLOPS</td><td>Tensor Core</td></tr>
+<tr><td>INT8</td><td class="num">624 TOPS</td><td>Tensor Core</td></tr>
+<tr><td>FP8</td><td class="num">不支持</td><td>Ampere 没有这个模式，FP8 权重只能先解成 16 位再算</td></tr>
+</table></div>
+<p>峰值的前提是做大块稠密矩阵乘、Tensor Core 满载。实际能用掉的比例叫 MFU：这台机器上训练 d32 时 MFU 是 65%，相当于每张卡持续 200 TFLOPS 左右。作为对比，H100 的 BF16 峰值是 989 TFLOPS，并且有原生 FP8。</p>
+
+<h2 id="batch">3. 批处理为什么能共享权重，MoE 为什么是例外</h2>
+<p>权重就是模型本身。训练结束后这几百亿个数就固定了，不管谁来问、问什么，走的都是同一套矩阵。不同请求之间不一样的只有三样：输入的 token、每层算出来的中间向量、各自的 KV cache。</p>
+<pre><code>单条请求：y = W · x       x 是这条请求当前 token 的向量
+16 条请求：Y = W · X       X 的 16 列分别是 16 条请求各自的向量</code></pre>
+<p>W 的每个数只从显存搬一次，到了计算核心后分别和 16 个不同的向量相乘。搬运量几乎不变，计算量变成 16 倍，而计算本来就闲着，所以总时间几乎不变。这就是并发越高总吞吐越高的原因。</p>
+<p>MoE 是例外。稠密模型里所有 token 用的都是全部权重；MoE 里每个 token 只挑几个专家，16 个 token 挑的专家各不相同，合起来要读的专家比单个 token 多得多。并发越高，一步里被激活的专家越多，要搬的权重越多。实测正好体现了这一点：</p>
+<div class="tablewrap"><table>
+<tr><th>模型</th><th class="num">并发 1 的 TPOT</th><th class="num">并发 32 的 TPOT</th><th class="num">变慢倍数</th></tr>
+<tr><td>Qwen3.8-27B，稠密</td><td class="num">20.6 ms</td><td class="num">28.6 ms</td><td class="num">1.4 倍</td></tr>
+<tr><td>Qwen3.6-35B-A3B，MoE</td><td class="num">5.8 ms</td><td class="num">17.1 ms</td><td class="num">2.9 倍</td></tr>
+<tr><td>GLM-5.3-Flash，MoE</td><td class="num">20.1 ms</td><td class="num">49.0 ms</td><td class="num">2.4 倍</td></tr>
+</table></div>
+<p>数据来自<a href="benchmark.html">评测报告</a>的压测矩阵。</p>
+
+<h2 id="tppp">4. TP4 × PP2 是什么意思</h2>
+<p>TP 和 PP 是把一个模型切到多张卡上的两种切法，后面的数字是切成几份。</p>
+<ul>
+<li><b>TP4，张量并行切 4 份。</b> 横着切每一层：把一层里的大矩阵切成 4 片，4 张卡各拿一片同时算，算完做一次 all-reduce 把结果合起来，再进下一层。</li>
+<li><b>PP2，流水线并行分 2 段。</b> 竖着切层的顺序：前一段层放一组卡，后一段放另一组卡。token 先在第一段算完，把激活向量交给第二段接着算，像流水线上的两道工序。</li>
+</ul>
+<pre><code>            第 1 段：第 1 到 24 层              第 2 段：第 25 到 45 层
+          ┌────────────────────────┐        ┌────────────────────────┐
+ token →  │ GPU0  GPU1  GPU2  GPU3 │  ───→  │ GPU4  GPU5  GPU6  GPU7 │ → 下一个 token
+          │ 每层矩阵切 4 片，       │ 只传一  │ 每层矩阵切 4 片，       │
+          │ 4 卡同时算，每层合一次  │ 个向量  │ 4 卡同时算，每层合一次  │
+          └────────────────────────┘        └────────────────────────┘
+                    TP4                                TP4</code></pre>
+<p>306 GB 的权重就这样分到了 8 张卡上，每张约 38 GB，和启动日志里的数字一致。</p>
+<div class="tablewrap"><table>
+<tr><th></th><th>张量并行 TP</th><th>流水线并行 PP</th></tr>
+<tr><td>怎么切</td><td>每一层的矩阵切开</td><td>层的先后顺序切开</td></tr>
+<tr><td>卡之间怎么配合</td><td>同时算同一层</td><td>一段算完交给下一段</td></tr>
+<tr><td>通信</td><td>每层都要合并一次，很频繁，靠 NVLink</td><td>只在段与段之间传一次</td></tr>
+<tr><td>缺点</td><td>卡越多通信越碎，收益递减</td><td>一个 token 在第一段时第二段空等，叫气泡</td></tr>
+</table></div>
+<p>GLM 没有用 TP8 也没有用 PP8，而是各取一半：A800 的 NVLink 被砍到 400 GB/s，TP 只切到 4 来控制通信开销；PP 只分 2 段来控制气泡。两个 Qwen 模型小，只用了 TP2。</p>
+<div class="note mem"><b>PP 不会让单个 token 变快。</b> 一个 token 要依次经过两段：第一段的 4 张卡各读约 2.25 GB，然后第二段的 4 张卡各读约 2.25 GB。两段先后发生，时间相加，效果等同于 4 张卡各读 4.5 GB，所以第 1 节的算式按 4 张卡算。PP 增加的是能放下的模型大小，不是单个 token 的速度。<a href="lab.html#s4">实验台第 4 站</a>有这个布局的 3D 动画。</div>
+
+<h2 id="width">5. "层数 × 宽度"里的宽度是什么</h2>
+<p>宽度是每个 token 在模型内部用多少个数来表示，也叫隐藏维度，代码里叫 <code>n_embd</code>。d12 里每个 token 是一个 768 维的向量，d24 是 1536 维，d32 是 2048 维。这个向量从第一层一路传到最后一层，长度始终不变，每一层都读它、改它，再传给下一层。层数是 token 要经过多少道加工，宽度是每道加工时手里的信息有多少维。</p>
+<p>宽度决定了几乎所有参数的大小。每层里，注意力的 Q、K、V、输出四个投影矩阵各是宽度 × 宽度；MLP 先把向量放大到 4 倍宽再压回来，两个矩阵相当于 8 个宽度 × 宽度：</p>
+<pre><code>每层参数     ≈ 12 × 宽度²
+全部矩阵参数 ≈ 12 × 层数 × 宽度²</code></pre>
+<div class="tablewrap"><table>
+<tr><th>模型</th><th class="num">层数</th><th class="num">宽度</th><th class="num">公式算出</th><th class="num">训练日志里的矩阵参数</th></tr>
+<tr><td>d12</td><td class="num">12</td><td class="num">768</td><td class="num">84,934,656</td><td class="num">84,935,088</td></tr>
+<tr><td>d24</td><td class="num">24</td><td class="num">1536</td><td class="num">679,477,248</td><td class="num">679,478,976</td></tr>
+<tr><td>d32</td><td class="num">32</td><td class="num">2048</td><td class="num">1,610,612,736</td><td class="num">1,610,615,808</td></tr>
+</table></div>
+<p>词嵌入表也一样，是词表大小 × 宽度：32768 × 768 = 25,165,824，正好是 d12 日志里的 wte。注意力头数是宽度 ÷ 128，所以 d12、d24、d32 分别有 6、12、16 个头。</p>
+<p>参数随宽度的平方增长：层数相同时宽度翻倍，参数变成 4 倍。d32 是 32 层 × 2048，矩阵参数 16 亿；Llama-2-7B 也是 32 层，宽度 4096，参数约 65 亿。nanochat 不单独设宽度，固定取层数的 64 倍，这就是它"只用层数一个旋钮"的原因。</p>
+
+<h2 id="size">6. d12、d24、d32 相当于几 B 的模型</h2>
+<div class="tablewrap"><table>
+<tr><th>模型</th><th>层数 × 宽度</th><th class="num">总参数</th><th class="num">其中查找表</th><th class="num">参与矩阵乘的参数</th><th>形状最接近</th></tr>
+<tr><td>d12</td><td>12 × 768</td><td class="num">0.29B</td><td class="num">0.15B</td><td class="num">0.11B</td><td>GPT-2 small，0.12B</td></tr>
+<tr><td>d24</td><td>24 × 1536</td><td class="num">1.38B</td><td class="num">0.60B</td><td class="num">0.73B</td><td>GPT-2 large，0.77B</td></tr>
+<tr><td>d32</td><td>32 × 2048</td><td class="num">2.82B</td><td class="num">1.07B</td><td class="num">1.68B</td><td>GPT-2 XL，1.56B</td></tr>
+</table></div>
+<p>nanochat 在注意力里加了一种叫 value embedding 的结构：每个 token 额外查一张表，把结果加到注意力的 V 上。查表只占显存、几乎不花计算，却被算进总参数，占了三分之一到一半。scaling law 的惯例只数参与矩阵乘的参数，训练耗时和推理速度也跟着这个数走，按这个算三个模型是 0.1B、0.7B、1.7B。</p>
+<p>按能力折算，可以用评测数据包里自带的四个 GPT-2 的 CORE 分数作参照：</p>
+<div class="tablewrap"><table>
+<tr><th>模型</th><th class="num">CORE</th><th>折算</th></tr>
+<tr><td>GPT-2 small，0.12B</td><td class="num">0.114</td><td></td></tr>
+<tr><td><b>d12</b></td><td class="num">0.145</td><td>约 0.2B 的 GPT-2，在 small 和 medium 之间</td></tr>
+<tr><td>GPT-2 medium，0.36B</td><td class="num">0.185</td><td></td></tr>
+<tr><td>GPT-2 large，0.77B</td><td class="num">0.215</td><td></td></tr>
+<tr><td><b>d24</b></td><td class="num">0.249</td><td>约 1.4B，基本等于 GPT-2 XL</td></tr>
+<tr><td>GPT-2 XL，1.56B</td><td class="num">0.257</td><td></td></tr>
+<tr><td><b>d32</b></td><td class="num">0.346</td><td>超过最大的 GPT-2；沿 GPT-2 家族的趋势粗略外推，约 7B</td></tr>
+</table></div>
+<p>d24 只用一半的计算参数就追平了 GPT-2 XL，靠的是更新的架构、优化器和更好的训练数据。</p>
+<div class="note warn">这个换算只在和 2019 年的 GPT-2 比时成立。和现在同样大小的模型比不了：Llama-3.2-1B 训练了 9 万亿 token，Qwen3-1.7B 训练了 36 万亿，d32 只训练了 134 亿，少了将近三个数量级。参数量说明模型有多大、跑起来有多贵，能力主要取决于训练数据量。</div>
+
+<h2 id="ceiling">7. 这 8 张卡从零训练的天花板</h2>
+<p>账的基础是实测：8 张卡在 MFU 63% 左右时，持续算力约 1.5 PFLOP/s，一天约 1.3 × 10²⁰ 次浮点运算。训练的计算量约等于 6 × 参数量 × 训练 token 数。</p>
+<div class="tablewrap"><table>
+<tr><th>规模</th><th class="num">参数</th><th class="num">训练 token</th><th class="num">计算量</th><th class="num">8 卡耗时</th><th>CORE</th></tr>
+<tr><td>d24，已完成</td><td class="num">14 亿</td><td class="num">58 亿</td><td class="num">2.8 × 10¹⁹</td><td class="num">5.1 小时</td><td>0.249 实测</td></tr>
+<tr><td>d32，已完成</td><td class="num">28 亿</td><td class="num">134 亿</td><td class="num">1.4 × 10²⁰</td><td class="num">约 1 天，实际 4 卡跑了 49 小时</td><td>0.346 实测</td></tr>
+<tr><td>d40，估算</td><td class="num">约 50 亿</td><td class="num">约 260 亿</td><td class="num">5.2 × 10²⁰</td><td class="num">约 4 天</td><td>按 d24 到 d32 的实际涨幅外推，约 0.40</td></tr>
+<tr><td>满负荷一个月</td><td class="num"></td><td class="num"></td><td class="num">3.9 × 10²¹</td><td class="num">30 天</td><td></td></tr>
+<tr><td>Llama-3.2-1B，2024</td><td class="num">12 亿</td><td class="num">9 万亿</td><td class="num">约 5 × 10²²</td><td class="num">约 1.1 年</td><td></td></tr>
+<tr><td>Qwen3-1.7B，2025</td><td class="num">17 亿</td><td class="num">36 万亿</td><td class="num">约 3.7 × 10²³</td><td class="num">约 7.5 年</td><td></td></tr>
+</table></div>
+<p>两个结论。从零训练，这台机器的合理上限是 2020 到 2022 年间几十亿参数基础模型的水平，d32 已经到了"值得做"的边界，d40 是极限尝试。要得到真正能用的现代模型，正确的路径是在现成开源模型上做后训练：LoRA、SFT、偏好优化、强化学习，几张卡几小时就够。<a href="training.html#more">训练实录最后一节</a>列了这些手段。</p>
+
+<footer>LLM Inference Lab · 在 8 × A800 上部署并评测开源大模型的学习记录 · <a href="https://github.com/haoxiangNtu/llm-inference-lab">源码</a></footer>
+</div>
+</body>
+</html>
